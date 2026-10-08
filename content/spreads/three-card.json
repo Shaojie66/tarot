@@ -1,0 +1,11 @@
+{
+  "id": "three-card",
+  "name": "此刻 · 阻碍 · 下一步",
+  "description": "看清现在卡在哪里，以及可以迈出的一小步。",
+  "allowReversed": true,
+  "positions": [
+    { "key": "situation", "label": "此刻的处境", "hint": "你现在真正站在哪里" },
+    { "key": "obstacle", "label": "卡住你的东西", "hint": "可能在外部，也可能在你心里" },
+    { "key": "next-step", "label": "可以试的下一步", "hint": "不是答案，是一个方向" }
+  ]
+}

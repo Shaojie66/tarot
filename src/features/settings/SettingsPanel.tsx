@@ -23,15 +23,15 @@ export function SettingsPanel() {
   const decks = Object.entries(DECKS) as [DeckId, (typeof DECKS)[DeckId]][];
 
   return (
-    <div className="space-y-8">
+    <div className="divide-y divide-line [&>section]:py-7 [&>section:first-child]:pt-0">
       {saveFailed && (
-        <p role="alert" className="rounded-lg bg-surface px-4 py-2 text-sm">
+        <p role="alert" className="hairline pt-3 text-sm">
           这个浏览器没有允许保存设置，这次设置只在当前页面有效。
         </p>
       )}
 
       <section aria-labelledby="reversed-title" className="space-y-2">
-        <h2 id="reversed-title" className="font-serif text-lg">
+        <h2 id="reversed-title" className="font-serif text-xl">
           逆位牌
         </h2>
         <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed">
@@ -44,7 +44,7 @@ export function SettingsPanel() {
       </section>
 
       <section aria-labelledby="deck-title" className="space-y-2">
-        <h2 id="deck-title" className="font-serif text-lg">
+        <h2 id="deck-title" className="font-serif text-xl">
           牌组
         </h2>
         <fieldset className="space-y-2">
@@ -60,7 +60,7 @@ export function SettingsPanel() {
       </section>
 
       <section aria-labelledby="ai-title" className="space-y-2">
-        <h2 id="ai-title" className="font-serif text-lg">
+        <h2 id="ai-title" className="font-serif text-xl">
           AI 解读
         </h2>
         <p className="text-sm leading-relaxed" data-testid="ai-status">
@@ -72,7 +72,7 @@ export function SettingsPanel() {
       </section>
 
       <section aria-labelledby="data-title" className="space-y-2">
-        <h2 id="data-title" className="font-serif text-lg">
+        <h2 id="data-title" className="font-serif text-xl">
           数据
         </h2>
         <p className="text-sm leading-relaxed">

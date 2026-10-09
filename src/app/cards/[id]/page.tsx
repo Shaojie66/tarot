@@ -89,23 +89,21 @@ function Side({ title, side }: { title: string; side: CardSide }) {
   return (
     <section className="mt-6 first:mt-0">
       <h2 className="font-serif text-xl">{title}</h2>
-      <ul className="mt-3 flex flex-wrap gap-2">
+      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-accent">
         {side.keywords.map((k) => (
-          <li key={k} className="rounded-full border border-accent/40 px-3 py-0.5 text-sm text-accent">
-            {k}
-          </li>
+          <li key={k}>{k}</li>
         ))}
       </ul>
-      <p className="mt-4 leading-relaxed">{side.meaning}</p>
-      <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+      <p className="diary mt-4">{side.meaning}</p>
+      <dl className="mt-6">
         {TOPICS.map((topic) => (
-          <div key={topic} className="rounded-lg bg-surface p-3">
-            <dt className="text-xs text-muted">{TOPIC_LABELS[topic]}</dt>
-            <dd className="mt-1 text-sm leading-relaxed">{side[topic]}</dd>
+          <div key={topic} className="hairline py-4 sm:grid sm:grid-cols-[4rem_1fr] sm:gap-4">
+            <dt className="eyebrow !tracking-normal">{TOPIC_LABELS[topic]}</dt>
+            <dd className="mt-1 text-sm leading-relaxed sm:mt-0">{side[topic]}</dd>
           </div>
         ))}
       </dl>
-      <p className="mt-5 border-l-2 border-accent pl-3 font-serif text-base">{side.question}</p>
+      <p className="question-line mt-2">{side.question}</p>
     </section>
   );
 }

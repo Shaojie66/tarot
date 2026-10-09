@@ -21,7 +21,8 @@
 | 设置（逆位开关、牌组、API 配置状态） | ✅（M3b） |
 | 导出分享图（本地生成；默认只含牌面、位置、关键词，问题 / 小行动须勾选并预览） | ✅（M3b） |
 | 换个视角（温和支持 / 理性拆解 / 挑战提问，另存一份快照） | 已实现 · 真实模型验收待完成（需自备 key） |
-| PWA、Docker、真机验收 | 计划中（M3c） |
+| PWA（可安装、已访问过的页面断网可用）、Docker 镜像 | ✅ 电脑端实测；iOS / Android 真机验收待你补（见 [docs/device-checklist.md](docs/device-checklist.md)） |
+| 求助资源（大陆 / 英国爱尔兰 / 美国 / 加拿大，附官方来源与核对日期） | ✅ |
 | AI 重绘牌组 | 计划中 |
 
 完整计划见 [docs/PLAN.md](docs/PLAN.md)。
@@ -81,6 +82,23 @@ pnpm build && pnpm start:lan   # 监听 0.0.0.0，并设置 TAROT_ALLOW_LAN=1
 pnpm build
 pnpm start
 ```
+
+### Docker
+
+```bash
+docker compose up --build        # 然后打开 http://localhost:3000
+```
+
+- 默认只映射到 `127.0.0.1:3000`，同网络的其他设备访问不到。
+- 不配置任何 key 也能用（本地解读）。要开启 AI：在项目根目录建 `.env.local` 写 `ANTHROPIC_API_KEY=...`，compose 会在**运行时**读取。key 不会进镜像：`.dockerignore` 排除了 `.env*`，构建上下文里没有它。
+- 想让手机访问：把 `docker-compose.yml` 里的端口改成 `"3000:3000"`，并设置环境变量 `TAROT_ALLOW_LAN=1`。风险同上文“在手机上用”：同一网络里的设备都能调用你的 AI 接口。
+- 镜像以非 root 用户运行，带健康检查（`/api/status`）。
+
+### 安装到手机主屏 / 离线
+
+- 访问过的页面，断网后还能打开；你保存的记录本来就在设备上。AI 在断网时不可用，会自动退回本地解读。
+- **需要安全上下文**：`http://localhost` 或 `https://`。用局域网 `http://192.168.x.x` 访问时浏览器**不允许** service worker，页面照常能用，但没有离线和安装能力。想要手机上离线 / 安装，需要给服务套一层 HTTPS（反向代理或隧道），自行配置。
+- 第一次访问必须在线；离线时打开从没访问过的页面，会看到一个说明页。细节、限制和验收矩阵见 [docs/pwa-offline.md](docs/pwa-offline.md)。
 
 ## 开发
 

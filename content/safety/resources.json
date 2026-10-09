@@ -1,10 +1,88 @@
 {
-  "region": "中国大陆",
-  "checkedAt": "2026-10-09",
-  "maintenance": "号码须经官方渠道核实后才能加入；每次发布前复核 checkedAt。未核实的热线号码不要写进来。",
-  "items": [
-    { "name": "紧急求助（人身安全有危险时）", "contact": "110", "note": "公安报警，全天" },
-    { "name": "医疗急救", "contact": "120", "note": "已经伤害了自己或身体不适时，全天" }
+  "maintenance": "号码须经官方渠道核实后才能加入，每条记录官方来源与复核日期；未核实的热线号码不要写进来。每次发布前复核各地区的 checkedAt。固定分流测试不依赖号码本身。",
+  "regions": [
+    {
+      "id": "cn",
+      "label": "中国大陆",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "name": "全国统一心理援助热线",
+          "contact": "12356",
+          "note": "2025 年 5 月 1 日起全国统一；各省已开通。具体接听时段以当地为准",
+          "source": { "name": "新华社报道（国家卫生健康委统一设置）", "url": "https://www.news.cn/politics/20250508/b45e439c15bb4732858ad5c7640e9ba9/c.html" }
+        },
+        {
+          "name": "紧急求助（人身安全有危险时）",
+          "contact": "110",
+          "note": "公安报警，全天",
+          "source": { "name": "中国政府网·常用应急号码", "url": "https://www.gov.cn/ztzl/yjzn/content_562406.htm" }
+        },
+        {
+          "name": "医疗急救",
+          "contact": "120",
+          "note": "已经伤害了自己或身体不适时，全天",
+          "source": { "name": "中国政府网·常用应急号码", "url": "https://www.gov.cn/ztzl/yjzn/content_562406.htm" }
+        }
+      ]
+    },
+    {
+      "id": "gb-ie",
+      "label": "英国 / 爱尔兰",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "name": "Samaritans（免费倾听热线）",
+          "contact": "116 123",
+          "note": "英国和爱尔兰，24 小时，每天",
+          "source": { "name": "Samaritans 官网", "url": "https://www.samaritans.org/how-we-can-help/contact-samaritan/" }
+        },
+        {
+          "name": "紧急情况（性命有危险）",
+          "contact": "999",
+          "note": "英国：有人性命有危险、或你无法保证自己或他人的安全时，拨打 999 或去急诊（A&E）",
+          "source": { "name": "NHS：心理健康紧急求助", "url": "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/" }
+        },
+        {
+          "name": "NHS 111（英格兰，紧急但不危及生命时）",
+          "contact": "111",
+          "note": "拨打后选择心理健康选项",
+          "source": { "name": "NHS：心理健康紧急求助", "url": "https://www.nhs.uk/nhs-services/mental-health-services/where-to-get-urgent-help-for-mental-health/" }
+        }
+      ]
+    },
+    {
+      "id": "us",
+      "label": "美国",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "name": "988 自杀与危机生命线",
+          "contact": "988",
+          "note": "可拨打、发短信或在线聊天，24 小时，每天",
+          "source": { "name": "988 Lifeline 官网", "url": "https://988lifeline.org/" }
+        }
+      ]
+    },
+    {
+      "id": "ca",
+      "label": "加拿大",
+      "checkedAt": "2026-10-09",
+      "items": [
+        {
+          "name": "988 自杀危机热线",
+          "contact": "988",
+          "note": "可拨打或发短信，24 小时，每天",
+          "source": { "name": "988.ca 官网", "url": "https://988.ca/" }
+        },
+        {
+          "name": "紧急情况（人身安全有危险）",
+          "contact": "911",
+          "note": "官网提示：安全受到威胁时立即拨打 9-1-1",
+          "source": { "name": "988.ca 官网", "url": "https://988.ca/" }
+        }
+      ]
+    }
   ],
   "directory": {
     "name": "Find A Helpline（按国家 / 地区查找免费心理援助热线）",
@@ -12,6 +90,6 @@
   },
   "advice": [
     "如果你现在有伤害自己的念头，请先让自己处在安全的地方，并联系一个你信任的人陪着你。",
-    "你所在城市通常有免费的心理援助热线，可以在上面的目录或当地卫生健康部门官网查到。"
+    "你所在的地方通常有免费的心理援助热线。不在上面的地区，可以用下面的目录查，或者问当地卫生部门。"
   ]
 }

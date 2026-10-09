@@ -127,3 +127,33 @@ test("危机误判可返回修改：原文保留，改完重新检查，不提�
   await expect(page.getByRole("button", { name: "快速抽牌" })).toBeVisible();
   expect(await countRecords(page)).toBe(0);
 });
+
+test.describe("求助资源按地区显示", () => {
+  test("默认按时区选地区，可切换；每条号码有来源链接和核对日期", async ({ page }) => {
+    await askQuestion(page, "自我", "我真的不想活了");
+    const items = page.getByTestId("help-items");
+    await expect(items.getByRole("link", { name: "12356" })).toBeVisible();
+    await expect(items.getByRole("link", { name: "来源" }).first()).toHaveAttribute("href", /^https:\/\//);
+
+    await page.getByRole("button", { name: "英国 / 爱尔兰" }).click();
+    await expect(items.getByRole("link", { name: "116 123" })).toBeVisible();
+    await expect(items.getByRole("link", { name: "116 123" })).toHaveAttribute("href", "tel:116123");
+    await expect(items.getByRole("link", { name: "12356" })).toHaveCount(0);
+
+    await page.getByRole("button", { name: "美国" }).click();
+    await expect(items.getByRole("link", { name: "988" })).toBeVisible();
+    await page.getByRole("button", { name: "加拿大" }).click();
+    await expect(items.getByRole("link", { name: "988" })).toBeVisible();
+    await expect(page.getByText(/核对于 2026-10-09/)).toBeVisible();
+    await expect(page.getByRole("link", { name: /Find A Helpline/ })).toBeVisible();
+  });
+
+  test.describe("英国时区", () => {
+    test.use({ timezoneId: "Europe/London" });
+    test("默认就是英国 / 爱尔兰", async ({ page }) => {
+      await askQuestion(page, "自我", "我真的不想活了");
+      await expect(page.getByRole("button", { name: "英国 / 爱尔兰" })).toHaveAttribute("aria-pressed", "true");
+      await expect(page.getByTestId("help-items").getByRole("link", { name: "116 123" })).toBeVisible();
+    });
+  });
+});

@@ -12,6 +12,8 @@ export default defineConfig({
   use: {
     baseURL: `http://127.0.0.1:${PORT}`,
     trace: "retain-on-failure",
+    // 危机页默认地区按时区选；固定一个时区让断言稳定（具体地区切换另有用例）
+    timezoneId: "Asia/Shanghai",
   },
   projects: [
     {

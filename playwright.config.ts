@@ -14,6 +14,8 @@ export default defineConfig({
     trace: "retain-on-failure",
     // 危机页默认地区按时区选；固定一个时区让断言稳定（具体地区切换另有用例）
     timezoneId: "Asia/Shanghai",
+    // 默认不让 service worker 介入，保证其他用例的网络断言（page.route 等）行为不变；PWA 用例单独打开
+    serviceWorkers: "block",
   },
   projects: [
     {

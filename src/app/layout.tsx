@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { PwaRegister } from "@/features/pwa/PwaRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "此刻三张牌", template: "%s · 此刻三张牌" },
   description: "抽三张牌，和自己聊一小会儿。自我反思工具，不预测未来。",
+  icons: { icon: "/icons/icon-192.png", apple: "/icons/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "此刻三张牌", statusBarStyle: "black-translucent" },
 };
 
 export const viewport: Viewport = {
@@ -40,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </nav>
         </header>
         <div className="flex flex-1 flex-col">{children}</div>
+        <PwaRegister />
       </body>
     </html>
   );

@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function ReadingPage() {
   return (
     <main className="mx-auto w-full max-w-xl px-5 py-8">
+      <h1 className="sr-only">抽三张牌</h1>
       <ReadingFlow />
     </main>
   );

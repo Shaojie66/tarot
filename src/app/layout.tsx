@@ -19,24 +19,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="zh-CN" className="h-full">
       <body className="flex min-h-full flex-col">
         <header className="border-b border-line">
-          <nav className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3 text-sm">
-            <Link href="/" className="font-serif text-base tracking-wide">
+          <nav className="mx-auto flex max-w-3xl items-center justify-between px-3 py-1 text-sm">
+            <Link href="/" className="inline-flex min-h-11 items-center px-2 font-serif text-base tracking-wide">
               此刻三张牌
             </Link>
-            <div className="flex flex-wrap justify-end gap-x-4 gap-y-1">
-              <Link href="/reading" className="text-muted hover:text-ink">
+            <div className="flex flex-wrap justify-end">
+              <Link href="/reading" className="inline-flex min-h-11 items-center px-2 text-muted hover:text-ink">
                 抽牌
               </Link>
-              <Link href="/daily" className="text-muted hover:text-ink">
+              <Link href="/daily" className="inline-flex min-h-11 items-center px-2 text-muted hover:text-ink">
                 每日
               </Link>
-              <Link href="/history" className="text-muted hover:text-ink">
+              <Link href="/history" className="inline-flex min-h-11 items-center px-2 text-muted hover:text-ink">
                 历史
               </Link>
-              <Link href="/settings" className="text-muted hover:text-ink">
+              <Link href="/settings" className="inline-flex min-h-11 items-center px-2 text-muted hover:text-ink">
                 设置
               </Link>
-              <Link href="/cards" className="text-muted hover:text-ink">
+              <Link href="/cards" className="inline-flex min-h-11 items-center px-2 text-muted hover:text-ink">
                 牌义百科
               </Link>
             </div>

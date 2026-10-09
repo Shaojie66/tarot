@@ -34,8 +34,8 @@ export function SettingsPanel() {
         <h2 id="reversed-title" className="font-serif text-lg">
           逆位牌
         </h2>
-        <label className="flex items-start gap-3 text-sm leading-relaxed">
-          <input type="checkbox" checked={settings.allowReversed} onChange={(e) => update({ allowReversed: e.target.checked })} className="mt-1" />
+        <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed">
+          <input type="checkbox" checked={settings.allowReversed} onChange={(e) => update({ allowReversed: e.target.checked })} className="mt-0.5 h-6 w-6 shrink-0" />
           <span>
             抽牌时可能出现逆位
             <span className="block text-xs text-muted">只影响下一次抽牌。已经保存的记录按当时的设置显示，不会被改动。</span>
@@ -50,8 +50,8 @@ export function SettingsPanel() {
         <fieldset className="space-y-2">
           <legend className="sr-only">牌组</legend>
           {decks.map(([id, deck]) => (
-            <label key={id} className="flex items-center gap-3 text-sm">
-              <input type="radio" name="deck" checked={settings.deckId === id} onChange={() => update({ deckId: id })} />
+            <label key={id} className="flex min-h-11 items-center gap-3 text-sm">
+              <input type="radio" name="deck" checked={settings.deckId === id} onChange={() => update({ deckId: id })} className="h-6 w-6 shrink-0" />
               {deck.name}
             </label>
           ))}

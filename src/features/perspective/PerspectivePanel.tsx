@@ -99,7 +99,7 @@ export function PerspectivePanel({ record, onSaved }: { record: ReadingRecord; o
               {t}
             </p>
           ))}
-          <p className="border-l-2 border-accent pl-3 font-serif leading-relaxed">{p.body.question}</p>
+          <p className="question-line">{p.body.question}</p>
         </article>
       ))}
 

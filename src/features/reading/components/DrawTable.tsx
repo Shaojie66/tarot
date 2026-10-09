@@ -63,7 +63,7 @@ export function DrawTable({ spread, deck, cards, revealed, onShuffled, onReveal,
           const side = card && drawn ? (drawn.reversed ? card.reversed : card.upright) : null;
           return (
             <li key={position.key} className="text-center">
-              <p className="mb-2 text-xs text-muted">{position.label}</p>
+              <p className="eyebrow mb-2 !tracking-normal">{position.label}</p>
               <div className="flip">
                 <div className="flip-inner" data-flipped={flipped}>
                   <div className="flip-face card-back" aria-hidden />
@@ -81,7 +81,7 @@ export function DrawTable({ spread, deck, cards, revealed, onShuffled, onReveal,
                     {card.nameZh}
                     {drawn?.reversed && <span className="text-muted">（逆位）</span>}
                   </p>
-                  <p className="text-xs text-accent">{side.keywords.join(" · ")}</p>
+                  <p className="text-xs leading-relaxed text-muted">{side.keywords.join(" · ")}</p>
                 </div>
               )}
             </li>

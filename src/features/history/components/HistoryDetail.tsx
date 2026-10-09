@@ -106,7 +106,7 @@ function Detail({ record, onChange, onDeleted }: { record: ReadingRecord; onChan
             <p className="mt-1 leading-relaxed">{text}</p>
           </div>
         ))}
-        <p className="border-l-2 border-accent pl-3 font-serif leading-relaxed">{result.question}</p>
+        <p className="question-line">{result.question}</p>
       </section>
 
       <section aria-labelledby="action-title" className="space-y-2 rounded-lg bg-surface p-4">

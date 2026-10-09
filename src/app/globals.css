@@ -18,11 +18,26 @@
   --color-muted: var(--muted);
   --color-accent: var(--accent);
   --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
-  --font-serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", serif;
+  --font-serif: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN", "Songti TC", "SimSun", serif;
 }
 
 html {
   color-scheme: dark;
+}
+
+/* 键盘焦点：统一的金色细环，不靠浏览器默认 */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* 下划线式输入框：焦点用金色底线（box-shadow 加粗），不画一圈外框 */
+.field:focus-visible {
+  outline: none;
+  border-bottom-color: var(--accent);
+  box-shadow: 0 1px 0 0 var(--accent);
+  border-radius: 0;
 }
 
 body {
@@ -30,6 +45,50 @@ body {
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* ---- 日记本的排版节奏：先定字号 / 行距 / 行宽，再谈装饰 ---- */
+.diary-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.625rem, 1.25rem + 1.8vw, 2.5rem);
+  line-height: 1.32;
+  letter-spacing: 0.02em;
+  text-wrap: balance;
+}
+.diary {
+  font-family: var(--font-serif);
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  line-height: 1.95;
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+  max-inline-size: 34em;
+}
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+/* 留给用户的那个问题：一条细金线 + 衬线大字，不用“左侧粗边框” */
+.question-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
+  line-height: 1.75;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
+  text-wrap: pretty;
+}
+.hairline {
+  border-top: 1px solid var(--line);
+}
+
+/* 进入：一次安静的上浮淡入，不持续动 */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
 }
 
 /* 翻牌：3D 翻转。牌背用纯 CSS 绘制，不依赖图片。 */
@@ -53,15 +112,18 @@ body {
   inset: 0;
   transform: rotateY(180deg);
 }
+/* 牌背：深色底 + 一圈内缩的细金线，克制，不抢真牌面的戏 */
 .card-back {
   aspect-ratio: 600 / 1035;
   border-radius: 0.5rem;
-  border: 1px solid color-mix(in oklab, var(--accent) 50%, transparent);
   background:
-    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent) 35%, transparent) 0 12%, transparent 13%),
-    repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 12%, transparent) 0 2px, transparent 2px 10px),
+    linear-gradient(var(--surface), var(--surface)) padding-box,
     var(--surface);
-  box-shadow: 0 10px 20px rgb(0 0 0 / 0.4);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklab, var(--accent) 38%, transparent),
+    inset 0 0 0 7px var(--surface),
+    inset 0 0 0 8px color-mix(in oklab, var(--accent) 22%, transparent),
+    0 10px 20px rgb(0 0 0 / 0.4);
 }
 
 @keyframes shuffle {
@@ -77,6 +139,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
   .flip-inner {
     transition: none;
   }

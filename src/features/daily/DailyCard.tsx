@@ -60,14 +60,14 @@ export function DailyCard() {
         <CardImage card={getCard(entry.cardId)} reversed={entry.reversed} deck={entry.deckId} priority sizes="176px" />
       </div>
       <header className="text-center">
-        <h2 id="daily-title" className="font-serif text-2xl">
+        <h2 id="daily-title" className="diary-title">
           {reading.nameZh}
           {reading.reversed && "（逆位）"}
         </h2>
         <p className="mt-1 text-sm text-muted">{reading.keywords.join(" · ")}</p>
       </header>
-      <p className="leading-relaxed">{reading.meaning}</p>
-      <p className="border-l-2 border-accent pl-3 font-serif text-lg leading-relaxed">{reading.question}</p>
+      <p className="diary">{reading.meaning}</p>
+      <p className="question-line">{reading.question}</p>
       <p className="text-sm leading-relaxed text-muted">{reading.notice}</p>
       <p className="text-xs leading-relaxed text-muted">
         牌是随机抽的，不预测今天会发生什么。想认真聊一件事，可以去{" "}

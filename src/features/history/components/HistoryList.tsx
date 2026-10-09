@@ -119,16 +119,16 @@ export function HistoryList() {
           </Link>
         </div>
       ) : (
-        <ul className="space-y-3">
+        <ul className="hairline">
           {data.records.map((r) => (
-            <li key={r.id}>
+            <li key={r.id} className="border-b border-line">
               <HistoryItem record={r} />
             </li>
           ))}
         </ul>
       )}
 
-      <section aria-label="备份与清理" className="space-y-3 border-t border-line pt-5 text-sm">
+      <section aria-label="备份与清理" className="space-y-3 pt-2 text-sm">
         <div className="flex flex-wrap gap-3">
           <button type="button" disabled={data.records.length === 0 && loadDaily().length === 0} onClick={() => setPanel(panel === "export" ? null : "export")} className="rounded-full border border-line px-4 py-1.5 disabled:opacity-40">
             导出备份
@@ -221,20 +221,20 @@ function HistoryItem({ record }: { record: ReadingRecord }) {
   const names = record.request.cards.map((c) => `${getCard(c.cardId).nameZh}${c.reversed ? "（逆）" : ""}`).join(" · ");
   const followUp = record.review?.followUp;
   return (
-    <Link href={`/history/${record.id}`} className="block rounded-lg border border-line bg-surface p-4 hover:border-accent">
+    <Link href={`/history/${record.id}`} className="block py-5 transition-colors hover:bg-surface/60">
       <p className="flex items-center justify-between text-xs text-muted">
         <span>
           {TOPIC_LABELS[record.request.topic]} · {formatTime(record.createdAt)}
         </span>
         <span>{record.result.source === "ai" ? "AI" : "本地"}</span>
       </p>
-      <p className="mt-1 leading-relaxed">{snippet(record.request.question, 60)}</p>
+      <p className="mt-1 font-serif text-lg leading-relaxed">{snippet(record.request.question, 60)}</p>
       <p className="mt-1 text-xs text-muted">{names}</p>
-      <p className="mt-2 flex flex-wrap gap-2 text-xs">
-        <span className="rounded-full border border-line px-2 py-0.5">{ACTION_STATUS_LABEL[record.choice.action.status]}</span>
-        {followUp && <span className="rounded-full border border-accent/60 px-2 py-0.5 text-accent">后来：{FOLLOW_UP_LABEL[followUp.status]}</span>}
+      <p className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+        <span className="text-muted">{ACTION_STATUS_LABEL[record.choice.action.status]}</span>
+        {followUp && <span className="text-accent">后来：{FOLLOW_UP_LABEL[followUp.status]}</span>}
         {record.review?.moods.map((m) => (
-          <span key={m} className="rounded-full bg-bg px-2 py-0.5 text-muted">
+          <span key={m} className="text-muted">
             {m}
           </span>
         ))}

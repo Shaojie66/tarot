@@ -307,19 +307,19 @@ export function ReadingFlow() {
 function TopicStep({ onChoose }: { onChoose: (topic: Topic) => void }) {
   return (
     <section aria-labelledby="topic-title" className="space-y-5">
-      <h2 id="topic-title" className="font-serif text-2xl">
+      <h2 id="topic-title" className="diary-title">
         最近在想哪方面的事？
       </h2>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="hairline">
         {TOPICS.map((topic) => (
           <button
             key={topic}
             type="button"
             onClick={() => onChoose(topic)}
-            className="rounded-lg border border-line bg-surface p-4 text-left hover:border-accent"
+            className="group flex min-h-16 w-full items-baseline justify-between gap-4 border-b border-line py-4 text-left transition-colors hover:border-accent"
           >
-            <span className="font-serif text-lg">{TOPIC_LABELS[topic]}</span>
-            <span className="mt-1 block text-xs text-muted">{QUESTION_BANK.topics[topic].hint}</span>
+            <span className="font-serif text-xl">{TOPIC_LABELS[topic]}</span>
+            <span className="text-xs leading-relaxed text-muted group-hover:text-ink">{QUESTION_BANK.topics[topic].hint}</span>
           </button>
         ))}
       </div>
@@ -349,7 +349,7 @@ function QuestionStep({
       <button type="button" onClick={onBack} className="text-sm text-muted hover:text-ink">
         ← {TOPIC_LABELS[topic]}
       </button>
-      <h2 id="question-title" className="font-serif text-2xl">
+      <h2 id="question-title" className="diary-title">
         想问自己什么？
       </h2>
       <form
@@ -370,7 +370,7 @@ function QuestionStep({
           rows={3}
           onChange={(e) => setText(e.target.value)}
           placeholder="用自己的话写，比如：我在这份工作里到底想要什么？"
-          className="w-full rounded-lg border border-line bg-surface p-3 leading-relaxed placeholder:text-muted/70"
+          className="diary field w-full resize-none rounded-none border-0 border-b border-line bg-transparent px-0 py-3 placeholder:text-muted/70"
         />
         {aiAvailable ? (
           <>
@@ -441,7 +441,7 @@ function RewriteStep({
   const value = edited ?? suggestion;
   return (
     <section aria-labelledby="rewrite-title" className="space-y-4">
-      <h2 id="rewrite-title" className="font-serif text-xl">
+      <h2 id="rewrite-title" className="diary-title !text-2xl">
         换个问法试试？
       </h2>
       <p className="text-sm text-muted">你的原话：{original}</p>
@@ -454,7 +454,7 @@ function RewriteStep({
         rows={2}
         maxLength={QUESTION_MAX}
         onChange={(e) => setEdited(e.target.value)}
-        className="w-full rounded-lg border border-accent/60 bg-surface p-3 leading-relaxed"
+        className="diary field w-full resize-none rounded-none border-0 border-b border-accent/60 bg-transparent px-0 py-3"
       />
       <div className="flex flex-wrap gap-3">
         <button type="button" disabled={!value.trim()} onClick={() => onConfirm(value.trim())} className="rounded-full bg-accent px-5 py-2 text-bg disabled:opacity-40">
@@ -471,10 +471,10 @@ function RewriteStep({
 function QuestionBanner({ topic, question }: { topic: Topic | null; question: string }) {
   if (!question) return null;
   return (
-    <p className="rounded-lg bg-surface px-4 py-3 text-sm leading-relaxed">
-      {topic && <span className="mr-2 text-xs text-accent">{TOPIC_LABELS[topic]}</span>}
-      {question}
-    </p>
+    <div className="hairline pt-4">
+      {topic && <p className="eyebrow">{TOPIC_LABELS[topic]}</p>}
+      <p className="mt-1 font-serif text-lg leading-relaxed">{question}</p>
+    </div>
   );
 }
 
@@ -489,7 +489,7 @@ function SelfStep({ initial, onSubmit }: { initial: string; onSubmit: (text: str
         onSubmit(text.trim());
       }}
     >
-      <h2 id="self-title" className="font-serif text-xl">
+      <h2 id="self-title" className="diary-title !text-2xl">
         你第一眼看到了什么？
       </h2>
       <p className="text-sm text-muted">一个词、一种感觉都可以。你的第一反应比牌义更重要。</p>
@@ -502,7 +502,7 @@ function SelfStep({ initial, onSubmit }: { initial: string; onSubmit: (text: str
         maxLength={SELF_READING_MAX}
         onChange={(e) => setText(e.target.value)}
         placeholder="比如：中间那张让我有点不舒服"
-        className="w-full rounded-lg border border-line bg-surface p-3"
+        className="diary field w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3"
       />
       <div className="flex gap-3">
         <button type="submit" className="rounded-full bg-accent px-5 py-2 text-bg">

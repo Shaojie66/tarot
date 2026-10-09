@@ -18,9 +18,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="zh-CN" className="h-full">
       <body className="flex min-h-full flex-col">
-        <header className="border-b border-line">
+        <header className="border-b border-line/70">
           <nav className="mx-auto flex max-w-3xl items-center justify-between px-3 py-1 text-sm">
-            <Link href="/" className="inline-flex min-h-11 items-center px-2 font-serif text-base tracking-wide">
+            <Link href="/" className="inline-flex min-h-11 items-center px-2 font-serif text-base tracking-[0.18em]">
               此刻三张牌
             </Link>
             <div className="flex flex-wrap justify-end">

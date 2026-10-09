@@ -29,17 +29,17 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
   const [draft, setDraft] = useState(choice.action.text);
 
   return (
-    <article className="space-y-8" aria-labelledby="result-title">
+    <article className="space-y-10" aria-labelledby="result-title">
       <header className="space-y-3">
-        <p className="text-xs tracking-widest text-accent">{result.source === "ai" ? "AI 解读" : "本地解读"}</p>
+        <p className="eyebrow rise">{result.source === "ai" ? "AI 解读" : "本地解读"}</p>
         <h2 id="result-title" className="sr-only">
           解读
         </h2>
-        <p className="leading-relaxed">{result.overall}</p>
+        <p className="diary rise" style={{ "--i": 1 } as React.CSSProperties}>{result.overall}</p>
       </header>
 
-      <section aria-labelledby="lens-title" className="space-y-3">
-        <h3 id="lens-title" className="font-serif text-lg">
+      <section aria-labelledby="lens-title" className="space-y-1">
+        <h3 id="lens-title" className="font-serif text-lg pb-2">
           两种读法，哪个更像你？
         </h3>
         {result.interpretations.map((text, i) => {
@@ -49,17 +49,17 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
           return (
             <div
               key={index}
-              className={`rounded-lg border p-4 ${chosen ? "border-accent" : "border-line"} ${rejected ? "opacity-50" : ""}`}
+              className={`hairline py-5 ${rejected ? "opacity-55" : ""}`}
             >
-              <p className="text-xs text-muted">{LENS_LABELS[index]}</p>
-              <p className="mt-1 leading-relaxed">{text}</p>
+              <p className={`eyebrow ${chosen ? "!text-accent" : ""}`}>{LENS_LABELS[index]}{chosen && " · 你选了这个"}</p>
+              <p className="diary mt-2">{text}</p>
               <div className="mt-3 flex gap-3 text-sm">
                 <button
                   type="button"
                   aria-pressed={chosen}
                   disabled={rejected}
                   onClick={() => onChoose(chosen ? null : index)}
-                  className={`rounded-full border px-3 py-1 ${chosen ? "border-accent bg-accent text-bg" : "border-line"} disabled:opacity-40`}
+                  className={`min-h-9 rounded-full border px-4 ${chosen ? "border-accent bg-accent text-bg" : "border-line"} disabled:opacity-40`}
                 >
                   {chosen ? "更像我 ✓" : "更像我"}
                 </button>
@@ -67,7 +67,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
                   type="button"
                   aria-pressed={rejected}
                   onClick={() => onToggleRejected(index)}
-                  className="rounded-full border border-line px-3 py-1 text-muted"
+                  className="min-h-9 px-2 text-muted underline underline-offset-4"
                 >
                   {rejected ? "已标记不符合" : "这不符合我的情况"}
                 </button>
@@ -75,7 +75,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
             </div>
           );
         })}
-        <p className="text-xs text-muted">都不像也没关系，牌只是一个观察角度，解释权在你。</p>
+        <p className="hairline pt-4 text-xs leading-relaxed text-muted">都不像也没关系，牌只是一个观察角度，解释权在你。</p>
       </section>
 
       <section aria-labelledby="cards-title">
@@ -99,7 +99,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
         </div>
       </section>
 
-      <section aria-labelledby="action-title" className="rounded-lg bg-surface p-4">
+      <section aria-labelledby="action-title" className="hairline border-b border-line py-7">
         <h3 id="action-title" className="font-serif text-lg">
           24 小时内可以试的一小步
         </h3>
@@ -131,7 +131,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
           </div>
         ) : (
           <>
-            <p className={`mt-2 leading-relaxed ${choice.action.status === "skipped" ? "text-muted line-through" : ""}`}>
+            <p className={`diary mt-3 ${choice.action.status === "skipped" ? "text-muted line-through" : choice.action.status === "undecided" ? "text-ink/80" : ""}`}>
               {choice.action.text || result.action}
             </p>
             <div className="mt-3 flex flex-wrap gap-3 text-sm">
@@ -139,7 +139,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
                 type="button"
                 aria-pressed={choice.action.status === "accepted"}
                 onClick={() => onAction("accepted", result.action)}
-                className="rounded-full border border-line px-3 py-1"
+                className="min-h-9 rounded-full border border-line px-4"
               >
                 {choice.action.status === "accepted" ? "就做这个 ✓" : "就做这个"}
               </button>
@@ -149,7 +149,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
                   setDraft(choice.action.text || result.action);
                   setEditing(true);
                 }}
-                className="rounded-full border border-line px-3 py-1"
+                className="min-h-9 rounded-full border border-line px-4"
               >
                 {choice.action.status === "edited" ? "已改成我的版本 · 再改" : "改成我的版本"}
               </button>
@@ -157,7 +157,7 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
                 type="button"
                 aria-pressed={choice.action.status === "skipped"}
                 onClick={() => onAction("skipped", "")}
-                className="rounded-full border border-line px-3 py-1 text-muted"
+                className="min-h-9 rounded-full border border-line px-4"
               >
                 {choice.action.status === "skipped" ? "已跳过" : "这次先不做"}
               </button>
@@ -167,10 +167,10 @@ export function ResultView({ spread, result, choice, saveStatus, recordId, onRet
       </section>
 
       <section aria-labelledby="question-title">
-        <h3 id="question-title" className="sr-only">
+        <h3 id="question-title" className="eyebrow mb-3">
           留给你的问题
         </h3>
-        <p className="border-l-2 border-accent pl-3 font-serif text-lg leading-relaxed">{result.question}</p>
+        <p className="question-line">{result.question}</p>
       </section>
 
       <footer className="space-y-3 border-t border-line pt-5 text-sm">

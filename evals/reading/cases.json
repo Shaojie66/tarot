@@ -1,0 +1,925 @@
+{
+ "seed": 20261009,
+ "cases": [
+  {
+   "id": "career-01",
+   "topic": "career",
+   "question": "我在这份工作里到底想要什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "the-sun",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-empress",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "career-02",
+   "topic": "career",
+   "question": "怎么面对一直升不上去的处境？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "knight-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-wands",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-03",
+   "topic": "career",
+   "question": "我该把精力放在哪个方向？",
+   "selfReading": "中间那张让我有点不舒服",
+   "cards": [
+    {
+     "cardId": "king-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "death",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "career-04",
+   "topic": "career",
+   "question": "工作好累",
+   "selfReading": "第一张的颜色很温暖",
+   "cards": [
+    {
+     "cardId": "king-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-hanged-man",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "seven-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-05",
+   "topic": "career",
+   "question": "老板总挑刺我该怎么办",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "king-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "strength",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-06",
+   "topic": "career",
+   "question": "我适合做什么？",
+   "selfReading": "感觉被看穿了",
+   "cards": [
+    {
+     "cardId": "knight-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "seven-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "seven-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-07",
+   "topic": "career",
+   "question": "转行这件事我在怕什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "two-of-pentacles",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "career-08",
+   "topic": "career",
+   "question": "不知道",
+   "selfReading": "没什么感觉",
+   "cards": [
+    {
+     "cardId": "four-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "king-of-wands",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-chariot",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-09",
+   "topic": "career",
+   "question": "考研还是工作，我在纠结什么？",
+   "selfReading": "最后一张让我想起一个人",
+   "cards": [
+    {
+     "cardId": "five-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-emperor",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-hanged-man",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-10",
+   "topic": "career",
+   "question": "怎样让每天上班不那么难熬？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "eight-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-hermit",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "temperance",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-01",
+   "topic": "relationship",
+   "question": "我在这段关系里真正需要的是什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "king-of-swords",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "eight-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "eight-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-02",
+   "topic": "relationship",
+   "question": "怎么和父母谈我的选择？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "wheel-of-fortune",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "five-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-high-priestess",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "relationship-03",
+   "topic": "relationship",
+   "question": "他到底怎么想的",
+   "selfReading": "中间那张让我有点不舒服",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-04",
+   "topic": "relationship",
+   "question": "我为什么总是在关系里讨好别人？",
+   "selfReading": "第一张的颜色很温暖",
+   "cards": [
+    {
+     "cardId": "ace-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-devil",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "king-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-05",
+   "topic": "relationship",
+   "question": "怎样和好朋友修复关系？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "three-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "king-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-06",
+   "topic": "relationship",
+   "question": "分手后我该怎么走出来？",
+   "selfReading": "感觉被看穿了",
+   "cards": [
+    {
+     "cardId": "four-of-swords",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-moon",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "ace-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "relationship-07",
+   "topic": "relationship",
+   "question": "暗恋一个人好久了",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "eight-of-cups",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "nine-of-cups",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-world",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-08",
+   "topic": "relationship",
+   "question": "我们之间的距离是怎么来的？",
+   "selfReading": "没什么感觉",
+   "cards": [
+    {
+     "cardId": "page-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "nine-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-09",
+   "topic": "relationship",
+   "question": "烦",
+   "selfReading": "最后一张让我想起一个人",
+   "cards": [
+    {
+     "cardId": "king-of-cups",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "eight-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "seven-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-10",
+   "topic": "relationship",
+   "question": "我怎样更好地表达自己的需要？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "three-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-lovers",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-star",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-01",
+   "topic": "self",
+   "question": "我最近为什么总是提不起劲？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "justice",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-02",
+   "topic": "self",
+   "question": "我是谁",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "death",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-magician",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "five-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-03",
+   "topic": "self",
+   "question": "怎样和焦虑相处？",
+   "selfReading": "中间那张让我有点不舒服",
+   "cards": [
+    {
+     "cardId": "seven-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-cups",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-04",
+   "topic": "self",
+   "question": "什么在消耗我的能量？",
+   "selfReading": "第一张的颜色很温暖",
+   "cards": [
+    {
+     "cardId": "the-sun",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "five-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-wands",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-05",
+   "topic": "self",
+   "question": "我在回避什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "two-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "death",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-06",
+   "topic": "self",
+   "question": "怎样对自己好一点？",
+   "selfReading": "感觉被看穿了",
+   "cards": [
+    {
+     "cardId": "five-of-pentacles",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-wands",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-lovers",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-07",
+   "topic": "self",
+   "question": "最近很迷茫",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "five-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "ten-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "king-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-08",
+   "topic": "self",
+   "question": "我真正在意的是什么？",
+   "selfReading": "没什么感觉",
+   "cards": [
+    {
+     "cardId": "the-magician",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "seven-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-09",
+   "topic": "self",
+   "question": "怎么停止和别人比较？",
+   "selfReading": "最后一张让我想起一个人",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "king-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-10",
+   "topic": "self",
+   "question": "随便问问",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "the-empress",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "king-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-hierophant",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "crossroads-01",
+   "topic": "crossroads",
+   "question": "留在大城市还是回老家，我在纠结什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "two-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-fool",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "king-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-02",
+   "topic": "crossroads",
+   "question": "离开这份工作我在怕什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "ten-of-pentacles",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-lovers",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-03",
+   "topic": "crossroads",
+   "question": "我该不该出国",
+   "selfReading": "中间那张让我有点不舒服",
+   "cards": [
+    {
+     "cardId": "ten-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "strength",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-04",
+   "topic": "crossroads",
+   "question": "两个offer怎么选？",
+   "selfReading": "第一张的颜色很温暖",
+   "cards": [
+    {
+     "cardId": "nine-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-fool",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "ace-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "crossroads-05",
+   "topic": "crossroads",
+   "question": "要不要搬出去住？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "two-of-swords",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-empress",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-chariot",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-06",
+   "topic": "crossroads",
+   "question": "继续读书对我意味着什么？",
+   "selfReading": "感觉被看穿了",
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-star",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-hanged-man",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-07",
+   "topic": "crossroads",
+   "question": "这段关系还要不要继续",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "the-sun",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-world",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "six-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-08",
+   "topic": "crossroads",
+   "question": "什么能帮我做这个决定？",
+   "selfReading": "没什么感觉",
+   "cards": [
+    {
+     "cardId": "the-emperor",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "crossroads-09",
+   "topic": "crossroads",
+   "question": "走还是留",
+   "selfReading": "最后一张让我想起一个人",
+   "cards": [
+    {
+     "cardId": "six-of-pentacles",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "judgement",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-hanged-man",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-10",
+   "topic": "crossroads",
+   "question": "如果离开，我最需要准备什么？",
+   "selfReading": "",
+   "cards": [
+    {
+     "cardId": "the-emperor",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "ace-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-sun",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  }
+ ]
+}

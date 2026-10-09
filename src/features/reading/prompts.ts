@@ -6,8 +6,9 @@ import { getCard } from "@/features/cards/cards";
 import { TOPIC_LABELS, type Topic } from "@/features/cards/schema";
 import type { ReadingRequest, Tone } from "./contract";
 import { getSpread } from "./spread";
+import type { Intent } from "@/features/profile/intent";
 
-export const PROMPT_VERSION = "v4";
+export const PROMPT_VERSION = "v5";
 
 const cache = new Map<string, string>();
 
@@ -26,6 +27,12 @@ export function readingSystemPrompt(): string {
 export function rewriteSystemPrompt(): string {
   return load("rewrite-system.md");
 }
+
+const INTENT_PROMPT: Record<Intent, string> = {
+  clarify: "理清现在的处境（把事情拆清楚）",
+  decide: "做个决定（帮 ta 看清各选项的得失与顾虑，不替 ta 选）",
+  companion: "只是陪我说说话（语气更柔和，少建议，不催促）",
+};
 
 export function perspectiveSystemPrompt(): string {
   return load("perspective-system.md");
@@ -63,6 +70,7 @@ export function readingUserPrompt(request: ReadingRequest): string {
     `主题：${TOPIC_LABELS[request.topic]}`,
     `用户的问题：${request.question}`,
     request.selfReading ? `用户看到牌后的第一反应（自解）：${request.selfReading}` : "用户没有填写自解。",
+    ...(request.intent ? [`这次想要的帮助：${INTENT_PROMPT[request.intent]}`] : []),
     "",
     "## 抽到的牌（顺序与位置已固定）",
     ...cards,

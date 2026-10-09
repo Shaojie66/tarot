@@ -19,10 +19,24 @@ async function countRecords(page: Page): Promise<number> {
 async function askQuestion(page: Page, topic: string, question: string) {
   await page.goto("/");
   await page.getByRole("link", { name: "开始" }).click();
+  // 主流程现在是情境卡；"自己写一个问题"保留原主题→问题输入链路
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: new RegExp(`^${topic}`) }).click();
   await page.getByLabel("你的问题").fill(question);
   await page.getByRole("button", { name: "就问这个" }).click();
 }
+
+test("情境卡快路径：点卡直接进洗牌，全程无输入框", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "开始" }).click();
+  await page.getByRole("button", { name: "留在原地，还是换个方向？" }).click();
+  await page.getByRole("button", { name: "快速抽牌" }).click();
+  for (const i of [0, 1, 2]) await expect(page.getByTestId(`slot-${i}`)).toBeVisible();
+  await page.getByRole("button", { name: "跳过" }).click();
+  await page.getByRole("button", { name: "本地解读" }).click();
+  await expect(page.getByText("两种读法，哪个更像你？")).toBeVisible();
+  expect(await countRecords(page)).toBe(1);
+});
 
 test("no API key: full local flow, saved and restored after reload", async ({ page }) => {
   const errors: string[] = [];

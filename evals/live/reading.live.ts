@@ -99,13 +99,17 @@ describe.skipIf(!provider)("live model eval", () => {
       lastStop = stop;
     });
     const rows = [];
-    for (const c of cases.cases) {
+    // 意图轮换：无 / 理清 / 决定 / 陪伴，各约四分之一
+    const INTENT_CYCLE = [undefined, "clarify", "decide", "companion"] as const;
+    for (const [index, c] of cases.cases.entries()) {
+      const intent = INTENT_CYCLE[index % INTENT_CYCLE.length];
       const request = readingRequestSchema.parse({
         spreadId: "three-card",
         topic: c.topic,
         originalQuestion: c.question,
         question: c.question,
         selfReading: c.selfReading,
+        ...(intent ? { intent } : {}),
         cards: c.cards,
       });
       const started = Date.now();

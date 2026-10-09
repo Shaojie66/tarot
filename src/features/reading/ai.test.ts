@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { modelBody, mockProvider, streamed, type Step } from "@/test/mock-provider";
 import { PERSPECTIVE_JSON_SCHEMA, READING_JSON_SCHEMA, REWRITE_JSON_SCHEMA, runAiReading, runPerspective, runRewrite, type ReadingStreamEvent } from "./ai";
-import { perspectiveSystemPrompt, perspectiveUserPrompt, readingSystemPrompt, rewriteSystemPrompt } from "./prompts";
+import { perspectiveSystemPrompt, perspectiveUserPrompt, readingSystemPrompt, readingUserPrompt as readingUserPromptFor, rewriteSystemPrompt } from "./prompts";
 import { readingRequestSchema } from "./contract";
 import { buildLocalReading } from "./local";
 
@@ -38,7 +38,7 @@ describe("runAiReading", () => {
       "action",
       "question",
     ]);
-    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v4", model: "mock-model" } });
+    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v5", model: "mock-model" } });
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
     expect(provider.calls[0].jsonSchema).toBeDefined();
   });
@@ -238,7 +238,7 @@ describe("runPerspective（换个视角）", () => {
 
   it("通过校验：返回视角正文与版本（deep 模型、prompt v3），请求里带着视角与已给过的读法", async () => {
     const { outcome, provider } = await run(done(goodBody), "rational");
-    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v4", model: "mock-model" } });
+    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v5", model: "mock-model" } });
     expect(provider.calls[0].tier).toBe("deep");
     expect(provider.calls[0].prompt).toContain("rational");
     expect(provider.calls[0].prompt).toContain(previous[0]);
@@ -369,5 +369,27 @@ describe("不同模型的输出习惯：无损整理 + 一次重试", () => {
     const outcome = await runPerspective(request, "support", [], provider);
     expect(outcome.type).toBe("ok");
     expect(n).toBe(2);
+  });
+});
+
+describe("intent 进入提示词", () => {
+  it("请求带 intent 时用户消息里有“这次想要的帮助”；没有就没有这一行", () => {
+    expect(readingUserPromptFor({ ...request, intent: "decide" })).toContain("这次想要的帮助：做个决定");
+    expect(readingUserPromptFor({ ...request, intent: "companion" })).toContain("这次想要的帮助：只是陪我说说话");
+    expect(readingUserPromptFor(request)).not.toContain("这次想要的帮助");
+  });
+
+  it("系统提示词（v5）说明三种意图，并强调不替用户做决定", () => {
+    const sys = readingSystemPrompt();
+    for (const text of ["理清现在的处境", "做个决定", "只是陪我说说话", "绝不替 ta 做决定"]) expect(sys).toContain(text);
+    expect(perspectiveSystemPrompt()).toContain("这次想要的帮助");
+  });
+
+  it("带 intent 的请求照常走完 AI 管道，请求里带着意图", async () => {
+    const provider = mockProvider(streamed(good));
+    const events: ReadingStreamEvent[] = [];
+    for await (const e of runAiReading({ ...request, intent: "companion" }, provider)) events.push(e);
+    expect(events.at(-1)).toMatchObject({ type: "result" });
+    expect(provider.calls[0].prompt).toContain("这次想要的帮助：只是陪我说说话");
   });
 });

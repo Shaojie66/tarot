@@ -21,6 +21,7 @@ async function countRecords(page: Page): Promise<number> {
 async function localResult(page: Page) {
   await page.goto("/");
   await page.getByRole("link", { name: "开始" }).click();
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill("我在这份工作里到底想要什么？");
   await page.getByRole("button", { name: "就问这个" }).click();
@@ -99,9 +100,9 @@ test("损坏的草稿不会让页面崩溃，回到起点", async ({ page }) => 
   await page.goto("/");
   await page.evaluate(() => localStorage.setItem("tarot:session:v2", JSON.stringify({ v: 2, state: { stage: "question" } })));
   await page.goto("/reading");
-  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这一刻，想看看什么？" })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这一刻，想看看什么？" })).toBeVisible();
 });
 
 test("旧版草稿：默认勾选的行动不冒充用户的选择", async ({ page }) => {

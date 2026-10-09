@@ -6,6 +6,7 @@ import { expect, test, type Page } from "@playwright/test";
 async function localReading(page: Page, question: string) {
   await page.goto("/");
   await page.getByRole("link", { name: "开始" }).click();
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill(question);
   await page.getByRole("button", { name: "就问这个" }).click();
@@ -188,7 +189,7 @@ test("删除记录后回到抽牌页，不会把它写回来", async ({ page }) 
   await page.getByRole("button", { name: "确认删除" }).click();
   await expect(page.getByText("已删除这条记录")).toBeVisible();
   await page.goto("/reading");
-  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这一刻，想看看什么？" })).toBeVisible();
   await page.goto("/history");
   await expect(page.getByText("还没有记录")).toBeVisible();
 });

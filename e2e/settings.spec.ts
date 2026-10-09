@@ -3,6 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 async function startQuestion(page: Page) {
   await page.goto("/");
   await page.getByRole("link", { name: "开始" }).click();
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^自我/ }).click();
   await page.getByLabel("你的问题").fill("合成问题：设置检查");
   await page.getByRole("button", { name: "就问这个" }).click();

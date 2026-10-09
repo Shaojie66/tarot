@@ -18,6 +18,7 @@ async function pretendKeyed(page: Page) {
 async function openQuestion(page: Page, question: string) {
   await page.goto("/");
   await page.getByRole("link", { name: "开始" }).click();
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill(question);
 }

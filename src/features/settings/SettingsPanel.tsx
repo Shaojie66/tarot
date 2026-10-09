@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { DECKS, type DeckId } from "@/features/cards/deck";
 import { fetchAiStatus } from "@/features/reading/client";
+import { TOPICS, TOPIC_LABELS, type Topic } from "@/features/cards/schema";
+import { INTENTS, INTENT_LABELS, RECALL_CADENCES, RECALL_CADENCE_LABELS, saveProfile, useProfile, type Intent, type RecallCadence } from "@/features/profile/profile";
 import { saveSettings, useSettings } from "./settings";
 
 export function SettingsPanel() {
   const settings = useSettings();
+  const profile = useProfile();
   const [ai, setAi] = useState<boolean | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
 
@@ -29,6 +32,73 @@ export function SettingsPanel() {
           这个浏览器没有允许保存设置，这次设置只在当前页面有效。
         </p>
       )}
+
+      <section aria-labelledby="intent-title" className="space-y-3">
+        <h2 id="intent-title" className="font-serif text-xl">
+          牌想帮你做什么
+        </h2>
+        <fieldset className="space-y-1">
+          <legend className="sr-only">牌想帮你做什么</legend>
+          {[null, ...INTENTS].map((it) => (
+            <label key={it ?? "none"} className="flex min-h-11 items-center gap-3 text-sm">
+              <input
+                type="radio"
+                name="intent"
+                checked={profile.intent === it}
+                onChange={() => setSaveFailed(!saveProfile({ ...profile, onboarded: true, intent: it as Intent | null }))}
+                className="h-6 w-6 shrink-0"
+              />
+              {it ? INTENT_LABELS[it] : "不指定（平实的默认语气）"}
+            </label>
+          ))}
+        </fieldset>
+        <p className="text-xs leading-relaxed text-muted">决定解读的语气：理清处境、帮你看清选项（不替你选）、或更柔和地陪你坐一会儿。只影响之后的占卜；“此刻”那张卡固定用陪伴语气。</p>
+      </section>
+
+      <section aria-labelledby="topics-title" className="space-y-3">
+        <h2 id="topics-title" className="font-serif text-xl">
+          常来的主题
+        </h2>
+        <fieldset className="space-y-1">
+          <legend className="sr-only">常来的主题（可多选）</legend>
+          {TOPICS.map((t) => (
+            <label key={t} className="flex min-h-11 items-center gap-3 text-sm">
+              <input
+                type="checkbox"
+                checked={profile.topics.includes(t)}
+                onChange={(e) =>
+                  setSaveFailed(!saveProfile({ ...profile, onboarded: true, topics: e.target.checked ? ([...profile.topics, t] as Topic[]) : profile.topics.filter((x) => x !== t) }))
+                }
+                className="h-6 w-6 shrink-0"
+              />
+              {TOPIC_LABELS[t]}
+            </label>
+          ))}
+        </fieldset>
+        <p className="text-xs text-muted">选了的主题，在“抽牌”页的情境卡里排在前面。</p>
+      </section>
+
+      <section aria-labelledby="recall-title" className="space-y-3">
+        <h2 id="recall-title" className="font-serif text-xl">
+          回来看看当时的自己
+        </h2>
+        <fieldset className="space-y-1">
+          <legend className="sr-only">回看提醒的节奏</legend>
+          {RECALL_CADENCES.map((c) => (
+            <label key={c} className="flex min-h-11 items-center gap-3 text-sm">
+              <input
+                type="radio"
+                name="recall"
+                checked={(profile.recallCadence ?? "none") === c}
+                onChange={() => setSaveFailed(!saveProfile({ ...profile, onboarded: true, recallCadence: c as RecallCadence }))}
+                className="h-6 w-6 shrink-0"
+              />
+              {RECALL_CADENCE_LABELS[c]}
+            </label>
+          ))}
+        </fieldset>
+        <p className="text-xs leading-relaxed text-muted">选了之后，每次保存都会安排一次回看，到时候在首页和历史页轻轻提一句，可以随时忽略。只对之后保存的记录生效；不推送，不发通知。</p>
+      </section>
 
       <section aria-labelledby="reversed-title" className="space-y-2">
         <h2 id="reversed-title" className="font-serif text-xl">

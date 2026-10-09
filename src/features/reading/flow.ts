@@ -3,11 +3,13 @@
 
 import type { Topic } from "@/features/cards/schema";
 import { DEFAULT_DECK, type DeckId } from "@/features/cards/deck";
+import type { Intent } from "@/features/profile/intent";
+import { getScenario, type ScenarioId } from "./scenarios";
 import type { DrawnCard } from "@/features/draw/draw";
 import type { ReadingErrorCode, Versions } from "./ai";
 import type { ReadingBody, ReadingChoice, ReadingResult } from "./contract";
 
-export type Stage = "topic" | "question" | "rewrite" | "draw" | "self" | "reading" | "result" | "crisis";
+export type Stage = "scenario" | "topic" | "question" | "rewrite" | "draw" | "self" | "reading" | "result" | "crisis";
 
 export type GenerationStatus = "idle" | "generating" | "done" | "refused" | "failed" | "cancelled";
 
@@ -28,6 +30,8 @@ export type SaveStatus = "idle" | "saving" | "saved" | "failed";
 export interface FlowState {
   stage: Stage;
   topic: Topic | null;
+  /** 情境卡选中值（轻量快路径）；"topicless" = 没有具体问题，只想看看此刻 */
+  scenario: ScenarioId | null;
   mode: Mode | null;
   originalQuestion: string;
   question: string;
@@ -37,6 +41,8 @@ export interface FlowState {
   /** 抽牌当时的牌组与正逆位设置快照；之后改设置不影响这一次 */
   deckId: DeckId;
   allowReversed: boolean;
+  /** 抽牌当时的“这次想要的帮助”；之后改设置不影响这一次。null = 中性默认 */
+  intent: Intent | null;
   /** 已翻开的牌数 */
   revealed: number;
   selfReading: string;
@@ -58,8 +64,9 @@ export const initialChoice: ReadingChoice = {
 };
 
 export const initialFlow: FlowState = {
-  stage: "topic",
+  stage: "scenario",
   topic: null,
+  scenario: null,
   mode: null,
   originalQuestion: "",
   question: "",
@@ -67,6 +74,7 @@ export const initialFlow: FlowState = {
   cards: null,
   deckId: DEFAULT_DECK,
   allowReversed: true,
+  intent: null,
   revealed: 0,
   selfReading: "",
   generation: { status: "idle", source: null, requestId: 0, error: null, sections: {} },
@@ -81,12 +89,16 @@ export const initialFlow: FlowState = {
 
 export type FlowAction =
   | { type: "chooseTopic"; topic: Topic }
+  /** 情境卡快路径：选题 + 出题合并成一步，直接进入洗牌 */
+  | { type: "chooseScenario"; scenario: ScenarioId }
+  /** 从情境卡进入"自己写一个问题"：回到主题选择页 */
+  | { type: "writeOwn" }
   | { type: "submitQuestion"; question: string; mode: Mode }
   | { type: "setMode"; mode: Mode }
   | { type: "rewriteSuggested"; suggestion: string }
   | { type: "rewriteSkipped" }
   | { type: "confirmQuestion"; question: string }
-  | { type: "drawn"; cards: DrawnCard[]; deckId?: DeckId; allowReversed?: boolean }
+  | { type: "drawn"; cards: DrawnCard[]; deckId?: DeckId; allowReversed?: boolean; intent?: Intent | null }
   | { type: "reveal"; count: number }
   | { type: "submitSelf"; selfReading: string }
   | { type: "startGeneration"; source: "ai" | "local"; requestId: number }
@@ -117,6 +129,23 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
   switch (action.type) {
     case "chooseTopic":
       return { ...state, topic: action.topic, stage: "question" };
+    case "chooseScenario": {
+      const s = getScenario(action.scenario);
+      // 快路径：把卡的克制问句作为本次问题，直接进入洗牌，不再让用户输入
+      return {
+        ...state,
+        stage: "draw",
+        scenario: action.scenario,
+        topic: s.topic,
+        originalQuestion: s.question,
+        question: s.question,
+        suggestion: null,
+        mode: "local",
+      };
+    }
+    case "writeOwn":
+      // 从情境卡进入"自己写一个问题"：回到主题选择页（不预设主题）
+      return { ...state, stage: "topic", topic: null, suggestion: null };
     case "submitQuestion":
       return {
         ...state,
@@ -138,7 +167,7 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
       // 牌已固定则忽略：重试、刷新、重复点击都不重抽
       return state.cards
         ? state
-        : { ...state, cards: action.cards, revealed: 0, deckId: action.deckId ?? state.deckId, allowReversed: action.allowReversed ?? state.allowReversed };
+        : { ...state, cards: action.cards, revealed: 0, deckId: action.deckId ?? state.deckId, allowReversed: action.allowReversed ?? state.allowReversed, intent: action.intent ?? state.intent };
     case "reveal": {
       if (!state.cards) return state;
       const revealed = Math.min(state.cards.length, Math.max(state.revealed, action.count));
@@ -197,7 +226,7 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
     case "editAfterCrisis":
       // 不提供绕过分流的"继续占卜"：回到起问页，原文保留，改完重新走安全检查
       return state.stage === "crisis"
-        ? { ...initialFlow, stage: state.topic ? "question" : "topic", topic: state.topic, mode: state.mode, originalQuestion: state.originalQuestion, selfReading: state.selfReading }
+        ? { ...initialFlow, stage: state.topic ? "question" : "scenario", topic: state.topic, scenario: state.scenario, mode: state.mode, originalQuestion: state.originalQuestion, selfReading: state.selfReading }
         : state;
     case "chooseInterpretation":
       return { ...state, choice: { ...state.choice, interpretation: action.index } };
@@ -219,7 +248,7 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
     case "retrySave":
       return state.result ? { ...state, saveStatus: "idle", saveNonce: state.saveNonce + 1 } : state;
     case "back":
-      if (state.stage === "question") return { ...state, stage: "topic" };
+      if (state.stage === "question") return { ...state, stage: "scenario" };
       if (state.stage === "rewrite") return { ...state, stage: "question", suggestion: null };
       return state;
     case "restore":

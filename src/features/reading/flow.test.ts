@@ -59,6 +59,13 @@ describe("flowReducer", () => {
     expect(run(drawn, { type: "drawn", cards, allowReversed: true }).allowReversed).toBe(false);
   });
 
+  it("抽牌时固定“这次想要的帮助”，之后不变；旧草稿没有该字段按中性默认", () => {
+    const drawn = run(initialFlow, { type: "chooseTopic", topic: "self" }, { type: "submitQuestion", question: "q", mode: "local" }, { type: "drawn", cards, intent: "decide" });
+    expect(drawn.intent).toBe("decide");
+    expect(run(drawn, { type: "drawn", cards, intent: "companion" }).intent).toBe("decide");
+    expect(initialFlow.intent).toBeNull();
+  });
+
   it("never redraws once cards are fixed", () => {
     const other: DrawnCard[] = cards.map((c) => ({ ...c, cardId: "the-sun" as const }));
     expect(run(ready, { type: "drawn", cards: other }).cards).toEqual(cards);
@@ -146,5 +153,28 @@ describe("flowReducer", () => {
     const restored = restoreFlow(JSON.parse(JSON.stringify(generating)));
     expect(restored.generation.status).toBe("cancelled");
     expect(restored.cards).toEqual(cards);
+  });
+
+  it("chooseScenario 快路径：点卡直接进入洗牌，用卡的克制问句作为问题，跳过输入", () => {
+    const s = run(initialFlow, { type: "chooseScenario", scenario: "career" });
+    expect(s.stage).toBe("draw");
+    expect(s.scenario).toBe("career");
+    expect(s.topic).toBe("career");
+    expect(s.question).toBe("留在原地，还是换个方向？");
+    expect(s.originalQuestion).toBe(s.question);
+    expect(s.mode).toBe("local");
+  });
+
+  it("topicless 情境卡：无题也抽，映射到 self 主题并带 topicless 标记", () => {
+    const s = run(initialFlow, { type: "chooseScenario", scenario: "topicless" });
+    expect(s.stage).toBe("draw");
+    expect(s.scenario).toBe("topicless");
+    expect(s.topic).toBe("self");
+  });
+
+  it("从 question 页 back 回到情境卡页", () => {
+    const atQuestion = run(initialFlow, { type: "chooseTopic", topic: "self" });
+    const back = run(atQuestion, { type: "back" });
+    expect(back.stage).toBe("scenario");
   });
 });

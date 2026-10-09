@@ -3,6 +3,7 @@
 
 import Dexie, { type EntityTable } from "dexie";
 import { DAILY_KEY, clearDaily, mergeDaily, type DailyEntry } from "@/features/daily/daily";
+import { clearAllRecalls, removeRecallsForRecord } from "@/features/recall/recall";
 import { MAX_PERSPECTIVES, readingRecordSchema, type Perspective, type ReadingRecord, type Review } from "./contract";
 import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
@@ -100,6 +101,8 @@ export async function deleteRecord(id: string): Promise<void> {
   await getDb().records.delete(id);
   // 进行中的草稿若指向这条记录，一并清掉：否则回到抽牌页时保存 effect 会把刚删掉的记录写回来
   if (loadSession()?.state.recordId === id) clearSession();
+  // 指向这条记录的未来回读一并清掉
+  removeRecallsForRecord(id);
 }
 
 /** 一键清空：已完成记录（含读不出来的条目）、每日一张、进行中的草稿。设置不属于用户内容，不清。 */
@@ -107,6 +110,7 @@ export async function clearEverything(): Promise<void> {
   await getDb().records.clear();
   clearDaily();
   clearSession();
+  clearAllRecalls();
 }
 
 /**

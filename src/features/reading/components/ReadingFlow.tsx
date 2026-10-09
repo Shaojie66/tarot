@@ -21,8 +21,12 @@ import {
 import { flowReducer, initialFlow, type FlowState, type Mode } from "../flow";
 import { buildLocalReading } from "../local";
 import { QUESTION_BANK } from "../questions";
+import { orderScenarios, type ScenarioId } from "../scenarios";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
 import { clearSession, getDraftWritable, loadSession, saveFlowRecord, storeSession, subscribeDraftHealth } from "../storage";
+import { ProfileOnboarding } from "@/features/profile/ProfileOnboarding";
+import { useProfile } from "@/features/profile/profile";
+import { addRecall } from "@/features/recall/recall";
 import { DrawTable } from "./DrawTable";
 import { ResultView } from "./ResultView";
 
@@ -52,6 +56,7 @@ function toRequest(state: FlowState): ReadingRequest | null {
     originalQuestion: state.originalQuestion,
     question: state.question,
     selfReading: state.selfReading,
+    ...(state.intent ? { intent: state.intent } : {}),
     cards: state.cards,
   };
 }
@@ -60,12 +65,15 @@ export function ReadingFlow() {
   const router = useRouter();
   const [state, dispatch] = useReducer(flowReducer, initialFlow);
   const settings = useSettings();
+  const profile = useProfile();
   const [hydrated, setHydrated] = useState(false);
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const requestSeq = useRef(0);
   const inflight = useRef<AbortController | null>(null);
   /** 同步防重：state 来不及更新时的第二次点击也只会发出一个请求 */
   const busyRequest = useRef<number | null>(null);
+  /** 记录已创建的未来回读，避免 saveNonce 变化时重复创建 */
+  const recallCreated = useRef<Set<string>>(new Set());
 
   // 离开页面 / 组件卸载：中止进行中的解读请求
   useEffect(
@@ -119,14 +127,22 @@ export function ReadingFlow() {
       choice,
       versions: versions ?? { content: CONTENT_VERSION, prompt: null, model: null },
     })
-      .then(() => !stale && dispatch({ type: "saved" }))
+      .then(() => {
+        if (!stale) dispatch({ type: "saved" });
+        // 建档设了未来回读节奏时，保存成功即安排一次"回来看看当时的自己"
+        const cadenceDays = profile.recallCadence === "3days" ? 3 : profile.recallCadence === "7days" ? 7 : null;
+        if (cadenceDays !== null && !recallCreated.current.has(recordId)) {
+          recallCreated.current.add(recordId);
+          addRecall(recordId, cadenceDays);
+        }
+      })
       .catch(() => !stale && dispatch({ type: "saveFailed" }));
     return () => {
       stale = true;
     };
     // state 的其余字段在结果生成后不再变化
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hydrated, result, choice, recordId, createdAt, versions, saveNonce]);
+  }, [hydrated, result, choice, recordId, createdAt, versions, saveNonce, profile.recallCadence]);
 
   // 问题改写（有 key 时）。失败不阻塞流程，直接用原问题。
   useEffect(() => {
@@ -199,6 +215,8 @@ export function ReadingFlow() {
       cards: drawCards({ count: spread.positions.length, allowReversed }),
       deckId: settings.deckId,
       allowReversed,
+      // “此刻”卡没有具体问题：陪伴语气；其余按建档 / 设置里选的意图（没选就是中性默认）
+      intent: state.scenario === "topicless" ? ("companion" as const) : profile.intent,
     };
   }
 
@@ -217,11 +235,20 @@ export function ReadingFlow() {
 
   return (
     <div className="space-y-8">
-      {draftUnsaved && state.stage !== "topic" && (
+      {draftUnsaved && state.stage !== "scenario" && (
         <p role="status" className="rounded-lg bg-surface px-4 py-2 text-xs leading-relaxed text-muted" data-testid="draft-unsaved">
           这个浏览器没有允许保存进行中的进度（可能是隐私模式或存储已满）。现在刷新页面会丢失当前这一步。
         </p>
       )}
+      {state.stage === "scenario" && (
+        <ScenarioGate>
+          <ScenarioStep
+            onChoose={(scenario) => dispatch({ type: "chooseScenario", scenario })}
+            onWriteOwn={() => dispatch({ type: "writeOwn" })}
+          />
+        </ScenarioGate>
+      )}
+
       {state.stage === "topic" && <TopicStep onChoose={(topic) => dispatch({ type: "chooseTopic", topic })} />}
 
       {state.stage === "question" && state.topic && (
@@ -296,11 +323,56 @@ export function ReadingFlow() {
       )}
 
       {state.stage !== "topic" && state.stage !== "result" && (
-        <button type="button" onClick={restart} className="text-xs text-muted underline underline-offset-4">
+        <button type="button" onClick={restart} className="inline-flex min-h-11 items-center text-xs text-muted underline underline-offset-4">
           从头开始
         </button>
       )}
     </div>
+  );
+}
+
+/** 建档引导：未建档时排在情境卡下面（可跳过），不挡住主操作、不阻塞占卜。建档完成 / 跳过后 profile.onboarded 变 true，自然消失。 */
+function ScenarioGate({ children }: { children: React.ReactNode }) {
+  const profile = useProfile();
+  return (
+    <div className="space-y-12">
+      {children}
+      {!profile.onboarded && <ProfileOnboarding onDone={() => {}} onSkip={() => {}} />}
+    </div>
+  );
+}
+
+function ScenarioStep({ onChoose, onWriteOwn }: { onChoose: (scenario: ScenarioId) => void; onWriteOwn: () => void }) {
+  const profile = useProfile();
+  return (
+    <section aria-labelledby="scenario-title" className="space-y-5">
+      <h2 id="scenario-title" className="diary-title">
+        这一刻，想看看什么？
+      </h2>
+      <p className="text-sm leading-relaxed text-muted">选一张卡，直接开始。不用想太多，牌是随机抽的。</p>
+      <div className="hairline">
+        {orderScenarios(profile.topics).map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            onClick={() => onChoose(s.id)}
+            className="group flex min-h-16 w-full items-baseline justify-between gap-4 border-b border-line py-4 text-left transition-colors hover:border-accent"
+          >
+            <span className="font-serif text-xl">{s.question}</span>
+            <span className="text-xs text-muted group-hover:text-ink" aria-hidden>
+              →
+            </span>
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={onWriteOwn}
+        className="inline-flex min-h-11 items-center text-sm text-muted underline underline-offset-4 hover:text-ink"
+      >
+        自己写一个问题
+      </button>
+    </section>
   );
 }
 

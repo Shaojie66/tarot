@@ -32,6 +32,12 @@ html {
   border-radius: 4px;
 }
 
+/* 勾选框 / 单选框用主题金色，不用浏览器默认的亮蓝 */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent);
+}
+
 /* 下划线式输入框：焦点用金色底线（box-shadow 加粗），不画一圈外框 */
 .field:focus-visible {
   outline: none;

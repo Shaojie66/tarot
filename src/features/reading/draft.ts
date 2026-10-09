@@ -3,6 +3,7 @@
 
 import { z } from "zod";
 import { DECKS } from "@/features/cards/deck";
+import { INTENTS } from "@/features/profile/intent";
 import { TOPICS } from "@/features/cards/schema";
 import { drawnCardSchema, readingChoiceSchema, readingResultSchema, checkRequest, resultMatchesDraw } from "./contract";
 import type { FlowState } from "./flow";
@@ -23,6 +24,7 @@ const flowStateSchema = z.object({
   cards: z.array(drawnCardSchema).nullable(),
   deckId: z.string().catch("rws-1909").transform((id) => (id in DECKS ? id : "rws-1909")),
   allowReversed: z.boolean().catch(true),
+  intent: z.enum(INTENTS).nullable().catch(null).default(null),
   revealed: z.int().min(0),
   selfReading: z.string(),
   generation: z.object({

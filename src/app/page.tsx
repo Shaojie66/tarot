@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { RecallBanner } from "@/features/recall/RecallBanner";
 
 export default function Home() {
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-6 py-16">
+      <RecallBanner />
       <span aria-hidden className="rise block h-px w-10 bg-accent" />
       <h1 className="diary-title rise mt-8" style={{ "--i": 1 } as React.CSSProperties}>
         有点迷茫？

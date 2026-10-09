@@ -9,6 +9,14 @@ import { getSpread } from "./spread";
 
 const topicMap = z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, z.string().min(4)])) as Record<Topic, z.ZodString>);
 
+const intentSchema = z.strictObject({
+  intro: z.string(),
+  lensLeads: z.tuple([z.string().includes("{obstacle}"), z.string().includes("{obstacle}")]),
+  nextLead: z.string().includes("{next}"),
+  question: z.string().min(4).endsWith("？"),
+  actions: topicMap,
+});
+
 const templateSchema = z.strictObject({
   intro: z.string(),
   selfReadingLead: z.string().includes("{self}"),
@@ -25,6 +33,8 @@ const templateSchema = z.strictObject({
     swords: topicMap,
     pentacles: topicMap,
   }),
+  /** 按“这次想要的帮助”换语气；没有 intent 或 clarify 用上面的默认 */
+  intents: z.strictObject({ decide: intentSchema, companion: intentSchema }),
   reversedActionLead: z.string(),
   fallbackQuestion: z.string().endsWith("？"),
 });
@@ -51,6 +61,7 @@ function roles(count: number) {
 export function buildLocalReading(request: ReadingRequest): ReadingResult {
   const spread = getSpread(request.spreadId);
   const T = LOCAL_TEMPLATE;
+  const tone = request.intent === "decide" || request.intent === "companion" ? T.intents[request.intent] : null;
   const drawn = request.cards.map((c) => ({ ...c, card: getCard(c.cardId), side: sideOf(getCard(c.cardId), c.reversed) }));
   const r = roles(drawn.length);
   const topic = request.topic;
@@ -65,19 +76,19 @@ export function buildLocalReading(request: ReadingRequest): ReadingResult {
   const summary = drawn
     .map((d) => `${spread.positions[d.position].label}——${cardLabel(d.card, d.reversed)}（${d.side.keywords.slice(0, 2).join("、")}）`)
     .join("；");
-  const overallParts = [`${summary}。`, T.intro];
+  const overallParts = [`${summary}。`, tone?.intro ?? T.intro];
   if (request.selfReading) overallParts.unshift(fill(T.selfReadingLead, { self: request.selfReading }));
 
   const obstacle = drawn[r.obstacle];
   const next = drawn[r.next];
   const outerField: keyof CardSide = topic === "self" ? "meaning" : topic;
   const interpretations: [string, string] = [
-    `${fill(T.lenses[0].lead, { obstacle: cardLabel(obstacle.card, obstacle.reversed) })}${obstacle.side[outerField]}${fill(T.nextLead, { next: cardLabel(next.card, next.reversed) })}${next.side.crossroads}`,
-    `${fill(T.lenses[1].lead, { obstacle: cardLabel(obstacle.card, obstacle.reversed) })}${obstacle.side.self}${fill(T.nextLead, { next: cardLabel(next.card, next.reversed) })}${next.side.self}`,
+    `${fill(tone?.lensLeads[0] ?? T.lenses[0].lead, { obstacle: cardLabel(obstacle.card, obstacle.reversed) })}${obstacle.side[outerField]}${fill(tone?.nextLead ?? T.nextLead, { next: cardLabel(next.card, next.reversed) })}${next.side.crossroads}`,
+    `${fill(tone?.lensLeads[1] ?? T.lenses[1].lead, { obstacle: cardLabel(obstacle.card, obstacle.reversed) })}${obstacle.side.self}${fill(tone?.nextLead ?? T.nextLead, { next: cardLabel(next.card, next.reversed) })}${next.side.self}`,
   ];
 
   const group = next.card.suit ?? "major";
-  const action = (next.reversed ? T.reversedActionLead : "") + T.actions[group][topic];
+  const action = (next.reversed ? T.reversedActionLead : "") + (tone ? tone.actions[topic] : T.actions[group][topic]);
 
   return {
     source: "local",
@@ -85,6 +96,6 @@ export function buildLocalReading(request: ReadingRequest): ReadingResult {
     cards,
     interpretations,
     action,
-    question: next.side.question || T.fallbackQuestion,
+    question: tone?.question ?? (next.side.question || T.fallbackQuestion),
   };
 }

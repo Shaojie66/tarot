@@ -53,9 +53,10 @@ test("已缓存后断网：刷新、跨页面导航、历史页都能打开；�
 
   // 客户端导航到预缓存页面
   await page.getByRole("link", { name: "开始" }).click();
-  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这一刻，想看看什么？" })).toBeVisible();
 
   // 离线走完本地流程：不依赖任何网络
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill("合成问题：离线也能用吗？");
   await page.getByRole("button", { name: "就问这个" }).click(); // 离线时 /api/status 失败 → 无 AI → 本地唯一路径

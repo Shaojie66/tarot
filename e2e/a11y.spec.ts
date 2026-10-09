@@ -22,8 +22,10 @@ test("只用键盘走完一次本地占卜并保存", async ({ page }) => {
   await page.goto("/");
   await tabTo(page, "开始");
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "这一刻，想看看什么？" })).toBeVisible();
 
+  await tabTo(page, "自己写一个问题");
+  await page.keyboard.press("Enter");
   await tabTo(page, /^事业/);
   await page.keyboard.press("Enter");
   await expect(page.getByLabel("你的问题")).toBeVisible();
@@ -100,6 +102,7 @@ test("触屏目标尺寸：主要页面里可点击元素不小于 24×24 CSS px
 test("reduced-motion：翻牌过渡与洗牌动画被关闭", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/reading");
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill("合成问题：动画");
   await page.getByRole("button", { name: "就问这个" }).click();
@@ -144,6 +147,7 @@ test("读屏语义：页面语言、唯一主标题、控件 / 图片都有名�
 
   // 抽牌后的牌面图有 alt（含正逆位），状态变化有 live region
   await page.goto("/reading");
+  await page.getByRole("button", { name: "自己写一个问题" }).click();
   await page.getByRole("button", { name: /^事业/ }).click();
   await page.getByLabel("你的问题").fill("合成问题：读屏");
   await page.getByRole("button", { name: "就问这个" }).click();

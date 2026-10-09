@@ -5,6 +5,7 @@ import { z } from "zod";
 import { isCardId, type CardId } from "@/features/cards/ids";
 import { TOPICS } from "@/features/cards/schema";
 import { DECKS } from "@/features/cards/deck";
+import { INTENTS } from "@/features/profile/intent";
 import { isValidDraw } from "@/features/draw/draw";
 import { SPREAD_IDS, getSpread } from "./spread";
 
@@ -34,6 +35,8 @@ export const readingRequestSchema = z.strictObject({
   question: z.string().trim().min(1).max(QUESTION_MAX),
   /** 可选自解："你第一眼看到了什么？" */
   selfReading: z.string().trim().max(SELF_READING_MAX).default(""),
+  /** 这次想要的帮助（建档 / 设置里选的；没有就是中性默认）。决定解读的语气，不改变牌与硬约束 */
+  intent: z.enum(INTENTS).optional(),
   cards: z.array(drawnCardSchema),
 });
 

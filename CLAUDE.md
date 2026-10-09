@@ -43,4 +43,5 @@ Next.js 16（App Router，`src/`）+ React 19 + Tailwind 4 + TypeScript，pnpm�
 - `pnpm check`：lint + typecheck（含 `next typegen`）+ 单元测试
 - `pnpm build`：涉及路由、页面、配置时额外跑
 - 页面改动用 dev server（`.claude/launch.json` 的 `dev`，端口 3210）在手机视口下看一遍，并查控制台报错
-- `pnpm e2e`：M2 引入 Playwright 后补
+- `pnpm e2e`：Playwright 手机视口 E2E（无 key 路径），涉及流程页面时跑
+- 改 prompt：新建 `content/prompts/vN/`，跑 `pnpm test`（mock 评测）；有 key 时再跑 `pnpm eval:live`

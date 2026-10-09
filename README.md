@@ -12,9 +12,11 @@
 |---|---|
 | 78 张牌义百科（正逆位 × 事业 / 关系 / 自我 / 去留 + 反思问题） | ✅ |
 | 1909 年原版莱德-韦特牌面 | ✅ |
-| 起问 → 洗牌抽牌 → 翻牌 → AI 解读（流式） | 开发中 |
-| 无 API key 的离线解读模式 | 开发中 |
-| 历史记录、回看笔记、每日一张、导出图片 | 计划中 |
+| 起问 → 洗牌抽牌 → 翻牌 → 先自解 → 解读 → 小行动 → 保存本次记录 | ✅ |
+| 无 API key 的本地解读（牌义 + 规则模板，不调用模型） | ✅ |
+| AI 问题改写与解读（受控流式、失败可重试或改用本地） | ✅（需自备 key） |
+| 危机内容分流（本地规则 + AI 标记），展示求助资源 | ✅ |
+| 历史列表、回看笔记、每日一张、导出图片、PWA、Docker | 计划中（M3） |
 | AI 重绘牌组 | 计划中 |
 
 完整计划见 [docs/PLAN.md](docs/PLAN.md)。
@@ -32,16 +34,30 @@ pnpm dev
 
 打开 http://localhost:3000 。
 
-### 开启 AI 解读（可选）
+### 路线一：无 key 体验
 
-AI 解读功能需要你自己的 [Anthropic API key](https://console.anthropic.com/)。不填也能用，会走离线解读。
+不需要任何配置。解读由本地规则模板根据牌义组织，不调用任何模型 API。
+
+### 路线二：开启 AI 解读（可选）
+
+需要你自己的 [Anthropic API key](https://console.anthropic.com/)：
 
 ```bash
 cp .env.example .env.local
-# 编辑 .env.local，填入 ANTHROPIC_API_KEY
+# 编辑 .env.local，填入 ANTHROPIC_API_KEY，然后重启 pnpm dev
 ```
 
-问题内容只保存在你的浏览器里，发给模型 API 的只有单次解读请求本身，服务端不落盘。
+有 key 时默认显示"AI 解读"，也随时可以选"本地解读"。AI 失败（超时、断网、key 无效）时，问题和牌都会保留，可以重试或改用本地解读，不会重抽。
+
+### 在手机上用
+
+电脑运行 `pnpm build && pnpm start --hostname 0.0.0.0`（开发模式默认拦截来自其他设备的请求），手机连同一个 Wi-Fi，打开 `http://<电脑的局域网 IP>:3000`。页面和 API 经过你的电脑；记录保存在手机浏览器里。
+
+### 数据与隐私
+
+- 问题、自解和记录只保存在**当前浏览器**的本地存储（IndexedDB）里。换浏览器、换设备或换端口不会同步；清理浏览器数据会删掉它们，没有云端备份。
+- 本地解读不发送任何内容。AI 模式下，问题改写和解读各发送一次所需内容（问题、自解、牌面）给模型 API。
+- 服务端不落盘、不记录问题内容。
 
 ### 生产模式
 
@@ -53,16 +69,20 @@ pnpm start
 ## 开发
 
 ```bash
-pnpm check   # lint + 类型检查 + 单元测试
-pnpm build   # 生产构建
+pnpm check      # lint + 类型检查 + 单元测试 + mock 评测
+pnpm build      # 生产构建
+pnpm e2e        # Playwright 手机视口端到端测试（默认用本机 Chrome；设 E2E_BROWSER_CHANNEL= 改用 Playwright 自带 Chromium）
+pnpm eval:live  # 真实模型评测，需要 ANTHROPIC_API_KEY，会产生少量费用
 ```
 
 ```
 src/app/            页面与 API 路由
-src/features/       业务模块：cards（牌义）/ draw（抽牌）/ reading（解读）
+src/features/       业务模块：cards（牌义）/ draw（抽牌）/ reading（解读流程）/ safety（危机分流）
 src/lib/ai/         模型配置与 provider 接口
 content/cards/      78 张牌义数据（JSON，加载时 Zod 校验）
 content/questions.json  示例问题库
+content/prompts/vN/ 版本化 prompt
+evals/              固定评测集（解读 40 例、危机分流样例）
 public/decks/       牌组图片，每个牌组附 SOURCES.md
 scripts/            数据抓取脚本
 ```
@@ -77,7 +97,7 @@ scripts/            数据抓取脚本
 
 ## 免责声明
 
-本项目是自我反思与娱乐工具，不提供医疗、心理、法律或财务建议。如果你正处在危机中，请联系当地的心理援助热线或紧急服务。
+本项目是自我反思与娱乐工具，不提供医疗、心理、法律或财务建议。如果你正处在危机中，请联系当地的心理援助热线或紧急服务。应用内的危机识别基于规则和模型标记，会有遗漏，不能替代专业帮助。
 
 ## 许可
 

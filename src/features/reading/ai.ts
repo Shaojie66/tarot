@@ -123,6 +123,9 @@ export async function* runAiReading(
     signal: controller.signal,
   };
   const sections = new TopLevelSections();
+  // 危机门控：确认本次输出的 crisis 是布尔 false 之前，章节只缓冲不放行（不依赖字段顺序）。
+  let crisisCleared = false;
+  const held: { key: SectionKey; value: unknown }[] = [];
   try {
     for await (const event of provider.stream(generate)) {
       if (signal?.aborted) {
@@ -137,15 +140,26 @@ export async function* runAiReading(
         for (const section of sections.push(event.delta)) {
           const value = tryParse(section.raw);
           if (section.key === "crisis") {
-            if (value === true) {
+            if (typeof value !== "boolean" || crisisCleared) {
+              // 类型错误，或重复出现的标记：整个输出无效
               controller.abort();
+              yield { type: "error", code: "invalid_output" };
+              return;
+            }
+            if (value) {
+              controller.abort();
+              held.length = 0;
               yield { type: "crisis" };
               return;
             }
+            crisisCleared = true;
+            for (const item of held.splice(0)) yield { type: "section", ...item };
             continue;
           }
           if (section.key in readingBodySchema.shape && checkSection(section.key as SectionKey, value, request)) {
-            yield { type: "section", key: section.key as SectionKey, value };
+            const item = { key: section.key as SectionKey, value };
+            if (crisisCleared) yield { type: "section", ...item };
+            else held.push(item);
           }
         }
         continue;
@@ -156,11 +170,15 @@ export async function* runAiReading(
         return;
       }
       const value = tryParse(event.text) as { crisis?: unknown } | undefined;
-      if (value?.crisis === true) {
+      if (typeof value?.crisis !== "boolean") {
+        yield { type: "error", code: "invalid_output" };
+        return;
+      }
+      if (value.crisis) {
         yield { type: "crisis" };
         return;
       }
-      if (value && typeof value === "object") delete value.crisis;
+      delete value.crisis;
       const body = validateReadingOutput(value, request);
       if (!body) {
         yield { type: "error", code: "invalid_output" };
@@ -207,7 +225,8 @@ export async function runRewrite(
       if (event.type !== "done") continue;
       if (event.stopReason === "max_tokens") return { type: "error", code: "invalid_output" };
       const value = tryParse(event.text) as { crisis?: unknown; question?: unknown } | undefined;
-      if (value?.crisis === true) return { type: "crisis" };
+      if (typeof value?.crisis !== "boolean") return { type: "error", code: "invalid_output" };
+      if (value.crisis) return { type: "crisis" };
       const rewritten = typeof value?.question === "string" ? value.question.trim() : "";
       if (rewritten.length < 4 || rewritten.length > 60 || !/[？?]$/.test(rewritten)) {
         return { type: "error", code: "invalid_output" };

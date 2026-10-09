@@ -177,7 +177,9 @@ export function ReadingFlow() {
 
   if (!hydrated) return <p className="py-16 text-center text-sm text-muted">正在准备牌桌…</p>;
 
-  if (state.stage === "crisis") return <CrisisSupport onExit={() => { restart(); router.push("/"); }} />;
+  if (state.stage === "crisis") {
+    return <CrisisSupport onEdit={() => dispatch({ type: "editAfterCrisis" })} onExit={() => { restart(); router.push("/"); }} />;
+  }
 
   return (
     <div className="space-y-8">
@@ -191,7 +193,7 @@ export function ReadingFlow() {
           aiAvailable={aiAvailable}
           onSubmit={(question, mode) => {
             // 安全检查①：问题进入任何后续步骤之前
-            if (detectCrisis(question).flagged) dispatch({ type: "crisis" });
+            if (detectCrisis(question).flagged) dispatch({ type: "crisis", question });
             else dispatch({ type: "submitQuestion", question, mode });
           }}
         />
@@ -223,7 +225,7 @@ export function ReadingFlow() {
         </section>
       ) : null}
 
-      {state.stage === "self" && <SelfStep onSubmit={(text) => dispatch({ type: "submitSelf", selfReading: text })} />}
+      {state.stage === "self" && <SelfStep initial={state.selfReading} onSubmit={(text) => dispatch({ type: "submitSelf", selfReading: text })} />}
 
       {state.stage === "reading" && (
         <GenerateStep
@@ -434,8 +436,8 @@ function QuestionBanner({ topic, question }: { topic: Topic | null; question: st
   );
 }
 
-function SelfStep({ onSubmit }: { onSubmit: (text: string) => void }) {
-  const [text, setText] = useState("");
+function SelfStep({ initial, onSubmit }: { initial: string; onSubmit: (text: string) => void }) {
+  const [text, setText] = useState(initial);
   return (
     <form
       aria-labelledby="self-title"

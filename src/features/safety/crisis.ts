@@ -30,23 +30,39 @@ const CRISIS_PATTERNS: readonly RegExp[] = [
   /end (my|it) all/i,
 ];
 
-/** 叙述虚构、新闻或牌义的语境标记；同一分句里没有"我想 / 我要"这类第一人称意图时视为非危机。 */
+/** 叙述虚构、新闻或牌义的语境标记。同一句里出现时，只有"并非说话人本人"的危机表述才被豁免。 */
 const FICTION_MARKERS = /小说|电影|电视剧|剧里|剧中|故事|角色|主角|书里|游戏里|动漫|历史上|新闻|牌义|这张牌/;
-const FIRST_PERSON_INTENT =
-  /我(也|真的|好|很|一直|有时|总是)?(想|要|准备|打算|会)(去)?(自杀|死|跳|割|轻生|结束|了结|伤害|自残)|\bI (want|wanna|will|am going) to (die|kill)/i;
+/** 说话人自指。危机词前紧邻（6 字内）出现自指，视为本人表述，语境标记不能豁免。 */
+const SPEAKER = /我|\bI\b|\bmy(self)?\b/gi;
+const SPEAKER_WINDOW = 6;
 
 export interface CrisisCheck {
   flagged: boolean;
 }
 
+function aboutSpeaker(subclause: string, matchIndex: number): boolean {
+  const before = subclause.slice(0, matchIndex);
+  const last = [...before.matchAll(SPEAKER)].pop();
+  return last !== undefined && before.length - (last.index + last[0].length) <= SPEAKER_WINDOW;
+}
+
+/**
+ * 规则：命中危机词即分流，除非该句带有虚构 / 新闻语境标记，且该危机词不是说话人本人的表述。
+ * 例："看完这部电影，我不想活了"仍分流；"小说里的主角想自杀"不分流。
+ * 第三方危机（"朋友说她想自杀"）有意分流：写下它的人也可能需要支持，页面提供"返回修改"。
+ */
 export function detectCrisis(...texts: (string | undefined | null)[]): CrisisCheck {
   for (const text of texts) {
     if (!text) continue;
-    const clauses = text.split(/[。！？!?；;\n]+/);
-    for (const clause of clauses) {
-      if (!CRISIS_PATTERNS.some((re) => re.test(clause))) continue;
-      if (FICTION_MARKERS.test(clause) && !FIRST_PERSON_INTENT.test(clause)) continue;
-      return { flagged: true };
+    for (const sentence of text.split(/[。！？!?；;\n]+/)) {
+      const fictional = FICTION_MARKERS.test(sentence);
+      for (const sub of sentence.split(/[，,、：:]+/)) {
+        for (const re of CRISIS_PATTERNS) {
+          const match = re.exec(sub);
+          if (!match) continue;
+          if (!fictional || aboutSpeaker(sub, match.index)) return { flagged: true };
+        }
+      }
     }
   }
   return { flagged: false };

@@ -86,7 +86,8 @@ export type FlowAction =
   | { type: "refused"; requestId: number }
   | { type: "failed"; requestId: number; error: ReadingErrorCode }
   | { type: "cancel" }
-  | { type: "crisis" }
+  | { type: "crisis"; question?: string }
+  | { type: "editAfterCrisis" }
   | { type: "chooseInterpretation"; index: 0 | 1 | null }
   | { type: "toggleRejected"; index: 0 | 1 }
   | { type: "setAction"; status: ReadingChoice["action"]["status"]; text: string }
@@ -170,8 +171,20 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
         ? { ...state, generation: { ...state.generation, status: "cancelled", sections: {} } }
         : state;
     case "crisis":
-      // 中止占卜：丢弃牌与生成状态，只保留"已分流"
-      return { ...initialFlow, stage: "crisis" };
+      // 中止占卜：丢弃牌、结果与生成状态，只保留用户写下的文字，供误判时"返回修改"。不产生记录。
+      return {
+        ...initialFlow,
+        stage: "crisis",
+        topic: state.topic,
+        mode: state.mode,
+        originalQuestion: action.question ?? state.originalQuestion,
+        selfReading: state.selfReading,
+      };
+    case "editAfterCrisis":
+      // 不提供绕过分流的"继续占卜"：回到起问页，原文保留，改完重新走安全检查
+      return state.stage === "crisis"
+        ? { ...initialFlow, stage: state.topic ? "question" : "topic", topic: state.topic, mode: state.mode, originalQuestion: state.originalQuestion, selfReading: state.selfReading }
+        : state;
     case "chooseInterpretation":
       return { ...state, choice: { ...state.choice, interpretation: action.index } };
     case "toggleRejected": {

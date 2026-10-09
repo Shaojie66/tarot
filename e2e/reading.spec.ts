@@ -109,3 +109,21 @@ test("crisis in self-reading is caught before the reading", async ({ page }) => 
   await expect(page.getByRole("heading", { name: "这一刻，先不抽牌了。" })).toBeVisible();
   expect(await countRecords(page)).toBe(0);
 });
+
+test("危机误判可返回修改：原文保留，改完重新检查，不提供绕过入口", async ({ page }) => {
+  await askQuestion(page, "自我", "看完这部电影，我不想活了");
+  await expect(page.getByRole("heading", { name: "这一刻，先不抽牌了。" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /继续占卜|无视|忽略/ })).toHaveCount(0);
+
+  await page.getByRole("button", { name: "返回修改我写的内容" }).click();
+  await expect(page.getByLabel("你的问题")).toHaveValue("看完这部电影，我不想活了");
+  // 仍命中则再次分流
+  await page.getByRole("button", { name: "就问这个" }).click();
+  await expect(page.getByRole("heading", { name: "这一刻，先不抽牌了。" })).toBeVisible();
+
+  await page.getByRole("button", { name: "返回修改我写的内容" }).click();
+  await page.getByLabel("你的问题").fill("看完这部电影，我在想自己想要什么？");
+  await page.getByRole("button", { name: "就问这个" }).click();
+  await expect(page.getByRole("button", { name: "快速抽牌" })).toBeVisible();
+  expect(await countRecords(page)).toBe(0);
+});

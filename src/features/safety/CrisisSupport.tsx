@@ -1,7 +1,7 @@
 import { HELP_RESOURCES } from "./resources";
 
 /** 危机分流页面内容：中止占卜后展示。不评价、不追问，只给出可以马上做的事。 */
-export function CrisisSupport({ onExit }: { onExit: () => void }) {
+export function CrisisSupport({ onExit, onEdit }: { onExit: () => void; onEdit: () => void }) {
   const r = HELP_RESOURCES;
   return (
     <section aria-labelledby="crisis-title" className="space-y-5">
@@ -40,9 +40,19 @@ export function CrisisSupport({ onExit }: { onExit: () => void }) {
         </p>
         <p className="mt-3 text-xs text-muted">信息核对于 {r.checkedAt}。不在中国大陆时，请使用所在地的紧急电话。</p>
       </div>
-      <button type="button" onClick={onExit} className="rounded-full border border-line px-5 py-2 text-sm text-muted hover:text-ink">
-        返回首页
-      </button>
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-3">
+          <button type="button" onClick={onExit} className="rounded-full border border-line px-5 py-2 text-sm text-muted hover:text-ink">
+            返回首页
+          </button>
+          <button type="button" onClick={onEdit} className="rounded-full border border-line px-5 py-2 text-sm text-muted hover:text-ink">
+            返回修改我写的内容
+          </button>
+        </div>
+        <p className="text-xs leading-relaxed text-muted">
+          如果这是误会（比如在写小说或讨论新闻），可以回去修改，改完会重新检查。这一步不会跳过检查，也不会保存任何记录。
+        </p>
+      </div>
     </section>
   );
 }

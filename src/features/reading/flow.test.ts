@@ -101,6 +101,33 @@ describe("flowReducer", () => {
     expect(s.cards).toBeNull();
   });
 
+  it("危机分流后可返回修改：丢弃牌与结果，保留用户写的文字，不提供继续占卜", () => {
+    const withSelf = run(ready, { type: "submitSelf", selfReading: "x" });
+    const crisis = run({ ...ready, selfReading: "看完只想一了百了" }, { type: "crisis" });
+    expect(crisis.stage).toBe("crisis");
+    expect(crisis.cards).toBeNull();
+    expect(crisis.result).toBeNull();
+    expect(crisis.originalQuestion).toBe("我在回避什么？");
+    expect(crisis.selfReading).toBe("看完只想一了百了");
+    expect(withSelf.stage).toBe("reading");
+
+    const back = run(crisis, { type: "editAfterCrisis" });
+    expect(back.stage).toBe("question");
+    expect(back.topic).toBe("self");
+    expect(back.originalQuestion).toBe("我在回避什么？");
+    expect(back.selfReading).toBe("看完只想一了百了");
+    expect(back.cards).toBeNull();
+    expect(back.recordId).toBeNull();
+    // 不在危机页时该动作无效
+    expect(run(ready, { type: "editAfterCrisis" })).toBe(ready);
+  });
+
+  it("起问页提交时命中危机：问题原文随 crisis 动作保留", () => {
+    const s = run(initialFlow, { type: "chooseTopic", topic: "self" }, { type: "crisis", question: "我真的不想活了" });
+    expect(s.stage).toBe("crisis");
+    expect(run(s, { type: "editAfterCrisis" }).originalQuestion).toBe("我真的不想活了");
+  });
+
   it("restores an interrupted generation as retryable", () => {
     const generating = run(ready, { type: "startGeneration", source: "ai", requestId: 1 });
     const restored = restoreFlow(JSON.parse(JSON.stringify(generating)));

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { modelBody, mockProvider, streamed, type Step } from "@/test/mock-provider";
-import { runAiReading, runRewrite, type ReadingStreamEvent } from "./ai";
+import { READING_JSON_SCHEMA, REWRITE_JSON_SCHEMA, runAiReading, runRewrite, type ReadingStreamEvent } from "./ai";
+import { readingSystemPrompt, rewriteSystemPrompt } from "./prompts";
 import { readingRequestSchema } from "./contract";
 import { buildLocalReading } from "./local";
 
@@ -37,7 +38,7 @@ describe("runAiReading", () => {
       "action",
       "question",
     ]);
-    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v1", model: "mock-model" } });
+    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v2", model: "mock-model" } });
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
     expect(provider.calls[0].jsonSchema).toBeDefined();
   });
@@ -100,6 +101,70 @@ describe("runAiReading", () => {
     expect(events).toEqual([{ type: "crisis" }]);
   });
 
+  describe("危机门控（流式章节在确认 crisis:false 之前不放行）", () => {
+    const withCrisis = (crisis: unknown, position: "first" | "middle" | "last") => {
+      const entries: [string, unknown][] = Object.entries(body);
+      const at = position === "first" ? 0 : position === "middle" ? 2 : entries.length;
+      entries.splice(at, 0, ["crisis", crisis]);
+      return JSON.stringify(Object.fromEntries(entries));
+    };
+    const kinds = (events: ReadingStreamEvent[]) => events.map((e) => e.type);
+
+    it("crisis:true 放在最后：不先放出任何普通章节", async () => {
+      const { events } = await collect(streamed(withCrisis(true, "last"), 5));
+      expect(events).toEqual([{ type: "crisis" }]);
+    });
+
+    it("crisis:true 放在中间：已缓冲的章节被丢弃", async () => {
+      const { events } = await collect(streamed(withCrisis(true, "middle"), 5));
+      expect(events).toEqual([{ type: "crisis" }]);
+    });
+
+    it("crisis:false 在中间：之前缓冲的章节按序放行，之后的直接放行", async () => {
+      const { events } = await collect(streamed(withCrisis(false, "middle"), 5));
+      expect(events.filter((e) => e.type === "section").map((e) => e.type === "section" && e.key)).toEqual([
+        "overall",
+        "cards",
+        "interpretations",
+        "action",
+        "question",
+      ]);
+      expect(kinds(events).at(-1)).toBe("result");
+    });
+
+    it("crisis:false 放在最后：确认前不放行，确认后章节一并放出，随后是结果", async () => {
+      const { events } = await collect(streamed(withCrisis(false, "last"), 5));
+      expect(kinds(events)).toEqual(["section", "section", "section", "section", "section", "result"]);
+    });
+
+    it.each([
+      ["缺失", JSON.stringify(body)],
+      ["字符串 false", withCrisis("false", "first")],
+      ["数字 0", withCrisis(0, "first")],
+      ["null", withCrisis(null, "first")],
+    ])("crisis %s：无效输出，不展示任何章节、不产生结果", async (_name, json) => {
+      const { events } = await collect(streamed(json, 5));
+      expect(events).toEqual([{ type: "error", code: "invalid_output" }]);
+    });
+
+    it("重复 / 矛盾的 crisis 标记：无效输出", async () => {
+      const dup = JSON.stringify({ crisis: false, ...body }).replace(/}$/, ',"crisis":true}');
+      const { events } = await collect(streamed(dup, 5));
+      expect(events.some((e) => e.type === "result")).toBe(false);
+      expect(events.at(-1)).toEqual({ type: "error", code: "invalid_output" });
+    });
+
+    it("流中 crisis:false 但 done 文本 crisis:true：危机优先，不产生结果", async () => {
+      const steps: Step[] = [
+        ...streamed(withCrisis(false, "first"), 5).slice(0, -1),
+        { type: "done", text: withCrisis(true, "first"), stopReason: "end" },
+      ];
+      const { events } = await collect(steps);
+      expect(events.at(-1)).toEqual({ type: "crisis" });
+      expect(events.some((e) => e.type === "result")).toBe(false);
+    });
+  });
+
   it("reports cancelled and never a result after the caller aborts", async () => {
     const controller = new AbortController();
     const steps: Step[] = [{ type: "text", delta: good.slice(0, 40) }, { type: "hang" }, ...streamed(good)];
@@ -107,6 +172,21 @@ describe("runAiReading", () => {
     const { events } = await collect(steps, controller.signal);
     expect(events.at(-1)).toEqual({ type: "error", code: "cancelled" });
     expect(events.some((e) => e.type === "result")).toBe(false);
+  });
+});
+
+describe("crisis 首字段约定（只降低首章节延迟；安全保证来自服务端缓冲）", () => {
+  it("schema 的第一个属性是 crisis", () => {
+    expect(Object.keys(READING_JSON_SCHEMA.properties)[0]).toBe("crisis");
+    expect(Object.keys(REWRITE_JSON_SCHEMA.properties)[0]).toBe("crisis");
+    expect(READING_JSON_SCHEMA.required[0]).toBe("crisis");
+  });
+
+  it("prompt 要求 crisis 为第一个字段且是布尔值", () => {
+    for (const prompt of [readingSystemPrompt(), rewriteSystemPrompt()]) {
+      expect(prompt).toMatch(/crisis：必须是 JSON 对象里(\*\*)?第一个(\*\*)?字段/);
+      expect(prompt).toContain("布尔");
+    }
   });
 });
 
@@ -121,6 +201,12 @@ describe("runRewrite", () => {
   it("rejects predictive or malformed rewrites", async () => {
     for (const question of ["我会不会被裁员？", "没有问号", ""]) {
       const text = JSON.stringify({ crisis: false, question });
+      expect(await run([{ type: "done", text, stopReason: "end" }])).toEqual({ type: "error", code: "invalid_output" });
+    }
+  });
+
+  it("缺失或类型错误的 crisis 标记视为无效输出", async () => {
+    for (const text of ['{"question":"面对裁员的担心，我能先做些什么？"}', '{"crisis":"false","question":"面对裁员的担心，我能先做些什么？"}']) {
       expect(await run([{ type: "done", text, stopReason: "end" }])).toEqual({ type: "error", code: "invalid_output" });
     }
   });

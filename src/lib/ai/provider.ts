@@ -1,5 +1,4 @@
-// 模型供应商接口。业务代码只依赖这里，以后切国内模型只换实现。
-// Anthropic 实现在 M2 落地（流式 + 结构化输出 + 拒答处理）。
+// 模型供应商接口。业务代码只依赖这里，以后切其他模型只换实现。
 
 import type { ModelTier } from "./models";
 
@@ -15,10 +14,25 @@ export interface GenerateRequest {
 
 export type GenerateEvent =
   | { type: "text"; delta: string }
-  | { type: "done"; text: string }
-  /** 模型安全拒答：前端走温和兜底文案，不显示错误 */
+  /** stopReason 为 max_tokens 时文本被截断，结构化结果不可信 */
+  | { type: "done"; text: string; stopReason: "end" | "max_tokens" }
+  /** 模型安全拒答：前端走温和兜底文案，不当作技术错误 */
   | { type: "refusal" };
 
 export interface AIProvider {
+  readonly model: (tier: ModelTier) => string;
   stream(request: GenerateRequest): AsyncIterable<GenerateEvent>;
+}
+
+export type AIErrorKind = "auth" | "rate_limit" | "timeout" | "network" | "overloaded" | "bad_request" | "aborted" | "unknown";
+
+/** provider 实现把供应商 SDK 的异常统一转换成这个类型再抛出。 */
+export class AIError extends Error {
+  constructor(
+    readonly kind: AIErrorKind,
+    message?: string,
+  ) {
+    super(message ?? kind);
+    this.name = "AIError";
+  }
 }

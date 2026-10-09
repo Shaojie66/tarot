@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="font-serif text-2xl leading-snug sm:text-3xl">
         有点迷茫？
         <br />
-        抽三张牌，和自己聊两分钟。
+        抽三张牌，和自己聊一小会儿。
       </h1>
       <p className="max-w-sm text-sm text-muted">这是一个自我反思工具，不预测未来。牌是随机抽的，怎么理解由你决定。</p>
       <Link href="/reading" className="rounded-full bg-accent px-6 py-2.5 text-bg hover:opacity-90">

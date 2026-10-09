@@ -1,7 +1,7 @@
 // 浏览器端调用 /api/*。网络错误统一映射成 ReadingErrorCode，不把细节暴露给用户。
 
 import type { Topic } from "@/features/cards/schema";
-import type { ReadingStreamEvent, RewriteOutcome } from "./ai";
+import type { ReadingErrorCode, ReadingStreamEvent, RewriteOutcome } from "./ai";
 import type { ReadingRequest } from "./contract";
 
 export async function fetchAiStatus(): Promise<boolean> {
@@ -13,6 +13,34 @@ export async function fetchAiStatus(): Promise<boolean> {
   }
 }
 
+const KNOWN_CODES: ReadonlySet<string> = new Set<ReadingErrorCode>([
+  "auth", "rate_limit", "timeout", "network", "overloaded", "invalid_output", "unavailable", "cancelled", "forbidden", "bad_request", "protocol", "unknown",
+]);
+
+/** 非 200 响应：优先用服务端给的错误码，否则按状态码映射。 */
+async function codeFromResponse(res: Response): Promise<ReadingErrorCode> {
+  try {
+    const body = (await res.json()) as { code?: unknown };
+    if (typeof body.code === "string" && KNOWN_CODES.has(body.code)) return body.code as ReadingErrorCode;
+  } catch {}
+  if (res.status === 403) return "forbidden";
+  if (res.status === 400 || res.status === 415) return "bad_request";
+  if (res.status === 429) return "rate_limit";
+  if (res.status === 503) return "unavailable";
+  return "unknown";
+}
+
+const EVENT_TYPES: ReadonlySet<string> = new Set(["section", "result", "crisis", "refusal", "error"]);
+
+function parseEvent(line: string): ReadingStreamEvent | null {
+  try {
+    const event = JSON.parse(line) as { type?: unknown };
+    return event && typeof event.type === "string" && EVENT_TYPES.has(event.type) ? (event as ReadingStreamEvent) : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function requestRewrite(question: string, topic: Topic, signal: AbortSignal): Promise<RewriteOutcome> {
   try {
     const res = await fetch("/api/rewrite", {
@@ -21,7 +49,12 @@ export async function requestRewrite(question: string, topic: Topic, signal: Abo
       body: JSON.stringify({ question, topic }),
       signal,
     });
-    return (await res.json()) as RewriteOutcome;
+    if (!res.ok) return { type: "error", code: await codeFromResponse(res) };
+    try {
+      return (await res.json()) as RewriteOutcome;
+    } catch {
+      return { type: "error", code: signal.aborted ? "cancelled" : "protocol" };
+    }
   } catch {
     return { type: "error", code: signal.aborted ? "cancelled" : "network" };
   }
@@ -42,7 +75,7 @@ export async function* streamReading(request: ReadingRequest, signal: AbortSigna
     return;
   }
   if (!res.ok || !res.body) {
-    yield { type: "error", code: "unknown" };
+    yield { type: "error", code: res.ok ? "protocol" : await codeFromResponse(res) };
     return;
   }
   const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
@@ -58,7 +91,13 @@ export async function* streamReading(request: ReadingRequest, signal: AbortSigna
         const line = buffer.slice(0, newline).trim();
         buffer = buffer.slice(newline + 1);
         if (!line) continue;
-        const event = JSON.parse(line) as ReadingStreamEvent;
+        const event = parseEvent(line);
+        if (!event) {
+          // 畸形行：协议错误，终止并关闭连接；与网络断流区分
+          await reader.cancel().catch(() => {});
+          yield { type: "error", code: "protocol" };
+          return;
+        }
         if (event.type !== "section") terminal = true;
         yield event;
       }

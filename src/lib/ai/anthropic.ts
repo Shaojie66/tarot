@@ -21,8 +21,14 @@ function toAIError(error: unknown): AIError {
   return new AIError("unknown");
 }
 
-export function createAnthropicProvider(apiKey: string): AIProvider {
-  const client = new Anthropic({ apiKey, timeout: 60_000, maxRetries: 1 });
+export interface AnthropicOptions {
+  /** 测试注入：假 fetch / 假服务地址 */
+  fetch?: typeof fetch;
+  baseURL?: string;
+}
+
+export function createAnthropicProvider(apiKey: string, options: AnthropicOptions = {}): AIProvider {
+  const client = new Anthropic({ apiKey, timeout: 60_000, maxRetries: 1, ...options });
   return {
     model: (tier: ModelTier) => MODELS[tier],
     async *stream(request: GenerateRequest): AsyncIterable<GenerateEvent> {

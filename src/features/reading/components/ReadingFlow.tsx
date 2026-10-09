@@ -37,6 +37,8 @@ const ERROR_TEXT: Record<ReadingErrorCode, string> = {
   invalid_output: "这次生成的结果不完整或不合格，已丢弃。",
   unavailable: "没有配置 API key，AI 解读不可用。",
   cancelled: "已取消。",
+  bad_request: "请求格式不被接受，这次没有发出。刷新页面后再试，或先用本地解读。",
+  protocol: "服务返回的数据格式不对，已丢弃。可以重试，或改用本地解读。",
   forbidden: "请求被本机服务拒绝：请用 localhost 打开页面，或按 README 显式开启局域网访问。",
   unknown: "出了点问题，解读没有完成。",
 };
@@ -60,6 +62,17 @@ export function ReadingFlow() {
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const requestSeq = useRef(0);
   const inflight = useRef<AbortController | null>(null);
+  /** 同步防重：state 来不及更新时的第二次点击也只会发出一个请求 */
+  const busyRequest = useRef<number | null>(null);
+
+  // 离开页面 / 组件卸载：中止进行中的解读请求
+  useEffect(
+    () => () => {
+      inflight.current?.abort();
+      inflight.current = null;
+    },
+    [],
+  );
 
   // 恢复上次的流程；已保存的记录以 IndexedDB 为准
   useEffect(() => {
@@ -127,6 +140,8 @@ export function ReadingFlow() {
 
   const restart = useCallback(() => {
     inflight.current?.abort();
+    inflight.current = null;
+    busyRequest.current = null;
     clearSession();
     dispatch({ type: "reset" });
   }, []);
@@ -134,13 +149,14 @@ export function ReadingFlow() {
   const generate = useCallback(
     async (source: "ai" | "local") => {
       const request = toRequest(state);
-      if (!request || state.generation.status === "generating") return;
+      if (!request || state.generation.status === "generating" || busyRequest.current !== null) return;
       // 安全检查②：确认后的问题 + 自解
       if (detectCrisis(request.originalQuestion, request.question, request.selfReading).flagged) {
         dispatch({ type: "crisis" });
         return;
       }
       const requestId = ++requestSeq.current;
+      busyRequest.current = requestId;
       dispatch({ type: "startGeneration", source, requestId });
       const meta = { recordId: randomId(), createdAt: new Date().toISOString() };
 
@@ -152,6 +168,7 @@ export function ReadingFlow() {
           versions: { content: CONTENT_VERSION, prompt: null, model: null },
           ...meta,
         });
+        busyRequest.current = null;
         return;
       }
 
@@ -160,11 +177,12 @@ export function ReadingFlow() {
       for await (const event of streamReading(request, controller.signal)) {
         if (event.type === "section") dispatch({ type: "section", requestId, key: event.key, value: event.value });
         else if (event.type === "result") dispatch({ type: "generated", requestId, result: event.result, versions: event.versions, ...meta });
-        else if (event.type === "crisis") dispatch({ type: "crisis" });
+        else if (event.type === "crisis") dispatch({ type: "crisis", requestId });
         else if (event.type === "refusal") dispatch({ type: "refused", requestId });
         else dispatch({ type: "failed", requestId, error: event.code });
       }
       if (inflight.current === controller) inflight.current = null;
+      if (busyRequest.current === requestId) busyRequest.current = null;
     },
     [state],
   );
@@ -172,6 +190,7 @@ export function ReadingFlow() {
   function cancel() {
     inflight.current?.abort();
     inflight.current = null;
+    busyRequest.current = null;
     dispatch({ type: "cancel" });
   }
 

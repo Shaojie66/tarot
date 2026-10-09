@@ -15,7 +15,7 @@ import { findForbiddenPhrase } from "./guard";
 import { TopLevelSections } from "./json-sections";
 import { PROMPT_VERSION, readingSystemPrompt, readingUserPrompt, rewriteSystemPrompt, rewriteUserPrompt } from "./prompts";
 
-export type ReadingErrorCode = Exclude<AIErrorKind, "aborted" | "bad_request"> | "invalid_output" | "unavailable" | "cancelled" | "forbidden";
+export type ReadingErrorCode = Exclude<AIErrorKind, "aborted" | "bad_request"> | "invalid_output" | "unavailable" | "cancelled" | "forbidden" | "bad_request" | "protocol";
 
 export interface Versions {
   content: string;
@@ -110,6 +110,11 @@ export async function* runAiReading(
   provider: AIProvider,
   signal?: AbortSignal,
 ): AsyncGenerator<ReadingStreamEvent> {
+  // 调用方已经取消：不启动 provider
+  if (signal?.aborted) {
+    yield { type: "error", code: "cancelled" };
+    return;
+  }
   // 内部控制器：模型标记 crisis 时提前停止生成
   const controller = new AbortController();
   const onAbort = () => controller.abort();
@@ -212,6 +217,7 @@ export async function runRewrite(
   provider: AIProvider,
   signal?: AbortSignal,
 ): Promise<RewriteOutcome> {
+  if (signal?.aborted) return { type: "error", code: "cancelled" };
   try {
     for await (const event of provider.stream({
       tier: "fast",

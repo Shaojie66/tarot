@@ -86,7 +86,8 @@ export type FlowAction =
   | { type: "refused"; requestId: number }
   | { type: "failed"; requestId: number; error: ReadingErrorCode }
   | { type: "cancel" }
-  | { type: "crisis"; question?: string }
+  /** requestId：来自异步流的危机事件必须带上，迟到的旧请求事件不能中止新会话 */
+  | { type: "crisis"; question?: string; requestId?: number }
   | { type: "editAfterCrisis" }
   | { type: "chooseInterpretation"; index: 0 | 1 | null }
   | { type: "toggleRejected"; index: 0 | 1 }
@@ -171,6 +172,7 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
         ? { ...state, generation: { ...state.generation, status: "cancelled", sections: {} } }
         : state;
     case "crisis":
+      if (action.requestId !== undefined && !isCurrent(state, action.requestId)) return state;
       // 中止占卜：丢弃牌、结果与生成状态，只保留用户写下的文字，供误判时"返回修改"。不产生记录。
       return {
         ...initialFlow,

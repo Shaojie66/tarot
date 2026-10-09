@@ -1,0 +1,25 @@
+# 密钥与本机文件：永远不进镜像构建上下文
+.env
+.env.*
+!.env.example
+deepseek/
+*.pem
+tmp/
+.git
+.claude/
+
+# 依赖与构建产物（镜像里重新装、重新构建）
+node_modules
+.next
+out
+test-results
+playwright-report
+*.tsbuildinfo
+
+# 与运行无关
+e2e/
+evals/
+docs/
+Dockerfile
+docker-compose.yml
+.dockerignore

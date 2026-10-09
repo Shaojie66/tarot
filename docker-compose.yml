@@ -1,0 +1,19 @@
+# 一条命令：docker compose up --build
+# 默认只绑定本机回环（127.0.0.1:3000），同网络的其他设备访问不到。
+# 想让手机访问：把 ports 改成 "3000:3000" 并设置 TAROT_ALLOW_LAN=1，风险见 README「在手机上用」。
+# 项目名写死：目录名含中文等非 ASCII 字符时，compose 推不出项目名会报错
+name: tarot-reflection
+
+services:
+  tarot:
+    build: .
+    image: tarot-reflection:local
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      # 不写 key 也能用（本地解读）。要开启 AI：在 .env.local 里写 ANTHROPIC_API_KEY=...，下面的 env_file 会读取。
+      TAROT_ALLOW_LAN: ${TAROT_ALLOW_LAN:-}
+    env_file:
+      - path: .env.local
+        required: false
+    restart: unless-stopped

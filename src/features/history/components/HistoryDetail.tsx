@@ -15,6 +15,7 @@ import {
   type Review,
 } from "@/features/reading/contract";
 import { getSpread } from "@/features/reading/spread";
+import { SharePanel } from "@/features/share/SharePanel";
 import { deleteRecord, getRecord, updateReview } from "@/features/reading/storage";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime } from "../labels";
 
@@ -140,6 +141,8 @@ function Detail({ record, onChange, onDeleted }: { record: ReadingRecord; onChan
       </section>
 
       <ReviewEditor record={record} onSaved={onChange} />
+
+      <SharePanel record={record} />
 
       <section className="border-t border-line pt-5 text-sm">
         {deleteFailed && <p role="alert" className="mb-2">删除失败：浏览器存储不可用。</p>}

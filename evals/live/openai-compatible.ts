@@ -16,7 +16,7 @@ export function createOpenAICompatibleProvider({ apiKey, baseURL, model }: OpenA
     async *stream(request: GenerateRequest): AsyncIterable<GenerateEvent> {
       // 该接口只保证 json_object：把 schema 写进 system，并要求 crisis 在最前
       const system = request.jsonSchema
-        ? `${request.system}\n\n## 输出格式\n只输出一个 JSON 对象，不要任何其他文字。必须符合下面的 JSON Schema，字段按 properties 中的顺序输出（crisis 第一个）。严格遵守：不要输出 schema 之外的任何字段；cards 的数量必须与输入的牌数完全相同、每项只含 cardId / position / reversed / text；interpretations 必须恰好是 2 个字符串（不是数组套数组）；所有文本字段都必须是非空字符串。\n\n${JSON.stringify(request.jsonSchema)}`
+        ? `${request.system}\n\n## 输出格式\n只输出一个 JSON 对象，不要任何其他文字。必须符合下面的 JSON Schema，字段按 properties 中的顺序输出（crisis 第一个）。严格遵守：不要输出 schema 之外的任何字段；cards 的数量必须与输入的牌数完全相同、每项只含 cardId / position / reversed / text 这四个键，绝对不要加 name、title、keywords 或任何其他键；interpretations 必须恰好是 2 个字符串（不是数组套数组）；所有文本字段都必须是非空字符串。\n\n${JSON.stringify(request.jsonSchema)}`
         : request.system;
       let res: Response;
       try {
@@ -27,6 +27,7 @@ export function createOpenAICompatibleProvider({ apiKey, baseURL, model }: OpenA
             model,
             stream: true,
             max_tokens: request.maxTokens,
+            temperature: 0.3,
             messages: [
               { role: "system", content: system },
               { role: "user", content: request.prompt },

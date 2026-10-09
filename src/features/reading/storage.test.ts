@@ -21,6 +21,8 @@ const result = buildLocalReading(request);
 const record: ReadingRecord = {
   id: "abcdef0123456789",
   schemaVersion: RECORD_SCHEMA_VERSION,
+  deckId: "rws-1909",
+  settings: { allowReversed: true },
   createdAt: new Date().toISOString(),
   request,
   result,

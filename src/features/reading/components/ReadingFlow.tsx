@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalStore } from "react";
 import { TOPICS, TOPIC_LABELS, type Topic } from "@/features/cards/schema";
+import { DEFAULT_DECK } from "@/features/cards/deck";
 import { drawCards } from "@/features/draw/draw";
 import { CrisisSupport } from "@/features/safety/CrisisSupport";
 import { detectCrisis } from "@/features/safety/crisis";
@@ -22,7 +23,7 @@ import { buildLocalReading } from "../local";
 import { QUESTION_BANK } from "../questions";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
 import { downgradeLegacyChoice } from "../draft";
-import { clearSession, getDraftWritable, getRecord, loadSession, saveRecord, storeSession, subscribeDraftHealth } from "../storage";
+import { clearSession, getDraftWritable, getRecord, loadSession, saveFlowRecord, storeSession, subscribeDraftHealth } from "../storage";
 import { DrawTable } from "./DrawTable";
 import { ResultView } from "./ResultView";
 
@@ -113,9 +114,11 @@ export function ReadingFlow() {
     if (!hydrated || !result || !recordId || !createdAt || !request) return;
     let stale = false;
     dispatch({ type: "saving" });
-    saveRecord({
+    saveFlowRecord({
       id: recordId,
       schemaVersion: RECORD_SCHEMA_VERSION,
+      deckId: DEFAULT_DECK,
+      settings: { allowReversed: spread.allowReversed },
       createdAt,
       request,
       result,

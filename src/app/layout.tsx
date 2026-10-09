@@ -24,6 +24,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Link href="/reading" className="text-muted hover:text-ink">
                 抽牌
               </Link>
+              <Link href="/history" className="text-muted hover:text-ink">
+                历史
+              </Link>
               <Link href="/cards" className="text-muted hover:text-ink">
                 牌义百科
               </Link>

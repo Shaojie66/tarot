@@ -4,12 +4,15 @@
 import { z } from "zod";
 import { isCardId, type CardId } from "@/features/cards/ids";
 import { TOPICS } from "@/features/cards/schema";
+import { DECKS } from "@/features/cards/deck";
 import { isValidDraw } from "@/features/draw/draw";
 import { SPREAD_IDS, getSpread } from "./spread";
 
 /** 牌义内容版本。改动 content/cards 的语义时手动更新，记录里留档。 */
 export const CONTENT_VERSION = "cards-2026-10-09";
-export const RECORD_SCHEMA_VERSION = 1;
+/** 当前写入的记录版本。v1 记录（M2 早期，无 deckId / settings）继续可读，不批量迁移，见 docs/decisions/002。 */
+export const RECORD_SCHEMA_VERSION = 2;
+export const LEGACY_RECORD_SCHEMA_VERSION = 1;
 
 export const QUESTION_MAX = 300;
 export const SELF_READING_MAX = 200;
@@ -78,9 +81,34 @@ export const readingChoiceSchema = z.strictObject({
 
 export type ReadingChoice = z.infer<typeof readingChoiceSchema>;
 
-export const readingRecordSchema = z.strictObject({
+export const MOODS = ["平静", "期待", "轻松", "迷茫", "焦虑", "疲惫", "难过"] as const;
+export const NOTE_MAX = 2000;
+export const FOLLOW_UP_NOTE_MAX = 500;
+
+/** 后来行动是否完成，与“当时是否接受建议”（choice.action）是两件事，分开记录。 */
+export const FOLLOW_UP_STATUSES = ["done", "partial", "not_done", "dropped"] as const;
+
+/** 用户事后在历史里补充的内容：情绪标签、回看笔记、行动复盘。不存在 = 用户没有写。 */
+export const reviewSchema = z.strictObject({
+  moods: z
+    .array(z.enum(MOODS))
+    .max(3)
+    .refine((m) => new Set(m).size === m.length, "duplicate mood"),
+  note: z.string().max(NOTE_MAX),
+  followUp: z
+    .strictObject({
+      status: z.enum(FOLLOW_UP_STATUSES),
+      note: z.string().max(FOLLOW_UP_NOTE_MAX),
+      at: z.iso.datetime(),
+    })
+    .nullable(),
+  updatedAt: z.iso.datetime(),
+});
+
+export type Review = z.infer<typeof reviewSchema>;
+
+const recordBase = {
   id: z.string().min(8),
-  schemaVersion: z.literal(RECORD_SCHEMA_VERSION),
   createdAt: z.iso.datetime(),
   request: readingRequestSchema,
   result: readingResultSchema,
@@ -90,9 +118,48 @@ export const readingRecordSchema = z.strictObject({
     prompt: z.string().nullable(),
     model: z.string().nullable(),
   }),
+  review: reviewSchema.optional(),
+};
+
+export const DECK_IDS = Object.keys(DECKS) as [keyof typeof DECKS, ...(keyof typeof DECKS)[]];
+
+const recordV1Schema = z.strictObject({ ...recordBase, schemaVersion: z.literal(LEGACY_RECORD_SCHEMA_VERSION) });
+const recordV2Schema = z.strictObject({
+  ...recordBase,
+  schemaVersion: z.literal(RECORD_SCHEMA_VERSION),
+  /** 生成时使用的牌组；历史按它渲染，切换牌组不追改旧记录 */
+  deckId: z.enum(DECK_IDS),
+  /** 抽牌当时的设置快照 */
+  settings: z.strictObject({ allowReversed: z.boolean() }),
 });
 
-export type ReadingRecord = z.infer<typeof readingRecordSchema>;
+/** 记录内部的一致性：抽牌合法、结果逐张对应抽牌、选择自洽。导入与保存都要过这一关。 */
+function recordConsistency(record: z.infer<typeof recordV1Schema> | z.infer<typeof recordV2Schema>, ctx: z.RefinementCtx) {
+  const spread = getSpread(record.request.spreadId);
+  const issue = (message: string, path: (string | number)[]) => ctx.addIssue({ code: "custom", message, path });
+  if (!isValidDraw(record.request.cards, spread.positions.length)) issue("invalid draw", ["request", "cards"]);
+  else if (!resultMatchesDraw(record.result, record.request)) issue("result does not match draw", ["result", "cards"]);
+  if (record.choice.interpretation !== null && record.choice.rejected.includes(record.choice.interpretation)) {
+    issue("chosen interpretation is also rejected", ["choice"]);
+  }
+  if (record.choice.action.status === "undecided" && record.choice.action.text !== "") {
+    issue("undecided action must have no text", ["choice", "action"]);
+  }
+  if ("settings" in record && !record.settings.allowReversed && record.request.cards.some((c) => c.reversed)) {
+    issue("reversed card but reversal disabled in snapshot", ["settings"]);
+  }
+}
+
+export const readingRecordSchema = z.discriminatedUnion("schemaVersion", [recordV1Schema, recordV2Schema]).superRefine(recordConsistency);
+
+export type ReadingRecord = z.infer<typeof recordV1Schema> | z.infer<typeof recordV2Schema>;
+export type ReadingRecordV2 = z.infer<typeof recordV2Schema>;
+
+/** 渲染用的牌组：v1 记录没有 deckId，按默认牌组显示并标注为旧记录（不伪造字段）。 */
+export function recordDeck(record: ReadingRecord): { deckId: keyof typeof DECKS; legacy: boolean } {
+  return "deckId" in record ? { deckId: record.deckId, legacy: false } : { deckId: DEFAULT_DECK_FOR_LEGACY, legacy: true };
+}
+const DEFAULT_DECK_FOR_LEGACY: keyof typeof DECKS = "rws-1909";
 
 /** 请求的业务校验：牌阵决定牌数和是否允许逆位，抽牌合法。 */
 export function checkRequest(request: ReadingRequest): string | null {

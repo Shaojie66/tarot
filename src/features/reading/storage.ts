@@ -2,7 +2,7 @@
 // 两者都只在这台设备的这个站点里，不同步、不上传。
 
 import Dexie, { type EntityTable } from "dexie";
-import { readingRecordSchema, type ReadingRecord } from "./contract";
+import { readingRecordSchema, type ReadingRecord, type Review } from "./contract";
 import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
 
@@ -25,6 +25,21 @@ export async function saveRecord(record: ReadingRecord): Promise<void> {
   await getDb().records.put(readingRecordSchema.parse(record));
 }
 
+/**
+ * 占卜流程保存：记录一旦存在，流程之后只会改“当时的选择”（choice）。
+ * 其余字段（含用户在历史里补写的 review、旧记录的 schemaVersion / 牌组）一律以已存的为准，
+ * 避免流程里过期的内存状态覆盖它们，也避免把 v1 旧记录悄悄升成 v2。
+ */
+export async function saveFlowRecord(record: ReadingRecord): Promise<void> {
+  const db = getDb();
+  await db.transaction("rw", db.records, async () => {
+    const raw = await db.records.get(record.id);
+    const existing = raw ? readingRecordSchema.safeParse(raw) : null;
+    const next = existing?.success ? { ...existing.data, choice: record.choice } : record;
+    await db.records.put(readingRecordSchema.parse(next));
+  });
+}
+
 export async function getRecord(id: string): Promise<ReadingRecord | undefined> {
   const raw = await getDb().records.get(id);
   const parsed = readingRecordSchema.safeParse(raw);
@@ -33,6 +48,55 @@ export async function getRecord(id: string): Promise<ReadingRecord | undefined> 
 
 export async function countRecords(): Promise<number> {
   return getDb().records.count();
+}
+
+export interface RecordList {
+  records: ReadingRecord[];
+  /** 读不出来的条目数（损坏 / 来自未来版本）。不显示、不删除，原样保留在存储里。 */
+  unreadable: number;
+}
+
+/** 新的在前。无法解析的条目不会让列表崩溃。 */
+export async function listRecords(): Promise<RecordList> {
+  const rows = await getDb().records.orderBy("createdAt").reverse().toArray();
+  const records: ReadingRecord[] = [];
+  let unreadable = 0;
+  for (const row of rows) {
+    const parsed = readingRecordSchema.safeParse(row);
+    if (parsed.success) records.push(parsed.data);
+    else unreadable++;
+  }
+  return { records, unreadable };
+}
+
+/** 写入或清除回看内容（情绪 / 笔记 / 行动复盘）。只改 review 字段。 */
+export async function updateReview(id: string, review: Review | null): Promise<ReadingRecord> {
+  const db = getDb();
+  return db.transaction("rw", db.records, async () => {
+    const existing = readingRecordSchema.parse(await db.records.get(id));
+    const { review: _old, ...rest } = existing;
+    void _old;
+    const next = readingRecordSchema.parse(review ? { ...rest, review } : rest);
+    await db.records.put(next);
+    return next;
+  });
+}
+
+export async function deleteRecord(id: string): Promise<void> {
+  await getDb().records.delete(id);
+}
+
+/** 一键清空：已完成记录（含读不出来的条目）+ 进行中草稿。 */
+export async function clearEverything(): Promise<void> {
+  await getDb().records.clear();
+  clearSession();
+}
+
+/** 导入：整批在一个事务里写入，要么全部成功要么一条都不写。 */
+export async function writeImported(records: ReadingRecord[]): Promise<void> {
+  const db = getDb();
+  const validated = records.map((r) => readingRecordSchema.parse(r));
+  await db.transaction("rw", db.records, () => db.records.bulkPut(validated));
 }
 
 const SESSION_KEY = "tarot:session:v2";

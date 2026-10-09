@@ -14,7 +14,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { CONTENT_VERSION } from "@/features/reading/contract";
 import { runAiReading, runRewrite, type ReadingStreamEvent } from "@/features/reading/ai";
-import { readingRequestSchema } from "@/features/reading/contract";
+import { readingBodySchema, readingRequestSchema } from "@/features/reading/contract";
 import { PROMPT_VERSION } from "@/features/reading/prompts";
 import { detectCrisis } from "@/features/safety/crisis";
 import { withDeadline } from "@/lib/ai/deadline";
@@ -63,12 +63,28 @@ function save(name: string, data: unknown) {
 }
 
 /** 记录 provider 返回的最终 JSON 文本里 crisis 是否为第一个字段，用于评估 prompt 的顺序约定。 */
-function spy(inner: AIProvider, onText: (text: string) => void): AIProvider {
+/** 失败用例的原因归类：把模型原始输出按业务 schema 再验一遍，记录第一批 issue 路径（不含用户文本）。 */
+function diagnose(text: string | undefined, stopReason?: string): string {
+  if (!text) return "no-output";
+  if (stopReason === "max_tokens") return "truncated(max_tokens)";
+  let value: unknown;
+  try {
+    value = JSON.parse(text);
+  } catch {
+    return "json-parse";
+  }
+  if (typeof value === "object" && value !== null) delete (value as { crisis?: unknown }).crisis;
+  const parsed = readingBodySchema.safeParse(value);
+  if (parsed.success) return "schema-ok(card-mismatch|forbidden-phrase)";
+  return parsed.error.issues.slice(0, 3).map((i) => `${i.path.map((p) => (typeof p === "number" ? "N" : p)).join(".")}:${i.code}`).join(" | ");
+}
+
+function spy(inner: AIProvider, onText: (text: string, stopReason: string) => void): AIProvider {
   return {
     model: inner.model,
     async *stream(req) {
       for await (const event of inner.stream(req)) {
-        if (event.type === "done") onText(event.text);
+        if (event.type === "done") onText(event.text, event.stopReason);
         yield event;
       }
     },
@@ -84,7 +100,13 @@ const sampleCards = [
 describe.skipIf(!provider)("live model eval", () => {
   it("1+2. 解读用例：成功率与被接受结果的硬约束", async () => {
     const texts: string[] = [];
-    const watched = spy(provider!, (t) => texts.push(t));
+    let lastText: string | undefined;
+    let lastStop: string | undefined;
+    const watched = spy(provider!, (t, stop) => {
+      texts.push(t);
+      lastText = t;
+      lastStop = stop;
+    });
     const rows = [];
     for (const c of cases.cases) {
       const request = readingRequestSchema.parse({
@@ -96,6 +118,8 @@ describe.skipIf(!provider)("live model eval", () => {
         cards: c.cards,
       });
       const started = Date.now();
+      lastText = undefined;
+      lastStop = undefined;
       let last: ReadingStreamEvent | undefined;
       let firstSectionMs: number | null = null;
       for await (const event of runAiReading(request, watched)) {
@@ -106,6 +130,7 @@ describe.skipIf(!provider)("live model eval", () => {
         id: c.id,
         terminal: last?.type,
         errorCode: last?.type === "error" ? last.code : null,
+        failureReason: last?.type === "error" ? diagnose(lastText, lastStop) : null,
         firstSectionMs,
         totalMs: Date.now() - started,
         result: last?.type === "result" ? last.result : null,
@@ -121,6 +146,7 @@ describe.skipIf(!provider)("live model eval", () => {
       successRate: ok / rows.length,
       terminalCounts: Object.fromEntries(Object.entries(Object.groupBy(rows, (r) => r.terminal ?? "none")).map(([k, v]) => [k, v!.length])),
       failedCodes: rows.filter((r) => r.errorCode).map((r) => `${r.id}:${r.errorCode}`),
+      failureReasons: Object.fromEntries(Object.entries(Object.groupBy(rows.filter((r) => r.failureReason), (r) => r.failureReason!)).map(([k, v]) => [k, v!.length])),
       crisisFieldFirst: `${crisisFirst}/${texts.length}`,
       unexpectedCrisis: crisisTrue,
       medianFirstSectionMs: firstMs.sort((a, b) => a - b)[Math.floor(firstMs.length / 2)] ?? null,

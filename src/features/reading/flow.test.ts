@@ -46,6 +46,19 @@ describe("flowReducer", () => {
     expect(restoreFlow({ ...ready, mode: undefined } as unknown as FlowState).mode).toBe("local");
   });
 
+  it("抽牌时固定牌组与正逆位设置快照，之后不再变化", () => {
+    const drawn = run(
+      initialFlow,
+      { type: "chooseTopic", topic: "self" },
+      { type: "submitQuestion", question: "q", mode: "local" },
+      { type: "drawn", cards, deckId: "rws-1909", allowReversed: false },
+    );
+    expect(drawn.allowReversed).toBe(false);
+    expect(drawn.deckId).toBe("rws-1909");
+    // 牌已固定：重复的 drawn 不会改快照
+    expect(run(drawn, { type: "drawn", cards, allowReversed: true }).allowReversed).toBe(false);
+  });
+
   it("never redraws once cards are fixed", () => {
     const other: DrawnCard[] = cards.map((c) => ({ ...c, cardId: "the-sun" as const }));
     expect(run(ready, { type: "drawn", cards: other }).cards).toEqual(cards);

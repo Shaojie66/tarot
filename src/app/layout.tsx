@@ -20,12 +20,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-serif text-base tracking-wide">
               此刻三张牌
             </Link>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap justify-end gap-x-4 gap-y-1">
               <Link href="/reading" className="text-muted hover:text-ink">
                 抽牌
               </Link>
+              <Link href="/daily" className="text-muted hover:text-ink">
+                每日
+              </Link>
               <Link href="/history" className="text-muted hover:text-ink">
                 历史
+              </Link>
+              <Link href="/settings" className="text-muted hover:text-ink">
+                设置
               </Link>
               <Link href="/cards" className="text-muted hover:text-ink">
                 牌义百科

@@ -2,6 +2,7 @@
 // 关键约束：牌一旦固定就不再重抽；迟到的生成结果按 requestId 丢弃；记录只创建一次。
 
 import type { Topic } from "@/features/cards/schema";
+import { DEFAULT_DECK, type DeckId } from "@/features/cards/deck";
 import type { DrawnCard } from "@/features/draw/draw";
 import type { ReadingErrorCode, Versions } from "./ai";
 import type { ReadingBody, ReadingChoice, ReadingResult } from "./contract";
@@ -33,6 +34,9 @@ export interface FlowState {
   /** AI 改写建议；null 表示没有建议 */
   suggestion: string | null;
   cards: DrawnCard[] | null;
+  /** 抽牌当时的牌组与正逆位设置快照；之后改设置不影响这一次 */
+  deckId: DeckId;
+  allowReversed: boolean;
   /** 已翻开的牌数 */
   revealed: number;
   selfReading: string;
@@ -61,6 +65,8 @@ export const initialFlow: FlowState = {
   question: "",
   suggestion: null,
   cards: null,
+  deckId: DEFAULT_DECK,
+  allowReversed: true,
   revealed: 0,
   selfReading: "",
   generation: { status: "idle", source: null, requestId: 0, error: null, sections: {} },
@@ -80,7 +86,7 @@ export type FlowAction =
   | { type: "rewriteSuggested"; suggestion: string }
   | { type: "rewriteSkipped" }
   | { type: "confirmQuestion"; question: string }
-  | { type: "drawn"; cards: DrawnCard[] }
+  | { type: "drawn"; cards: DrawnCard[]; deckId?: DeckId; allowReversed?: boolean }
   | { type: "reveal"; count: number }
   | { type: "submitSelf"; selfReading: string }
   | { type: "startGeneration"; source: "ai" | "local"; requestId: number }
@@ -130,7 +136,9 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
       return state.stage === "rewrite" ? { ...state, question: action.question, stage: "draw" } : state;
     case "drawn":
       // 牌已固定则忽略：重试、刷新、重复点击都不重抽
-      return state.cards ? state : { ...state, cards: action.cards, revealed: 0 };
+      return state.cards
+        ? state
+        : { ...state, cards: action.cards, revealed: 0, deckId: action.deckId ?? state.deckId, allowReversed: action.allowReversed ?? state.allowReversed };
     case "reveal": {
       if (!state.cards) return state;
       const revealed = Math.min(state.cards.length, Math.max(state.revealed, action.count));

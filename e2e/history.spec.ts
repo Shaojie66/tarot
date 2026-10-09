@@ -180,6 +180,19 @@ test("删除单条记录需要确认", async ({ page }) => {
   await expect(page.getByText("还没有记录")).toBeVisible();
 });
 
+test("删除记录后回到抽牌页，不会把它写回来", async ({ page }) => {
+  await localReading(page, "合成问题：别复活我");
+  await page.goto("/history");
+  await page.getByRole("link", { name: /别复活我/ }).click();
+  await page.getByRole("button", { name: "删除这条记录" }).click();
+  await page.getByRole("button", { name: "确认删除" }).click();
+  await expect(page.getByText("已删除这条记录")).toBeVisible();
+  await page.goto("/reading");
+  await expect(page.getByRole("heading", { name: "最近在想哪方面的事？" })).toBeVisible();
+  await page.goto("/history");
+  await expect(page.getByText("还没有记录")).toBeVisible();
+});
+
 test("旧版（v1）记录：能显示，标注没有牌组，且不被改写成 v2", async ({ page }) => {
   await localReading(page, "合成问题：旧记录");
   await page.evaluate(

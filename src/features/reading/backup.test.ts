@@ -1,9 +1,9 @@
 import "fake-indexeddb/auto";
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BACKUP_VERSION, MAX_BACKUP_BYTES, backupFileName, buildBackup, parseBackup, recordsToWrite, stableStringify } from "./backup";
 import { CONTENT_VERSION, RECORD_SCHEMA_VERSION, type ReadingRecord, type Review } from "./contract";
 import { buildLocalReading } from "./local";
-import { clearEverything, deleteRecord, getRecord, listRecords, saveFlowRecord, saveRecord, updateReview, writeImported } from "./storage";
+import { applyImport, clearEverything, deleteRecord, getRecord, listRecords, saveFlowRecord, saveRecord, updateReview, writeImported } from "./storage";
 
 function makeRecord(id: string, over: Partial<ReadingRecord> = {}, seed = 0): ReadingRecord {
   const request = {
@@ -83,7 +83,7 @@ describe("备份往返", () => {
   it("备份不含草稿 / 密钥 / 设备信息，文件名不含问题文字", () => {
     const record = makeRecord("record-0001");
     const backup = buildBackup([record], new Date(Date.UTC(2026, 9, 9)));
-    expect(Object.keys(backup).sort()).toEqual(["backupVersion", "contentVersion", "exportedAt", "format", "records"]);
+    expect(Object.keys(backup).sort()).toEqual(["backupVersion", "contentVersion", "daily", "exportedAt", "format", "records"]);
     const name = backupFileName(new Date(Date.UTC(2026, 9, 9)), "ab12cd34");
     expect(name).toBe("tarot-backup-20261009-ab12cd.json");
     expect(name).not.toContain("走还是留");
@@ -229,5 +229,48 @@ describe("列表、删除、清空", () => {
     const list = await listRecords();
     expect(list.records).toHaveLength(0);
     expect(list.unreadable).toBe(0);
+  });
+});
+
+describe("每日一张随备份往返", () => {
+  const day = (dayKey: string, cardId = "the-fool") => ({
+    dayKey,
+    timeZone: "Europe/London",
+    drawnAt: `${dayKey}T08:00:00.000Z`,
+    cardId,
+    reversed: false,
+    deckId: "rws-1909",
+    settings: { allowReversed: true },
+  });
+
+  it("导出含 daily；导入补本机没有的日键，已有的不覆盖；旧备份（无 daily 字段）照常可导入", () => {
+    const withDaily = JSON.parse(file([makeRecord("record-0001")], { daily: [day("2026-10-01"), day("2026-10-02")] }));
+    const parsed = parseBackup(JSON.stringify(withDaily), new Map(), new Set(["2026-10-01"]));
+    expect(parsed.ok && parsed.preview.dailyAdd.map((d) => d.dayKey)).toEqual(["2026-10-02"]);
+    expect(parsed.ok && parsed.preview.dailySkip).toBe(1);
+
+    const old = parseBackup(file([makeRecord("record-0001")]), new Map());
+    expect(old.ok && old.preview.dailyAdd).toEqual([]);
+    expect(buildBackup([], new Date(0), [day("2026-10-02") as never, day("2026-10-01") as never]).daily.map((d) => d.dayKey)).toEqual(["2026-10-01", "2026-10-02"]);
+  });
+
+  it("坏的每日记录 / 重复日键 → 拒绝整个文件", () => {
+    expect(parseBackup(file([], { daily: [{ dayKey: "bad" }] }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_daily" } });
+    expect(parseBackup(file([], { daily: [day("2026-10-01"), day("2026-10-01")] }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_daily" } });
+    expect(parseBackup(file([], { daily: "nope" }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_daily" } });
+  });
+});
+
+describe("applyImport：记录与每日一张要么都写要么都不写", () => {
+  it("记录事务失败 → 每日一张恢复为导入前", async () => {
+    const store = new Map<string, string>();
+    vi.stubGlobal("localStorage", { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v), removeItem: (k: string) => void store.delete(k) });
+    store.set("tarot:daily:v1", JSON.stringify([{ dayKey: "2026-09-01", timeZone: "UTC", drawnAt: "2026-09-01T08:00:00.000Z", cardId: "death", reversed: false, deckId: "rws-1909", settings: { allowReversed: true } }]));
+    const before = store.get("tarot:daily:v1");
+    const bad = { ...makeRecord("record-0009"), id: "x" } as ReadingRecord;
+    const newDay = { dayKey: "2026-10-02", timeZone: "UTC", drawnAt: "2026-10-02T08:00:00.000Z", cardId: "the-fool" as const, reversed: false, deckId: "rws-1909" as const, settings: { allowReversed: true } };
+    await expect(applyImport([bad], [newDay])).rejects.toThrow();
+    expect(store.get("tarot:daily:v1")).toBe(before);
+    vi.unstubAllGlobals();
   });
 });

@@ -2,6 +2,7 @@
 // 两者都只在这台设备的这个站点里，不同步、不上传。
 
 import Dexie, { type EntityTable } from "dexie";
+import { DAILY_KEY, clearDaily, mergeDaily, type DailyEntry } from "@/features/daily/daily";
 import { readingRecordSchema, type ReadingRecord, type Review } from "./contract";
 import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
@@ -84,12 +85,38 @@ export async function updateReview(id: string, review: Review | null): Promise<R
 
 export async function deleteRecord(id: string): Promise<void> {
   await getDb().records.delete(id);
+  // 进行中的草稿若指向这条记录，一并清掉：否则回到抽牌页时保存 effect 会把刚删掉的记录写回来
+  if (loadSession()?.state.recordId === id) clearSession();
 }
 
-/** 一键清空：已完成记录（含读不出来的条目）+ 进行中草稿。 */
+/** 一键清空：已完成记录（含读不出来的条目）、每日一张、进行中的草稿。设置不属于用户内容，不清。 */
 export async function clearEverything(): Promise<void> {
   await getDb().records.clear();
+  clearDaily();
   clearSession();
+}
+
+/**
+ * 导入记录 + 每日一张。记录在一个 IndexedDB 事务里写入；每日一张在 localStorage。
+ * 两者不在同一个事务里，所以先写每日一张并留快照，记录写入失败就把它恢复，保证“要么都写要么都不写”。
+ */
+export async function applyImport(records: ReadingRecord[], dailyAdd: DailyEntry[]): Promise<void> {
+  let snapshot: string | null = null;
+  try {
+    snapshot = localStorage.getItem(DAILY_KEY);
+  } catch {}
+  if (dailyAdd.length > 0) mergeDaily(dailyAdd);
+  try {
+    await writeImported(records);
+  } catch (error) {
+    if (dailyAdd.length > 0) {
+      try {
+        if (snapshot === null) localStorage.removeItem(DAILY_KEY);
+        else localStorage.setItem(DAILY_KEY, snapshot);
+      } catch {}
+    }
+    throw error;
+  }
 }
 
 /** 导入：整批在一个事务里写入，要么全部成功要么一条都不写。 */

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { CardImage } from "@/components/CardImage";
 import { getCard } from "@/features/cards/cards";
+import type { DeckId } from "@/features/cards/deck";
 import type { DrawnCard } from "@/features/draw/draw";
 import type { Spread } from "../spread";
 
@@ -12,6 +13,7 @@ const FAN_SIZE = 7;
 
 interface DrawTableProps {
   spread: Spread;
+  deck: DeckId;
   cards: DrawnCard[] | null;
   revealed: number;
   onShuffled: () => void;
@@ -20,7 +22,7 @@ interface DrawTableProps {
 }
 
 /** 洗牌（长按）→ 点选抽牌（每点一张就翻开一张）。牌在洗牌结束时已经由 crypto 固定，点哪张只决定翻牌节奏。 */
-export function DrawTable({ spread, cards, revealed, onShuffled, onReveal, onQuickDraw }: DrawTableProps) {
+export function DrawTable({ spread, deck, cards, revealed, onShuffled, onReveal, onQuickDraw }: DrawTableProps) {
   const [shuffling, setShuffling] = useState(false);
   const [hint, setHint] = useState<string | null>(null);
   const holdStart = useRef(0);
@@ -68,7 +70,7 @@ export function DrawTable({ spread, cards, revealed, onShuffled, onReveal, onQui
                   {/* 牌固定后就渲染牌面（背面朝外、对读屏隐藏），翻牌时图片已加载好 */}
                   {card && drawn && (
                     <div className="flip-face flip-front" aria-hidden={!flipped}>
-                      <CardImage card={card} reversed={drawn.reversed} sizes="30vw" />
+                      <CardImage card={card} reversed={drawn.reversed} deck={deck} sizes="30vw" />
                     </div>
                   )}
                 </div>

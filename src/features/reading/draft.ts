@@ -2,6 +2,7 @@
 // 半写入都可能让它"是合法 JSON 但缺字段"。校验不过就丢弃，用户回到干净的起点，已完成的记录不受影响。
 
 import { z } from "zod";
+import { DECKS } from "@/features/cards/deck";
 import { TOPICS } from "@/features/cards/schema";
 import { drawnCardSchema, readingChoiceSchema, readingResultSchema, checkRequest, resultMatchesDraw } from "./contract";
 import type { FlowState } from "./flow";
@@ -20,6 +21,8 @@ const flowStateSchema = z.object({
   question: z.string(),
   suggestion: z.string().nullable(),
   cards: z.array(drawnCardSchema).nullable(),
+  deckId: z.string().catch("rws-1909").transform((id) => (id in DECKS ? id : "rws-1909")),
+  allowReversed: z.boolean().catch(true),
   revealed: z.int().min(0),
   selfReading: z.string(),
   generation: z.object({

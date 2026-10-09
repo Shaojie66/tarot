@@ -6,7 +6,8 @@ import { getCard } from "@/features/cards/cards";
 import { TOPIC_LABELS } from "@/features/cards/schema";
 import { backupFileName, buildBackup, describeRejection, parseBackup, recordsToWrite, type ImportPreview } from "@/features/reading/backup";
 import type { ReadingRecord } from "@/features/reading/contract";
-import { clearEverything, listRecords, writeImported, type RecordList } from "@/features/reading/storage";
+import { loadDaily } from "@/features/daily/daily";
+import { applyImport, clearEverything, listRecords, type RecordList } from "@/features/reading/storage";
 import { randomId } from "@/lib/id";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime, snippet } from "../labels";
 
@@ -38,7 +39,7 @@ export function HistoryList() {
   function download() {
     if (!data) return;
     const now = new Date();
-    const blob = new Blob([JSON.stringify(buildBackup(data.records, now), null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(buildBackup(data.records, now, loadDaily()), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -56,7 +57,7 @@ export function HistoryList() {
     if (!file || !data) return;
     const text = await file.text().catch(() => null);
     if (text === null) return setImportError("读取文件失败，没有导入任何内容。");
-    const result = parseBackup(text, new Map(data.records.map((r) => [r.id, r])));
+    const result = parseBackup(text, new Map(data.records.map((r) => [r.id, r])), new Set(loadDaily().map((d) => d.dayKey)));
     if (!result.ok) return setImportError(describeRejection(result.reason));
     setUseIncoming(new Set());
     setPreview(result.preview);
@@ -67,8 +68,8 @@ export function HistoryList() {
     if (!preview) return;
     const toWrite = recordsToWrite(preview, useIncoming);
     try {
-      await writeImported(toWrite);
-      setNotice(`已导入 ${toWrite.length} 条；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
+      await applyImport(toWrite, preview.dailyAdd);
+      setNotice(`已导入 ${toWrite.length} 条记录和 ${preview.dailyAdd.length} 条每日一张；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
       setPreview(null);
       reload();
     } catch {
@@ -129,14 +130,14 @@ export function HistoryList() {
 
       <section aria-label="备份与清理" className="space-y-3 border-t border-line pt-5 text-sm">
         <div className="flex flex-wrap gap-3">
-          <button type="button" disabled={data.records.length === 0} onClick={() => setPanel(panel === "export" ? null : "export")} className="rounded-full border border-line px-4 py-1.5 disabled:opacity-40">
+          <button type="button" disabled={data.records.length === 0 && loadDaily().length === 0} onClick={() => setPanel(panel === "export" ? null : "export")} className="rounded-full border border-line px-4 py-1.5 disabled:opacity-40">
             导出备份
           </button>
           <button type="button" onClick={() => fileInput.current?.click()} className="rounded-full border border-line px-4 py-1.5">
             导入备份
           </button>
           <input ref={fileInput} type="file" accept="application/json,.json" aria-label="选择备份文件" className="sr-only" onChange={(e) => void onFile(e.target.files?.[0])} />
-          <button type="button" disabled={data.records.length === 0 && data.unreadable === 0} onClick={() => setPanel(panel === "clear" ? null : "clear")} className="rounded-full border border-line px-4 py-1.5 text-muted disabled:opacity-40">
+          <button type="button" disabled={data.records.length === 0 && data.unreadable === 0 && loadDaily().length === 0} onClick={() => setPanel(panel === "clear" ? null : "clear")} className="rounded-full border border-line px-4 py-1.5 text-muted disabled:opacity-40">
             清空全部
           </button>
         </div>
@@ -155,7 +156,7 @@ export function HistoryList() {
         {panel === "clear" && (
           <div className="space-y-2 rounded-lg bg-surface p-3" role="alert">
             <p className="leading-relaxed">
-              将删除这个浏览器里的全部 {data.records.length} 条记录{data.unreadable > 0 ? `（和 ${data.unreadable} 条读不出来的条目）` : ""}，以及进行中的草稿。删除后无法恢复，建议先导出备份。
+              将删除这个浏览器里的全部 {data.records.length} 条记录、每日一张的记录{data.unreadable > 0 ? `（和 ${data.unreadable} 条读不出来的条目）` : ""}，以及进行中的草稿。删除后无法恢复，建议先导出备份。
             </p>
             <div className="flex gap-3">
               <button type="button" onClick={() => void confirmClear()} className="rounded-full border border-accent px-4 py-1.5 text-accent">
@@ -177,7 +178,7 @@ export function HistoryList() {
         {preview && (
           <div className="space-y-3 rounded-lg bg-surface p-3" role="group" aria-label="导入预览" data-testid="import-preview">
             <p className="leading-relaxed">
-              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。
+              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。每日一张：补上本机没有的 <b>{preview.dailyAdd.length}</b> 天，已有的 {preview.dailySkip} 天不覆盖。
             </p>
             {preview.conflicts.length > 0 && (
               <fieldset className="space-y-2">

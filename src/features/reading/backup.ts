@@ -2,6 +2,7 @@
 // 备份含问题、自解、笔记等私密明文，用于无损恢复；它不是分享格式（分享走白名单，见 docs/PLAN.md「导出边界」）。
 // 不含：进行中草稿、API key / 配置、设备信息。
 
+import { dailyEntrySchema, type DailyEntry } from "@/features/daily/daily";
 import { CONTENT_VERSION, readingRecordSchema, type ReadingRecord } from "./contract";
 
 export const BACKUP_FORMAT = "tarot-backup";
@@ -15,15 +16,18 @@ export interface Backup {
   exportedAt: string;
   contentVersion: string;
   records: ReadingRecord[];
+  /** 每日一张记录。可选字段：没有它的旧备份照常可导入 */
+  daily: DailyEntry[];
 }
 
-export function buildBackup(records: ReadingRecord[], now: Date = new Date()): Backup {
+export function buildBackup(records: ReadingRecord[], now: Date = new Date(), daily: DailyEntry[] = []): Backup {
   return {
     format: BACKUP_FORMAT,
     backupVersion: BACKUP_VERSION,
     exportedAt: now.toISOString(),
     contentVersion: CONTENT_VERSION,
     records: [...records].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id)),
+    daily: [...daily].sort((a, b) => a.dayKey.localeCompare(b.dayKey)),
   };
 }
 
@@ -40,7 +44,8 @@ export type RejectReason =
   | { kind: "future_version"; version: number }
   | { kind: "bad_version" }
   | { kind: "invalid_records"; problems: { index: number; id: string | null; message: string }[]; total: number }
-  | { kind: "duplicate_ids"; ids: string[] };
+  | { kind: "duplicate_ids"; ids: string[] }
+  | { kind: "invalid_daily"; total: number };
 
 export interface Conflict {
   incoming: ReadingRecord;
@@ -54,6 +59,9 @@ export interface ImportPreview {
   skip: ReadingRecord[];
   /** 同 ID 但内容不同：默认保留本机的，用户逐条选择才改用文件里的 */
   conflicts: Conflict[];
+  /** 每日一张：本机没有的日键才会补上，已有的不覆盖 */
+  dailyAdd: DailyEntry[];
+  dailySkip: number;
 }
 
 export type ParseResult = { ok: true; preview: ImportPreview } | { ok: false; reason: RejectReason };
@@ -76,7 +84,7 @@ const MAX_PROBLEMS_SHOWN = 5;
  * 预检。任何一个问题（坏记录、文件内重复 ID、未来版本）都拒绝整个文件，不做部分导入：
  * 确定性强，用户修好文件或换文件后再来，不会出现“导进去一半”。
  */
-export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingRecord>): ParseResult {
+export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingRecord>, existingDailyKeys: ReadonlySet<string> = new Set()): ParseResult {
   const bytes = new TextEncoder().encode(text).length;
   if (bytes > MAX_BACKUP_BYTES) return { ok: false, reason: { kind: "too_large", bytes } };
 
@@ -87,7 +95,7 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
     return { ok: false, reason: { kind: "not_json" } };
   }
   if (typeof json !== "object" || json === null) return { ok: false, reason: { kind: "not_a_backup" } };
-  const file = json as { format?: unknown; backupVersion?: unknown; records?: unknown };
+  const file = json as { format?: unknown; backupVersion?: unknown; records?: unknown; daily?: unknown };
   if (file.format !== BACKUP_FORMAT || !Array.isArray(file.records)) return { ok: false, reason: { kind: "not_a_backup" } };
   if (typeof file.backupVersion !== "number" || !Number.isInteger(file.backupVersion) || file.backupVersion < 1) {
     return { ok: false, reason: { kind: "bad_version" } };
@@ -114,7 +122,29 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
   for (const r of records) (seen.has(r.id) ? dup : seen).add(r.id);
   if (dup.size > 0) return { ok: false, reason: { kind: "duplicate_ids", ids: [...dup].slice(0, MAX_PROBLEMS_SHOWN) } };
 
-  const preview: ImportPreview = { add: [], skip: [], conflicts: [] };
+  const daily: DailyEntry[] = [];
+  if (file.daily !== undefined) {
+    if (!Array.isArray(file.daily)) return { ok: false, reason: { kind: "invalid_daily", total: 1 } };
+    const days = new Set<string>();
+    let badDaily = 0;
+    for (const raw of file.daily) {
+      const parsed = dailyEntrySchema.safeParse(raw);
+      if (!parsed.success || days.has(parsed.data.dayKey)) badDaily++;
+      else {
+        days.add(parsed.data.dayKey);
+        daily.push(parsed.data as DailyEntry);
+      }
+    }
+    if (badDaily > 0) return { ok: false, reason: { kind: "invalid_daily", total: badDaily } };
+  }
+
+  const preview: ImportPreview = {
+    add: [],
+    skip: [],
+    conflicts: [],
+    dailyAdd: daily.filter((d) => !existingDailyKeys.has(d.dayKey)),
+    dailySkip: daily.filter((d) => existingDailyKeys.has(d.dayKey)).length,
+  };
   for (const incoming of records) {
     const current = existing.get(incoming.id);
     if (!current) preview.add.push(incoming);
@@ -145,6 +175,8 @@ export function describeRejection(reason: RejectReason): string {
       const first = reason.problems.map((p) => `第 ${p.index + 1} 条${p.id ? `（${p.id}）` : ""}：${p.message}`).join("；");
       return `备份里有 ${reason.total} 条记录无法通过检查，为避免导入一半，整个文件都没有导入。${first}`;
     }
+    case "invalid_daily":
+      return `备份里有 ${reason.total} 条每日一张记录无法通过检查（格式错误或日期重复），整个文件都没有导入。`;
     case "duplicate_ids":
       return `备份文件内有重复的记录 ID（${reason.ids.join("、")}），没有导入任何内容。`;
   }

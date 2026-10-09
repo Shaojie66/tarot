@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalStore } from "react";
 import { TOPICS, TOPIC_LABELS, type Topic } from "@/features/cards/schema";
-import { DEFAULT_DECK } from "@/features/cards/deck";
 import { drawCards } from "@/features/draw/draw";
+import { useSettings } from "@/features/settings/settings";
 import { CrisisSupport } from "@/features/safety/CrisisSupport";
 import { detectCrisis } from "@/features/safety/crisis";
 import { randomId } from "@/lib/id";
@@ -22,8 +22,7 @@ import { flowReducer, initialFlow, type FlowState, type Mode } from "../flow";
 import { buildLocalReading } from "../local";
 import { QUESTION_BANK } from "../questions";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
-import { downgradeLegacyChoice } from "../draft";
-import { clearSession, getDraftWritable, getRecord, loadSession, saveFlowRecord, storeSession, subscribeDraftHealth } from "../storage";
+import { clearSession, getDraftWritable, loadSession, saveFlowRecord, storeSession, subscribeDraftHealth } from "../storage";
 import { DrawTable } from "./DrawTable";
 import { ResultView } from "./ResultView";
 
@@ -60,6 +59,7 @@ function toRequest(state: FlowState): ReadingRequest | null {
 export function ReadingFlow() {
   const router = useRouter();
   const [state, dispatch] = useReducer(flowReducer, initialFlow);
+  const settings = useSettings();
   const [hydrated, setHydrated] = useState(false);
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null);
   const requestSeq = useRef(0);
@@ -76,22 +76,16 @@ export function ReadingFlow() {
     [],
   );
 
-  // 恢复上次的流程；已保存的记录以 IndexedDB 为准
+  // 恢复上次的流程
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const loaded = loadSession();
       if (loaded) {
-        const { state: saved, legacy } = loaded;
-        let restored = saved;
-        if (saved.recordId) {
-          const record = await getRecord(saved.recordId).catch(() => undefined);
-          if (record) {
-            // 旧版草稿的行动选择无法证明是用户点的：保守按"未决定"
-            const choice = legacy ? downgradeLegacyChoice(record.choice) : record.choice;
-            restored = { ...saved, result: record.result, choice, saveStatus: "saved" };
-          }
-        }
+        const { state: saved } = loaded;
+        // 草稿里的选择是用户最近一次的操作，数据库写入可能还没落地（点完立刻刷新），所以以草稿为准；
+        // 恢复后下面的保存 effect 会把它写回同一条记录。旧版草稿的默认选择已在迁移时降为“未决定”。
+        const restored = saved;
         if (!cancelled) dispatch({ type: "restore", state: restored });
       }
       if (!cancelled) setHydrated(true);
@@ -117,8 +111,8 @@ export function ReadingFlow() {
     saveFlowRecord({
       id: recordId,
       schemaVersion: RECORD_SCHEMA_VERSION,
-      deckId: DEFAULT_DECK,
-      settings: { allowReversed: spread.allowReversed },
+      deckId: state.deckId,
+      settings: { allowReversed: state.allowReversed },
       createdAt,
       request,
       result,
@@ -197,6 +191,17 @@ export function ReadingFlow() {
     [state],
   );
 
+  /** 抽牌：只在客户端 crypto 完成；同时固定这一次用的牌组与正逆位设置。 */
+  function drawAction() {
+    const allowReversed = spread.allowReversed && settings.allowReversed;
+    return {
+      type: "drawn" as const,
+      cards: drawCards({ count: spread.positions.length, allowReversed }),
+      deckId: settings.deckId,
+      allowReversed,
+    };
+  }
+
   function cancel() {
     inflight.current?.abort();
     inflight.current = null;
@@ -247,12 +252,13 @@ export function ReadingFlow() {
           <QuestionBanner topic={state.topic} question={state.question} />
           <DrawTable
             spread={spread}
+            deck={state.cards ? state.deckId : settings.deckId}
             cards={state.cards}
             revealed={state.revealed}
-            onShuffled={() => dispatch({ type: "drawn", cards: drawCards({ count: spread.positions.length, allowReversed: spread.allowReversed }) })}
+            onShuffled={() => dispatch(drawAction())}
             onReveal={(count) => dispatch({ type: "reveal", count })}
             onQuickDraw={() => {
-              dispatch({ type: "drawn", cards: drawCards({ count: spread.positions.length, allowReversed: spread.allowReversed }) });
+              dispatch(drawAction());
               dispatch({ type: "reveal", count: spread.positions.length });
             }}
           />

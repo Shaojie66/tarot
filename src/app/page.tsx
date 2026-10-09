@@ -12,6 +12,9 @@ export default function Home() {
       <Link href="/reading" className="rounded-full bg-accent px-6 py-2.5 text-bg hover:opacity-90">
         开始
       </Link>
+      <Link href="/daily" className="text-sm text-muted underline underline-offset-4 hover:text-ink">
+        只想抽一张？每日一张
+      </Link>
       <Link href="/cards" className="text-sm text-muted underline underline-offset-4 hover:text-ink">
         先看看牌义百科
       </Link>

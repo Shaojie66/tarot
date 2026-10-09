@@ -31,3 +31,56 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+/* 翻牌：3D 翻转。牌背用纯 CSS 绘制，不依赖图片。 */
+.flip {
+  perspective: 1200px;
+}
+.flip-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+.flip-inner[data-flipped="true"] {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-front {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+.card-back {
+  aspect-ratio: 600 / 1035;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--accent) 50%, transparent);
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--accent) 35%, transparent) 0 12%, transparent 13%),
+    repeating-linear-gradient(45deg, color-mix(in oklab, var(--accent) 12%, transparent) 0 2px, transparent 2px 10px),
+    var(--surface);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 0.4);
+}
+
+@keyframes shuffle {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-18px) rotate(-6deg); }
+  75% { transform: translateX(18px) rotate(6deg); }
+}
+.shuffling > * {
+  animation: shuffle 0.45s ease-in-out infinite;
+}
+.shuffling > *:nth-child(2n) {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner {
+    transition: none;
+  }
+  .shuffling > * {
+    animation: none;
+  }
+}

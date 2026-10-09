@@ -8,8 +8,11 @@ export default function Home() {
         <br />
         抽三张牌，和自己聊两分钟。
       </h1>
-      <p className="max-w-sm text-sm text-muted">这是一个自我反思工具，不预测未来。占卜流程正在建设中。</p>
-      <Link href="/cards" className="rounded-full border border-accent px-5 py-2 text-sm text-accent hover:bg-accent hover:text-bg">
+      <p className="max-w-sm text-sm text-muted">这是一个自我反思工具，不预测未来。牌是随机抽的，怎么理解由你决定。</p>
+      <Link href="/reading" className="rounded-full bg-accent px-6 py-2.5 text-bg hover:opacity-90">
+        开始
+      </Link>
+      <Link href="/cards" className="text-sm text-muted underline underline-offset-4 hover:text-ink">
         先看看牌义百科
       </Link>
     </main>

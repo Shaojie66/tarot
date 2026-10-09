@@ -20,9 +20,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-serif text-base tracking-wide">
               此刻三张牌
             </Link>
-            <Link href="/cards" className="text-muted hover:text-ink">
-              牌义百科
-            </Link>
+            <div className="flex gap-4">
+              <Link href="/reading" className="text-muted hover:text-ink">
+                抽牌
+              </Link>
+              <Link href="/cards" className="text-muted hover:text-ink">
+                牌义百科
+              </Link>
+            </div>
           </nav>
         </header>
         <div className="flex flex-1 flex-col">{children}</div>

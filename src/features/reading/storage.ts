@@ -3,7 +3,8 @@
 
 import Dexie, { type EntityTable } from "dexie";
 import { DAILY_KEY, clearDaily, mergeDaily, type DailyEntry } from "@/features/daily/daily";
-import { clearAllRecalls, removeRecallsForRecord } from "@/features/recall/recall";
+import { PROFILE_KEY, forgetProfileMemory, saveProfile, type Profile } from "@/features/profile/profile";
+import { RECALL_KEY, clearAllRecalls, mergeRecalls, removeRecallsForRecord, type Recall } from "@/features/recall/recall";
 import { MAX_PERSPECTIVES, readingRecordSchema, type Perspective, type ReadingRecord, type Review } from "./contract";
 import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
@@ -113,25 +114,43 @@ export async function clearEverything(): Promise<void> {
   clearAllRecalls();
 }
 
+export interface ImportExtras {
+  dailyAdd?: DailyEntry[];
+  recallsAdd?: Recall[];
+  profileApply?: Profile | null;
+}
+
 /**
- * 导入记录 + 每日一张。记录在一个 IndexedDB 事务里写入；每日一张在 localStorage。
- * 两者不在同一个事务里，所以先写每日一张并留快照，记录写入失败就把它恢复，保证“要么都写要么都不写”。
+ * 导入记录 + 每日一张 + 回读 + 建档。记录在一个 IndexedDB 事务里写入；其余在 localStorage。
+ * 两者不在同一个事务里，所以先写 localStorage 的部分并留快照，记录写入失败就整体恢复，保证“要么都写要么都不写”。
  */
-export async function applyImport(records: ReadingRecord[], dailyAdd: DailyEntry[]): Promise<void> {
-  let snapshot: string | null = null;
-  try {
-    snapshot = localStorage.getItem(DAILY_KEY);
-  } catch {}
-  if (dailyAdd.length > 0) mergeDaily(dailyAdd);
-  try {
-    await writeImported(records);
-  } catch (error) {
-    if (dailyAdd.length > 0) {
+export async function applyImport(records: ReadingRecord[], extras: ImportExtras | DailyEntry[] = {}): Promise<void> {
+  const { dailyAdd = [], recallsAdd = [], profileApply = null } = Array.isArray(extras) ? { dailyAdd: extras } : extras;
+  const keys = [DAILY_KEY, RECALL_KEY, PROFILE_KEY];
+  const snapshot = new Map<string, string | null>();
+  for (const key of keys) {
+    try {
+      snapshot.set(key, localStorage.getItem(key));
+    } catch {
+      snapshot.set(key, null);
+    }
+  }
+  const restore = () => {
+    for (const [key, value] of snapshot) {
       try {
-        if (snapshot === null) localStorage.removeItem(DAILY_KEY);
-        else localStorage.setItem(DAILY_KEY, snapshot);
+        if (value === null) localStorage.removeItem(key);
+        else localStorage.setItem(key, value);
       } catch {}
     }
+    forgetProfileMemory();
+  };
+  try {
+    if (dailyAdd.length > 0) mergeDaily(dailyAdd);
+    if (recallsAdd.length > 0) mergeRecalls(recallsAdd);
+    if (profileApply && !saveProfile(profileApply)) throw new Error("profile storage unavailable");
+    await writeImported(records);
+  } catch (error) {
+    restore();
     throw error;
   }
 }

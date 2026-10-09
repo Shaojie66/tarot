@@ -7,6 +7,8 @@ import { TOPIC_LABELS } from "@/features/cards/schema";
 import { backupFileName, buildBackup, describeRejection, parseBackup, recordsToWrite, type ImportPreview } from "@/features/reading/backup";
 import type { ReadingRecord } from "@/features/reading/contract";
 import { loadDaily } from "@/features/daily/daily";
+import { loadProfile } from "@/features/profile/profile";
+import { loadAll as loadRecalls } from "@/features/recall/recall";
 import { applyImport, clearEverything, listRecords, type RecordList } from "@/features/reading/storage";
 import { randomId } from "@/lib/id";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime, snippet } from "../labels";
@@ -39,7 +41,7 @@ export function HistoryList() {
   function download() {
     if (!data) return;
     const now = new Date();
-    const blob = new Blob([JSON.stringify(buildBackup(data.records, now, loadDaily()), null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(buildBackup(data.records, now, { daily: loadDaily(), recalls: loadRecalls(), profile: loadProfile() }), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -57,7 +59,11 @@ export function HistoryList() {
     if (!file || !data) return;
     const text = await file.text().catch(() => null);
     if (text === null) return setImportError("读取文件失败，没有导入任何内容。");
-    const result = parseBackup(text, new Map(data.records.map((r) => [r.id, r])), new Set(loadDaily().map((d) => d.dayKey)));
+    const result = parseBackup(text, new Map(data.records.map((r) => [r.id, r])), {
+      dailyKeys: new Set(loadDaily().map((d) => d.dayKey)),
+      recallRecordIds: new Set(loadRecalls().map((r) => r.recordId)),
+      profileOnboarded: loadProfile().onboarded,
+    });
     if (!result.ok) return setImportError(describeRejection(result.reason));
     setUseIncoming(new Set());
     setPreview(result.preview);
@@ -68,8 +74,8 @@ export function HistoryList() {
     if (!preview) return;
     const toWrite = recordsToWrite(preview, useIncoming);
     try {
-      await applyImport(toWrite, preview.dailyAdd);
-      setNotice(`已导入 ${toWrite.length} 条记录和 ${preview.dailyAdd.length} 条每日一张；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
+      await applyImport(toWrite, { dailyAdd: preview.dailyAdd, recallsAdd: preview.recallsAdd, profileApply: preview.profileApply });
+      setNotice(`已导入 ${toWrite.length} 条记录、${preview.dailyAdd.length} 条每日一张、${preview.recallsAdd.length} 条回看提醒${preview.profileApply ? "，并采用了备份里的偏好" : ""}；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
       setPreview(null);
       reload();
     } catch {
@@ -145,7 +151,7 @@ export function HistoryList() {
         {panel === "export" && (
           <div className="space-y-2 rounded-lg bg-surface p-3" role="group" aria-label="导出确认">
             <p className="leading-relaxed">
-              备份文件包含你的问题、自解、笔记等<b>明文</b>，可能被浏览器的下载目录或系统云盘同步。不含 API key 和进行中的草稿。这是给你自己恢复用的，不是用来分享的。
+              备份文件包含你的问题、自解、笔记、偏好等<b>明文</b>，可能被浏览器的下载目录或系统云盘同步。不含 API key、设置（逆位 / 牌组）和进行中的草稿。这是给你自己恢复用的，不是用来分享的。
             </p>
             <button type="button" onClick={download} className="rounded-full bg-accent px-4 py-1.5 text-bg">
               下载 {data.records.length} 条记录
@@ -178,7 +184,7 @@ export function HistoryList() {
         {preview && (
           <div className="space-y-3 rounded-lg bg-surface p-3" role="group" aria-label="导入预览" data-testid="import-preview">
             <p className="leading-relaxed">
-              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。每日一张：补上本机没有的 <b>{preview.dailyAdd.length}</b> 天，已有的 {preview.dailySkip} 天不覆盖。
+              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。每日一张：补上本机没有的 <b>{preview.dailyAdd.length}</b> 天，已有的 {preview.dailySkip} 天不覆盖。回看提醒：补上 <b>{preview.recallsAdd.length}</b> 条{preview.recallsSkip > 0 && `（${preview.recallsSkip} 条已有或找不到对应记录，跳过）`}。{preview.profileApply && " 备份里有你的偏好（牌想帮你做什么 / 常来的主题 / 回看节奏），这台设备还没建档，会采用它。"}{preview.profileIgnored && " 备份里的偏好不会覆盖这台设备已有的设置。"}
             </p>
             {preview.conflicts.length > 0 && (
               <fieldset className="space-y-2">

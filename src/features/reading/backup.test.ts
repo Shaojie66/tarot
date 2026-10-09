@@ -83,7 +83,7 @@ describe("备份往返", () => {
   it("备份不含草稿 / 密钥 / 设备信息，文件名不含问题文字", () => {
     const record = makeRecord("record-0001");
     const backup = buildBackup([record], new Date(Date.UTC(2026, 9, 9)));
-    expect(Object.keys(backup).sort()).toEqual(["backupVersion", "contentVersion", "daily", "exportedAt", "format", "records"]);
+    expect(Object.keys(backup).sort()).toEqual(["backupVersion", "contentVersion", "daily", "exportedAt", "format", "profile", "recalls", "records"]);
     const name = backupFileName(new Date(Date.UTC(2026, 9, 9)), "ab12cd34");
     expect(name).toBe("tarot-backup-20261009-ab12cd.json");
     expect(name).not.toContain("走还是留");
@@ -245,7 +245,7 @@ describe("每日一张随备份往返", () => {
 
   it("导出含 daily；导入补本机没有的日键，已有的不覆盖；旧备份（无 daily 字段）照常可导入", () => {
     const withDaily = JSON.parse(file([makeRecord("record-0001")], { daily: [day("2026-10-01"), day("2026-10-02")] }));
-    const parsed = parseBackup(JSON.stringify(withDaily), new Map(), new Set(["2026-10-01"]));
+    const parsed = parseBackup(JSON.stringify(withDaily), new Map(), { dailyKeys: new Set(["2026-10-01"]) });
     expect(parsed.ok && parsed.preview.dailyAdd.map((d) => d.dayKey)).toEqual(["2026-10-02"]);
     expect(parsed.ok && parsed.preview.dailySkip).toBe(1);
 
@@ -322,5 +322,97 @@ describe("换视角快照", () => {
   it("预检拒绝：同一记录里重复的语气", () => {
     const r = makeRecord("record-0003", { perspectives: [perspective("support"), { ...perspective("support"), id: "persp-support-0009" }] }, 3);
     expect(parseBackup(file([r]), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_records" } });
+  });
+});
+
+describe("回读与建档随备份往返", () => {
+  const ID_A = "record-0001";
+  const ID_B = "record-0002";
+  const recall = (recordId: string, id = `recall-${recordId}`) => ({
+    id,
+    recordId,
+    dueAt: new Date(Date.UTC(2026, 9, 12)).toISOString(),
+    status: "pending" as const,
+    createdAt: new Date(Date.UTC(2026, 9, 9)).toISOString(),
+    completedAt: null,
+  });
+  const profile = { onboarded: true, intent: "decide" as const, topics: ["career" as const], recallCadence: "3days" as const };
+
+  it("buildBackup：回读只带“指向的记录也在备份里”的；没建档就没有 profile", () => {
+    const b = buildBackup([makeRecord(ID_A)], new Date(0), { recalls: [recall(ID_A), recall("record-9999")], profile: { ...profile, onboarded: false } });
+    expect(b.recalls.map((r) => r.recordId)).toEqual([ID_A]);
+    expect(b.profile).toBeNull();
+    expect(buildBackup([makeRecord(ID_A)], new Date(0), { profile }).profile).toEqual(profile);
+  });
+
+  it("预览：指向的记录存在（本机已有或随本次导入）且本机没有回读的才补；孤儿 / 已有的跳过", () => {
+    const local = new Map([[ID_B, makeRecord(ID_B, {}, 2)]]);
+    const text = file([makeRecord(ID_A)], { recalls: [recall(ID_A), recall(ID_B), recall("record-0003")] });
+    // 本机：有记录 B，且 B 已经有回读
+    const parsed = parseBackup(text, local, { recallRecordIds: new Set([ID_B]) });
+    if (!parsed.ok) throw new Error("expected ok");
+    expect(parsed.preview.recallsAdd.map((r) => r.recordId)).toEqual([ID_A]);
+    expect(parsed.preview.recallsSkip).toBe(2);
+  });
+
+  it("预览：建档只在本机还没建档时采用；已建档的本机不覆盖", () => {
+    const text = file([], { profile });
+    const fresh = parseBackup(text, new Map(), { profileOnboarded: false });
+    const used = parseBackup(text, new Map(), { profileOnboarded: true });
+    if (!fresh.ok || !used.ok) throw new Error("expected ok");
+    expect(fresh.preview.profileApply).toEqual(profile);
+    expect(fresh.preview.profileIgnored).toBe(false);
+    expect(used.preview.profileApply).toBeNull();
+    expect(used.preview.profileIgnored).toBe(true);
+    // 没有 profile 字段 / 为 null 的旧备份照常导入
+    for (const t of [file([]), file([], { profile: null })]) {
+      const p = parseBackup(t, new Map());
+      expect(p.ok && p.preview.profileApply).toBeNull();
+    }
+  });
+
+  it("坏的回读 / 重复回读 / 坏的建档 → 拒绝整个文件", () => {
+    expect(parseBackup(file([], { recalls: [{ id: "x" }] }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_recalls" } });
+    expect(parseBackup(file([makeRecord(ID_A)], { recalls: [recall(ID_A), recall(ID_A, "recall-other-0002")] }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_recalls" } });
+    expect(parseBackup(file([], { recalls: "nope" }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_recalls" } });
+    for (const bad of [{ ...profile, intent: "angry" }, { ...profile, topics: ["nope"] }, { ...profile, extra: 1 }, { onboarded: true }, "str"]) {
+      expect(parseBackup(file([], { profile: bad }), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_profile" } });
+    }
+  });
+
+  describe("applyImport：全部写入或全部不写", () => {
+    function stubStorage() {
+      const store = new Map<string, string>();
+      vi.stubGlobal("localStorage", { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v), removeItem: (k: string) => void store.delete(k) });
+      return store;
+    }
+
+    it("成功：记录、回读、建档都写入", async () => {
+      const store = stubStorage();
+      await applyImport([makeRecord(ID_A)], { recallsAdd: [recall(ID_A)], profileApply: profile });
+      expect((await getRecord(ID_A))?.id).toBe(ID_A);
+      expect(JSON.parse(store.get("tarot:recall:v1")!)).toHaveLength(1);
+      expect(JSON.parse(store.get("tarot:profile:v1")!)).toMatchObject({ onboarded: true, intent: "decide" });
+      vi.unstubAllGlobals();
+    });
+
+    it("记录事务失败：回读与建档都恢复成导入前（包括原本为空）", async () => {
+      const store = stubStorage();
+      store.set("tarot:recall:v1", JSON.stringify([recall("record-0777")]));
+      const before = store.get("tarot:recall:v1");
+      const bad = { ...makeRecord("record-0009"), id: "x" } as ReadingRecord;
+      await expect(applyImport([bad], { recallsAdd: [recall(ID_B)], profileApply: profile })).rejects.toThrow();
+      expect(store.get("tarot:recall:v1")).toBe(before);
+      expect(store.has("tarot:profile:v1")).toBe(false);
+      vi.unstubAllGlobals();
+    });
+
+    it("同一条记录已有回读：mergeRecalls 不重复", async () => {
+      const store = stubStorage();
+      store.set("tarot:recall:v1", JSON.stringify([recall(ID_A, "recall-local-0001")]));
+      await applyImport([], { recallsAdd: [recall(ID_A, "recall-file-00001")] });
+      expect(JSON.parse(store.get("tarot:recall:v1")!)).toHaveLength(1);
+      vi.unstubAllGlobals();
+    });
   });
 });

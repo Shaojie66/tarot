@@ -17,10 +17,10 @@ export interface Recall {
   completedAt: string | null;
 }
 
-const RECALL_KEY = "tarot:recall:v1";
+export const RECALL_KEY = "tarot:recall:v1";
 const MAX_RECALLS = 200;
 
-const recallSchema = z.strictObject({
+export const recallSchema = z.strictObject({
   id: z.string().min(8),
   recordId: z.string().min(8),
   dueAt: z.string(),
@@ -68,6 +68,19 @@ export function markDone(id: string): boolean {
 export function removeRecallsForRecord(recordId: string): boolean {
   const next = loadAll().filter((r) => r.recordId !== recordId);
   return write(next);
+}
+
+/**
+ * 导入（备份）：补上本机该记录还没有回读的条目；一条记录只保留一条。返回新增条数。
+ * 写入失败抛错（调用方负责整体回滚）。
+ */
+export function mergeRecalls(incoming: Recall[]): { added: number; skipped: number } {
+  const existing = loadAll();
+  const have = new Set(existing.map((r) => r.recordId));
+  const ids = new Set(existing.map((r) => r.id));
+  const fresh = incoming.filter((r) => !have.has(r.recordId) && !ids.has(r.id));
+  if (fresh.length > 0 && !write([...fresh, ...existing].slice(0, MAX_RECALLS))) throw new Error("recall storage unavailable");
+  return { added: fresh.length, skipped: incoming.length - fresh.length };
 }
 
 export function clearAllRecalls(): boolean {

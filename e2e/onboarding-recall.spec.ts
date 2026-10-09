@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 // 首访建档与未来回读：此前所有用例都在“未建档”状态下直接点情境卡，没有覆盖这条产品路径。
 
 import { expect, test, type Page } from "@playwright/test";
@@ -196,4 +197,75 @@ test("设置页：回读节奏可改；改后只对之后保存的记录生效",
   expect((await profile(page)).recallCadence).toBe("7days");
   await page.getByLabel("不用").check();
   expect((await profile(page)).recallCadence).toBe("none");
+});
+
+test("备份带上回读和建档：新设备导入后采用偏好并补回提醒；已建档的设备不被覆盖", async ({ page, browser }, testInfo) => {
+  // 设备 A：建档（决定 / 事业 / 3 天后）→ 走完一次 → 导出
+  await openScenarios(page);
+  await page.getByRole("button", { name: "做个决定" }).click();
+  await page.getByLabel("偏好 事业").check();
+  await page.getByRole("button", { name: "下一步" }).click();
+  await page.getByRole("button", { name: /3 天后/ }).click();
+  await finishReading(page);
+  await expect.poll(async () => (await recalls(page)).length).toBe(1);
+  await page.goto("/history");
+  await page.getByRole("button", { name: "导出备份" }).click();
+  await expect(page.getByText("偏好等")).toBeVisible();
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: /^下载/ }).click()]);
+  const path = (await download.path())!;
+  const backup = JSON.parse(readFileSync(path, "utf8"));
+  expect(backup.recalls).toHaveLength(1);
+  expect(backup.profile).toEqual({ onboarded: true, intent: "decide", topics: ["career"], recallCadence: "3days" });
+  expect(JSON.stringify(backup)).not.toMatch(/api[_-]?key|sk-[a-z0-9]/i); // 没有 key；顶层也没有 settings（见下面的键列表）
+  expect(Object.keys(backup).sort()).toEqual(["backupVersion", "contentVersion", "daily", "exportedAt", "format", "profile", "recalls", "records"]);
+
+  const baseURL = testInfo.project.use.baseURL!;
+
+  // 设备 B：全新（没建档）→ 导入 → 采用偏好，补回提醒
+  const fresh = await browser.newContext({ baseURL, serviceWorkers: "block" });
+  const b = await fresh.newPage();
+  await b.goto("/history");
+  await b.getByLabel("选择备份文件").setInputFiles(path);
+  await expect(b.getByTestId("import-preview")).toContainText("这台设备还没建档，会采用它");
+  await expect(b.getByTestId("import-preview")).toContainText("回看提醒：补上 1 条");
+  await b.getByRole("button", { name: "确认导入" }).click();
+  await expect(b.getByTestId("history-notice")).toContainText("1 条回看提醒");
+  expect(await profile(b)).toEqual({ onboarded: true, intent: "decide", topics: ["career"], recallCadence: "3days" });
+  expect(await recalls(b)).toHaveLength(1);
+  await b.goto("/reading");
+  await expect(b.getByRole("heading", { name: "先花几秒定个方向" })).toHaveCount(0); // 已经有偏好，不再问
+  // 偏好生效：事业排第一
+  const first = await b.locator("section[aria-labelledby=scenario-title] button").first().innerText();
+  expect(first).toContain("留在原地，还是换个方向？");
+  await fresh.close();
+
+  // 设备 C：已建档（理清）→ 导入 → 偏好不被覆盖，提醒照补
+  const used = await browser.newContext({ baseURL, serviceWorkers: "block" });
+  const c = await used.newPage();
+  await c.goto("/");
+  await c.evaluate(() => localStorage.setItem("tarot:profile:v1", JSON.stringify({ onboarded: true, intent: "clarify", topics: [], recallCadence: "none" })));
+  await c.goto("/history");
+  await c.getByLabel("选择备份文件").setInputFiles(path);
+  await expect(c.getByTestId("import-preview")).toContainText("不会覆盖这台设备已有的设置");
+  await c.getByRole("button", { name: "确认导入" }).click();
+  await expect(c.getByTestId("history-notice")).toBeVisible();
+  expect(await profile(c)).toEqual({ onboarded: true, intent: "clarify", topics: [], recallCadence: "none" });
+  expect(await recalls(c)).toHaveLength(1);
+  await used.close();
+});
+
+test("旧备份（没有 recalls / profile 字段）照常能导入", async ({ page }) => {
+  await openScenarios(page);
+  await page.getByRole("button", { name: "全部跳过，直接开始" }).click();
+  await finishReading(page);
+  await page.goto("/history");
+  await page.getByRole("button", { name: "导出备份" }).click();
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: /^下载/ }).click()]);
+  const old = JSON.parse(readFileSync((await download.path())!, "utf8"));
+  delete old.recalls;
+  delete old.profile;
+  delete old.daily;
+  await page.getByLabel("选择备份文件").setInputFiles({ name: "old.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(old)) });
+  await expect(page.getByTestId("import-preview")).toContainText("将新增 0 条");
+  await expect(page.getByTestId("import-error")).toHaveCount(0);
 });

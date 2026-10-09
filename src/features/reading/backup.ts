@@ -3,6 +3,8 @@
 // 不含：进行中草稿、API key / 配置、设备信息。
 
 import { dailyEntrySchema, type DailyEntry } from "@/features/daily/daily";
+import { profileBackupSchema, type Profile } from "@/features/profile/profile";
+import { recallSchema, type Recall } from "@/features/recall/recall";
 import { CONTENT_VERSION, readingRecordSchema, type ReadingRecord } from "./contract";
 
 export const BACKUP_FORMAT = "tarot-backup";
@@ -18,9 +20,22 @@ export interface Backup {
   records: ReadingRecord[];
   /** 每日一张记录。可选字段：没有它的旧备份照常可导入 */
   daily: DailyEntry[];
+  /** 未来回读（指向某条记录的“回来看看当时的自己”）。可选字段 */
+  recalls: Recall[];
+  /** 首访建档（意图 / 主题偏好 / 回读节奏）。可选字段；导入时只在本机还没建档时采用 */
+  profile: Profile | null;
 }
 
-export function buildBackup(records: ReadingRecord[], now: Date = new Date(), daily: DailyEntry[] = []): Backup {
+export interface BackupExtras {
+  daily?: DailyEntry[];
+  recalls?: Recall[];
+  profile?: Profile | null;
+}
+
+export function buildBackup(records: ReadingRecord[], now: Date = new Date(), extras: BackupExtras | DailyEntry[] = {}): Backup {
+  // 兼容旧的第三个参数（只传每日一张数组）
+  const { daily = [], recalls = [], profile = null } = Array.isArray(extras) ? { daily: extras } : extras;
+  const ids = new Set(records.map((r) => r.id));
   return {
     format: BACKUP_FORMAT,
     backupVersion: BACKUP_VERSION,
@@ -28,6 +43,10 @@ export function buildBackup(records: ReadingRecord[], now: Date = new Date(), da
     contentVersion: CONTENT_VERSION,
     records: [...records].sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id)),
     daily: [...daily].sort((a, b) => a.dayKey.localeCompare(b.dayKey)),
+    // 回读只带“指向的记录也在这份备份里”的，且每条记录一条
+    recalls: recalls.filter((r) => ids.has(r.recordId)).sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.id.localeCompare(b.id)),
+    // 没建档就没有可备份的偏好
+    profile: profile?.onboarded ? profile : null,
   };
 }
 
@@ -45,7 +64,9 @@ export type RejectReason =
   | { kind: "bad_version" }
   | { kind: "invalid_records"; problems: { index: number; id: string | null; message: string }[]; total: number }
   | { kind: "duplicate_ids"; ids: string[] }
-  | { kind: "invalid_daily"; total: number };
+  | { kind: "invalid_daily"; total: number }
+  | { kind: "invalid_recalls"; total: number }
+  | { kind: "invalid_profile" };
 
 export interface Conflict {
   incoming: ReadingRecord;
@@ -62,6 +83,21 @@ export interface ImportPreview {
   /** 每日一张：本机没有的日键才会补上，已有的不覆盖 */
   dailyAdd: DailyEntry[];
   dailySkip: number;
+  /** 回读：指向的记录存在（本机已有或随本次导入）、且本机该记录还没有回读的才补上 */
+  recallsAdd: Recall[];
+  recallsSkip: number;
+  /** 建档：文件里有，且本机还没建档 → 采用；本机已建档 → 不覆盖（profileIgnored） */
+  profileApply: Profile | null;
+  profileIgnored: boolean;
+}
+
+export interface ImportContext {
+  /** 本机已有每日一张的日键 */
+  dailyKeys?: ReadonlySet<string>;
+  /** 本机已有回读所指向的记录 id */
+  recallRecordIds?: ReadonlySet<string>;
+  /** 本机是否已经建档 */
+  profileOnboarded?: boolean;
 }
 
 export type ParseResult = { ok: true; preview: ImportPreview } | { ok: false; reason: RejectReason };
@@ -84,7 +120,8 @@ const MAX_PROBLEMS_SHOWN = 5;
  * 预检。任何一个问题（坏记录、文件内重复 ID、未来版本）都拒绝整个文件，不做部分导入：
  * 确定性强，用户修好文件或换文件后再来，不会出现“导进去一半”。
  */
-export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingRecord>, existingDailyKeys: ReadonlySet<string> = new Set()): ParseResult {
+export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingRecord>, ctx: ImportContext = {}): ParseResult {
+  const existingDailyKeys = ctx.dailyKeys ?? new Set<string>();
   const bytes = new TextEncoder().encode(text).length;
   if (bytes > MAX_BACKUP_BYTES) return { ok: false, reason: { kind: "too_large", bytes } };
 
@@ -95,7 +132,7 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
     return { ok: false, reason: { kind: "not_json" } };
   }
   if (typeof json !== "object" || json === null) return { ok: false, reason: { kind: "not_a_backup" } };
-  const file = json as { format?: unknown; backupVersion?: unknown; records?: unknown; daily?: unknown };
+  const file = json as { format?: unknown; backupVersion?: unknown; records?: unknown; daily?: unknown; recalls?: unknown; profile?: unknown };
   if (file.format !== BACKUP_FORMAT || !Array.isArray(file.records)) return { ok: false, reason: { kind: "not_a_backup" } };
   if (typeof file.backupVersion !== "number" || !Number.isInteger(file.backupVersion) || file.backupVersion < 1) {
     return { ok: false, reason: { kind: "bad_version" } };
@@ -138,7 +175,39 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
     if (badDaily > 0) return { ok: false, reason: { kind: "invalid_daily", total: badDaily } };
   }
 
+  const recalls: Recall[] = [];
+  if (file.recalls !== undefined) {
+    if (!Array.isArray(file.recalls)) return { ok: false, reason: { kind: "invalid_recalls", total: 1 } };
+    const seenRecords = new Set<string>();
+    let bad = 0;
+    for (const raw of file.recalls) {
+      const parsed = recallSchema.safeParse(raw);
+      // 同一条记录只能有一条回读；格式不对或重复 → 拒绝整个文件
+      if (!parsed.success || seenRecords.has(parsed.data.recordId)) bad++;
+      else {
+        seenRecords.add(parsed.data.recordId);
+        recalls.push(parsed.data);
+      }
+    }
+    if (bad > 0) return { ok: false, reason: { kind: "invalid_recalls", total: bad } };
+  }
+
+  let profileFromFile: Profile | null = null;
+  if (file.profile !== undefined && file.profile !== null) {
+    const parsed = profileBackupSchema.safeParse(file.profile);
+    if (!parsed.success) return { ok: false, reason: { kind: "invalid_profile" } };
+    profileFromFile = parsed.data;
+  }
+
+  const knownRecords = new Set<string>([...existing.keys(), ...records.map((r) => r.id)]);
+  const localRecallRecords = ctx.recallRecordIds ?? new Set<string>();
+  const recallsAdd = recalls.filter((r) => knownRecords.has(r.recordId) && !localRecallRecords.has(r.recordId));
+
   const preview: ImportPreview = {
+    recallsAdd,
+    recallsSkip: recalls.length - recallsAdd.length,
+    profileApply: profileFromFile && !ctx.profileOnboarded ? profileFromFile : null,
+    profileIgnored: !!profileFromFile && !!ctx.profileOnboarded,
     add: [],
     skip: [],
     conflicts: [],
@@ -177,6 +246,10 @@ export function describeRejection(reason: RejectReason): string {
     }
     case "invalid_daily":
       return `备份里有 ${reason.total} 条每日一张记录无法通过检查（格式错误或日期重复），整个文件都没有导入。`;
+    case "invalid_recalls":
+      return `备份里有 ${reason.total} 条回读提醒无法通过检查（格式错误，或同一条记录有多条），整个文件都没有导入。`;
+    case "invalid_profile":
+      return "备份里的建档信息无法通过检查，整个文件都没有导入。";
     case "duplicate_ids":
       return `备份文件内有重复的记录 ID（${reason.ids.join("、")}），没有导入任何内容。`;
   }

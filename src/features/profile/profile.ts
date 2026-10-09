@@ -32,13 +32,21 @@ export interface Profile {
 
 export const DEFAULT_PROFILE: Profile = { onboarded: false, intent: null, topics: [], recallCadence: null };
 
-const PROFILE_KEY = "tarot:profile:v1";
+export const PROFILE_KEY = "tarot:profile:v1";
 
 const profileSchema = z.object({
   onboarded: z.boolean().catch(DEFAULT_PROFILE.onboarded),
   intent: z.enum(INTENTS).nullable().catch(DEFAULT_PROFILE.intent),
   topics: z.array(z.enum(TOPICS)).catch(DEFAULT_PROFILE.topics),
   recallCadence: z.enum(RECALL_CADENCES).nullable().catch(DEFAULT_PROFILE.recallCadence),
+});
+
+/** 备份里的建档：严格校验（和读本机存储时“出错回默认”不同：备份文件有问题就该拒绝，而不是悄悄改成默认）。 */
+export const profileBackupSchema = z.strictObject({
+  onboarded: z.boolean(),
+  intent: z.enum(INTENTS).nullable(),
+  topics: z.array(z.enum(TOPICS)).max(TOPICS.length),
+  recallCadence: z.enum(RECALL_CADENCES).nullable(),
 });
 
 export function parseProfile(raw: string | null): Profile {
@@ -69,6 +77,12 @@ export function saveProfile(next: Profile): boolean {
   }
   emit();
   return true;
+}
+
+/** 回滚导入时用：丢掉内存里暂存的档案（保存失败时才会用到的备份值），以 localStorage 恢复后的内容为准。 */
+export function forgetProfileMemory(): void {
+  memory = null;
+  emit();
 }
 
 /** 完成建档（未选意图也算建档完成——"此刻"无题分支可继续）。 */

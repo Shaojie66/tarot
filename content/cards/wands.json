@@ -7,11 +7,11 @@
   {
     "id": "two-of-wands", "nameZh": "权杖二", "nameEn": "Two of Wands", "number": 2,
     "upright": { "keywords": ["规划", "远眺", "选方向"], "meaning": "你站在原地看向远方，心里已经有了想法，接下来要决定往哪走。", "career": "制定更长远的计划，评估向外拓展的可能。", "relationship": "在考虑这段关系的未来。", "self": "你想要的，比现在拥有的更大。", "crossroads": "现在的位置安稳，但你心里已经在看外面了。", "question": "五年后的你，希望站在哪里？" },
-    "reversed": { "keywords": ["害怕未知", "计划不周", "犹豫不前"], "meaning": "想走出去却害怕离开舒适区，或者计划还不够具体。", "career": "计划停留在想象里，缺少第一步。", "relationship": "双方对未来的规划不一致。", "self": "担心选错，所以一直不选。", "crossroads": "把“想去”拆成可以验证的小步骤。", "question": "什么让你一直停在原地？" }
+    "reversed": { "keywords": ["害怕未知", "计划不周", "犹豫不前"], "meaning": "想走出去却害怕离开舒适区，或者计划还不够具体。", "career": "计划停留在想象里，缺少第一步。", "relationship": "看看双方对未来的规划是否一致。", "self": "担心选错，所以一直不选。", "crossroads": "把“想去”拆成可以验证的小步骤。", "question": "什么让你一直停在原地？" }
   },
   {
     "id": "three-of-wands", "nameZh": "权杖三", "nameEn": "Three of Wands", "number": 3,
-    "upright": { "keywords": ["拓展", "等待回音", "视野"], "meaning": "你已经出发，现在是等待成果、看向更远处的时候。", "career": "前期投入开始有回音，可以考虑更大的版图。", "relationship": "关系在成长，或在异地中彼此等待。", "self": "你的视野正在打开。", "crossroads": "往外走的选择，开始显现出价值。", "question": "你已经播下的种子里，哪一颗最值得等待？" },
+    "upright": { "keywords": ["拓展", "等待回音", "视野"], "meaning": "你已经出发，现在是等待成果、看向更远处的时候。", "career": "前期投入开始有回音，可以考虑更大的版图。", "relationship": "关系在成长，也需要彼此的耐心。", "self": "你的视野正在打开。", "crossroads": "往外走的选择，开始显现出价值。", "question": "你已经播下的种子里，哪一颗最值得等待？" },
     "reversed": { "keywords": ["延迟", "视野受限", "失望"], "meaning": "期待的结果迟迟不来，或者计划遇到了阻碍。", "career": "进展慢于预期，调整预期，也调整策略。", "relationship": "等待让人焦虑，需要更多沟通。", "self": "你可能把目光放得太窄了。", "crossroads": "回头看看，是不是方向本身需要修正。", "question": "如果结果比预期晚一年，你还会坚持吗？" }
   },
   {
@@ -26,7 +26,7 @@
   },
   {
     "id": "six-of-wands", "nameZh": "权杖六", "nameEn": "Six of Wands", "number": 6,
-    "upright": { "keywords": ["认可", "成功", "自信"], "meaning": "你的努力被看见了，可以自信地走在前面。", "career": "获得认可或晋升，好好享受它。", "relationship": "被欣赏、被肯定。", "self": "承认自己做得不错，这不是骄傲。", "crossroads": "你已经有底气做出选择了。", "question": "你最近做成了什么，却没好好肯定自己？" },
+    "upright": { "keywords": ["认可", "成功", "自信"], "meaning": "你的努力被看见了，可以自信地走在前面。", "career": "如果努力得到了认可，好好享受它。", "relationship": "被欣赏、被肯定。", "self": "承认自己做得不错，这不是骄傲。", "crossroads": "你已经有底气做出选择了。", "question": "你最近做成了什么，却没好好肯定自己？" },
     "reversed": { "keywords": ["怕被评价", "未被看见", "自我怀疑"], "meaning": "过于在意别人的评价，或者努力暂时没有被认可。", "career": "认可迟到了，不代表你做得不好。", "relationship": "期待被看见，却没有得到回应。", "self": "外界的掌声，不是唯一的衡量。", "crossroads": "别为了面子做选择。", "question": "如果没有人看见，你还会这样选吗？" }
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "id": "eight-of-wands", "nameZh": "权杖八", "nameEn": "Eight of Wands", "number": 8,
-    "upright": { "keywords": ["快速推进", "消息", "势头"], "meaning": "事情在加速，消息纷至沓来，适合顺势而动。", "career": "进展很快，及时回应、抓住势头。", "relationship": "联系频繁，关系进展迅速。", "self": "你的状态正在上升。", "crossroads": "机会来得快，准备好了就出发。", "question": "现在有什么事，正适合趁热打铁？" },
+    "upright": { "keywords": ["快速推进", "消息", "势头"], "meaning": "事情在加速，消息纷至沓来，适合顺势而动。", "career": "进展很快，及时回应、抓住势头。", "relationship": "如果关系进展很快，也留意彼此的节奏。", "self": "你的状态正在上升。", "crossroads": "机会来得快，准备好了就出发。", "question": "现在有什么事，正适合趁热打铁？" },
     "reversed": { "keywords": ["延误", "仓促", "失去节奏"], "meaning": "事情卡住或拖延，或者推进太快导致失误。", "career": "等待回复让人焦躁，先做好手头的事。", "relationship": "信息错位，或者节奏不一致。", "self": "慌乱中容易出错，慢一点。", "crossroads": "别因为着急而选错。", "question": "你在急什么？" }
   },
   {
@@ -46,12 +46,12 @@
   },
   {
     "id": "ten-of-wands", "nameZh": "权杖十", "nameEn": "Ten of Wands", "number": 10,
-    "upright": { "keywords": ["重担", "责任", "过载"], "meaning": "你扛着太多东西，前进得很吃力。", "career": "任务太多，学会拒绝或分配。", "relationship": "一个人承担了关系中大部分的重量。", "self": "你不需要一个人扛下一切。", "crossroads": "选那个能让你卸下一些负担的方向。", "question": "你背着的东西里，哪一件可以放下？" },
+    "upright": { "keywords": ["重担", "责任", "过载"], "meaning": "你扛着太多东西，前进得很吃力。", "career": "任务太多，学会拒绝或分配。", "relationship": "看看关系里的重量是否都压在了一个人身上。", "self": "你不需要一个人扛下一切。", "crossroads": "选那个能让你卸下一些负担的方向。", "question": "你背着的东西里，哪一件可以放下？" },
     "reversed": { "keywords": ["卸下", "放手", "到了边缘"], "meaning": "终于开始放下一些负担，或者已经快被压垮了。", "career": "是时候和人谈谈工作量了。", "relationship": "学会把责任分出去。", "self": "承认自己扛不住，是一种勇气。", "crossroads": "减负之后再判断方向，会清楚很多。", "question": "如果可以放下一件事，你会放下什么？" }
   },
   {
     "id": "page-of-wands", "nameZh": "权杖侍从", "nameEn": "Page of Wands", "number": 11,
-    "upright": { "keywords": ["好奇", "探索", "新消息"], "meaning": "像一个充满好奇的新手，对新事物跃跃欲试。", "career": "学一项新技能，或接触一个新领域。", "relationship": "新的认识，有趣的开始。", "self": "用新手的心态去尝试。", "crossroads": "先去体验，而不是只在脑子里想。", "question": "你最近对什么感到好奇？" },
+    "upright": { "keywords": ["好奇", "探索", "新消息"], "meaning": "像一个充满好奇的新手，对新事物跃跃欲试。", "career": "学一项新技能，或接触一个新领域。", "relationship": "对新的认识保持好奇。", "self": "用新手的心态去尝试。", "crossroads": "先去体验，而不是只在脑子里想。", "question": "你最近对什么感到好奇？" },
     "reversed": { "keywords": ["三分钟热度", "不成熟", "迷茫"], "meaning": "想法很多但坚持不下来，或者不知道该把热情放在哪里。", "career": "每样都碰一下，却都没有深入。", "relationship": "热情来得快，去得也快。", "self": "对什么都有兴趣，又对什么都不确定。", "crossroads": "挑一件事坚持一个月，再判断。", "question": "哪件事，你愿意坚持一个月看看？" }
   },
   {
@@ -62,11 +62,11 @@
   {
     "id": "queen-of-wands", "nameZh": "权杖王后", "nameEn": "Queen of Wands", "number": 13,
     "upright": { "keywords": ["自信", "热情", "感染力"], "meaning": "温暖而自信，能用自己的热情带动身边的人。", "career": "你的魅力和主动性，会帮你打开局面。", "relationship": "自信、开朗，懂得表达爱。", "self": "相信自己身上的光。", "crossroads": "选那个能让你发光的地方。", "question": "你身上哪一点最能感染别人？" },
-    "reversed": { "keywords": ["嫉妒", "自我怀疑", "耗竭"], "meaning": "自信受挫，或者在照亮别人的过程中把自己耗尽了。", "career": "你可能在和他人的比较中失去了自己的节奏。", "relationship": "不安全感引发占有欲或嫉妒。", "self": "你对自己的要求太高了。", "crossroads": "别因为别人的选择而动摇。", "question": "你最近在和谁比较？" }
+    "reversed": { "keywords": ["嫉妒", "自我怀疑", "耗竭"], "meaning": "自信受挫，或者在照亮别人的过程中把自己耗尽了。", "career": "你可能在和他人的比较中失去了自己的节奏。", "relationship": "如果有不安全感，它可能会表现为占有欲或嫉妒。", "self": "你对自己的要求太高了。", "crossroads": "别因为别人的选择而动摇。", "question": "你最近在和谁比较？" }
   },
   {
     "id": "king-of-wands", "nameZh": "权杖国王", "nameEn": "King of Wands", "number": 14,
     "upright": { "keywords": ["远见", "领导", "魄力"], "meaning": "有远见、有魄力，能把愿景变成行动。", "career": "适合主导项目，带领他人。", "relationship": "成熟、有担当。", "self": "你可以为自己的人生掌舵。", "crossroads": "用长远的眼光来做这个选择。", "question": "如果你是自己人生的领导者，你会做什么决定？" },
-    "reversed": { "keywords": ["专断", "急躁", "期望过高"], "meaning": "想掌控一切，或者对自己和他人要求过高。", "career": "独断专行，会失去支持。", "relationship": "控制欲影响了关系。", "self": "放下“必须做到最好”的执念。", "crossroads": "听听别人的意见，再做决定。", "question": "有什么是你一直想控制、其实控制不了的？" }
+    "reversed": { "keywords": ["专断", "急躁", "期望过高"], "meaning": "想掌控一切，或者对自己和他人要求过高。", "career": "独断专行，会失去支持。", "relationship": "看看控制欲是否在影响关系。", "self": "放下“必须做到最好”的执念。", "crossroads": "听听别人的意见，再做决定。", "question": "有什么是你一直想控制、其实控制不了的？" }
   }
 ]

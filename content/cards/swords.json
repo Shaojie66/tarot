@@ -7,17 +7,17 @@
   {
     "id": "two-of-swords", "nameZh": "宝剑二", "nameEn": "Two of Swords", "number": 2,
     "upright": { "keywords": ["僵持", "回避", "两难"], "meaning": "蒙住眼睛，不愿面对选择，暂时维持着平衡。", "career": "在两个选项之间僵持不下。", "relationship": "回避冲突，假装一切正常。", "self": "你在用“不看”来保护自己。", "crossroads": "摘下眼罩，看看你真正在回避的是什么。", "question": "你不愿看的那个事实是什么？" },
-    "reversed": { "keywords": ["被迫选择", "信息过载", "打破僵局"], "meaning": "僵局被打破，不得不做出选择，或者信息太多让人更乱。", "career": "再拖下去，别人会替你做选择。", "relationship": "回避不下去了，需要面对。", "self": "继续犹豫的压力，已经让你承受不住了。", "crossroads": "选一个，然后看自己的第一反应是松了口气，还是失落。", "question": "如果抛一枚硬币，你希望它落在哪一面？" }
+    "reversed": { "keywords": ["被迫选择", "信息过载", "打破僵局"], "meaning": "僵局被打破，不得不做出选择，或者信息太多让人更乱。", "career": "拖得太久，选择可能会被别人或时间替你做掉。", "relationship": "回避不下去了，需要面对。", "self": "继续犹豫的压力，已经让你承受不住了。", "crossroads": "选一个，然后看自己的第一反应是松了口气，还是失落。", "question": "如果抛一枚硬币，你希望它落在哪一面？" }
   },
   {
     "id": "three-of-swords", "nameZh": "宝剑三", "nameEn": "Three of Swords", "number": 3,
-    "upright": { "keywords": ["心痛", "伤害", "真相之痛"], "meaning": "一段让人心痛的经历或真相，痛苦是真实的。", "career": "被否定或受挫，允许自己难过。", "relationship": "失望、背叛或分离带来的伤痛。", "self": "你受伤了，需要被好好安放。", "crossroads": "痛苦会影响判断，先疗伤再决定。", "question": "那份伤痛，需要被怎样照顾？" },
+    "upright": { "keywords": ["心痛", "伤害", "真相之痛"], "meaning": "一段让人心痛的经历或真相，痛苦是真实的。", "career": "被否定或受挫，允许自己难过。", "relationship": "如果正经历失望或分离，那份伤痛是真实的。", "self": "你受伤了，需要被好好安放。", "crossroads": "痛苦会影响判断，先疗伤再决定。", "question": "那份伤痛，需要被怎样照顾？" },
     "reversed": { "keywords": ["疗愈", "释怀", "旧伤"], "meaning": "伤口在慢慢愈合，或者旧伤还没有真正过去。", "career": "从挫折中慢慢恢复。", "relationship": "开始原谅，或者旧伤被再次触碰。", "self": "你在一点点释怀。", "crossroads": "别让旧伤决定新的选择。", "question": "你准备好放下那份痛了吗？" }
   },
   {
     "id": "four-of-swords", "nameZh": "宝剑四", "nameEn": "Four of Swords", "number": 4,
     "upright": { "keywords": ["休息", "恢复", "暂停"], "meaning": "是时候停下来休息了，恢复之后才有力气继续。", "career": "适当休假，或放慢节奏。", "relationship": "给彼此一些空间。", "self": "休息是必要的，不是软弱。", "crossroads": "先休息，再决定。", "question": "你上一次真正放松是什么时候？" },
-    "reversed": { "keywords": ["焦躁", "停不下来", "重新出发"], "meaning": "想休息却停不下来，或者已经休息够了，准备回到行动中。", "career": "过度疲劳，再不休息会出问题。", "relationship": "冷静期该结束了。", "self": "你的心静不下来。", "crossroads": "休息好了，就可以开始行动了。", "question": "是什么让你无法真正停下来？" }
+    "reversed": { "keywords": ["焦躁", "停不下来", "重新出发"], "meaning": "想休息却停不下来，或者已经休息够了，准备回到行动中。", "career": "如果已经过度疲劳，休息是优先事项。", "relationship": "冷静期该结束了。", "self": "你的心静不下来。", "crossroads": "休息好了，就可以开始行动了。", "question": "是什么让你无法真正停下来？" }
   },
   {
     "id": "five-of-swords", "nameZh": "宝剑五", "nameEn": "Five of Swords", "number": 5,
@@ -26,13 +26,13 @@
   },
   {
     "id": "six-of-swords", "nameZh": "宝剑六", "nameEn": "Six of Swords", "number": 6,
-    "upright": { "keywords": ["过渡", "离开", "走向平静"], "meaning": "正在离开动荡，驶向更平静的水域。", "career": "转换到一个更好的环境。", "relationship": "走出困难期，关系趋于平稳。", "self": "你在从困境中慢慢走出来。", "crossroads": "离开可能就是答案，平静就在前方。", "question": "你正在离开的是什么？" },
+    "upright": { "keywords": ["过渡", "离开", "走向平静"], "meaning": "正在离开动荡，驶向更平静的水域。", "career": "转换到一个更好的环境。", "relationship": "如果关系刚经历困难期，可以慢慢找回平稳。", "self": "你在从困境中慢慢走出来。", "crossroads": "如果在考虑离开，可以想想你想去的是一个怎样的地方。", "question": "你正在离开的是什么？" },
     "reversed": { "keywords": ["走不了", "问题如影随形", "抗拒过渡"], "meaning": "想离开却走不了，或者问题跟着你到了新地方。", "career": "换了环境，问题依旧。", "relationship": "旧问题没解决，又被带进了新阶段。", "self": "有些东西，搬家也会带着走。", "crossroads": "离开之前，先想清楚要带走什么、留下什么。", "question": "有什么问题，你换了地方也没摆脱？" }
   },
   {
     "id": "seven-of-swords", "nameZh": "宝剑七", "nameEn": "Seven of Swords", "number": 7,
-    "upright": { "keywords": ["策略", "迂回", "隐瞒"], "meaning": "用策略或迂回的方式达成目标，也可能有人不够坦诚。", "career": "需要聪明的策略，也要留意不透明的信息。", "relationship": "有所隐瞒或保留。", "self": "你是不是在逃避面对某件事？", "crossroads": "别只看表面，问清楚隐藏的条件。", "question": "这件事里，有没有人（包括你自己）没说实话？" },
-    "reversed": { "keywords": ["坦白", "被揭穿", "良心不安"], "meaning": "隐瞒的东西浮出水面，或者你不想再骗自己了。", "career": "是时候坦诚面对了。", "relationship": "秘密被发现，或者终于坦白。", "self": "停止自我欺骗。", "crossroads": "诚实地承认你真实的动机。", "question": "你最想对自己承认的是什么？" }
+    "upright": { "keywords": ["策略", "迂回", "隐瞒"], "meaning": "用策略或迂回的方式达成目标，也可能有人不够坦诚。", "career": "需要聪明的策略，也要留意不透明的信息。", "relationship": "沟通里可能有没说出口的部分，也包括你自己的。", "self": "你是不是在逃避面对某件事？", "crossroads": "别只看表面，问清楚隐藏的条件。", "question": "这件事里，有没有人（包括你自己）没说实话？" },
+    "reversed": { "keywords": ["坦白", "被揭穿", "良心不安"], "meaning": "隐瞒的东西浮出水面，或者你不想再骗自己了。", "career": "是时候坦诚面对了。", "relationship": "有些没说的话，可能到了可以说出口的时候。", "self": "停止自我欺骗。", "crossroads": "诚实地承认你真实的动机。", "question": "你最想对自己承认的是什么？" }
   },
   {
     "id": "eight-of-swords", "nameZh": "宝剑八", "nameEn": "Eight of Swords", "number": 8,
@@ -46,7 +46,7 @@
   },
   {
     "id": "ten-of-swords", "nameZh": "宝剑十", "nameEn": "Ten of Swords", "number": 10,
-    "upright": { "keywords": ["触底", "结束", "最坏已过"], "meaning": "跌到了最低点，但这也意味着最坏的已经过去。", "career": "一件事彻底结束了，可以重新开始。", "relationship": "一段关系走到了尽头。", "self": "你可能很痛，但这是谷底，也是转折。", "crossroads": "这条路已经走到头，可以考虑新的方向了。", "question": "如果这真的是最低点，接下来会往哪里走？" },
+    "upright": { "keywords": ["触底", "结束", "最坏已过"], "meaning": "这张牌描绘的是低谷。如果你正觉得在谷底，它也提醒你：从这里往上的路是存在的。", "career": "如果一件事已经结束，可以开始想想怎样重新开始。", "relationship": "可以看看关系里有没有某种相处模式，已经走到了尽头。", "self": "你可能很痛，但这是谷底，也是转折。", "crossroads": "如果你觉得这条路已经走到头，可以考虑新的方向。", "question": "如果这真的是最低点，接下来会往哪里走？" },
     "reversed": { "keywords": ["恢复", "重新站起来", "不愿放手"], "meaning": "从谷底慢慢爬起来，或者还不愿接受结束。", "career": "慢慢恢复，重建信心。", "relationship": "接受结束，开始疗愈。", "self": "你在重新站起来。", "crossroads": "别回头去捡已经结束的东西。", "question": "重新站起来，你需要什么支持？" }
   },
   {
@@ -67,6 +67,6 @@
   {
     "id": "king-of-swords", "nameZh": "宝剑国王", "nameEn": "King of Swords", "number": 14,
     "upright": { "keywords": ["理性", "权威", "判断"], "meaning": "用理性和原则做出清晰的判断。", "career": "适合做决策者，做专业的判断。", "relationship": "理性、公正，但可能缺少一些温度。", "self": "你有能力冷静地分析自己的处境。", "crossroads": "用客观的标准来做这个决定。", "question": "如果是一位你信任的智者，他会怎么判断？" },
-    "reversed": { "keywords": ["冷酷", "操控", "滥用权威"], "meaning": "理性变成了冷酷，或者权威被滥用。", "career": "面对专断的上级或制度，先保护好自己。", "relationship": "一方用道理压人。", "self": "别只用逻辑审判自己。", "crossroads": "别被看似有道理的说法绑架。", "question": "有谁在用“道理”让你感到不舒服？" }
+    "reversed": { "keywords": ["冷酷", "操控", "滥用权威"], "meaning": "理性变成了冷酷，或者权威被滥用。", "career": "面对专断的上级或制度，先保护好自己。", "relationship": "留意是否有一方在用道理压人。", "self": "别只用逻辑审判自己。", "crossroads": "别被看似有道理的说法绑架。", "question": "有谁在用“道理”让你感到不舒服？" }
   }
 ]

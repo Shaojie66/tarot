@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { getAllCards } from "./cards";
 import { DECKS, cardImageSrc, type DeckId } from "./deck";
-import { BANNED_PHRASES } from "./schema";
+import { ASSERTIVE_PHRASES, BANNED_PHRASES } from "./schema";
 
 const cards = getAllCards();
 const publicDir = fileURLToPath(new URL("../../../public", import.meta.url));
@@ -31,6 +31,15 @@ describe("card content", () => {
     for (const card of cards) {
       const all = JSON.stringify([card.upright, card.reversed]);
       for (const phrase of BANNED_PHRASES) {
+        expect(all.includes(phrase), `${card.id} contains “${phrase}”`).toBe(false);
+      }
+    }
+  });
+
+  it("does not decide the user's situation for them", () => {
+    for (const card of cards) {
+      const all = JSON.stringify([card.upright, card.reversed]);
+      for (const phrase of ASSERTIVE_PHRASES) {
         expect(all.includes(phrase), `${card.id} contains “${phrase}”`).toBe(false);
       }
     }

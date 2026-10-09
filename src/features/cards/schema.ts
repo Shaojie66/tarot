@@ -38,3 +38,20 @@ export type CardEntry = z.infer<typeof cardEntrySchema>;
 
 /** 文案红线：牌义不得出现断言式预测用语。 */
 export const BANNED_PHRASES = ["一定", "注定", "必然", "必将", "肯定会", "命中注定"] as const;
+
+/**
+ * 内容标准（R01）：不能仅凭牌面替用户确认处境、他人动机、关系结论或未来事件。
+ * 语义审稿是主要手段，这里只拦住审稿中出现过的典型断言，防止回归。
+ */
+export const ASSERTIVE_PHRASES = [
+  "名存实亡",
+  "背叛",
+  "第三方介入",
+  "最坏的已经过去",
+  "明显不对等",
+  "危机将至",
+  "该分手",
+  "该辞职",
+  "该离开他",
+  "该离开她",
+] as const;

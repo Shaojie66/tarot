@@ -1,7 +1,7 @@
 [
   {
     "id": "ace-of-pentacles", "nameZh": "星币王牌", "nameEn": "Ace of Pentacles", "number": 1,
-    "upright": { "keywords": ["新机会", "务实", "种子"], "meaning": "一个实实在在的机会出现了，可以让它落地生根。", "career": "新的工作机会，或新的收入来源。", "relationship": "关系有了更实际的基础。", "self": "照顾好身体和生活的基础。", "crossroads": "选那个有实际支撑的方向。", "question": "有什么具体的机会已经摆在你面前？" },
+    "upright": { "keywords": ["新机会", "务实", "种子"], "meaning": "一个实实在在的机会出现了，可以让它落地生根。", "career": "留意身边可能被忽略的工作机会或收入来源。", "relationship": "关系有了更实际的基础。", "self": "照顾好身体和生活的基础。", "crossroads": "选那个有实际支撑的方向。", "question": "有什么具体的机会已经摆在你面前？" },
     "reversed": { "keywords": ["错失机会", "计划不实", "财务担忧"], "meaning": "机会没有抓住，或者计划缺乏现实基础。", "career": "机会还没成熟，或者你还没准备好。", "relationship": "现实问题影响了关系。", "self": "生活的基础需要先稳住。", "crossroads": "先算清楚现实这笔账。", "question": "你的计划里，哪一部分还不够落地？" }
   },
   {
@@ -17,17 +17,17 @@
   {
     "id": "four-of-pentacles", "nameZh": "星币四", "nameEn": "Four of Pentacles", "number": 4,
     "upright": { "keywords": ["守护", "安全感", "保守"], "meaning": "牢牢抓住已有的东西，求一份安全感。", "career": "稳定第一，先保住现有的。", "relationship": "重视承诺与安全感。", "self": "你在保护自己。", "crossroads": "守住现在的稳定，也是一种合理的选择。", "question": "你最害怕失去的是什么？" },
-    "reversed": { "keywords": ["抓得太紧", "控制", "学会放手"], "meaning": "抓得太紧反而会失去，或者你开始学会放手。", "career": "害怕风险，错过了成长。", "relationship": "占有欲或控制欲在作祟。", "self": "放松一点，安全感也可以来自内心。", "crossroads": "抓得太紧的东西，可能正在束缚你。", "question": "如果松开手，最坏会怎样？" }
+    "reversed": { "keywords": ["抓得太紧", "控制", "学会放手"], "meaning": "抓得太紧反而会失去，或者你开始学会放手。", "career": "害怕风险，错过了成长。", "relationship": "留意占有欲或控制欲是否在影响你们。", "self": "放松一点，安全感也可以来自内心。", "crossroads": "抓得太紧的东西，可能正在束缚你。", "question": "如果松开手，最坏会怎样？" }
   },
   {
     "id": "five-of-pentacles", "nameZh": "星币五", "nameEn": "Five of Pentacles", "number": 5,
-    "upright": { "keywords": ["匮乏", "困顿", "被排斥"], "meaning": "物质或情感上的困顿，觉得被关在门外。但帮助可能就在附近。", "career": "经济或职业上遇到了困难。", "relationship": "感到被冷落或孤立。", "self": "你可能觉得不被接纳，但你值得被照顾。", "crossroads": "困难时期，先确保基本生活。", "question": "有没有身边的帮助，你还没开口去要？" },
+    "upright": { "keywords": ["匮乏", "困顿", "被排斥"], "meaning": "物质或情感上的困顿，觉得被关在门外。但帮助可能就在附近。", "career": "如果经济或职业上遇到了困难，先照顾好基本盘。", "relationship": "感到被冷落或孤立。", "self": "你可能觉得不被接纳，但你值得被照顾。", "crossroads": "困难时期，先确保基本生活。", "question": "有没有身边的帮助，你还没开口去要？" },
     "reversed": { "keywords": ["走出困境", "接受帮助", "恢复"], "meaning": "困境开始缓解，你愿意接受帮助了。", "career": "情况开始好转。", "relationship": "重新被接纳。", "self": "你在慢慢恢复。", "crossroads": "有了喘息的空间，可以重新规划。", "question": "是什么帮你撑过了最难的时候？" }
   },
   {
     "id": "six-of-pentacles", "nameZh": "星币六", "nameEn": "Six of Pentacles", "number": 6,
     "upright": { "keywords": ["给予与接受", "帮助", "互惠"], "meaning": "资源在流动，给予与接受都是自然的。", "career": "获得帮助或资源，也可以回馈他人。", "relationship": "关系中的付出与收获。", "self": "学会接受别人的好意。", "crossroads": "有人愿意帮你，可以接受。", "question": "你更擅长给予，还是接受？" },
-    "reversed": { "keywords": ["不对等", "附带条件", "欠人情"], "meaning": "帮助带着条件，或者给予与接受失衡。", "career": "小心有附加条件的“好处”。", "relationship": "一方总在付出，一方总在索取。", "self": "别用付出去换取被爱。", "crossroads": "别因为欠人情而做选择。", "question": "你接受的帮助里，有没有让你不舒服的？" }
+    "reversed": { "keywords": ["不对等", "附带条件", "欠人情"], "meaning": "帮助带着条件，或者给予与接受失衡。", "career": "小心有附加条件的“好处”。", "relationship": "看看给予和索取是否长期偏向一边。", "self": "别用付出去换取被爱。", "crossroads": "别因为欠人情而做选择。", "question": "你接受的帮助里，有没有让你不舒服的？" }
   },
   {
     "id": "seven-of-pentacles", "nameZh": "星币七", "nameEn": "Seven of Pentacles", "number": 7,
@@ -56,7 +56,7 @@
   },
   {
     "id": "knight-of-pentacles", "nameZh": "星币骑士", "nameEn": "Knight of Pentacles", "number": 12,
-    "upright": { "keywords": ["稳健", "可靠", "坚持"], "meaning": "稳扎稳打，一步一个脚印，可靠而有耐心。", "career": "踏实推进，慢就是快。", "relationship": "可靠、忠诚的伴侣。", "self": "你的坚持会慢慢积累出结果。", "crossroads": "选那个稳妥的方案也没关系。", "question": "哪件事你可以每天推进一点点？" },
+    "upright": { "keywords": ["稳健", "可靠", "坚持"], "meaning": "稳扎稳打，一步一个脚印，可靠而有耐心。", "career": "踏实推进，慢就是快。", "relationship": "重视可靠与忠诚，用稳定的行动表达在乎。", "self": "你的坚持会慢慢积累出结果。", "crossroads": "选那个稳妥的方案也没关系。", "question": "哪件事你可以每天推进一点点？" },
     "reversed": { "keywords": ["停滞", "过于保守", "无聊"], "meaning": "太过保守而停滞，或者日复一日让人厌倦。", "career": "一成不变，让你失去了动力。", "relationship": "关系陷入了例行公事。", "self": "稳定变成了困住。", "crossroads": "稳定很好，但也问问自己是否还在成长。", "question": "你的生活里，哪部分需要一点变化？" }
   },
   {

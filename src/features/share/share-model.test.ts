@@ -43,6 +43,16 @@ function record(over: Partial<ReadingRecord> = {}): ReadingRecord {
     result,
     choice: { interpretation: 0, rejected: [], action: { status: "edited", text: SECRET.edited } },
     versions: { content: CONTENT_VERSION, prompt: "v2", model: "secret-model-name" },
+    perspectives: [
+      {
+        id: "persp-secret-0001",
+        tone: "support",
+        createdAt: new Date(Date.UTC(2026, 9, 12)).toISOString(),
+        source: "ai",
+        versions: { content: CONTENT_VERSION, prompt: "v3", model: "secret-model-name" },
+        body: { overall: `${SECRET.perspective}整体`, interpretations: [`${SECRET.perspective}甲`, `${SECRET.perspective}乙`], question: `${SECRET.perspective}你想先弄清楚什么？` },
+      },
+    ],
     review: {
       moods: ["迷茫"],
       note: SECRET.note,

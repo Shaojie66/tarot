@@ -4,10 +4,10 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { getCard } from "@/features/cards/cards";
 import { TOPIC_LABELS, type Topic } from "@/features/cards/schema";
-import type { ReadingRequest } from "./contract";
+import type { ReadingRequest, Tone } from "./contract";
 import { getSpread } from "./spread";
 
-export const PROMPT_VERSION = "v2";
+export const PROMPT_VERSION = "v3";
 
 const cache = new Map<string, string>();
 
@@ -25,6 +25,22 @@ export function readingSystemPrompt(): string {
 
 export function rewriteSystemPrompt(): string {
   return load("rewrite-system.md");
+}
+
+export function perspectiveSystemPrompt(): string {
+  return load("perspective-system.md");
+}
+
+/** 换视角：同样的问题与牌，加上目标视角和“已经给过的读法”（要求这次明显不同）。 */
+export function perspectiveUserPrompt(request: ReadingRequest, tone: Tone, previous: readonly string[]): string {
+  return [
+    readingUserPrompt(request),
+    "",
+    `## 这次要用的视角：${tone}`,
+    previous.length ? `## 已经给过的读法（这次要明显不同）\n${previous.map((p, i) => `${i + 1}. ${p}`).join("\n")}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
 }
 
 export function readingUserPrompt(request: ReadingRequest): string {

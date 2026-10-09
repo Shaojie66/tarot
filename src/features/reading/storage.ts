@@ -3,7 +3,7 @@
 
 import Dexie, { type EntityTable } from "dexie";
 import { DAILY_KEY, clearDaily, mergeDaily, type DailyEntry } from "@/features/daily/daily";
-import { readingRecordSchema, type ReadingRecord, type Review } from "./contract";
+import { MAX_PERSPECTIVES, readingRecordSchema, type Perspective, type ReadingRecord, type Review } from "./contract";
 import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
 
@@ -78,6 +78,19 @@ export async function updateReview(id: string, review: Review | null): Promise<R
     const { review: _old, ...rest } = existing;
     void _old;
     const next = readingRecordSchema.parse(review ? { ...rest, review } : rest);
+    await db.records.put(next);
+    return next;
+  });
+}
+
+/** 追加一份视角快照。同一种语气已经存在就不重复追加（返回已有记录），原解读与用户选择不动。 */
+export async function addPerspective(id: string, perspective: Perspective): Promise<ReadingRecord> {
+  const db = getDb();
+  return db.transaction("rw", db.records, async () => {
+    const existing = readingRecordSchema.parse(await db.records.get(id));
+    const list = existing.perspectives ?? [];
+    if (list.some((p) => p.tone === perspective.tone) || list.length >= MAX_PERSPECTIVES) return existing;
+    const next = readingRecordSchema.parse({ ...existing, perspectives: [...list, perspective] });
     await db.records.put(next);
     return next;
   });

@@ -15,6 +15,7 @@ import {
   type Review,
 } from "@/features/reading/contract";
 import { getSpread } from "@/features/reading/spread";
+import { PerspectivePanel } from "@/features/perspective/PerspectivePanel";
 import { SharePanel } from "@/features/share/SharePanel";
 import { deleteRecord, getRecord, updateReview } from "@/features/reading/storage";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime } from "../labels";
@@ -139,6 +140,8 @@ function Detail({ record, onChange, onDeleted }: { record: ReadingRecord; onChan
           </div>
         </dl>
       </section>
+
+      <PerspectivePanel record={record} onSaved={onChange} />
 
       <ReviewEditor record={record} onSaved={onChange} />
 

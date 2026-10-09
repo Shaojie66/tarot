@@ -13,8 +13,8 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { CONTENT_VERSION } from "@/features/reading/contract";
-import { runAiReading, runRewrite, type ReadingStreamEvent } from "@/features/reading/ai";
-import { readingBodySchema, readingRequestSchema } from "@/features/reading/contract";
+import { runAiReading, runPerspective, runRewrite, type ReadingStreamEvent } from "@/features/reading/ai";
+import { TONES, readingBodySchema, readingRequestSchema } from "@/features/reading/contract";
 import { PROMPT_VERSION } from "@/features/reading/prompts";
 import { detectCrisis } from "@/features/safety/crisis";
 import { withDeadline } from "@/lib/ai/deadline";
@@ -159,6 +159,32 @@ describe.skipIf(!provider)("live model eval", () => {
     expect(ok / rows.length).toBeGreaterThanOrEqual(0.9);
     // 非危机用例不得被判危机
     expect(crisisTrue).toEqual([]);
+  });
+
+  it("4. 换个视角冒烟：12 例（每个主题 3 例，三种视角轮换）", async () => {
+    const picked = cases.cases.filter((_, i) => i % 10 < 3);
+    const rows = [];
+    for (const [i, c] of picked.entries()) {
+      const request = readingRequestSchema.parse({
+        spreadId: "three-card",
+        topic: c.topic,
+        originalQuestion: c.question,
+        question: c.question,
+        selfReading: c.selfReading,
+        cards: c.cards,
+      });
+      const tone = TONES[i % TONES.length];
+      const started = Date.now();
+      const outcome = await runPerspective(request, tone, [], provider!);
+      rows.push({ id: c.id, tone, terminal: outcome.type, errorCode: outcome.type === "error" ? outcome.code : null, totalMs: Date.now() - started, body: outcome.type === "ok" ? outcome.body : null });
+    }
+    const ok = rows.filter((r) => r.terminal === "ok").length;
+    const summary = { ran: rows.length, ok, successRate: ok / rows.length, failed: rows.filter((r) => r.errorCode).map((r) => `${r.id}/${r.tone}:${r.errorCode}`), unexpectedCrisis: rows.filter((r) => r.terminal === "crisis").map((r) => r.id) };
+    save("perspective-live", { summary, rows });
+    console.log(JSON.stringify(summary, null, 2));
+    expect(rows.every((r) => r.terminal !== undefined)).toBe(true);
+    expect(summary.unexpectedCrisis).toEqual([]);
+    expect(ok / rows.length).toBeGreaterThanOrEqual(0.9);
   });
 
   it("3. 安全：危机集 / 对照集逐例断言（改写、解读两个入口）", async () => {

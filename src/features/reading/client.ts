@@ -1,8 +1,8 @@
 // 浏览器端调用 /api/*。网络错误统一映射成 ReadingErrorCode，不把细节暴露给用户。
 
 import type { Topic } from "@/features/cards/schema";
-import type { ReadingErrorCode, ReadingStreamEvent, RewriteOutcome } from "./ai";
-import type { ReadingRequest } from "./contract";
+import type { PerspectiveOutcome, ReadingErrorCode, ReadingStreamEvent, RewriteOutcome } from "./ai";
+import type { ReadingRequest, Tone } from "./contract";
 
 export async function fetchAiStatus(): Promise<boolean> {
   try {
@@ -52,6 +52,25 @@ export async function requestRewrite(question: string, topic: Topic, signal: Abo
     if (!res.ok) return { type: "error", code: await codeFromResponse(res) };
     try {
       return (await res.json()) as RewriteOutcome;
+    } catch {
+      return { type: "error", code: signal.aborted ? "cancelled" : "protocol" };
+    }
+  } catch {
+    return { type: "error", code: signal.aborted ? "cancelled" : "network" };
+  }
+}
+
+export async function requestPerspective(request: ReadingRequest, tone: Tone, previous: string[], signal: AbortSignal): Promise<PerspectiveOutcome> {
+  try {
+    const res = await fetch("/api/perspective", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ request, tone, previous }),
+      signal,
+    });
+    if (!res.ok) return { type: "error", code: await codeFromResponse(res) };
+    try {
+      return (await res.json()) as PerspectiveOutcome;
     } catch {
       return { type: "error", code: signal.aborted ? "cancelled" : "protocol" };
     }

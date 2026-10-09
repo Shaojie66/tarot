@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { modelBody, mockProvider, streamed, type Step } from "@/test/mock-provider";
-import { READING_JSON_SCHEMA, REWRITE_JSON_SCHEMA, runAiReading, runRewrite, type ReadingStreamEvent } from "./ai";
-import { readingSystemPrompt, rewriteSystemPrompt } from "./prompts";
+import { PERSPECTIVE_JSON_SCHEMA, READING_JSON_SCHEMA, REWRITE_JSON_SCHEMA, runAiReading, runPerspective, runRewrite, type ReadingStreamEvent } from "./ai";
+import { perspectiveSystemPrompt, perspectiveUserPrompt, readingSystemPrompt, rewriteSystemPrompt } from "./prompts";
 import { readingRequestSchema } from "./contract";
 import { buildLocalReading } from "./local";
 
@@ -38,7 +38,7 @@ describe("runAiReading", () => {
       "action",
       "question",
     ]);
-    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v2", model: "mock-model" } });
+    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v3", model: "mock-model" } });
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
     expect(provider.calls[0].jsonSchema).toBeDefined();
   });
@@ -179,11 +179,12 @@ describe("crisis 首字段约定（只降低首章节延迟；安全保证来自
   it("schema 的第一个属性是 crisis", () => {
     expect(Object.keys(READING_JSON_SCHEMA.properties)[0]).toBe("crisis");
     expect(Object.keys(REWRITE_JSON_SCHEMA.properties)[0]).toBe("crisis");
+    expect(Object.keys(PERSPECTIVE_JSON_SCHEMA.properties)[0]).toBe("crisis");
     expect(READING_JSON_SCHEMA.required[0]).toBe("crisis");
   });
 
   it("prompt 要求 crisis 为第一个字段且是布尔值", () => {
-    for (const prompt of [readingSystemPrompt(), rewriteSystemPrompt()]) {
+    for (const prompt of [readingSystemPrompt(), rewriteSystemPrompt(), perspectiveSystemPrompt()]) {
       expect(prompt).toMatch(/crisis：必须是 JSON 对象里(\*\*)?第一个(\*\*)?字段/);
       expect(prompt).toContain("布尔");
     }
@@ -218,5 +219,70 @@ describe("runRewrite", () => {
 
   it("maps errors", async () => {
     expect(await run([{ type: "throw", kind: "auth" }])).toEqual({ type: "error", code: "auth" });
+  });
+});
+
+describe("runPerspective（换个视角）", () => {
+  const previous = buildLocalReading(request).interpretations;
+  const goodBody = {
+    crisis: false,
+    overall: "换个角度看：你已经在认真对待这件事，这本身值得被看见。",
+    interpretations: ["也许这份疲惫在提醒你，需要的不只是答案，还有休息。", "如果把三张牌当作三个问题，哪一个你最想先回答？"],
+    question: "如果不用立刻决定，你最想先弄清楚什么？",
+  };
+  const run = (steps: Step[], tone: "support" | "rational" | "challenge" = "support", signal?: AbortSignal) => {
+    const provider = mockProvider(steps);
+    return runPerspective(request, tone, previous, provider, signal).then((outcome) => ({ outcome, provider }));
+  };
+  const done = (value: unknown, stopReason: "end" | "max_tokens" = "end"): Step[] => [{ type: "done", text: JSON.stringify(value), stopReason }];
+
+  it("通过校验：返回视角正文与版本（deep 模型、prompt v3），请求里带着视角与已给过的读法", async () => {
+    const { outcome, provider } = await run(done(goodBody), "rational");
+    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v3", model: "mock-model" } });
+    expect(provider.calls[0].tier).toBe("deep");
+    expect(provider.calls[0].prompt).toContain("rational");
+    expect(provider.calls[0].prompt).toContain(previous[0]);
+    expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
+  });
+
+  it("输出里不含 action：多出来的 action 字段被拒绝，原小行动不可能被覆盖", async () => {
+    const { outcome } = await run(done({ ...goodBody, action: "今晚就去辞职" }));
+    expect(outcome).toEqual({ type: "error", code: "invalid_output" });
+  });
+
+  it("crisis 为 true → 危机；缺失 / 类型错误 → 无效；截断 → 无效", async () => {
+    expect((await run(done({ ...goodBody, crisis: true }))).outcome).toEqual({ type: "crisis" });
+    const { crisis: _c, ...noCrisis } = goodBody;
+    void _c;
+    expect((await run(done(noCrisis))).outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect((await run(done({ ...goodBody, crisis: "false" }))).outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect((await run(done(goodBody, "max_tokens"))).outcome).toEqual({ type: "error", code: "invalid_output" });
+  });
+
+  it("拒绝：断言式用语、两个读法相同、原样重复上次的读法、非问句收尾", async () => {
+    for (const bad of [
+      { ...goodBody, overall: "你注定会离开这份工作。" },
+      { ...goodBody, interpretations: [goodBody.interpretations[0], goodBody.interpretations[0]] },
+      { ...goodBody, interpretations: [previous[0], goodBody.interpretations[1]] },
+      { ...goodBody, question: "你该休息了。" },
+    ]) {
+      expect((await run(done(bad))).outcome).toEqual({ type: "error", code: "invalid_output" });
+    }
+  });
+
+  it("拒答 / 错误映射 / 已取消不启动 provider", async () => {
+    expect((await run([{ type: "refusal" }])).outcome).toEqual({ type: "refusal" });
+    expect((await run([{ type: "throw", kind: "overloaded" }])).outcome).toEqual({ type: "error", code: "overloaded" });
+    const controller = new AbortController();
+    controller.abort();
+    const { outcome, provider } = await run(done(goodBody), "support", controller.signal);
+    expect(outcome).toEqual({ type: "error", code: "cancelled" });
+    expect(provider.calls).toHaveLength(0);
+  });
+
+  it("用户消息不含 action 的要求之外的个人字段泄漏：只含问题、自解、牌面", () => {
+    const prompt = perspectiveUserPrompt(request, "challenge", previous);
+    expect(prompt).toContain(request.question);
+    expect(prompt).toContain("challenge");
   });
 });

@@ -44,6 +44,7 @@ test("分享图默认只含白名单内容：预览说明里没有问题 / 自�
 
   const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("link", { name: "下载图片" }).click()]);
   expect(download.suggestedFilename()).toMatch(/^tarot-share-[0-9a-f]{6}\.png$/);
+  await download.saveAs("tmp/share-sample.png"); // 供人工看一眼（tmp/ 已 gitignore）
   const png = readFileSync((await download.path())!);
   const { width, height } = pngSize(png);
   expect(width).toBe(1080);

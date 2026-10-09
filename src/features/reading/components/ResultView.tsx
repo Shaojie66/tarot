@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { getCard } from "@/features/cards/cards";
 import type { ReadingChoice, ReadingResult } from "../contract";
@@ -13,6 +14,7 @@ interface ResultViewProps {
   result: ReadingResult;
   choice: ReadingChoice;
   saveStatus: SaveStatus;
+  recordId: string | null;
   onRetrySave: () => void;
   onChoose: (index: 0 | 1 | null) => void;
   onToggleRejected: (index: 0 | 1) => void;
@@ -20,7 +22,7 @@ interface ResultViewProps {
   onRestart: () => void;
 }
 
-export function ResultView({ spread, result, choice, saveStatus, onRetrySave, onChoose, onToggleRejected, onAction, onRestart }: ResultViewProps) {
+export function ResultView({ spread, result, choice, saveStatus, recordId, onRetrySave, onChoose, onToggleRejected, onAction, onRestart }: ResultViewProps) {
   const [editing, setEditing] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
   const unsaved = saveStatus === "failed" || saveStatus === "saving";
@@ -184,6 +186,15 @@ export function ResultView({ spread, result, choice, saveStatus, onRetrySave, on
             </button>
           )}
         </div>
+        {saveStatus === "saved" && recordId && (
+          <p className="text-xs leading-relaxed text-muted">
+            之后可以到{" "}
+            <Link href={`/history/${recordId}`} className="text-accent underline underline-offset-4" data-testid="open-record">
+              这条记录
+            </Link>{" "}
+            补写感受、换个视角或导出图片。
+          </p>
+        )}
         {confirmRestart && unsaved ? (
           <div role="alert" className="space-y-2 rounded-lg bg-surface p-3">
             <p className="leading-relaxed">当前这次解读还没有保存成功，开始新问题后将无法找回。确定要离开吗？</p>

@@ -107,6 +107,30 @@ export const reviewSchema = z.strictObject({
 
 export type Review = z.infer<typeof reviewSchema>;
 
+/** 换个视角：同一问题与固定的牌，换一种语气再解读。 */
+export const TONES = ["support", "rational", "challenge"] as const;
+export type Tone = (typeof TONES)[number];
+export const TONE_LABELS: Record<Tone, string> = { support: "温和支持", rational: "理性拆解", challenge: "挑战提问" };
+export const MAX_PERSPECTIVES = TONES.length;
+
+export const perspectiveBodySchema = z.strictObject({
+  overall: sentence,
+  interpretations: z.tuple([sentence, sentence]),
+  question: readingBodySchema.shape.question,
+});
+export type PerspectiveBody = z.infer<typeof perspectiveBodySchema>;
+
+/** 视角快照：附加在记录上，不覆盖原解读、原小行动，也不改动用户的选择。 */
+export const perspectiveSchema = z.strictObject({
+  id: z.string().min(8),
+  tone: z.enum(TONES),
+  createdAt: z.iso.datetime(),
+  source: z.literal("ai"),
+  versions: z.strictObject({ content: z.string(), prompt: z.string().nullable(), model: z.string().nullable() }),
+  body: perspectiveBodySchema,
+});
+export type Perspective = z.infer<typeof perspectiveSchema>;
+
 const recordBase = {
   id: z.string().min(8),
   createdAt: z.iso.datetime(),
@@ -119,6 +143,8 @@ const recordBase = {
     model: z.string().nullable(),
   }),
   review: reviewSchema.optional(),
+  /** 后续视角快照，每种语气最多一份 */
+  perspectives: z.array(perspectiveSchema).max(MAX_PERSPECTIVES).optional(),
 };
 
 export const DECK_IDS = Object.keys(DECKS) as [keyof typeof DECKS, ...(keyof typeof DECKS)[]];
@@ -145,6 +171,8 @@ function recordConsistency(record: z.infer<typeof recordV1Schema> | z.infer<type
   if (record.choice.action.status === "undecided" && record.choice.action.text !== "") {
     issue("undecided action must have no text", ["choice", "action"]);
   }
+  const tones = (record.perspectives ?? []).map((p) => p.tone);
+  if (new Set(tones).size !== tones.length) issue("duplicate perspective tone", ["perspectives"]);
   if ("settings" in record && !record.settings.allowReversed && record.request.cards.some((c) => c.reversed)) {
     issue("reversed card but reversal disabled in snapshot", ["settings"]);
   }

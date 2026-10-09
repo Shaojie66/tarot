@@ -1,9 +1,9 @@
 import "fake-indexeddb/auto";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BACKUP_VERSION, MAX_BACKUP_BYTES, backupFileName, buildBackup, parseBackup, recordsToWrite, stableStringify } from "./backup";
-import { CONTENT_VERSION, RECORD_SCHEMA_VERSION, type ReadingRecord, type Review } from "./contract";
+import { CONTENT_VERSION, RECORD_SCHEMA_VERSION, type Perspective, type ReadingRecord, type Review } from "./contract";
 import { buildLocalReading } from "./local";
-import { applyImport, clearEverything, deleteRecord, getRecord, listRecords, saveFlowRecord, saveRecord, updateReview, writeImported } from "./storage";
+import { addPerspective, applyImport, clearEverything, deleteRecord, getRecord, listRecords, saveFlowRecord, saveRecord, updateReview, writeImported } from "./storage";
 
 function makeRecord(id: string, over: Partial<ReadingRecord> = {}, seed = 0): ReadingRecord {
   const request = {
@@ -272,5 +272,55 @@ describe("applyImport：记录与每日一张要么都写要么都不写", () =>
     await expect(applyImport([bad], [newDay])).rejects.toThrow();
     expect(store.get("tarot:daily:v1")).toBe(before);
     vi.unstubAllGlobals();
+  });
+});
+
+describe("换视角快照", () => {
+  const perspective = (tone: Perspective["tone"]): Perspective => ({
+    id: `persp-${tone}-0001`,
+    tone,
+    createdAt: new Date(Date.UTC(2026, 9, 12)).toISOString(),
+    source: "ai",
+    versions: { content: CONTENT_VERSION, prompt: "v3", model: "claude-sonnet-5-5" },
+    body: { overall: "合成换视角：换个角度看。", interpretations: ["合成读法甲", "合成读法乙"], question: "合成：你想先弄清楚什么？" },
+  });
+
+  it("追加视角不改原解读 / 选择 / 回看；同一语气不重复追加；备份往返无损", async () => {
+    const r = makeRecord("record-0001", { review });
+    await saveRecord(r);
+    const after = await addPerspective(r.id, perspective("support"));
+    expect(after.perspectives).toHaveLength(1);
+    expect(after.result).toEqual(r.result);
+    expect(after.choice).toEqual(r.choice);
+    expect(after.review).toEqual(review);
+
+    const again = await addPerspective(r.id, { ...perspective("support"), id: "persp-support-0002" });
+    expect(again.perspectives).toHaveLength(1);
+    expect(again.perspectives?.[0].id).toBe("persp-support-0001");
+    await addPerspective(r.id, perspective("rational"));
+
+    const before = (await listRecords()).records;
+    const text = JSON.stringify(buildBackup(before));
+    await clearEverything();
+    const parsed = parseBackup(text, new Map());
+    if (!parsed.ok) throw new Error("expected ok");
+    await writeImported(recordsToWrite(parsed.preview));
+    expect(stableStringify((await listRecords()).records)).toBe(stableStringify(before));
+    expect((await getRecord(r.id))?.perspectives?.map((p) => p.tone)).toEqual(["support", "rational"]);
+  });
+
+  it("流程保存（只更新 choice）不会抹掉已有视角", async () => {
+    const r = makeRecord("record-0002", {}, 2);
+    await saveRecord(r);
+    await addPerspective(r.id, perspective("challenge"));
+    await saveFlowRecord({ ...r, choice: { interpretation: 0, rejected: [], action: { status: "accepted", text: r.result.action } } });
+    const kept = await getRecord(r.id);
+    expect(kept?.perspectives).toHaveLength(1);
+    expect(kept?.choice.action.status).toBe("accepted");
+  });
+
+  it("预检拒绝：同一记录里重复的语气", () => {
+    const r = makeRecord("record-0003", { perspectives: [perspective("support"), { ...perspective("support"), id: "persp-support-0009" }] }, 3);
+    expect(parseBackup(file([r]), new Map())).toMatchObject({ ok: false, reason: { kind: "invalid_records" } });
   });
 });

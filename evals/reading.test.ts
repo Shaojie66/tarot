@@ -2,8 +2,8 @@
 // 硬检查：结构、牌面一致、文案红线、行动非空、反问以问号结尾。真实模型评测见 evals/live/。
 
 import { describe, expect, it } from "vitest";
-import { runAiReading } from "@/features/reading/ai";
-import { readingRequestSchema, readingResultSchema, resultMatchesDraw, type ReadingRequest } from "@/features/reading/contract";
+import { runAiReading, runPerspective } from "@/features/reading/ai";
+import { TONES, readingRequestSchema, readingResultSchema, resultMatchesDraw, type ReadingRequest } from "@/features/reading/contract";
 import { findForbiddenPhrase } from "@/features/reading/guard";
 import { buildLocalReading } from "@/features/reading/local";
 import { modelBody, mockProvider, streamed } from "@/test/mock-provider";
@@ -48,5 +48,26 @@ describe("AI pipeline replays a well-formed model output for every case", () => 
     const events = [];
     for await (const e of runAiReading(request, provider)) events.push(e);
     expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" } });
+  });
+});
+
+describe("换视角管道回放：40 例 × 3 种视角", () => {
+  const cases = requests.flatMap(([id, request]) => TONES.map((tone) => [`${id}/${tone}`, request, tone] as const));
+  it.each(cases)("%s", async (_name, request, tone) => {
+    const local = buildLocalReading(request);
+    const provider = mockProvider([
+      {
+        type: "done",
+        text: JSON.stringify({
+          crisis: false,
+          overall: `（${tone}）${local.overall}`,
+          interpretations: [`（${tone}）${local.interpretations[0]}`, `（${tone}）${local.interpretations[1]}`],
+          question: local.question,
+        }),
+        stopReason: "end",
+      },
+    ]);
+    const outcome = await runPerspective(request, tone, local.interpretations, provider);
+    expect(outcome.type).toBe("ok");
   });
 });

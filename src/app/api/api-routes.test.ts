@@ -6,6 +6,7 @@ const getProvider = vi.fn();
 vi.mock("@/lib/ai/server", () => ({ getProvider: () => getProvider() }));
 
 import { POST as reading } from "./reading/route";
+import { POST as perspective } from "./perspective/route";
 import { POST as rewrite } from "./rewrite/route";
 
 function post(path: string, body: unknown, headers: Record<string, string> = {}) {
@@ -63,5 +64,28 @@ describe("被拒请求不触达上游 provider", () => {
       expect(res.status).toBe(status);
     }
     expect(getProvider).not.toHaveBeenCalled();
+  });
+});
+
+describe("/api/perspective", () => {
+  it("危机分流先于 provider；被拒请求不触达上游；无 key 返回 503 unavailable", async () => {
+    const crisis = await perspective(post("/api/perspective", { request: readingBody({ selfReading: "活不下去了" }), tone: "support" }));
+    expect(await crisis.json()).toEqual({ type: "crisis" });
+
+    for (const headers of [{ "content-type": "text/plain" }, { origin: "https://evil.example" }, { host: "192.168.1.20:3000" }] as Record<string, string>[]) {
+      const res = await perspective(post("/api/perspective", { request: readingBody({}), tone: "support" }, headers));
+      expect([403, 415]).toContain(res.status);
+    }
+    expect(getProvider).not.toHaveBeenCalled();
+
+    getProvider.mockReturnValue(null);
+    const none = await perspective(post("/api/perspective", { request: readingBody({}), tone: "support" }));
+    expect(none.status).toBe(503);
+  });
+
+  it("参数不合法 → 400（未知语气、多余字段、牌数不对）", async () => {
+    for (const body of [{ request: readingBody({}), tone: "angry" }, { request: readingBody({}), tone: "support", extra: 1 }, { request: readingBody({ cards: cards.slice(0, 2) }), tone: "support" }]) {
+      expect((await perspective(post("/api/perspective", body))).status).toBe(400);
+    }
   });
 });

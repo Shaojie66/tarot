@@ -286,6 +286,7 @@ export function ReadingFlow() {
           result={state.result}
           choice={state.choice}
           saveStatus={state.saveStatus}
+          recordId={state.recordId}
           onRetrySave={() => dispatch({ type: "retrySave" })}
           onChoose={(index) => dispatch({ type: "chooseInterpretation", index })}
           onToggleRejected={(index) => dispatch({ type: "toggleRejected", index })}

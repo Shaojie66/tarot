@@ -5,15 +5,18 @@ import type { Topic } from "@/features/cards/schema";
 import { AIError, type AIErrorKind, type AIProvider, type GenerateRequest } from "@/lib/ai/provider";
 import {
   CONTENT_VERSION,
+  perspectiveBodySchema,
   readingBodySchema,
   resultMatchesDraw,
   type ReadingBody,
   type ReadingRequest,
+  type PerspectiveBody,
   type ReadingResult,
+  type Tone,
 } from "./contract";
 import { findForbiddenPhrase } from "./guard";
 import { TopLevelSections } from "./json-sections";
-import { PROMPT_VERSION, readingSystemPrompt, readingUserPrompt, rewriteSystemPrompt, rewriteUserPrompt } from "./prompts";
+import { PROMPT_VERSION, perspectiveSystemPrompt, perspectiveUserPrompt, readingSystemPrompt, readingUserPrompt, rewriteSystemPrompt, rewriteUserPrompt } from "./prompts";
 
 export type ReadingErrorCode = Exclude<AIErrorKind, "aborted" | "bad_request"> | "invalid_output" | "unavailable" | "cancelled" | "forbidden" | "bad_request" | "protocol";
 
@@ -248,3 +251,65 @@ export async function runRewrite(
   }
 }
 
+
+export const PERSPECTIVE_JSON_SCHEMA = {
+  type: "object",
+  additionalProperties: false,
+  required: ["crisis", "overall", "interpretations", "question"],
+  properties: {
+    crisis: { type: "boolean" },
+    overall: str,
+    interpretations: { type: "array", items: str },
+    question: str,
+  },
+} as const;
+
+export type PerspectiveOutcome =
+  | { type: "ok"; body: PerspectiveBody; versions: Versions }
+  | { type: "crisis" }
+  | { type: "refusal" }
+  | { type: "error"; code: ReadingErrorCode };
+
+/**
+ * 换视角：一次请求、整体校验后才返回（内容短，不做章节流式）。
+ * 与原解读一样：crisis 必须是布尔，缺失 / 类型错误视为无效；输出不含 action，不会触碰原小行动。
+ */
+export async function runPerspective(
+  request: ReadingRequest,
+  tone: Tone,
+  previous: readonly string[],
+  provider: AIProvider,
+  signal?: AbortSignal,
+): Promise<PerspectiveOutcome> {
+  if (signal?.aborted) return { type: "error", code: "cancelled" };
+  try {
+    for await (const event of provider.stream({
+      tier: "deep",
+      system: perspectiveSystemPrompt(),
+      prompt: perspectiveUserPrompt(request, tone, previous),
+      jsonSchema: PERSPECTIVE_JSON_SCHEMA,
+      maxTokens: 2000,
+      signal,
+    })) {
+      if (event.type === "refusal") return { type: "refusal" };
+      if (event.type !== "done") continue;
+      if (event.stopReason === "max_tokens") return { type: "error", code: "invalid_output" };
+      const value = tryParse(event.text) as { crisis?: unknown } | undefined;
+      if (typeof value?.crisis !== "boolean") return { type: "error", code: "invalid_output" };
+      if (value.crisis) return { type: "crisis" };
+      delete value.crisis;
+      const parsed = perspectiveBodySchema.safeParse(value);
+      if (!parsed.success) return { type: "error", code: "invalid_output" };
+      const body = parsed.data;
+      const texts = [body.overall, ...body.interpretations, body.question];
+      if (findForbiddenPhrase(texts)) return { type: "error", code: "invalid_output" };
+      // 两种读法必须有区别；也不能原样重复上一次给过的读法
+      if (body.interpretations[0] === body.interpretations[1]) return { type: "error", code: "invalid_output" };
+      if (body.interpretations.some((t) => previous.includes(t))) return { type: "error", code: "invalid_output" };
+      return { type: "ok", body, versions: { content: CONTENT_VERSION, prompt: PROMPT_VERSION, model: provider.model("deep") } };
+    }
+    return { type: "error", code: signal?.aborted ? "cancelled" : "network" };
+  } catch (error) {
+    return { type: "error", code: signal?.aborted ? "cancelled" : errorCode(error) };
+  }
+}

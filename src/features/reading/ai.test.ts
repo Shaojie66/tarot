@@ -38,7 +38,7 @@ describe("runAiReading", () => {
       "action",
       "question",
     ]);
-    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v3", model: "mock-model" } });
+    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v4", model: "mock-model" } });
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
     expect(provider.calls[0].jsonSchema).toBeDefined();
   });
@@ -238,35 +238,36 @@ describe("runPerspective（换个视角）", () => {
 
   it("通过校验：返回视角正文与版本（deep 模型、prompt v3），请求里带着视角与已给过的读法", async () => {
     const { outcome, provider } = await run(done(goodBody), "rational");
-    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v3", model: "mock-model" } });
+    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v4", model: "mock-model" } });
     expect(provider.calls[0].tier).toBe("deep");
     expect(provider.calls[0].prompt).toContain("rational");
     expect(provider.calls[0].prompt).toContain(previous[0]);
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
   });
 
-  it("输出里不含 action：多出来的 action 字段被拒绝，原小行动不可能被覆盖", async () => {
+  it("输出里不含 action：模型多写的 action 被丢弃，结果里没有它，原小行动不可能被覆盖", async () => {
     const { outcome } = await run(done({ ...goodBody, action: "今晚就去辞职" }));
-    expect(outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect(outcome.type).toBe("ok");
+    expect(outcome.type === "ok" && "action" in outcome.body).toBe(false);
   });
 
   it("crisis 为 true → 危机；缺失 / 类型错误 → 无效；截断 → 无效", async () => {
     expect((await run(done({ ...goodBody, crisis: true }))).outcome).toEqual({ type: "crisis" });
     const { crisis: _c, ...noCrisis } = goodBody;
     void _c;
-    expect((await run(done(noCrisis))).outcome).toEqual({ type: "error", code: "invalid_output" });
-    expect((await run(done({ ...goodBody, crisis: "false" }))).outcome).toEqual({ type: "error", code: "invalid_output" });
-    expect((await run(done(goodBody, "max_tokens"))).outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect((await run([...done(noCrisis), ...done(noCrisis)])).outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect((await run([...done({ ...goodBody, crisis: "false" }), ...done({ ...goodBody, crisis: "false" })])).outcome).toEqual({ type: "error", code: "invalid_output" });
+    expect((await run([...done(goodBody, "max_tokens"), ...done(goodBody, "max_tokens")])).outcome).toEqual({ type: "error", code: "invalid_output" });
   });
 
-  it("拒绝：断言式用语、两个读法相同、原样重复上次的读法、非问句收尾", async () => {
+  it("拒绝（重试后仍不合格）：断言式用语、两个读法相同、原样重复上次的读法、非问句收尾", async () => {
     for (const bad of [
       { ...goodBody, overall: "你注定会离开这份工作。" },
       { ...goodBody, interpretations: [goodBody.interpretations[0], goodBody.interpretations[0]] },
       { ...goodBody, interpretations: [previous[0], goodBody.interpretations[1]] },
       { ...goodBody, question: "你该休息了。" },
     ]) {
-      expect((await run(done(bad))).outcome).toEqual({ type: "error", code: "invalid_output" });
+      expect((await run([...done(bad), ...done(bad)])).outcome).toEqual({ type: "error", code: "invalid_output" });
     }
   });
 
@@ -284,5 +285,89 @@ describe("runPerspective（换个视角）", () => {
     const prompt = perspectiveUserPrompt(request, "challenge", previous);
     expect(prompt).toContain(request.question);
     expect(prompt).toContain("challenge");
+  });
+});
+
+describe("不同模型的输出习惯：无损整理 + 一次重试", () => {
+  const withExtras = {
+    crisis: false,
+    ...body,
+    cards: body.cards.map((c) => ({ ...c, name: "多余的牌名", keywords: ["多余"] })),
+    reasoning: "模型的思考过程",
+  };
+
+  it("多余字段 / 代码围栏 / 前后文字都能过，结果里只有规定的字段", async () => {
+    const text = "好的：\n```json\n" + JSON.stringify(withExtras) + "\n```";
+    const { events, provider } = await collect([{ type: "done", text, stopReason: "end" }]);
+    expect(events.at(-1)).toMatchObject({ type: "result" });
+    expect(provider.calls).toHaveLength(1); // 不需要重试
+    const result = (events.at(-1) as { result: Record<string, unknown> }).result;
+    expect(Object.keys(result).sort()).toEqual(["action", "cards", "interpretations", "overall", "question", "source"]);
+    expect(Object.keys((result.cards as object[])[0]).sort()).toEqual(["cardId", "position", "reversed", "text"]);
+  });
+
+  it("读法套了一层数组：拉平后通过", async () => {
+    const nested = JSON.stringify({ crisis: false, ...body, interpretations: [[body.interpretations[0]], [body.interpretations[1]]] });
+    const { events } = await collect([{ type: "done", text: nested, stopReason: "end" }]);
+    expect(events.at(-1)).toMatchObject({ type: "result" });
+  });
+
+  it("第一次不合格（换了牌）→ 带原因重试一次 → 第二次合格则返回结果；重试提示不含用户内容", async () => {
+    const swapped = JSON.stringify({ crisis: false, ...body, cards: body.cards.map((c, i) => (i === 0 ? { ...c, cardId: "the-sun" } : c)) });
+    const provider = mockProvider((req) => (req.prompt.includes("上一次输出没有通过检查") ? [{ type: "done", text: good, stopReason: "end" }] : [{ type: "done", text: swapped, stopReason: "end" }]));
+    const events: ReadingStreamEvent[] = [];
+    for await (const e of runAiReading(request, provider)) events.push(e);
+    expect(events.at(-1)).toMatchObject({ type: "result" });
+    expect(provider.calls).toHaveLength(2);
+    const note = provider.calls[1].prompt.split("上一次输出没有通过检查")[1];
+    expect(note).toContain("cardId");
+    expect(note).not.toContain(request.question);
+  });
+
+  it("重试一次后仍不合格：invalid_output，不再重试（共 2 次调用）", async () => {
+    const swapped = JSON.stringify({ crisis: false, ...body, cards: body.cards.map((c, i) => (i === 0 ? { ...c, cardId: "the-sun" } : c)) });
+    const provider = mockProvider([{ type: "done", text: swapped, stopReason: "end" }]);
+    const events: ReadingStreamEvent[] = [];
+    for await (const e of runAiReading(request, provider)) events.push(e);
+    expect(events.at(-1)).toEqual({ type: "error", code: "invalid_output" });
+    expect(provider.calls).toHaveLength(2);
+  });
+
+  it("crisis 不容错：字符串 \"false\" / 缺失不会被当成 false 放行；第二次若判危机则分流", async () => {
+    const stringy = JSON.stringify({ crisis: "false", ...body });
+    const provider = mockProvider((req) =>
+      req.prompt.includes("上一次输出没有通过检查")
+        ? [{ type: "done", text: JSON.stringify({ crisis: true, overall: "", cards: [], interpretations: [], action: "", question: "" }), stopReason: "end" }]
+        : [{ type: "done", text: stringy, stopReason: "end" }],
+    );
+    const events: ReadingStreamEvent[] = [];
+    for await (const e of runAiReading(request, provider)) events.push(e);
+    expect(events.at(-1)).toEqual({ type: "crisis" });
+    expect(events.some((e) => e.type === "result")).toBe(false);
+  });
+
+  it("危机命中不重试；拒答不重试；取消不重试", async () => {
+    const crisis = JSON.stringify({ crisis: true, overall: "", cards: [], interpretations: [], action: "", question: "" });
+    const p1 = mockProvider([{ type: "done", text: crisis, stopReason: "end" }]);
+    for await (const e of runAiReading(request, p1)) void e;
+    expect(p1.calls).toHaveLength(1);
+
+    const p2 = mockProvider([{ type: "refusal" }]);
+    for await (const e of runAiReading(request, p2)) void e;
+    expect(p2.calls).toHaveLength(1);
+  });
+
+  it("换视角同样：多余字段被丢弃、不合格重试一次", async () => {
+    const good2 = { crisis: false, overall: "换个角度看：你已经在认真对待这件事。", interpretations: ["也许这份疲惫在提醒你需要休息。", "如果把三张牌当作三个问题，哪一个最想先回答？"], question: "如果不用立刻决定，你最想先弄清楚什么？" };
+    let n = 0;
+    const provider = mockProvider((req) => {
+      n++;
+      return req.prompt.includes("上一次输出没有通过检查")
+        ? [{ type: "done", text: "```json\n" + JSON.stringify({ ...good2, reasoning: "x" }) + "\n```", stopReason: "end" }]
+        : [{ type: "done", text: "抱歉，我无法输出 JSON", stopReason: "end" }];
+    });
+    const outcome = await runPerspective(request, "support", [], provider);
+    expect(outcome.type).toBe("ok");
+    expect(n).toBe(2);
   });
 });

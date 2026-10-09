@@ -30,7 +30,7 @@ const SPREAD_ID = DEFAULT_SPREAD;
 const spread = getSpread(SPREAD_ID);
 
 const ERROR_TEXT: Record<ReadingErrorCode, string> = {
-  auth: "API key 无效或没有权限。检查 .env.local 里的 ANTHROPIC_API_KEY，或者先用本地解读。",
+  auth: "API key 无效或没有权限。检查 .env.local 里的 key 配置，或者先用本地解读。",
   rate_limit: "请求太频繁了，稍等一会儿再试。",
   timeout: "模型响应超时了。",
   network: "连接中断了，解读没有完整返回。",

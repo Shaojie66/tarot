@@ -33,6 +33,6 @@ export default defineConfig({
         timeout: 240_000,
         reuseExistingServer: false,
         // 强制无 key：验证"没有 API key 也能完整走通"。已存在的环境变量不会被 .env.local 覆盖。
-        env: { ANTHROPIC_API_KEY: "" },
+        env: { ANTHROPIC_API_KEY: "", OPENAI_API_KEY: "", AI_PROVIDER: "" },
       },
 });

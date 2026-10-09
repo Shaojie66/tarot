@@ -32,7 +32,8 @@
 - 文件名 kebab-case；组件 PascalCase；临时文件放 `tmp/`（已 gitignore）。
 
 ## AI 调用
-- 模型 ID 只写在 `src/lib/ai/models.ts`：`fast` = `claude-haiku-5-5`（改写、短解读、安全分类），`deep` = `claude-sonnet-5-5`（换视角、深度解读）。
+- Anthropic 的模型 ID 只写在 `src/lib/ai/models.ts`：`fast` = `claude-haiku-5-5`（改写、短解读、安全分类），`deep` = `claude-sonnet-5-5`（换视角、深度解读）。OpenAI 兼容接口（DeepSeek 等）的模型名由用户在环境变量里配（`OPENAI_MODEL` / `OPENAI_MODEL_DEEP`），代码里不写死。
+- **产品要适配各种模型**：不同模型对 schema 的遵守程度不一。`src/features/reading/model-output.ts` 只做无损整理（取 JSON、丢多余字段、拉平套层数组），不合格带原因重试一次；硬约束（牌面一致、禁词、`crisis` 必须是布尔值）不为任何模型放宽。
 - 业务代码只依赖 `src/lib/ai/provider.ts` 接口，不直接 import SDK。
 
 ## 技术栈与 Next 16 注意事项

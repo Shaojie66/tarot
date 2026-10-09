@@ -10,16 +10,19 @@
 
 ## 真实模型评测
 
+评测与产品走同一个入口（`getProvider`），用同样的环境变量选模型：
+
 ```bash
 # Anthropic（需要 ANTHROPIC_API_KEY，写在 .env.local）
 pnpm eval:live
 
-# 没有 Anthropic key 时，用 OpenAI 兼容接口（如 DeepSeek）只验证协议 / 流程链路
-DEEPSEEK_API_KEY=... LIVE_PROVIDER=deepseek pnpm eval:live
+# 任何 OpenAI 兼容接口，例如 DeepSeek
+AI_PROVIDER=openai-compatible OPENAI_BASE_URL=https://api.deepseek.com OPENAI_MODEL=deepseek-chat \
+  OPENAI_TEMPERATURE=0.3 OPENAI_API_KEY=... pnpm eval:live
 ```
 
 - 无 key 时整套跳过，**只能记为“未验收”**，不能记通过。
-- DeepSeek 路径的结果只证明链路可用，**不能当作 claude-haiku / claude-sonnet 的质量验收**。
+- 结果按模型分别记账：A 模型的数字不能当作 B 模型的验收。
 - 每次运行写入 `tmp/evals/`（已 gitignore，只含合成输入）：日期、提交、provider / 模型、prompt / 内容版本、每例终态、首章节 / 总耗时、失败原因。脱敏后的结论写进 `docs/` 的评审记录。
 
 ## 分别计分

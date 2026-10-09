@@ -7,7 +7,7 @@ import { TOPIC_LABELS, type Topic } from "@/features/cards/schema";
 import type { ReadingRequest, Tone } from "./contract";
 import { getSpread } from "./spread";
 
-export const PROMPT_VERSION = "v3";
+export const PROMPT_VERSION = "v4";
 
 const cache = new Map<string, string>();
 

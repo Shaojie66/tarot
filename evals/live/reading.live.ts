@@ -5,8 +5,6 @@
 //   4. 语义质量与体验：人工逐例审阅，原始产物落 tmp/evals/（已 gitignore，只含合成输入）。
 // 无 key 时整套跳过，必须记为“未验收”，不能算通过。
 //
-// provider：默认 Anthropic（ANTHROPIC_API_KEY）。LIVE_PROVIDER=deepseek + DEEPSEEK_API_KEY 时改用 DeepSeek，
-// 只证明协议 / 流程链路，不代表 Claude 模型的质量。
 
 import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
@@ -17,25 +15,14 @@ import { runAiReading, runPerspective, runRewrite, type ReadingStreamEvent } fro
 import { TONES, readingBodySchema, readingRequestSchema } from "@/features/reading/contract";
 import { PROMPT_VERSION } from "@/features/reading/prompts";
 import { detectCrisis } from "@/features/safety/crisis";
-import { withDeadline } from "@/lib/ai/deadline";
 import type { AIProvider } from "@/lib/ai/provider";
-import { getProvider } from "@/lib/ai/server";
+import { getProvider, resolveProviderConfig } from "@/lib/ai/server";
 import cases from "../reading/cases.json";
 import safety from "../safety/cases.json";
-import { createOpenAICompatibleProvider } from "./openai-compatible";
 
-const useDeepseek = process.env.LIVE_PROVIDER === "deepseek";
-const base: AIProvider | null = useDeepseek
-  ? process.env.DEEPSEEK_API_KEY?.trim()
-    ? createOpenAICompatibleProvider({
-        apiKey: process.env.DEEPSEEK_API_KEY.trim(),
-        baseURL: process.env.DEEPSEEK_BASE_URL ?? "https://api.deepseek.com",
-        model: process.env.DEEPSEEK_MODEL ?? "deepseek-chat",
-      })
-    : null
-  : getProvider();
-// getProvider 已带期限；DeepSeek 路径这里补上
-const provider = base && useDeepseek ? withDeadline(base, { totalMs: 90_000, idleMs: 30_000 }) : base;
+// provider 与产品用同一个入口（getProvider）：按环境变量选 Anthropic 或 OpenAI 兼容接口。
+// 例：AI_PROVIDER=openai-compatible OPENAI_BASE_URL=https://api.deepseek.com OPENAI_MODEL=deepseek-chat OPENAI_API_KEY=... pnpm eval:live
+const provider = getProvider();
 
 const outDir = fileURLToPath(new URL("../../tmp/evals/", import.meta.url));
 const stamp = new Date().toISOString().replace(/[:.]/g, "-");
@@ -51,7 +38,11 @@ function commit(): string {
 const meta = () => ({
   date: new Date().toISOString(),
   commit: commit(),
-  provider: useDeepseek ? "deepseek (协议冒烟，非 Claude 质量验收)" : "anthropic",
+  provider: resolveProviderConfig()?.kind ?? null,
+  baseURL: (() => {
+    const c = resolveProviderConfig();
+    return c?.kind === "openai-compatible" ? new URL(c.baseURL).host : null;
+  })(),
   model: provider?.model("fast") ?? null,
   promptVersion: PROMPT_VERSION,
   contentVersion: CONTENT_VERSION,
@@ -230,7 +221,7 @@ describe.skipIf(!provider)("live model eval", () => {
 if (!provider) {
   describe("live model eval", () => {
     it("未验收：没有可用的 provider key，真实模型评测被跳过（不能记为通过）", () => {
-      console.warn("[live eval] 未验收：设置 ANTHROPIC_API_KEY，或 LIVE_PROVIDER=deepseek + DEEPSEEK_API_KEY。");
+      console.warn("[live eval] 未验收：设置 ANTHROPIC_API_KEY，或 AI_PROVIDER=openai-compatible + OPENAI_*（见 .env.example）。");
       expect(existsSync(outDir) || true).toBe(true);
     });
   });

@@ -15,6 +15,7 @@ import {
   type Tone,
 } from "./contract";
 import { findForbiddenPhrase } from "./guard";
+import { describeIssues, normalizePerspectiveBody, normalizeReadingBody, normalizeSection, parseModelJson, repairNote } from "./model-output";
 import { TopLevelSections } from "./json-sections";
 import { PROMPT_VERSION, perspectiveSystemPrompt, perspectiveUserPrompt, readingSystemPrompt, readingUserPrompt, rewriteSystemPrompt, rewriteUserPrompt } from "./prompts";
 
@@ -108,6 +109,36 @@ export function validateReadingOutput(value: unknown, request: ReadingRequest): 
   return body;
 }
 
+type Judged<T> = { type: "ok"; body: T } | { type: "crisis" } | { type: "invalid"; reasons: string[] };
+
+/**
+ * 判定一次完整输出。crisis 必须是布尔值（缺失 / 类型错误一律无效，不容错——这是安全字段）；
+ * 其余字段先做无损整理（丢多余字段、拉回类型），再按硬约束校验。
+ */
+function judgeReading(text: string, stopReason: "end" | "max_tokens", request: ReadingRequest): Judged<ReadingBody> {
+  if (stopReason === "max_tokens") return { type: "invalid", reasons: ["输出被截断（太长）"] };
+  const value = parseModelJson(text) as { crisis?: unknown } | undefined;
+  if (value === undefined || typeof value !== "object" || value === null) return { type: "invalid", reasons: ["不是 JSON 对象"] };
+  if (typeof value.crisis !== "boolean") return { type: "invalid", reasons: ["crisis 缺失或不是布尔值"] };
+  if (value.crisis) return { type: "crisis" };
+  const parsed = readingBodySchema.safeParse(normalizeReadingBody(value));
+  if (!parsed.success) return { type: "invalid", reasons: describeIssues(parsed.error.issues) };
+  const body = parsed.data;
+  if (!resultMatchesDraw(body, request)) return { type: "invalid", reasons: ["cards 的 cardId / position / reversed 与输入不一致"] };
+  const texts = [body.overall, ...body.cards.map((c) => c.text), ...body.interpretations, body.action, body.question];
+  if (findForbiddenPhrase(texts)) return { type: "invalid", reasons: ["含断言式用语"] };
+  return { type: "ok", body };
+}
+
+/** 不流式地跑完一次生成，取最终文本（重试用）。provider 抛错照常向上抛。 */
+async function collectOnce(provider: AIProvider, req: GenerateRequest): Promise<{ kind: "text"; text: string; stopReason: "end" | "max_tokens" } | { kind: "refusal" }> {
+  for await (const event of provider.stream(req)) {
+    if (event.type === "refusal") return { kind: "refusal" };
+    if (event.type === "done") return { kind: "text", text: event.text, stopReason: event.stopReason };
+  }
+  throw new AIError("network");
+}
+
 export async function* runAiReading(
   request: ReadingRequest,
   provider: AIProvider,
@@ -146,7 +177,8 @@ export async function* runAiReading(
       }
       if (event.type === "text") {
         for (const section of sections.push(event.delta)) {
-          const value = tryParse(section.raw);
+          const raw = tryParse(section.raw);
+          const value = section.key === "crisis" ? raw : normalizeSection(section.key, raw);
           if (section.key === "crisis") {
             if (typeof value !== "boolean" || crisisCleared) {
               // 类型错误，或重复出现的标记：整个输出无效
@@ -172,29 +204,31 @@ export async function* runAiReading(
         }
         continue;
       }
-      // done
-      if (event.stopReason === "max_tokens") {
-        yield { type: "error", code: "invalid_output" };
+      // done：先判第一次的输出；不合格就带着原因让模型重试一次（只重试一次，不循环）
+      let judged = judgeReading(event.text, event.stopReason, request);
+      if (judged.type === "invalid" && !signal?.aborted) {
+        const second = await collectOnce(provider, { ...generate, prompt: generate.prompt + repairNote(judged.reasons) });
+        if (second.kind === "refusal") {
+          yield { type: "refusal" };
+          return;
+        }
+        judged = judgeReading(second.text, second.stopReason, request);
+      }
+      if (signal?.aborted) {
+        yield { type: "error", code: "cancelled" };
         return;
       }
-      const value = tryParse(event.text) as { crisis?: unknown } | undefined;
-      if (typeof value?.crisis !== "boolean") {
-        yield { type: "error", code: "invalid_output" };
-        return;
-      }
-      if (value.crisis) {
+      if (judged.type === "crisis") {
         yield { type: "crisis" };
         return;
       }
-      delete value.crisis;
-      const body = validateReadingOutput(value, request);
-      if (!body) {
+      if (judged.type === "invalid") {
         yield { type: "error", code: "invalid_output" };
         return;
       }
       yield {
         type: "result",
-        result: { ...body, source: "ai" },
+        result: { ...judged.body, source: "ai" },
         versions: { content: CONTENT_VERSION, prompt: PROMPT_VERSION, model: provider.model("fast") },
       };
       return;
@@ -233,7 +267,7 @@ export async function runRewrite(
       if (event.type === "refusal") return { type: "refusal" };
       if (event.type !== "done") continue;
       if (event.stopReason === "max_tokens") return { type: "error", code: "invalid_output" };
-      const value = tryParse(event.text) as { crisis?: unknown; question?: unknown } | undefined;
+      const value = parseModelJson(event.text) as { crisis?: unknown; question?: unknown } | undefined;
       if (typeof value?.crisis !== "boolean") return { type: "error", code: "invalid_output" };
       if (value.crisis) return { type: "crisis" };
       const rewritten = typeof value?.question === "string" ? value.question.trim() : "";
@@ -274,6 +308,27 @@ export type PerspectiveOutcome =
  * 换视角：一次请求、整体校验后才返回（内容短，不做章节流式）。
  * 与原解读一样：crisis 必须是布尔，缺失 / 类型错误视为无效；输出不含 action，不会触碰原小行动。
  */
+function judgePerspective(text: string, stopReason: "end" | "max_tokens", previous: readonly string[]): Judged<PerspectiveBody> {
+  if (stopReason === "max_tokens") return { type: "invalid", reasons: ["输出被截断（太长）"] };
+  const value = parseModelJson(text) as { crisis?: unknown } | undefined;
+  if (value === undefined || typeof value !== "object" || value === null) return { type: "invalid", reasons: ["不是 JSON 对象"] };
+  if (typeof value.crisis !== "boolean") return { type: "invalid", reasons: ["crisis 缺失或不是布尔值"] };
+  if (value.crisis) return { type: "crisis" };
+  // 多余字段（包括模型自作主张加的 action）在整理时被丢弃：视角本来就不含 action，原小行动不会被碰
+  const parsed = perspectiveBodySchema.safeParse(normalizePerspectiveBody(value));
+  if (!parsed.success) return { type: "invalid", reasons: describeIssues(parsed.error.issues) };
+  const body = parsed.data;
+  if (findForbiddenPhrase([body.overall, ...body.interpretations, body.question])) return { type: "invalid", reasons: ["含断言式用语"] };
+  // 两种读法必须有区别；也不能原样重复上一次给过的读法
+  if (body.interpretations[0] === body.interpretations[1]) return { type: "invalid", reasons: ["两个读法相同"] };
+  if (body.interpretations.some((t) => previous.includes(t))) return { type: "invalid", reasons: ["重复了之前给过的读法"] };
+  return { type: "ok", body };
+}
+
+/**
+ * 换视角：一次请求、整体校验后才返回（内容短，不做章节流式）。不合格时带着原因重试一次。
+ * 与原解读一样：crisis 必须是布尔，缺失 / 类型错误视为无效。
+ */
 export async function runPerspective(
   request: ReadingRequest,
   tone: Tone,
@@ -282,33 +337,27 @@ export async function runPerspective(
   signal?: AbortSignal,
 ): Promise<PerspectiveOutcome> {
   if (signal?.aborted) return { type: "error", code: "cancelled" };
+  const generate: GenerateRequest = {
+    tier: "deep",
+    system: perspectiveSystemPrompt(),
+    prompt: perspectiveUserPrompt(request, tone, previous),
+    jsonSchema: PERSPECTIVE_JSON_SCHEMA,
+    maxTokens: 2000,
+    signal,
+  };
   try {
-    for await (const event of provider.stream({
-      tier: "deep",
-      system: perspectiveSystemPrompt(),
-      prompt: perspectiveUserPrompt(request, tone, previous),
-      jsonSchema: PERSPECTIVE_JSON_SCHEMA,
-      maxTokens: 2000,
-      signal,
-    })) {
-      if (event.type === "refusal") return { type: "refusal" };
-      if (event.type !== "done") continue;
-      if (event.stopReason === "max_tokens") return { type: "error", code: "invalid_output" };
-      const value = tryParse(event.text) as { crisis?: unknown } | undefined;
-      if (typeof value?.crisis !== "boolean") return { type: "error", code: "invalid_output" };
-      if (value.crisis) return { type: "crisis" };
-      delete value.crisis;
-      const parsed = perspectiveBodySchema.safeParse(value);
-      if (!parsed.success) return { type: "error", code: "invalid_output" };
-      const body = parsed.data;
-      const texts = [body.overall, ...body.interpretations, body.question];
-      if (findForbiddenPhrase(texts)) return { type: "error", code: "invalid_output" };
-      // 两种读法必须有区别；也不能原样重复上一次给过的读法
-      if (body.interpretations[0] === body.interpretations[1]) return { type: "error", code: "invalid_output" };
-      if (body.interpretations.some((t) => previous.includes(t))) return { type: "error", code: "invalid_output" };
-      return { type: "ok", body, versions: { content: CONTENT_VERSION, prompt: PROMPT_VERSION, model: provider.model("deep") } };
+    let out = await collectOnce(provider, generate);
+    if (out.kind === "refusal") return { type: "refusal" };
+    let judged = judgePerspective(out.text, out.stopReason, previous);
+    if (judged.type === "invalid" && !signal?.aborted) {
+      out = await collectOnce(provider, { ...generate, prompt: generate.prompt + repairNote(judged.reasons) });
+      if (out.kind === "refusal") return { type: "refusal" };
+      judged = judgePerspective(out.text, out.stopReason, previous);
     }
-    return { type: "error", code: signal?.aborted ? "cancelled" : "network" };
+    if (signal?.aborted) return { type: "error", code: "cancelled" };
+    if (judged.type === "crisis") return { type: "crisis" };
+    if (judged.type === "invalid") return { type: "error", code: "invalid_output" };
+    return { type: "ok", body: judged.body, versions: { content: CONTENT_VERSION, prompt: PROMPT_VERSION, model: provider.model("deep") } };
   } catch (error) {
     return { type: "error", code: signal?.aborted ? "cancelled" : errorCode(error) };
   }

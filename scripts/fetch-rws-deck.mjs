@@ -1,15 +1,22 @@
 // 从 Wikimedia Commons 拉取 1909 RWS（Pamela Colman Smith）公有领域扫描件，
 // 转 WebP 存到 public/decks/rws-1909/<card-id>.webp，并生成 SOURCES.md。
 // 用法：node scripts/fetch-rws-deck.mjs   （需要本机有 cwebp）
+// 安全更新：先全部抓到暂存目录 tmp/rws-staging，78 张全部校验通过才替换线上目录；
+// 任何一张失败，public/decks/rws-1909 和 SOURCES.md 都保持上一版完整不动。上一版会备份到 tmp/rws-backup/。
 
 import { execFileSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
+import { clearDir, promoteStaged, verifyDeck } from "./lib/deck-staging.mjs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const RAW_DIR = join(ROOT, "tmp/rws-raw");
-const OUT_DIR = join(ROOT, "public/decks/rws-1909");
+const LIVE_DIR = join(ROOT, "public/decks/rws-1909");
+const STAGING_DIR = join(ROOT, "tmp/rws-staging/rws-1909");
+const BACKUP_DIR = join(ROOT, "tmp/rws-backup");
+// 之后的写入都先进暂存目录
+const OUT_DIR = STAGING_DIR;
 const WIDTH = 600;
 const UA = "tarot-reflection-app/0.1 (https://github.com/Shaojie66/tarot)";
 
@@ -69,7 +76,7 @@ const strip = (html = "") => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").t
 
 async function main() {
   mkdirSync(RAW_DIR, { recursive: true });
-  mkdirSync(OUT_DIR, { recursive: true });
+  clearDir(STAGING_DIR);
 
   const pages = new Map();
   for (let i = 0; i < CARDS.length; i += 40) {
@@ -121,11 +128,19 @@ async function main() {
     ].join("\n"),
   );
 
-  console.log(`\nok: ${rows.length}/${CARDS.length}`);
-  if (missing.length) {
-    console.log("missing:\n  " + missing.join("\n  "));
+  console.log(`\n抓取：${rows.length}/${CARDS.length}`);
+  if (missing.length) console.log("抓取失败：\n  " + missing.join("\n  "));
+
+  // 抓取不完整或校验不通过：不碰线上目录
+  const problems = verifyDeck(STAGING_DIR, CARDS.map(([id]) => id), { width: WIDTH });
+  if (missing.length || problems.length) {
+    if (problems.length) console.log("暂存目录校验未通过：\n  " + problems.join("\n  "));
+    console.log(`未更新 ${LIVE_DIR}（保持上一版）。暂存目录留在 ${STAGING_DIR} 供检查。`);
     process.exitCode = 1;
+    return;
   }
+  const backup = promoteStaged(STAGING_DIR, LIVE_DIR, BACKUP_DIR);
+  console.log(`已更新 ${LIVE_DIR}。上一版备份在 ${backup ?? "（无）"}`);
 }
 
 main();

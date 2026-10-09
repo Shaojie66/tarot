@@ -4,7 +4,7 @@ Rider–Waite–Smith 塔罗，Pamela Colman Smith 绘，1909 年首版（Rider 
 作者 1951 年去世，作品在美国（1929 年前出版）及作者终身 + 70 年的法域均已进入公有领域。
 只使用 Wikimedia Commons 上的原始扫描，未使用任何后期商业重绘 / 上色版本。
 
-抓取：`node scripts/fetch-rws-deck.mjs`，宽 600px，cwebp q82。抓取日期：2026-10-08
+抓取：`node scripts/fetch-rws-deck.mjs`，宽 600px，cwebp q82。抓取日期：2026-10-09
 
 | card id | Commons 文件 | 作者（Commons 记录） | 许可（Commons 记录） |
 |---|---|---|---|

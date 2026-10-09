@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState, useSyncExternalStore } from "react";
 import { TOPICS, TOPIC_LABELS, type Topic } from "@/features/cards/schema";
 import { drawCards } from "@/features/draw/draw";
 import { CrisisSupport } from "@/features/safety/CrisisSupport";
@@ -21,7 +21,8 @@ import { flowReducer, initialFlow, type FlowState, type Mode } from "../flow";
 import { buildLocalReading } from "../local";
 import { QUESTION_BANK } from "../questions";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
-import { clearSession, getRecord, loadSession, saveRecord, storeSession } from "../storage";
+import { downgradeLegacyChoice } from "../draft";
+import { clearSession, getDraftWritable, getRecord, loadSession, saveRecord, storeSession, subscribeDraftHealth } from "../storage";
 import { DrawTable } from "./DrawTable";
 import { ResultView } from "./ResultView";
 
@@ -78,12 +79,17 @@ export function ReadingFlow() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const saved = loadSession();
-      if (saved && typeof saved.stage === "string") {
+      const loaded = loadSession();
+      if (loaded) {
+        const { state: saved, legacy } = loaded;
         let restored = saved;
         if (saved.recordId) {
           const record = await getRecord(saved.recordId).catch(() => undefined);
-          if (record) restored = { ...saved, result: record.result, choice: record.choice, saveStatus: "saved" };
+          if (record) {
+            // 旧版草稿的行动选择无法证明是用户点的：保守按"未决定"
+            const choice = legacy ? downgradeLegacyChoice(record.choice) : record.choice;
+            restored = { ...saved, result: record.result, choice, saveStatus: "saved" };
+          }
         }
         if (!cancelled) dispatch({ type: "restore", state: restored });
       }
@@ -95,12 +101,13 @@ export function ReadingFlow() {
     };
   }, []);
 
+  const draftUnsaved = !useSyncExternalStore(subscribeDraftHealth, getDraftWritable, () => true);
   useEffect(() => {
     if (hydrated) storeSession(state);
   }, [hydrated, state]);
 
   // 结果与用户选择变化时写入同一条记录
-  const { result, choice, recordId, createdAt, versions } = state;
+  const { result, choice, recordId, createdAt, versions, saveNonce } = state;
   useEffect(() => {
     const request = toRequest(state);
     if (!hydrated || !result || !recordId || !createdAt || !request) return;
@@ -122,7 +129,7 @@ export function ReadingFlow() {
     };
     // state 的其余字段在结果生成后不再变化
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hydrated, result, choice, recordId, createdAt, versions]);
+  }, [hydrated, result, choice, recordId, createdAt, versions, saveNonce]);
 
   // 问题改写（有 key 时）。失败不阻塞流程，直接用原问题。
   useEffect(() => {
@@ -202,6 +209,11 @@ export function ReadingFlow() {
 
   return (
     <div className="space-y-8">
+      {draftUnsaved && state.stage !== "topic" && (
+        <p role="status" className="rounded-lg bg-surface px-4 py-2 text-xs leading-relaxed text-muted" data-testid="draft-unsaved">
+          这个浏览器没有允许保存进行中的进度（可能是隐私模式或存储已满）。现在刷新页面会丢失当前这一步。
+        </p>
+      )}
       {state.stage === "topic" && <TopicStep onChoose={(topic) => dispatch({ type: "chooseTopic", topic })} />}
 
       {state.stage === "question" && state.topic && (
@@ -265,6 +277,7 @@ export function ReadingFlow() {
           result={state.result}
           choice={state.choice}
           saveStatus={state.saveStatus}
+          onRetrySave={() => dispatch({ type: "retrySave" })}
           onChoose={(index) => dispatch({ type: "chooseInterpretation", index })}
           onToggleRejected={(index) => dispatch({ type: "toggleRejected", index })}
           onAction={(status, text) => dispatch({ type: "setAction", status, text })}

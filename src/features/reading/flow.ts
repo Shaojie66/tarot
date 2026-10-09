@@ -43,12 +43,14 @@ export interface FlowState {
   recordId: string | null;
   createdAt: string | null;
   saveStatus: SaveStatus;
+  /** 手动重试保存时递增，触发同一记录 ID 的再次写入 */
+  saveNonce: number;
 }
 
 export const initialChoice: ReadingChoice = {
   interpretation: null,
   rejected: [],
-  action: { status: "accepted", text: "" },
+  action: { status: "undecided", text: "" },
 };
 
 export const initialFlow: FlowState = {
@@ -68,6 +70,7 @@ export const initialFlow: FlowState = {
   recordId: null,
   createdAt: null,
   saveStatus: "idle",
+  saveNonce: 0,
 };
 
 export type FlowAction =
@@ -95,6 +98,7 @@ export type FlowAction =
   | { type: "saving" }
   | { type: "saved" }
   | { type: "saveFailed" }
+  | { type: "retrySave" }
   | { type: "back" }
   | { type: "restore"; state: FlowState }
   | { type: "reset" };
@@ -155,7 +159,7 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
         result: action.result,
         versions: action.versions,
         generation: { ...state.generation, status: "done", sections: {} },
-        choice: { ...initialChoice, action: { status: "accepted", text: action.result.action } },
+        choice: initialChoice,
         recordId: state.recordId ?? action.recordId,
         createdAt: state.createdAt ?? action.createdAt,
       };
@@ -204,6 +208,8 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
       return { ...state, saveStatus: "saved" };
     case "saveFailed":
       return { ...state, saveStatus: "failed" };
+    case "retrySave":
+      return state.result ? { ...state, saveStatus: "idle", saveNonce: state.saveNonce + 1 } : state;
     case "back":
       if (state.stage === "question") return { ...state, stage: "topic" };
       if (state.stage === "rewrite") return { ...state, stage: "question", suggestion: null };

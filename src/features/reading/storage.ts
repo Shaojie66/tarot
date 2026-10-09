@@ -3,6 +3,7 @@
 
 import Dexie, { type EntityTable } from "dexie";
 import { readingRecordSchema, type ReadingRecord } from "./contract";
+import { DRAFT_VERSION, migrateLegacyDraft, parseDraft } from "./draft";
 import type { FlowState } from "./flow";
 
 class TarotDB extends Dexie {
@@ -34,27 +35,50 @@ export async function countRecords(): Promise<number> {
   return getDb().records.count();
 }
 
-const SESSION_KEY = "tarot:session:v1";
+const SESSION_KEY = "tarot:session:v2";
+const LEGACY_SESSION_KEY = "tarot:session:v1";
 
-export function loadSession(): FlowState | null {
+/** 读取并校验草稿。坏草稿 / 旧版本草稿不会抛异常：能迁移的迁移，否则清掉并回到起点。 */
+export function loadSession(): { state: FlowState; legacy: boolean } | null {
   try {
-    const raw = localStorage.getItem(SESSION_KEY);
-    return raw ? (JSON.parse(raw) as FlowState) : null;
+    const current = parseDraft(localStorage.getItem(SESSION_KEY));
+    if (current) return { state: current, legacy: false };
+    if (localStorage.getItem(SESSION_KEY) !== null) localStorage.removeItem(SESSION_KEY);
+    const legacy = migrateLegacyDraft(localStorage.getItem(LEGACY_SESSION_KEY));
+    localStorage.removeItem(LEGACY_SESSION_KEY);
+    return legacy ? { state: legacy, legacy: true } : null;
   } catch {
     return null;
   }
 }
 
-export function storeSession(state: FlowState): void {
+// 草稿能否写入：给界面订阅（useSyncExternalStore），失败时提示"刷新后无法恢复"。
+let draftWritable = true;
+const draftListeners = new Set<() => void>();
+export const subscribeDraftHealth = (listener: () => void) => {
+  draftListeners.add(listener);
+  return () => void draftListeners.delete(listener);
+};
+export const getDraftWritable = () => draftWritable;
+
+/** 返回是否写入成功。失败（隐私模式 / 配额）时流程照常，但界面应提示刷新后无法恢复。 */
+export function storeSession(state: FlowState): boolean {
+  let ok = true;
   try {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(state));
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ v: DRAFT_VERSION, state }));
   } catch {
-    // 存储不可用（隐私模式 / 配额）：流程照常，刷新后无法恢复
+    ok = false;
   }
+  if (ok !== draftWritable) {
+    draftWritable = ok;
+    draftListeners.forEach((listener) => listener());
+  }
+  return ok;
 }
 
 export function clearSession(): void {
   try {
     localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(LEGACY_SESSION_KEY);
   } catch {}
 }

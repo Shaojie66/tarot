@@ -13,14 +13,17 @@ interface ResultViewProps {
   result: ReadingResult;
   choice: ReadingChoice;
   saveStatus: SaveStatus;
+  onRetrySave: () => void;
   onChoose: (index: 0 | 1 | null) => void;
   onToggleRejected: (index: 0 | 1) => void;
   onAction: (status: ReadingChoice["action"]["status"], text: string) => void;
   onRestart: () => void;
 }
 
-export function ResultView({ spread, result, choice, saveStatus, onChoose, onToggleRejected, onAction, onRestart }: ResultViewProps) {
+export function ResultView({ spread, result, choice, saveStatus, onRetrySave, onChoose, onToggleRejected, onAction, onRestart }: ResultViewProps) {
   const [editing, setEditing] = useState(false);
+  const [confirmRestart, setConfirmRestart] = useState(false);
+  const unsaved = saveStatus === "failed" || saveStatus === "saving";
   const [draft, setDraft] = useState(choice.action.text);
 
   return (
@@ -98,6 +101,7 @@ export function ResultView({ spread, result, choice, saveStatus, onChoose, onTog
         <h3 id="action-title" className="font-serif text-lg">
           24 小时内可以试的一小步
         </h3>
+        {choice.action.status === "undecided" && <p className="mt-1 text-xs text-muted">这只是一个建议，还没决定也没关系。</p>}
         {editing ? (
           <div className="mt-2 space-y-2">
             <label htmlFor="action-edit" className="sr-only">
@@ -167,15 +171,38 @@ export function ResultView({ spread, result, choice, saveStatus, onChoose, onTog
         <p className="border-l-2 border-accent pl-3 font-serif text-lg leading-relaxed">{result.question}</p>
       </section>
 
-      <footer className="flex items-center justify-between border-t border-line pt-5 text-sm">
-        <p role="status" className="text-muted" data-testid="save-status">
-          {saveStatus === "saved" && "已保存在这台设备的浏览器里"}
-          {saveStatus === "saving" && "保存中…"}
-          {saveStatus === "failed" && "未保存：浏览器存储不可用"}
-        </p>
-        <button type="button" onClick={onRestart} className="rounded-full border border-accent px-4 py-1.5 text-accent">
-          再问一个问题
-        </button>
+      <footer className="space-y-3 border-t border-line pt-5 text-sm">
+        <div className="flex items-center justify-between gap-3">
+          <p role="status" className="text-muted" data-testid="save-status">
+            {saveStatus === "saved" && "已保存在这台设备的浏览器里"}
+            {saveStatus === "saving" && "保存中…"}
+            {saveStatus === "failed" && "未保存：浏览器存储不可用"}
+          </p>
+          {saveStatus === "failed" && (
+            <button type="button" onClick={onRetrySave} className="rounded-full border border-line px-3 py-1 text-sm">
+              重试保存
+            </button>
+          )}
+        </div>
+        {confirmRestart && unsaved ? (
+          <div role="alert" className="space-y-2 rounded-lg bg-surface p-3">
+            <p className="leading-relaxed">当前这次解读还没有保存成功，开始新问题后将无法找回。确定要离开吗？</p>
+            <div className="flex gap-3">
+              <button type="button" onClick={onRestart} className="rounded-full border border-accent px-4 py-1.5 text-accent">
+                仍然开始新问题
+              </button>
+              <button type="button" onClick={() => setConfirmRestart(false)} className="rounded-full border border-line px-4 py-1.5">
+                先留在这里
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-end">
+            <button type="button" onClick={() => (unsaved ? setConfirmRestart(true) : onRestart())} className="rounded-full border border-accent px-4 py-1.5 text-accent">
+              再问一个问题
+            </button>
+          </div>
+        )}
       </footer>
     </article>
   );

@@ -66,8 +66,12 @@ export const readingChoiceSchema = z.strictObject({
   interpretation: z.union([z.literal(0), z.literal(1)]).nullable(),
   /** 标记为"不符合我的情况"的读法下标 */
   rejected: z.array(z.union([z.literal(0), z.literal(1)])),
+  /**
+   * 小行动：建议与决定分开。undecided = 用户还没操作（默认）；只有明确点击才变 accepted / edited / skipped。
+   * 编辑时把文本清空等同 skipped。旧版曾在生成时默认写 accepted，无法证明用户点过，不得当作明确接受。
+   */
   action: z.strictObject({
-    status: z.enum(["accepted", "edited", "skipped"]),
+    status: z.enum(["undecided", "accepted", "edited", "skipped"]),
     text: z.string().trim().max(200),
   }),
 });

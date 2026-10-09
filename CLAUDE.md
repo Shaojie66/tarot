@@ -25,6 +25,7 @@
 - `public/decks/<deck-id>/` 牌组图片（`rws-1909` 原版、`ai-v1` 等重绘），每个牌组带 `SOURCES.md`，在 `src/features/cards/deck.ts` 登记；业务代码通过 `cardImageSrc()` 取路径，不写死。只用 1909 原版公有领域扫描或基于它的重绘。
 - `src/features/{history,daily,share,perspective,settings}` 历史回看 / 每日一张 / 分享图 / 换视角 / 本机设置；分享只能经 `share-model.ts` 的白名单重建内容，不得直接读取记录正文。
 - `src/features/history` 历史与回看界面；记录读写、备份预检在 `src/features/reading/{storage,backup}.ts`。记录 schema 当前为 v2（含 `deckId`、设置快照），v1 旧记录继续可读且不批量迁移（见 `docs/decisions/002`）。
+- `Dockerfile` / `docker-compose.yml`：镜像不含密钥（`.dockerignore` 排除 `.env*`、`deepseek/`、`tmp/`）；compose 只映射 127.0.0.1。PWA 的 service worker 源码在 `src/features/pwa/sw-source.ts`，**永不缓存 `/api/*`**，离线行为见 `docs/pwa-offline.md`。
 - `scripts/` 数据抓取与生成脚本（可重复运行）。路径用 `fileURLToPath`，项目目录可能含非 ASCII 字符。
 - `evals/` prompt 评测集，改 prompt 后必须跑一次。
 - `docs/` 计划、决策记录（`docs/decisions/NNN-标题.md`）。
@@ -46,5 +47,6 @@ Next.js 16（App Router，`src/`）+ React 19 + Tailwind 4 + TypeScript，pnpm�
 - `pnpm check`：lint + typecheck（含 `next typegen`）+ 单元测试
 - `pnpm build`：涉及路由、页面、配置时额外跑
 - 页面改动用 dev server（`.claude/launch.json` 的 `dev`，端口 3210）在手机视口下看一遍，并查控制台报错
-- `pnpm e2e`：Playwright 手机视口 E2E（无 key 路径），涉及流程页面时跑
+- `pnpm e2e`：Playwright 手机视口 E2E（无 key 路径，含 PWA 离线、无障碍回归），涉及流程页面时跑；`E2E_BASE_URL=... pnpm e2e` 可对已运行的实例（如容器）跑同一套
+- `node scripts/verify-lan.mjs`（需先 build）：局域网授权矩阵；`node scripts/verify-deck.mjs`：牌组完整性
 - 改 prompt：新建 `content/prompts/vN/`（当前 v3，含换视角），跑 `pnpm test`（mock 评测）；有 key 时再跑 `pnpm eval:live`

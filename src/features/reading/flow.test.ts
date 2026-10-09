@@ -14,7 +14,7 @@ const run = (state: FlowState, ...actions: FlowAction[]) => actions.reduce(flowR
 const ready = run(
   initialFlow,
   { type: "chooseTopic", topic: "self" },
-  { type: "submitQuestion", question: "我在回避什么？", rewrite: false },
+  { type: "submitQuestion", question: "我在回避什么？", mode: "local" },
   { type: "drawn", cards },
   { type: "reveal", count: 3 },
   { type: "submitSelf", selfReading: "" },
@@ -34,6 +34,16 @@ describe("flowReducer", () => {
   it("walks to the reading stage without self-reading", () => {
     expect(ready.stage).toBe("reading");
     expect(ready.selfReading).toBe("");
+  });
+
+  it("本地模式跳过改写，AI 模式进入改写；旧草稿无 mode 按本地恢复", () => {
+    const local = run(initialFlow, { type: "chooseTopic", topic: "self" }, { type: "submitQuestion", question: "q", mode: "local" });
+    expect(local.stage).toBe("draw");
+    expect(local.mode).toBe("local");
+    const ai = run(initialFlow, { type: "chooseTopic", topic: "self" }, { type: "submitQuestion", question: "q", mode: "ai" });
+    expect(ai.stage).toBe("rewrite");
+    expect(ai.mode).toBe("ai");
+    expect(restoreFlow({ ...ready, mode: undefined } as unknown as FlowState).mode).toBe("local");
   });
 
   it("never redraws once cards are fixed", () => {

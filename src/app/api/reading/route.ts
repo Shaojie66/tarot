@@ -2,6 +2,7 @@ import { runAiReading, type ReadingStreamEvent } from "@/features/reading/ai";
 import { checkRequest, readingRequestSchema } from "@/features/reading/contract";
 import { detectCrisis } from "@/features/safety/crisis";
 import { getProvider } from "@/lib/ai/server";
+import { guardApiRequest } from "@/lib/http/guard";
 import { readJsonBody } from "@/lib/http/json-body";
 
 /** NDJSON：每行一个 ReadingStreamEvent。只推送已校验的章节和最终结果。 */
@@ -22,6 +23,8 @@ function ndjson(events: AsyncIterable<ReadingStreamEvent> | ReadingStreamEvent[]
 }
 
 export async function POST(request: Request) {
+  const denied = guardApiRequest(request, { json: true });
+  if (denied) return denied;
   const parsed = readingRequestSchema.safeParse(await readJsonBody(request));
   if (!parsed.success || checkRequest(parsed.data)) {
     return Response.json({ type: "error", code: "bad_request" }, { status: 400 });

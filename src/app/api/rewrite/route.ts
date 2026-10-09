@@ -4,6 +4,7 @@ import { runRewrite } from "@/features/reading/ai";
 import { QUESTION_MAX } from "@/features/reading/contract";
 import { detectCrisis } from "@/features/safety/crisis";
 import { getProvider } from "@/lib/ai/server";
+import { guardApiRequest } from "@/lib/http/guard";
 import { readJsonBody } from "@/lib/http/json-body";
 
 const bodySchema = z.strictObject({
@@ -12,6 +13,8 @@ const bodySchema = z.strictObject({
 });
 
 export async function POST(request: Request) {
+  const denied = guardApiRequest(request, { json: true });
+  if (denied) return denied;
   const parsed = bodySchema.safeParse(await readJsonBody(request));
   if (!parsed.success) return Response.json({ type: "error", code: "bad_request" }, { status: 400 });
   const { question, topic } = parsed.data;

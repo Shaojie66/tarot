@@ -19,11 +19,15 @@ export interface Generation {
   sections: Partial<ReadingBody>;
 }
 
+/** 本次占卜是否允许把内容发送给模型 API。在提交问题时明确选择；null 只出现在旧版草稿，按本地处理。 */
+export type Mode = "local" | "ai";
+
 export type SaveStatus = "idle" | "saving" | "saved" | "failed";
 
 export interface FlowState {
   stage: Stage;
   topic: Topic | null;
+  mode: Mode | null;
   originalQuestion: string;
   question: string;
   /** AI 改写建议；null 表示没有建议 */
@@ -50,6 +54,7 @@ export const initialChoice: ReadingChoice = {
 export const initialFlow: FlowState = {
   stage: "topic",
   topic: null,
+  mode: null,
   originalQuestion: "",
   question: "",
   suggestion: null,
@@ -67,7 +72,8 @@ export const initialFlow: FlowState = {
 
 export type FlowAction =
   | { type: "chooseTopic"; topic: Topic }
-  | { type: "submitQuestion"; question: string; rewrite: boolean }
+  | { type: "submitQuestion"; question: string; mode: Mode }
+  | { type: "setMode"; mode: Mode }
   | { type: "rewriteSuggested"; suggestion: string }
   | { type: "rewriteSkipped" }
   | { type: "confirmQuestion"; question: string }
@@ -105,8 +111,11 @@ export function flowReducer(state: FlowState, action: FlowAction): FlowState {
         originalQuestion: action.question,
         question: action.question,
         suggestion: null,
-        stage: action.rewrite ? "rewrite" : "draw",
+        mode: action.mode,
+        stage: action.mode === "ai" ? "rewrite" : "draw",
       };
+    case "setMode":
+      return { ...state, mode: action.mode };
     case "rewriteSuggested":
       return state.stage === "rewrite" ? { ...state, suggestion: action.suggestion } : state;
     case "rewriteSkipped":
@@ -198,5 +207,5 @@ export function restoreFlow(saved: FlowState): FlowState {
       ? { ...saved.generation, status: "cancelled" as const, sections: {} }
       : saved.generation;
   const stage = saved.stage === "rewrite" ? "draw" : saved.stage;
-  return { ...saved, stage, suggestion: null, generation, saveStatus: saved.saveStatus === "saving" ? "idle" : saved.saveStatus };
+  return { ...saved, mode: saved.mode ?? "local", stage, suggestion: null, generation, saveStatus: saved.saveStatus === "saving" ? "idle" : saved.saveStatus };
 }

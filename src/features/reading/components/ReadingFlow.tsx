@@ -17,7 +17,7 @@ import {
   type ReadingBody,
   type ReadingRequest,
 } from "../contract";
-import { flowReducer, initialFlow, type FlowState } from "../flow";
+import { flowReducer, initialFlow, type FlowState, type Mode } from "../flow";
 import { buildLocalReading } from "../local";
 import { QUESTION_BANK } from "../questions";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
@@ -37,6 +37,7 @@ const ERROR_TEXT: Record<ReadingErrorCode, string> = {
   invalid_output: "这次生成的结果不完整或不合格，已丢弃。",
   unavailable: "没有配置 API key，AI 解读不可用。",
   cancelled: "已取消。",
+  forbidden: "请求被本机服务拒绝：请用 localhost 打开页面，或按 README 显式开启局域网访问。",
   unknown: "出了点问题，解读没有完成。",
 };
 
@@ -187,10 +188,11 @@ export function ReadingFlow() {
           topic={state.topic}
           initial={state.originalQuestion}
           onBack={() => dispatch({ type: "back" })}
-          onSubmit={(question) => {
+          aiAvailable={aiAvailable}
+          onSubmit={(question, mode) => {
             // 安全检查①：问题进入任何后续步骤之前
             if (detectCrisis(question).flagged) dispatch({ type: "crisis" });
-            else dispatch({ type: "submitQuestion", question, rewrite: aiAvailable === true });
+            else dispatch({ type: "submitQuestion", question, mode });
           }}
         />
       )}
@@ -226,6 +228,7 @@ export function ReadingFlow() {
       {state.stage === "reading" && (
         <GenerateStep
           aiAvailable={aiAvailable}
+          mode={state.mode}
           status={state.generation.status}
           source={state.generation.source}
           error={state.generation.error}
@@ -283,12 +286,14 @@ function TopicStep({ onChoose }: { onChoose: (topic: Topic) => void }) {
 function QuestionStep({
   topic,
   initial,
+  aiAvailable,
   onSubmit,
   onBack,
 }: {
   topic: Topic;
   initial: string;
-  onSubmit: (question: string) => void;
+  aiAvailable: boolean | null;
+  onSubmit: (question: string, mode: Mode) => void;
   onBack: () => void;
 }) {
   const [text, setText] = useState(initial);
@@ -306,7 +311,8 @@ function QuestionStep({
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (question) onSubmit(question);
+          // 有 key 时必须由下面两个按钮明确选择；回车提交只在无 key 时有效
+          if (question && aiAvailable === false) onSubmit(question, "local");
         }}
         className="space-y-3"
       >
@@ -322,10 +328,28 @@ function QuestionStep({
           placeholder="用自己的话写，比如：我在这份工作里到底想要什么？"
           className="w-full rounded-lg border border-line bg-surface p-3 leading-relaxed placeholder:text-muted/70"
         />
-        <p className="text-xs text-muted">问题只保存在你的浏览器里。</p>
-        <button type="submit" disabled={!question} className="rounded-full bg-accent px-6 py-2 text-bg disabled:opacity-40">
-          就问这个
-        </button>
+        {aiAvailable ? (
+          <>
+            <p className="text-xs leading-relaxed text-muted">
+              选一种方式继续。<b>全程本地</b>：不调用模型，问题只留在你的浏览器里。<b>AI 辅助</b>：问题会发送给模型 API 做改写；之后解读时还会发送自解和牌面，服务端不保存。
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <button type="button" disabled={!question} onClick={() => onSubmit(question, "local")} className="rounded-full bg-accent px-5 py-2 text-bg disabled:opacity-40">
+                全程本地，不发送
+              </button>
+              <button type="button" disabled={!question} onClick={() => onSubmit(question, "ai")} className="rounded-full border border-line px-5 py-2 disabled:opacity-40">
+                AI 辅助（会发送问题）
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-xs text-muted">问题只保存在你的浏览器里。</p>
+            <button type="submit" disabled={!question || aiAvailable === null} className="rounded-full bg-accent px-6 py-2 text-bg disabled:opacity-40">
+              就问这个
+            </button>
+          </>
+        )}
       </form>
       <div className="space-y-2">
         <p className="text-sm text-muted">{unsure ? "可以从这些开始：" : "或者选一个："}</p>
@@ -449,6 +473,7 @@ const SECTION_ORDER: (keyof ReadingBody)[] = ["overall", "interpretations", "act
 
 function GenerateStep({
   aiAvailable,
+  mode,
   status,
   source,
   error,
@@ -457,6 +482,7 @@ function GenerateStep({
   onCancel,
 }: {
   aiAvailable: boolean | null;
+  mode: Mode | null;
   status: FlowState["generation"]["status"];
   source: "ai" | "local" | null;
   error: ReadingErrorCode | null;
@@ -484,6 +510,8 @@ function GenerateStep({
   }
 
   const failed = status === "failed" || status === "refused" || status === "cancelled";
+  const showAi = aiAvailable === true && status !== "refused" && error !== "auth";
+  const aiPrimary = showAi && mode === "ai";
   return (
     <section aria-labelledby="generate-title" className="space-y-4">
       <h2 id="generate-title" className="font-serif text-xl">
@@ -497,22 +525,27 @@ function GenerateStep({
       )}
       {status === "cancelled" && error === null && <p className="text-sm">已取消。你的问题、自解和牌都保留着，不会重抽。</p>}
       <div className="flex flex-wrap gap-3">
-        {aiAvailable && status !== "refused" && error !== "auth" && (
-          <button type="button" onClick={() => onGenerate("ai")} className="rounded-full bg-accent px-5 py-2 text-bg">
-            {failed && source === "ai" ? "重试 AI 解读" : "AI 解读"}
+        {showAi && (
+          <button
+            type="button"
+            onClick={() => onGenerate("ai")}
+            className={aiPrimary ? "rounded-full bg-accent px-5 py-2 text-bg" : "rounded-full border border-line px-5 py-2"}
+          >
+            {failed && source === "ai" ? "重试 AI 解读" : aiPrimary ? "AI 解读" : "改用 AI 解读"}
           </button>
         )}
         <button
           type="button"
           onClick={() => onGenerate("local")}
-          className={aiAvailable ? "rounded-full border border-line px-5 py-2" : "rounded-full bg-accent px-5 py-2 text-bg"}
+          className={aiPrimary ? "rounded-full border border-line px-5 py-2" : "rounded-full bg-accent px-5 py-2 text-bg"}
         >
-          {failed ? "改用本地解读" : "本地解读"}
+          {failed && source === "ai" ? "改用本地解读" : "本地解读"}
         </button>
       </div>
       <p className="text-xs text-muted">
         {aiAvailable === false && "没有配置 API key：本地解读用牌义和规则模板组织，不联网调用模型。"}
-        {aiAvailable && "AI 解读会把问题、自解和牌面发送给模型 API；本地解读不发送任何内容。"}
+        {showAi && "AI 解读会把问题、自解和牌面发送给模型 API；本地解读不发送任何内容。"}
+        {showAi && mode === "ai" && " 问题改写阶段已经发送过问题；这一步选本地解读不会再发送内容。"}
       </p>
     </section>
   );

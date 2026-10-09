@@ -15,7 +15,7 @@ import { findForbiddenPhrase } from "./guard";
 import { TopLevelSections } from "./json-sections";
 import { PROMPT_VERSION, readingSystemPrompt, readingUserPrompt, rewriteSystemPrompt, rewriteUserPrompt } from "./prompts";
 
-export type ReadingErrorCode = Exclude<AIErrorKind, "aborted" | "bad_request"> | "invalid_output" | "unavailable" | "cancelled";
+export type ReadingErrorCode = Exclude<AIErrorKind, "aborted" | "bad_request"> | "invalid_output" | "unavailable" | "cancelled" | "forbidden";
 
 export interface Versions {
   content: string;

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ace-of-pentacles", "nameZh": "星币王牌", "nameEn": "Ace of Pentacles", "number": 1,
+    "upright": { "keywords": ["新机会", "务实", "种子"], "meaning": "一个实实在在的机会出现了，可以让它落地生根。", "career": "新的工作机会，或新的收入来源。", "relationship": "关系有了更实际的基础。", "self": "照顾好身体和生活的基础。", "crossroads": "选那个有实际支撑的方向。", "question": "有什么具体的机会已经摆在你面前？" },
+    "reversed": { "keywords": ["错失机会", "计划不实", "财务担忧"], "meaning": "机会没有抓住，或者计划缺乏现实基础。", "career": "机会还没成熟，或者你还没准备好。", "relationship": "现实问题影响了关系。", "self": "生活的基础需要先稳住。", "crossroads": "先算清楚现实这笔账。", "question": "你的计划里，哪一部分还不够落地？" }
+  },
+  {
+    "id": "two-of-pentacles", "nameZh": "星币二", "nameEn": "Two of Pentacles", "number": 2,
+    "upright": { "keywords": ["平衡", "灵活", "兼顾"], "meaning": "在多件事之间灵活周旋，保持平衡。", "career": "同时处理多件事，需要灵活调度。", "relationship": "在关系和其他事务之间找平衡。", "self": "你在努力兼顾，这很不容易。", "crossroads": "也许可以两边都试试，再看哪边更适合。", "question": "你在同时抛接哪几个球？" },
+    "reversed": { "keywords": ["失衡", "手忙脚乱", "承诺过多"], "meaning": "事情太多，开始顾此失彼。", "career": "承诺太多，需要做取舍。", "relationship": "没有时间留给关系。", "self": "你太累了，先放下一些。", "crossroads": "不可能什么都要，先选最重要的。", "question": "哪一个球，你可以先放下？" }
+  },
+  {
+    "id": "three-of-pentacles", "nameZh": "星币三", "nameEn": "Three of Pentacles", "number": 3,
+    "upright": { "keywords": ["合作", "技艺", "被认可"], "meaning": "通过合作和专业能力，做出被认可的成果。", "career": "团队合作顺利，你的专业被看见。", "relationship": "一起为共同的目标努力。", "self": "你的能力在积累。", "crossroads": "选那个能让你的技艺成长的地方。", "question": "你最想精进的能力是什么？" },
+    "reversed": { "keywords": ["配合不畅", "敷衍了事", "不被重视"], "meaning": "合作不顺，或者你的付出没有被认可。", "career": "团队分工不清，或沟通不畅。", "relationship": "双方没有在一起“建造”什么。", "self": "你的价值，不取决于别人有没有看见。", "crossroads": "一个不重视你的地方，值得重新考虑。", "question": "你希望自己的努力被谁看见？" }
+  },
+  {
+    "id": "four-of-pentacles", "nameZh": "星币四", "nameEn": "Four of Pentacles", "number": 4,
+    "upright": { "keywords": ["守护", "安全感", "保守"], "meaning": "牢牢抓住已有的东西，求一份安全感。", "career": "稳定第一，先保住现有的。", "relationship": "重视承诺与安全感。", "self": "你在保护自己。", "crossroads": "守住现在的稳定，也是一种合理的选择。", "question": "你最害怕失去的是什么？" },
+    "reversed": { "keywords": ["抓得太紧", "控制", "学会放手"], "meaning": "抓得太紧反而会失去，或者你开始学会放手。", "career": "害怕风险，错过了成长。", "relationship": "占有欲或控制欲在作祟。", "self": "放松一点，安全感也可以来自内心。", "crossroads": "抓得太紧的东西，可能正在束缚你。", "question": "如果松开手，最坏会怎样？" }
+  },
+  {
+    "id": "five-of-pentacles", "nameZh": "星币五", "nameEn": "Five of Pentacles", "number": 5,
+    "upright": { "keywords": ["匮乏", "困顿", "被排斥"], "meaning": "物质或情感上的困顿，觉得被关在门外。但帮助可能就在附近。", "career": "经济或职业上遇到了困难。", "relationship": "感到被冷落或孤立。", "self": "你可能觉得不被接纳，但你值得被照顾。", "crossroads": "困难时期，先确保基本生活。", "question": "有没有身边的帮助，你还没开口去要？" },
+    "reversed": { "keywords": ["走出困境", "接受帮助", "恢复"], "meaning": "困境开始缓解，你愿意接受帮助了。", "career": "情况开始好转。", "relationship": "重新被接纳。", "self": "你在慢慢恢复。", "crossroads": "有了喘息的空间，可以重新规划。", "question": "是什么帮你撑过了最难的时候？" }
+  },
+  {
+    "id": "six-of-pentacles", "nameZh": "星币六", "nameEn": "Six of Pentacles", "number": 6,
+    "upright": { "keywords": ["给予与接受", "帮助", "互惠"], "meaning": "资源在流动，给予与接受都是自然的。", "career": "获得帮助或资源，也可以回馈他人。", "relationship": "关系中的付出与收获。", "self": "学会接受别人的好意。", "crossroads": "有人愿意帮你，可以接受。", "question": "你更擅长给予，还是接受？" },
+    "reversed": { "keywords": ["不对等", "附带条件", "欠人情"], "meaning": "帮助带着条件，或者给予与接受失衡。", "career": "小心有附加条件的“好处”。", "relationship": "一方总在付出，一方总在索取。", "self": "别用付出去换取被爱。", "crossroads": "别因为欠人情而做选择。", "question": "你接受的帮助里，有没有让你不舒服的？" }
+  },
+  {
+    "id": "seven-of-pentacles", "nameZh": "星币七", "nameEn": "Seven of Pentacles", "number": 7,
+    "upright": { "keywords": ["耐心", "等待收获", "评估"], "meaning": "已经付出了努力，现在需要耐心等待，也需要评估。", "career": "停下来评估一下投入和产出。", "relationship": "关系需要时间生长。", "self": "你已经做了很多，给成果一些时间。", "crossroads": "看看这些年的投入，是否值得继续。", "question": "你在等待的东西，还需要多久？" },
+    "reversed": { "keywords": ["急于求成", "回报不足", "白费力气"], "meaning": "付出很多却看不到回报，开始焦躁。", "career": "投入与回报不成正比，考虑调整方向。", "relationship": "付出得不到回应。", "self": "别因为短期没有结果就否定自己。", "crossroads": "及时止损，也是一种智慧。", "question": "如果再投入一年，你期待看到什么？" }
+  },
+  {
+    "id": "eight-of-pentacles", "nameZh": "星币八", "nameEn": "Eight of Pentacles", "number": 8,
+    "upright": { "keywords": ["专注", "练习", "精进"], "meaning": "一次次练习和打磨，让你越来越好。", "career": "专注提升技能，扎实积累。", "relationship": "用心经营，日常的小事很重要。", "self": "你在打磨自己。", "crossroads": "选那个让你愿意长期投入的事。", "question": "你愿意花一万小时去做的事是什么？" },
+    "reversed": { "keywords": ["敷衍", "完美主义", "机械重复"], "meaning": "要么在敷衍，要么陷入完美主义，或者觉得重复的工作失去了意义。", "career": "工作变成了机械重复。", "relationship": "关系缺少用心。", "self": "别要求自己完美。", "crossroads": "如果这件事让你厌倦，问问是方法的问题还是方向的问题。", "question": "你现在做的事，还让你有成长感吗？" }
+  },
+  {
+    "id": "nine-of-pentacles", "nameZh": "星币九", "nameEn": "Nine of Pentacles", "number": 9,
+    "upright": { "keywords": ["独立", "自足", "享受成果"], "meaning": "靠自己的努力过上了想要的生活，独立而自足。", "career": "经济独立，享受劳动成果。", "relationship": "你能独立，也能好好地爱。", "self": "你值得享受自己创造的生活。", "crossroads": "选那个让你更自主的方向。", "question": "你已经为自己建立了什么？" },
+    "reversed": { "keywords": ["依赖", "不安全感", "向外证明"], "meaning": "表面独立，内心不安，或者依赖外在的东西来证明价值。", "career": "经济压力，或过度依赖某个收入来源。", "relationship": "用物质替代情感连接。", "self": "你的价值，不等于你拥有的东西。", "crossroads": "别为了安全感放弃自主。", "question": "没有外在的东西，你如何感到安心？" }
+  },
+  {
+    "id": "ten-of-pentacles", "nameZh": "星币十", "nameEn": "Ten of Pentacles", "number": 10,
+    "upright": { "keywords": ["长久", "传承", "稳固"], "meaning": "长期积累带来的稳固与富足，关乎家庭与传承。", "career": "长期稳定的事业基础。", "relationship": "家庭稳固，有长远打算。", "self": "你在为长久的生活打基础。", "crossroads": "选那个能让你长期扎根的地方。", "question": "你想为未来的自己留下什么？" },
+    "reversed": { "keywords": ["家庭压力", "财务问题", "传统束缚"], "meaning": "家庭或长期规划里有压力，或者传统的期待让你喘不过气。", "career": "家里的期待和你的选择有冲突。", "relationship": "家庭事务影响了关系。", "self": "你不必完全按家里的期待生活。", "crossroads": "区分“家人希望的”和“我想要的”。", "question": "你的选择里，有多少是为了满足家人？" }
+  },
+  {
+    "id": "page-of-pentacles", "nameZh": "星币侍从", "nameEn": "Page of Pentacles", "number": 11,
+    "upright": { "keywords": ["学习", "踏实", "新计划"], "meaning": "认真踏实地开始学习，或开始一个新计划。", "career": "新工作、新课程、新技能。", "relationship": "一个踏实的新开始。", "self": "一步一步来，你在打基础。", "crossroads": "先学习，再做决定。", "question": "你现在最想学的是什么？" },
+    "reversed": { "keywords": ["拖延", "不够专注", "只想不做"], "meaning": "计划很好却迟迟不行动，或者学了很多却不去用。", "career": "学习停留在收藏夹里。", "relationship": "承诺没有落实。", "self": "你在拖延什么？", "crossroads": "光想不做，选择不会自己变清楚。", "question": "你收藏了却从没打开的是什么？" }
+  },
+  {
+    "id": "knight-of-pentacles", "nameZh": "星币骑士", "nameEn": "Knight of Pentacles", "number": 12,
+    "upright": { "keywords": ["稳健", "可靠", "坚持"], "meaning": "稳扎稳打，一步一个脚印，可靠而有耐心。", "career": "踏实推进，慢就是快。", "relationship": "可靠、忠诚的伴侣。", "self": "你的坚持会慢慢积累出结果。", "crossroads": "选那个稳妥的方案也没关系。", "question": "哪件事你可以每天推进一点点？" },
+    "reversed": { "keywords": ["停滞", "过于保守", "无聊"], "meaning": "太过保守而停滞，或者日复一日让人厌倦。", "career": "一成不变，让你失去了动力。", "relationship": "关系陷入了例行公事。", "self": "稳定变成了困住。", "crossroads": "稳定很好，但也问问自己是否还在成长。", "question": "你的生活里，哪部分需要一点变化？" }
+  },
+  {
+    "id": "queen-of-pentacles", "nameZh": "星币王后", "nameEn": "Queen of Pentacles", "number": 13,
+    "upright": { "keywords": ["务实", "照顾", "丰足"], "meaning": "务实又温暖，能把生活和身边的人照顾得很好。", "career": "兼顾事业和生活，务实高效。", "relationship": "温暖、可靠，懂得照顾人。", "self": "照顾好你的身体和生活环境。", "crossroads": "选那个让生活更踏实的方向。", "question": "你怎样照顾自己的日常？" },
+    "reversed": { "keywords": ["失衡", "过度操劳", "忽视自己"], "meaning": "照顾了所有人，唯独忘了自己。", "career": "工作和家庭两头忙，顾不上自己。", "relationship": "付出变成了牺牲。", "self": "你也需要被照顾。", "crossroads": "别把自己放在最后。", "question": "谁在照顾你？" }
+  },
+  {
+    "id": "king-of-pentacles", "nameZh": "星币国王", "nameEn": "King of Pentacles", "number": 14,
+    "upright": { "keywords": ["稳定", "成就", "善用资源"], "meaning": "通过长期经营获得稳定与成就，善于管理资源。", "career": "事业有成，善于经营。", "relationship": "可靠，能给人安全感。", "self": "你有能力为自己建立稳固的生活。", "crossroads": "用长期价值来衡量这个选择。", "question": "十年后，你希望自己建立起什么？" },
+    "reversed": { "keywords": ["物质至上", "固执", "控制"], "meaning": "太看重物质与地位，或者固执地守着旧方式。", "career": "只看收入，忽视了成长和意义。", "relationship": "用物质衡量关系。", "self": "成功的定义不止一种。", "crossroads": "别只用钱来做这个决定。", "question": "除了钱，你还想从这个选择中得到什么？" }
+  }
+]

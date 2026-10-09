@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ace-of-swords", "nameZh": "宝剑王牌", "nameEn": "Ace of Swords", "number": 1,
+    "upright": { "keywords": ["清晰", "真相", "突破"], "meaning": "思路突然清晰，像一把剑劈开迷雾。", "career": "找到了问题的关键，可以果断推进。", "relationship": "需要一次真诚、直接的沟通。", "self": "你看清了自己真正的想法。", "crossroads": "一个清楚的判断正在形成，相信它。", "question": "如果只用一句话说出真相，会是什么？" },
+    "reversed": { "keywords": ["混乱", "误判", "言语伤人"], "meaning": "想法混乱，或者真话说得太锋利，伤到了人。", "career": "信息混乱，先理清再决定。", "relationship": "沟通中有话说重了。", "self": "想得太多，反而更迷糊。", "crossroads": "把想法写下来，会比在脑中打转更清楚。", "question": "你脑子里转了很久的那个想法，写下来是什么？" }
+  },
+  {
+    "id": "two-of-swords", "nameZh": "宝剑二", "nameEn": "Two of Swords", "number": 2,
+    "upright": { "keywords": ["僵持", "回避", "两难"], "meaning": "蒙住眼睛，不愿面对选择，暂时维持着平衡。", "career": "在两个选项之间僵持不下。", "relationship": "回避冲突，假装一切正常。", "self": "你在用“不看”来保护自己。", "crossroads": "摘下眼罩，看看你真正在回避的是什么。", "question": "你不愿看的那个事实是什么？" },
+    "reversed": { "keywords": ["被迫选择", "信息过载", "打破僵局"], "meaning": "僵局被打破，不得不做出选择，或者信息太多让人更乱。", "career": "再拖下去，别人会替你做选择。", "relationship": "回避不下去了，需要面对。", "self": "继续犹豫的压力，已经让你承受不住了。", "crossroads": "选一个，然后看自己的第一反应是松了口气，还是失落。", "question": "如果抛一枚硬币，你希望它落在哪一面？" }
+  },
+  {
+    "id": "three-of-swords", "nameZh": "宝剑三", "nameEn": "Three of Swords", "number": 3,
+    "upright": { "keywords": ["心痛", "伤害", "真相之痛"], "meaning": "一段让人心痛的经历或真相，痛苦是真实的。", "career": "被否定或受挫，允许自己难过。", "relationship": "失望、背叛或分离带来的伤痛。", "self": "你受伤了，需要被好好安放。", "crossroads": "痛苦会影响判断，先疗伤再决定。", "question": "那份伤痛，需要被怎样照顾？" },
+    "reversed": { "keywords": ["疗愈", "释怀", "旧伤"], "meaning": "伤口在慢慢愈合，或者旧伤还没有真正过去。", "career": "从挫折中慢慢恢复。", "relationship": "开始原谅，或者旧伤被再次触碰。", "self": "你在一点点释怀。", "crossroads": "别让旧伤决定新的选择。", "question": "你准备好放下那份痛了吗？" }
+  },
+  {
+    "id": "four-of-swords", "nameZh": "宝剑四", "nameEn": "Four of Swords", "number": 4,
+    "upright": { "keywords": ["休息", "恢复", "暂停"], "meaning": "是时候停下来休息了，恢复之后才有力气继续。", "career": "适当休假，或放慢节奏。", "relationship": "给彼此一些空间。", "self": "休息是必要的，不是软弱。", "crossroads": "先休息，再决定。", "question": "你上一次真正放松是什么时候？" },
+    "reversed": { "keywords": ["焦躁", "停不下来", "重新出发"], "meaning": "想休息却停不下来，或者已经休息够了，准备回到行动中。", "career": "过度疲劳，再不休息会出问题。", "relationship": "冷静期该结束了。", "self": "你的心静不下来。", "crossroads": "休息好了，就可以开始行动了。", "question": "是什么让你无法真正停下来？" }
+  },
+  {
+    "id": "five-of-swords", "nameZh": "宝剑五", "nameEn": "Five of Swords", "number": 5,
+    "upright": { "keywords": ["输赢之争", "代价", "不值得的胜利"], "meaning": "赢了争论，却失去了更重要的东西。", "career": "竞争中可能伤了人际关系。", "relationship": "为了赢而吵，伤害了彼此。", "self": "问问自己：这场仗值得打吗？", "crossroads": "有些胜利，代价太大。", "question": "你想要的是赢，还是被理解？" },
+    "reversed": { "keywords": ["和解", "放下", "反思"], "meaning": "意识到冲突的代价，愿意放下或和解。", "career": "修补关系，重新合作。", "relationship": "有道歉与和解的可能。", "self": "放下“必须是对的”执念。", "crossroads": "退一步，看看真正重要的是什么。", "question": "如果不需要证明自己是对的，你会怎么做？" }
+  },
+  {
+    "id": "six-of-swords", "nameZh": "宝剑六", "nameEn": "Six of Swords", "number": 6,
+    "upright": { "keywords": ["过渡", "离开", "走向平静"], "meaning": "正在离开动荡，驶向更平静的水域。", "career": "转换到一个更好的环境。", "relationship": "走出困难期，关系趋于平稳。", "self": "你在从困境中慢慢走出来。", "crossroads": "离开可能就是答案，平静就在前方。", "question": "你正在离开的是什么？" },
+    "reversed": { "keywords": ["走不了", "问题如影随形", "抗拒过渡"], "meaning": "想离开却走不了，或者问题跟着你到了新地方。", "career": "换了环境，问题依旧。", "relationship": "旧问题没解决，又被带进了新阶段。", "self": "有些东西，搬家也会带着走。", "crossroads": "离开之前，先想清楚要带走什么、留下什么。", "question": "有什么问题，你换了地方也没摆脱？" }
+  },
+  {
+    "id": "seven-of-swords", "nameZh": "宝剑七", "nameEn": "Seven of Swords", "number": 7,
+    "upright": { "keywords": ["策略", "迂回", "隐瞒"], "meaning": "用策略或迂回的方式达成目标，也可能有人不够坦诚。", "career": "需要聪明的策略，也要留意不透明的信息。", "relationship": "有所隐瞒或保留。", "self": "你是不是在逃避面对某件事？", "crossroads": "别只看表面，问清楚隐藏的条件。", "question": "这件事里，有没有人（包括你自己）没说实话？" },
+    "reversed": { "keywords": ["坦白", "被揭穿", "良心不安"], "meaning": "隐瞒的东西浮出水面，或者你不想再骗自己了。", "career": "是时候坦诚面对了。", "relationship": "秘密被发现，或者终于坦白。", "self": "停止自我欺骗。", "crossroads": "诚实地承认你真实的动机。", "question": "你最想对自己承认的是什么？" }
+  },
+  {
+    "id": "eight-of-swords", "nameZh": "宝剑八", "nameEn": "Eight of Swords", "number": 8,
+    "upright": { "keywords": ["困住", "自我设限", "无力感"], "meaning": "感觉被困住了，但很多束缚来自自己的想法。", "career": "觉得没有出路，其实还有选项没看到。", "relationship": "感到被困在关系里。", "self": "限制性的信念在困住你。", "crossroads": "列出所有可能，哪怕看起来很荒唐。", "question": "是什么让你觉得自己“没得选”？" },
+    "reversed": { "keywords": ["挣脱", "看到出路", "释放"], "meaning": "开始意识到束缚可以解开，找到了出口。", "career": "找到了新的可能性。", "relationship": "走出困局。", "self": "你在挣脱自我设限。", "crossroads": "你比自己以为的更自由。", "question": "如果不再相信那个限制，你会做什么？" }
+  },
+  {
+    "id": "nine-of-swords", "nameZh": "宝剑九", "nameEn": "Nine of Swords", "number": 9,
+    "upright": { "keywords": ["焦虑", "失眠", "担忧"], "meaning": "深夜里的担忧被放大，想象往往比现实更可怕。", "career": "工作压力让你睡不好。", "relationship": "对关系充满担忧。", "self": "焦虑在夜里格外沉重。", "crossroads": "白天再想一遍，事情可能没那么糟。", "question": "让你睡不着的那件事，最坏的结果是什么？你能承受吗？" },
+    "reversed": { "keywords": ["焦虑缓解", "求助", "走出噩梦"], "meaning": "焦虑开始缓解，或者你愿意向人求助了。", "career": "压力开始释放。", "relationship": "说出担忧，关系反而更近。", "self": "你在走出最黑暗的时刻。", "crossroads": "找人聊聊，会帮你看清。", "question": "有谁可以听你说说那些担忧？" }
+  },
+  {
+    "id": "ten-of-swords", "nameZh": "宝剑十", "nameEn": "Ten of Swords", "number": 10,
+    "upright": { "keywords": ["触底", "结束", "最坏已过"], "meaning": "跌到了最低点，但这也意味着最坏的已经过去。", "career": "一件事彻底结束了，可以重新开始。", "relationship": "一段关系走到了尽头。", "self": "你可能很痛，但这是谷底，也是转折。", "crossroads": "这条路已经走到头，可以考虑新的方向了。", "question": "如果这真的是最低点，接下来会往哪里走？" },
+    "reversed": { "keywords": ["恢复", "重新站起来", "不愿放手"], "meaning": "从谷底慢慢爬起来，或者还不愿接受结束。", "career": "慢慢恢复，重建信心。", "relationship": "接受结束，开始疗愈。", "self": "你在重新站起来。", "crossroads": "别回头去捡已经结束的东西。", "question": "重新站起来，你需要什么支持？" }
+  },
+  {
+    "id": "page-of-swords", "nameZh": "宝剑侍从", "nameEn": "Page of Swords", "number": 11,
+    "upright": { "keywords": ["好奇", "观察", "求知"], "meaning": "带着好奇心观察和学习，思维敏锐。", "career": "学习新知识，收集信息。", "relationship": "想了解对方，多提问。", "self": "保持好奇，多问为什么。", "crossroads": "先多了解信息，再做决定。", "question": "关于这件事，你还需要知道什么？" },
+    "reversed": { "keywords": ["急于下结论", "传言", "说话冲动"], "meaning": "信息不全就下结论，或者说话太冲。", "career": "别在不了解全貌时表态。", "relationship": "话说出口之前，先想一想。", "self": "你可能在用想象填补信息的空白。", "crossroads": "别凭传言做决定。", "question": "你的判断里，有多少是推测？" }
+  },
+  {
+    "id": "knight-of-swords", "nameZh": "宝剑骑士", "nameEn": "Knight of Swords", "number": 12,
+    "upright": { "keywords": ["果断", "冲锋", "直接"], "meaning": "思路清晰，行动果断，直奔目标。", "career": "迅速行动，抓住机会。", "relationship": "直接表达你的想法。", "self": "你知道自己想要什么。", "crossroads": "想清楚了，就果断行动。", "question": "你还在犹豫什么？" },
+    "reversed": { "keywords": ["鲁莽", "冲撞", "不顾后果"], "meaning": "冲得太快，忽略了他人的感受和后果。", "career": "急于推进，可能树敌。", "relationship": "言辞锋利，伤人。", "self": "速度不等于正确。", "crossroads": "慢一点，考虑后果。", "question": "你的急迫，是来自目标，还是来自焦虑？" }
+  },
+  {
+    "id": "queen-of-swords", "nameZh": "宝剑王后", "nameEn": "Queen of Swords", "number": 13,
+    "upright": { "keywords": ["清醒", "独立", "直言"], "meaning": "头脑清醒，界限分明，能直率地说出真相。", "career": "用理性和专业赢得尊重。", "relationship": "坦诚、清醒，有自己的边界。", "self": "经历让你变得清醒和独立。", "crossroads": "理性地分析一遍，你会得出清楚的判断。", "question": "如果完全理性地看，你会怎么判断？" },
+    "reversed": { "keywords": ["冷漠", "尖刻", "封闭"], "meaning": "用理性筑起高墙，变得冷漠或尖刻。", "career": "过于挑剔，让人难以合作。", "relationship": "情感上过于疏离。", "self": "你可能在用理性保护一颗受过伤的心。", "crossroads": "理性之外，也问问你的感受。", "question": "你的冷静背后，藏着什么感受？" }
+  },
+  {
+    "id": "king-of-swords", "nameZh": "宝剑国王", "nameEn": "King of Swords", "number": 14,
+    "upright": { "keywords": ["理性", "权威", "判断"], "meaning": "用理性和原则做出清晰的判断。", "career": "适合做决策者，做专业的判断。", "relationship": "理性、公正，但可能缺少一些温度。", "self": "你有能力冷静地分析自己的处境。", "crossroads": "用客观的标准来做这个决定。", "question": "如果是一位你信任的智者，他会怎么判断？" },
+    "reversed": { "keywords": ["冷酷", "操控", "滥用权威"], "meaning": "理性变成了冷酷，或者权威被滥用。", "career": "面对专断的上级或制度，先保护好自己。", "relationship": "一方用道理压人。", "self": "别只用逻辑审判自己。", "crossroads": "别被看似有道理的说法绑架。", "question": "有谁在用“道理”让你感到不舒服？" }
+  }
+]

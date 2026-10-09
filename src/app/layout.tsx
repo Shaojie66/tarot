@@ -1,29 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "此刻三张牌",
+  title: { default: "此刻三张牌", template: "%s · 此刻三张牌" },
   description: "抽三张牌，和自己聊两分钟。自我反思工具，不预测未来。",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#15131b",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="zh-CN"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="zh-CN" className="h-full">
+      <body className="flex min-h-full flex-col">
+        <header className="border-b border-line">
+          <nav className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3 text-sm">
+            <Link href="/" className="font-serif text-base tracking-wide">
+              此刻三张牌
+            </Link>
+            <Link href="/cards" className="text-muted hover:text-ink">
+              牌义百科
+            </Link>
+          </nav>
+        </header>
+        <div className="flex flex-1 flex-col">{children}</div>
+      </body>
     </html>
   );
 }

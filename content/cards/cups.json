@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ace-of-cups", "nameZh": "圣杯王牌", "nameEn": "Ace of Cups", "number": 1,
+    "upright": { "keywords": ["新的情感", "敞开", "爱"], "meaning": "情感的源泉正在涌出，适合敞开心去感受和连接。", "career": "找到真正让你心动的工作内容。", "relationship": "新的感情，或关系里的新开始。", "self": "对自己温柔一点，情绪是可以流动的。", "crossroads": "跟着让你心动的方向走一走。", "question": "什么让你感到被爱？" },
+    "reversed": { "keywords": ["封闭", "情感枯竭", "压抑"], "meaning": "情感被堵住了，或者一直在付出却没有被滋养。", "career": "工作让你没感觉了。", "relationship": "心门关上了，害怕再次受伤。", "self": "你可能在压抑某种情绪。", "crossroads": "先感受清楚自己的情绪，再做决定。", "question": "你最近在压着哪种情绪？" }
+  },
+  {
+    "id": "two-of-cups", "nameZh": "圣杯二", "nameEn": "Two of Cups", "number": 2,
+    "upright": { "keywords": ["连接", "相互吸引", "合作"], "meaning": "两个人之间平等的连接，彼此看见，彼此回应。", "career": "一段好的合作关系正在形成。", "relationship": "互相吸引，彼此尊重。", "self": "和自己和解。", "crossroads": "这个选择里，有一个重要的人值得考虑进去。", "question": "你身边谁真正“看见”了你？" },
+    "reversed": { "keywords": ["失衡", "疏离", "误解"], "meaning": "关系不再对等，或者彼此的频率对不上了。", "career": "合作出现分歧，需要重新对齐。", "relationship": "一方付出更多，或沟通出现了裂缝。", "self": "你可能在和自己的某一部分对抗。", "crossroads": "别只为一个人做决定，也要为自己。", "question": "这段关系里，你得到的回应够吗？" }
+  },
+  {
+    "id": "three-of-cups", "nameZh": "圣杯三", "nameEn": "Three of Cups", "number": 3,
+    "upright": { "keywords": ["友谊", "庆祝", "支持"], "meaning": "和朋友在一起，分享快乐，也彼此支持。", "career": "团队氛围好，合作愉快。", "relationship": "社交生活丰富，朋友是你的支持系统。", "self": "允许自己享受快乐。", "crossroads": "有朋友在的地方，会让你更有力量。", "question": "你上一次和朋友开怀大笑是什么时候？" },
+    "reversed": { "keywords": ["疏远", "社交消耗", "小圈子"], "meaning": "社交带来消耗，或者和朋友之间有了距离。", "career": "团队里有小圈子或闲话。", "relationship": "第三方介入，或朋友之间有摩擦。", "self": "社交太多，反而让你更孤独。", "crossroads": "想想你是真的喜欢那里，还是怕离开朋友。", "question": "哪一段友谊需要你重新经营？" }
+  },
+  {
+    "id": "four-of-cups", "nameZh": "圣杯四", "nameEn": "Four of Cups", "number": 4,
+    "upright": { "keywords": ["倦怠", "冷淡", "视而不见"], "meaning": "对眼前的一切提不起兴趣，可能因此错过了新的东西。", "career": "工作让你厌倦，但机会可能就在旁边。", "relationship": "关系进入了平淡期。", "self": "情绪低迷，对什么都没兴趣。", "crossroads": "不满足的感受值得认真对待，但先看看身边有什么被忽略了。", "question": "有什么递到你面前的东西，被你忽视了？" },
+    "reversed": { "keywords": ["重新投入", "走出低谷", "醒来"], "meaning": "开始从冷漠中走出来，重新对生活产生兴趣。", "career": "重新找到工作的动力。", "relationship": "愿意重新投入这段关系。", "self": "你开始醒过来了。", "crossroads": "新的兴趣，可能就是方向的线索。", "question": "最近有什么让你重新有了兴趣？" }
+  },
+  {
+    "id": "five-of-cups", "nameZh": "圣杯五", "nameEn": "Five of Cups", "number": 5,
+    "upright": { "keywords": ["失落", "遗憾", "悲伤"], "meaning": "为失去的东西难过，但身后还有没倒下的杯子。", "career": "失败或失去带来打击，允许自己难过。", "relationship": "分开、遗憾或失望。", "self": "你在悲伤，这很正常。", "crossroads": "难过之后，看看还剩下什么。", "question": "在失去之外，你还拥有什么？" },
+    "reversed": { "keywords": ["接受", "放下", "走出悲伤"], "meaning": "开始接受失去，慢慢往前走。", "career": "从失败中汲取经验。", "relationship": "原谅，然后放下。", "self": "你在愈合。", "crossroads": "可以开始考虑新的可能了。", "question": "这次失去教会了你什么？" }
+  },
+  {
+    "id": "six-of-cups", "nameZh": "圣杯六", "nameEn": "Six of Cups", "number": 6,
+    "upright": { "keywords": ["回忆", "怀旧", "纯真"], "meaning": "过去的美好回忆浮现，也许能提醒你最初的自己。", "career": "回到你最初热爱的事情。", "relationship": "旧人旧情，或纯真简单的相处。", "self": "和内心的那个小孩重新连接。", "crossroads": "回想一下，小时候的你想成为什么样的人？", "question": "什么时候你最无忧无虑？" },
+    "reversed": { "keywords": ["困在过去", "美化回忆", "向前看"], "meaning": "太沉溺于过去，或者终于准备好放下旧日。", "career": "别用过去的方式应对现在的问题。", "relationship": "和旧人纠缠，或拿过去和现在比较。", "self": "过去不会回来，但你可以带着它往前走。", "crossroads": "别因为怀念过去而拒绝改变。", "question": "你怀念的，是过去，还是当时的自己？" }
+  },
+  {
+    "id": "seven-of-cups", "nameZh": "圣杯七", "nameEn": "Seven of Cups", "number": 7,
+    "upright": { "keywords": ["幻想", "选项太多", "诱惑"], "meaning": "选项太多、太美好，难以分辨哪些是真实的。", "career": "很多机会看起来都很好，需要一一验证。", "relationship": "把对方理想化，或在多个可能之间犹豫。", "self": "白日梦很美，但需要落地。", "crossroads": "把每个选项拿到现实里检验一下。", "question": "这些选项里，哪个是你真正能拿到的？" },
+    "reversed": { "keywords": ["清醒", "聚焦", "做出选择"], "meaning": "幻想退去，你开始看清什么才是真正重要的。", "career": "能够聚焦到一个方向了。", "relationship": "看清了关系真实的样子。", "self": "你在从幻想回到现实。", "crossroads": "现在是做出选择的时候了。", "question": "去掉幻想之后，你还想要什么？" }
+  },
+  {
+    "id": "eight-of-cups", "nameZh": "圣杯八", "nameEn": "Eight of Cups", "number": 8,
+    "upright": { "keywords": ["离开", "寻找更多", "放下"], "meaning": "即使已经拥有不少，你仍感到缺了什么，于是选择离开去寻找。", "career": "离开一个看起来不错、却不再适合你的地方。", "relationship": "从无法满足你的关系中走出来。", "self": "你在寻找更深的意义。", "crossroads": "想离开的感觉是真实的，值得认真对待。", "question": "你在寻找的那个“更多”，具体是什么？" },
+    "reversed": { "keywords": ["犹豫离开", "舍不得", "逃避"], "meaning": "想走却舍不得，或者在用离开来逃避问题。", "career": "不确定离开对不对，先弄清你在逃离什么。", "relationship": "想放手，又放不下。", "self": "离开解决不了问题，除非你知道为什么离开。", "crossroads": "问清楚：我是在走向什么，还是在逃离什么？", "question": "你想离开的，是环境，还是某种感受？" }
+  },
+  {
+    "id": "nine-of-cups", "nameZh": "圣杯九", "nameEn": "Nine of Cups", "number": 9,
+    "upright": { "keywords": ["满足", "心愿", "享受"], "meaning": "心愿实现后的满足感，你可以好好享受此刻。", "career": "得到了想要的东西，享受成果。", "relationship": "关系让你满意、幸福。", "self": "允许自己感到满足。", "crossroads": "你想要的，可能已经在手里了。", "question": "你现在拥有的，哪些是曾经许过的愿？" },
+    "reversed": { "keywords": ["不满足", "空虚", "向外填补"], "meaning": "得到了却不快乐，或者用外在的东西填补内心的空。", "career": "达成目标后，反而感到空虚。", "relationship": "关系看起来不错，却缺少真正的满足。", "self": "你想要的，也许不是你以为的那样。", "crossroads": "重新问自己：我真正想要的是什么？", "question": "什么东西你得到了，却没让你快乐？" }
+  },
+  {
+    "id": "ten-of-cups", "nameZh": "圣杯十", "nameEn": "Ten of Cups", "number": 10,
+    "upright": { "keywords": ["和谐", "家庭", "情感圆满"], "meaning": "情感上的圆满与和谐，归属与爱都在。", "career": "工作与生活达到和谐。", "relationship": "稳定、幸福，有共同的愿景。", "self": "你感受到深深的归属。", "crossroads": "选那个让你和重要的人更靠近的方向。", "question": "对你来说，“幸福”具体是什么画面？" },
+    "reversed": { "keywords": ["家庭矛盾", "期待落差", "不和谐"], "meaning": "理想中的圆满和现实有差距，家庭或亲密关系里有张力。", "career": "工作挤压了家庭生活。", "relationship": "对关系的期待与现实不符。", "self": "别用别人的幸福模板要求自己。", "crossroads": "家人的期待和你的想法冲突时，先理清各自的需要。", "question": "你理想中的幸福，是你自己的，还是别人给你的？" }
+  },
+  {
+    "id": "page-of-cups", "nameZh": "圣杯侍从", "nameEn": "Page of Cups", "number": 11,
+    "upright": { "keywords": ["敏感", "直觉", "情感萌芽"], "meaning": "一个温柔敏感的信号，可能是新的情感，也可能是灵感。", "career": "创意灵感涌现，留意它。", "relationship": "新的情感萌芽，或一个温柔的消息。", "self": "接纳自己的敏感，它也是天赋。", "crossroads": "跟着心里那个小小的声音走走看。", "question": "你心里那个小小的声音在说什么？" },
+    "reversed": { "keywords": ["情绪化", "不成熟", "容易受伤"], "meaning": "情绪起伏大，容易被小事伤到。", "career": "太在意别人的反应，影响了判断。", "relationship": "情感表达还不够成熟。", "self": "你的情绪需要被照顾，但别让它主导一切。", "crossroads": "情绪平稳后再做决定。", "question": "最近什么小事让你特别难受？" }
+  },
+  {
+    "id": "knight-of-cups", "nameZh": "圣杯骑士", "nameEn": "Knight of Cups", "number": 12,
+    "upright": { "keywords": ["浪漫", "追随内心", "邀请"], "meaning": "追随内心的召唤，带着理想和浪漫前行。", "career": "追求有意义、有热情的工作。", "relationship": "浪漫的邀约，或真诚的表白。", "self": "你在追随自己的心。", "crossroads": "选那个让你心动的选项，但看清它的现实。", "question": "你的心在邀请你去哪里？" },
+    "reversed": { "keywords": ["不切实际", "情绪多变", "承诺不足"], "meaning": "理想太过浪漫，现实感不足，或者情绪来得快去得快。", "career": "只有热情，没有计划。", "relationship": "甜言蜜语多，实际行动少。", "self": "你可能在逃避现实。", "crossroads": "心动之外，也要看看可行性。", "question": "你的梦想，落地的第一步是什么？" }
+  },
+  {
+    "id": "queen-of-cups", "nameZh": "圣杯王后", "nameEn": "Queen of Cups", "number": 13,
+    "upright": { "keywords": ["共情", "温柔", "情绪智慧"], "meaning": "能深深共情他人，也能温柔地照顾自己的情绪。", "career": "你的共情力，本身就是一种专业能力。", "relationship": "体贴、包容的爱。", "self": "你懂得倾听自己的感受。", "crossroads": "相信你的感受会给你答案。", "question": "如果温柔地问问自己，你现在感觉怎样？" },
+    "reversed": { "keywords": ["过度共情", "被情绪淹没", "失去边界"], "meaning": "太在乎别人的感受，把自己淹没了。", "career": "承接了太多别人的情绪。", "relationship": "失去自我，只为对方而活。", "self": "先照顾好自己，再照顾别人。", "crossroads": "别让别人的情绪替你做决定。", "question": "你最近替谁承担了不属于你的情绪？" }
+  },
+  {
+    "id": "king-of-cups", "nameZh": "圣杯国王", "nameEn": "King of Cups", "number": 14,
+    "upright": { "keywords": ["情绪稳定", "包容", "成熟"], "meaning": "能感受情绪，却不被情绪控制，成熟而包容。", "career": "冷静处理人际问题，是团队的稳定器。", "relationship": "成熟、可靠，懂得包容。", "self": "你可以既感受情绪，又保持平衡。", "crossroads": "冷静下来后，你的直觉会更准。", "question": "在情绪和理智之间，你能找到怎样的平衡？" },
+    "reversed": { "keywords": ["压抑情绪", "情绪失控", "冷漠"], "meaning": "把情绪压得太深，或者突然失控。", "career": "表面冷静，内心翻涌。", "relationship": "情感上的疏离或操控。", "self": "压下去的情绪，会以别的方式冒出来。", "crossroads": "别假装自己不在乎。", "question": "你一直装作不在乎的是什么？" }
+  }
+]

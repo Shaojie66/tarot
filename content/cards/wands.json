@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ace-of-wands", "nameZh": "权杖王牌", "nameEn": "Ace of Wands", "number": 1,
+    "upright": { "keywords": ["灵感", "热情", "新机会"], "meaning": "一股新的冲劲出现了，像一颗火种，等着你去点燃。", "career": "新项目或新想法，值得马上动手试试。", "relationship": "新的吸引，或重新燃起的热情。", "self": "你重新找回了想做点什么的劲头。", "crossroads": "让你心动的那个方向，可以先迈出试探的一步。", "question": "最近什么事让你眼睛一亮？" },
+    "reversed": { "keywords": ["拖延", "热情消退", "起步受阻"], "meaning": "有想法却点不着火，或者热情来得快去得也快。", "career": "先别追求完美开局，做一个粗糙的版本。", "relationship": "热度降了，需要新的互动方式。", "self": "动力不足时，从最小的一步开始。", "crossroads": "等冲动消退后再看，它是否还吸引你。", "question": "是什么在浇灭你的热情？" }
+  },
+  {
+    "id": "two-of-wands", "nameZh": "权杖二", "nameEn": "Two of Wands", "number": 2,
+    "upright": { "keywords": ["规划", "远眺", "选方向"], "meaning": "你站在原地看向远方，心里已经有了想法，接下来要决定往哪走。", "career": "制定更长远的计划，评估向外拓展的可能。", "relationship": "在考虑这段关系的未来。", "self": "你想要的，比现在拥有的更大。", "crossroads": "现在的位置安稳，但你心里已经在看外面了。", "question": "五年后的你，希望站在哪里？" },
+    "reversed": { "keywords": ["害怕未知", "计划不周", "犹豫不前"], "meaning": "想走出去却害怕离开舒适区，或者计划还不够具体。", "career": "计划停留在想象里，缺少第一步。", "relationship": "双方对未来的规划不一致。", "self": "担心选错，所以一直不选。", "crossroads": "把“想去”拆成可以验证的小步骤。", "question": "什么让你一直停在原地？" }
+  },
+  {
+    "id": "three-of-wands", "nameZh": "权杖三", "nameEn": "Three of Wands", "number": 3,
+    "upright": { "keywords": ["拓展", "等待回音", "视野"], "meaning": "你已经出发，现在是等待成果、看向更远处的时候。", "career": "前期投入开始有回音，可以考虑更大的版图。", "relationship": "关系在成长，或在异地中彼此等待。", "self": "你的视野正在打开。", "crossroads": "往外走的选择，开始显现出价值。", "question": "你已经播下的种子里，哪一颗最值得等待？" },
+    "reversed": { "keywords": ["延迟", "视野受限", "失望"], "meaning": "期待的结果迟迟不来，或者计划遇到了阻碍。", "career": "进展慢于预期，调整预期，也调整策略。", "relationship": "等待让人焦虑，需要更多沟通。", "self": "你可能把目光放得太窄了。", "crossroads": "回头看看，是不是方向本身需要修正。", "question": "如果结果比预期晚一年，你还会坚持吗？" }
+  },
+  {
+    "id": "four-of-wands", "nameZh": "权杖四", "nameEn": "Four of Wands", "number": 4,
+    "upright": { "keywords": ["庆祝", "安定", "归属"], "meaning": "一个值得庆祝的阶段，有了暂时的安稳和归属感。", "career": "达成了一个里程碑，好好庆祝一下。", "relationship": "稳定、欢乐，可能走向更正式的阶段。", "self": "你找到了让自己安心的地方。", "crossroads": "这里能给你归属感，这一点很重要。", "question": "什么地方或什么人，让你有“回家”的感觉？" },
+    "reversed": { "keywords": ["不安定", "缺少归属", "过渡期"], "meaning": "环境或关系里缺少安定感，你正处在过渡期。", "career": "团队或环境让你没有归属感。", "relationship": "关系中的安全感不足。", "self": "你在寻找一个可以停靠的地方。", "crossroads": "归属感可以是选择的重要条件，别忽视它。", "question": "你在哪里最不像个外人？" }
+  },
+  {
+    "id": "five-of-wands", "nameZh": "权杖五", "nameEn": "Five of Wands", "number": 5,
+    "upright": { "keywords": ["竞争", "冲突", "摩擦"], "meaning": "各方意见在碰撞，有摩擦，也有成长的可能。", "career": "竞争激烈，想清楚你真正要赢的是什么。", "relationship": "小争执频繁，背后可能是没说清的需求。", "self": "内心有好几个想法在吵架。", "crossroads": "别人的意见很多，先分辨哪些真的和你有关。", "question": "这场争执里，你真正在意的是什么？" },
+    "reversed": { "keywords": ["回避冲突", "和解", "内耗"], "meaning": "冲突在平息，或者表面平静、暗中内耗。", "career": "回避分歧，不会让问题消失。", "relationship": "学会好好吵架，比不吵更重要。", "self": "停止和自己较劲。", "crossroads": "不必说服所有人，你只需要说服自己。", "question": "你在回避哪一次必要的对话？" }
+  },
+  {
+    "id": "six-of-wands", "nameZh": "权杖六", "nameEn": "Six of Wands", "number": 6,
+    "upright": { "keywords": ["认可", "成功", "自信"], "meaning": "你的努力被看见了，可以自信地走在前面。", "career": "获得认可或晋升，好好享受它。", "relationship": "被欣赏、被肯定。", "self": "承认自己做得不错，这不是骄傲。", "crossroads": "你已经有底气做出选择了。", "question": "你最近做成了什么，却没好好肯定自己？" },
+    "reversed": { "keywords": ["怕被评价", "未被看见", "自我怀疑"], "meaning": "过于在意别人的评价，或者努力暂时没有被认可。", "career": "认可迟到了，不代表你做得不好。", "relationship": "期待被看见，却没有得到回应。", "self": "外界的掌声，不是唯一的衡量。", "crossroads": "别为了面子做选择。", "question": "如果没有人看见，你还会这样选吗？" }
+  },
+  {
+    "id": "seven-of-wands", "nameZh": "权杖七", "nameEn": "Seven of Wands", "number": 7,
+    "upright": { "keywords": ["坚守", "捍卫", "立场"], "meaning": "有压力也有质疑，但你有值得守住的东西。", "career": "坚持你的专业判断，守住自己的位置。", "relationship": "为关系或自己的边界站出来。", "self": "你可以坚持自己的想法。", "crossroads": "别人不理解的选择，不见得是错的。", "question": "你最想守护的东西是什么？" },
+    "reversed": { "keywords": ["疲于应付", "想放弃", "被压倒"], "meaning": "防守太久让你很累，开始怀疑值不值得。", "career": "四面受敌时，想想哪些仗可以不打。", "relationship": "一直在辩解或防御，很累。", "self": "不必每件事都要证明自己。", "crossroads": "也许该问：这个阵地还值得守吗？", "question": "哪一场仗，你其实可以不打？" }
+  },
+  {
+    "id": "eight-of-wands", "nameZh": "权杖八", "nameEn": "Eight of Wands", "number": 8,
+    "upright": { "keywords": ["快速推进", "消息", "势头"], "meaning": "事情在加速，消息纷至沓来，适合顺势而动。", "career": "进展很快，及时回应、抓住势头。", "relationship": "联系频繁，关系进展迅速。", "self": "你的状态正在上升。", "crossroads": "机会来得快，准备好了就出发。", "question": "现在有什么事，正适合趁热打铁？" },
+    "reversed": { "keywords": ["延误", "仓促", "失去节奏"], "meaning": "事情卡住或拖延，或者推进太快导致失误。", "career": "等待回复让人焦躁，先做好手头的事。", "relationship": "信息错位，或者节奏不一致。", "self": "慌乱中容易出错，慢一点。", "crossroads": "别因为着急而选错。", "question": "你在急什么？" }
+  },
+  {
+    "id": "nine-of-wands", "nameZh": "权杖九", "nameEn": "Nine of Wands", "number": 9,
+    "upright": { "keywords": ["韧性", "坚持", "最后一程"], "meaning": "你已经很累了，但也已经走了很远。再撑一下，也记得保护自己。", "career": "坚持到最后，但注意别透支。", "relationship": "过去的伤让你有所防备。", "self": "你比自己想的更坚韧。", "crossroads": "已经走到这里，评估一下是坚持到底，还是及时止损。", "question": "是什么让你一路撑到了现在？" },
+    "reversed": { "keywords": ["精疲力尽", "防备过度", "想放弃"], "meaning": "你已经到了极限，或者因为受过伤而对一切都很戒备。", "career": "已经透支，需要休息或求助。", "relationship": "防备让人无法靠近你。", "self": "休息不是放弃。", "crossroads": "精疲力尽时，不适合做长期决定。", "question": "你现在需要的是坚持，还是休息？" }
+  },
+  {
+    "id": "ten-of-wands", "nameZh": "权杖十", "nameEn": "Ten of Wands", "number": 10,
+    "upright": { "keywords": ["重担", "责任", "过载"], "meaning": "你扛着太多东西，前进得很吃力。", "career": "任务太多，学会拒绝或分配。", "relationship": "一个人承担了关系中大部分的重量。", "self": "你不需要一个人扛下一切。", "crossroads": "选那个能让你卸下一些负担的方向。", "question": "你背着的东西里，哪一件可以放下？" },
+    "reversed": { "keywords": ["卸下", "放手", "到了边缘"], "meaning": "终于开始放下一些负担，或者已经快被压垮了。", "career": "是时候和人谈谈工作量了。", "relationship": "学会把责任分出去。", "self": "承认自己扛不住，是一种勇气。", "crossroads": "减负之后再判断方向，会清楚很多。", "question": "如果可以放下一件事，你会放下什么？" }
+  },
+  {
+    "id": "page-of-wands", "nameZh": "权杖侍从", "nameEn": "Page of Wands", "number": 11,
+    "upright": { "keywords": ["好奇", "探索", "新消息"], "meaning": "像一个充满好奇的新手，对新事物跃跃欲试。", "career": "学一项新技能，或接触一个新领域。", "relationship": "新的认识，有趣的开始。", "self": "用新手的心态去尝试。", "crossroads": "先去体验，而不是只在脑子里想。", "question": "你最近对什么感到好奇？" },
+    "reversed": { "keywords": ["三分钟热度", "不成熟", "迷茫"], "meaning": "想法很多但坚持不下来，或者不知道该把热情放在哪里。", "career": "每样都碰一下，却都没有深入。", "relationship": "热情来得快，去得也快。", "self": "对什么都有兴趣，又对什么都不确定。", "crossroads": "挑一件事坚持一个月，再判断。", "question": "哪件事，你愿意坚持一个月看看？" }
+  },
+  {
+    "id": "knight-of-wands", "nameZh": "权杖骑士", "nameEn": "Knight of Wands", "number": 12,
+    "upright": { "keywords": ["冲劲", "冒险", "激情"], "meaning": "充满能量地冲向目标，勇敢，也可能有些冲动。", "career": "大胆行动，适合开拓和冒险。", "relationship": "热烈的追求，激情四射。", "self": "你有一股想冲出去的劲。", "crossroads": "想走就走，但别忘了带上地图。", "question": "你愿意为什么冒一次险？" },
+    "reversed": { "keywords": ["冲动", "急躁", "半途而废"], "meaning": "行动太快、缺乏计划，容易虎头蛇尾。", "career": "急于求成，反而容易出错。", "relationship": "来得快的热情，也可能走得快。", "self": "你的冲动可能在替你做决定。", "crossroads": "冷静一晚再出发。", "question": "这个决定，是想清楚了，还是被一时情绪推着走？" }
+  },
+  {
+    "id": "queen-of-wands", "nameZh": "权杖王后", "nameEn": "Queen of Wands", "number": 13,
+    "upright": { "keywords": ["自信", "热情", "感染力"], "meaning": "温暖而自信，能用自己的热情带动身边的人。", "career": "你的魅力和主动性，会帮你打开局面。", "relationship": "自信、开朗，懂得表达爱。", "self": "相信自己身上的光。", "crossroads": "选那个能让你发光的地方。", "question": "你身上哪一点最能感染别人？" },
+    "reversed": { "keywords": ["嫉妒", "自我怀疑", "耗竭"], "meaning": "自信受挫，或者在照亮别人的过程中把自己耗尽了。", "career": "你可能在和他人的比较中失去了自己的节奏。", "relationship": "不安全感引发占有欲或嫉妒。", "self": "你对自己的要求太高了。", "crossroads": "别因为别人的选择而动摇。", "question": "你最近在和谁比较？" }
+  },
+  {
+    "id": "king-of-wands", "nameZh": "权杖国王", "nameEn": "King of Wands", "number": 14,
+    "upright": { "keywords": ["远见", "领导", "魄力"], "meaning": "有远见、有魄力，能把愿景变成行动。", "career": "适合主导项目，带领他人。", "relationship": "成熟、有担当。", "self": "你可以为自己的人生掌舵。", "crossroads": "用长远的眼光来做这个选择。", "question": "如果你是自己人生的领导者，你会做什么决定？" },
+    "reversed": { "keywords": ["专断", "急躁", "期望过高"], "meaning": "想掌控一切，或者对自己和他人要求过高。", "career": "独断专行，会失去支持。", "relationship": "控制欲影响了关系。", "self": "放下“必须做到最好”的执念。", "crossroads": "听听别人的意见，再做决定。", "question": "有什么是你一直想控制、其实控制不了的？" }
+  }
+]

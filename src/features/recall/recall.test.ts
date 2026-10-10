@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { addRecall, clearAllRecalls, dismissRecall, dueAfter, expiredRecalls, loadAll, markDone, removeRecallsForRecord } from "./recall";
+import { addRecall, clearAllRecalls, dismissRecall, dueAfter, expiredRecalls, loadAll, markDone, nextDueAt, removeRecallsForRecord, scheduleRecall, subscribe } from "./recall";
 
 const store = new Map<string, string>();
 vi.stubGlobal("localStorage", {
@@ -67,5 +67,41 @@ describe("recall", () => {
     addRecall(R1, 1);
     clearAllRecalls();
     expect(loadAll()).toHaveLength(0);
+  });
+
+  it("scheduleRecall：新建；已有（含已回看 / 已忽略）在同一条上改回 pending 并从此刻重算到期，不新增", () => {
+    const now = new Date(Date.UTC(2026, 9, 10));
+    const first = scheduleRecall(R1, 3, now)!;
+    expect(first.dueAt).toBe(dueAfter(3, now));
+    markDone(first.id);
+    const later = new Date(Date.UTC(2026, 9, 20));
+    const again = scheduleRecall(R1, 7, later)!;
+    expect(again.id).toBe(first.id);
+    expect(again).toMatchObject({ status: "pending", completedAt: null, dueAt: dueAfter(7, later) });
+    expect(loadAll()).toHaveLength(1);
+  });
+
+  it("多条到期按最早到期在前；nextDueAt 给出下一个还没到的时间点", () => {
+    const now = new Date(Date.UTC(2026, 9, 10));
+    store.set(
+      "tarot:recall:v1",
+      JSON.stringify([
+        { id: "recall-b-0001", recordId: R2, dueAt: "2026-10-09T00:00:00.000Z", status: "pending", createdAt: "2026-10-01T00:00:00.000Z", completedAt: null },
+        { id: "recall-a-0001", recordId: R1, dueAt: "2026-10-05T00:00:00.000Z", status: "pending", createdAt: "2026-10-01T00:00:00.000Z", completedAt: null },
+        { id: "recall-c-0001", recordId: "rec-000000000000000000000000003", dueAt: "2026-10-12T00:00:00.000Z", status: "pending", createdAt: "2026-10-01T00:00:00.000Z", completedAt: null },
+      ]),
+    );
+    expect(expiredRecalls(now).map((r) => r.id)).toEqual(["recall-a-0001", "recall-b-0001"]);
+    expect(nextDueAt(now)).toBe(Date.parse("2026-10-12T00:00:00.000Z"));
+  });
+
+  it("subscribe：本页写入会通知；取消订阅后不再通知", () => {
+    const listener = vi.fn();
+    const off = subscribe(listener);
+    addRecall(R1, 3);
+    expect(listener).toHaveBeenCalledTimes(1);
+    off();
+    addRecall(R2, 3);
+    expect(listener).toHaveBeenCalledTimes(1);
   });
 });

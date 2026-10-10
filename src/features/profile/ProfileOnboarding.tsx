@@ -24,12 +24,12 @@ export function ProfileOnboarding({ onDone, onSkip }: { onDone: () => void; onSk
         <h2 id="onboarding-title" className="font-serif text-xl">
           {step === "intent" ? "先花几秒定个方向" : step === "topics" ? "你常为哪类事来？" : "抽完想不想回来看一眼？"}
         </h2>
-        <p className="text-xs leading-relaxed text-muted">只问这一次，之后不再打扰你；答案只存在这台设备上，之后可以在“设置”里改。</p>
+        <p className="text-xs leading-relaxed text-muted">只问这一次，之后不再打扰你。偏好保存在这个浏览器里，之后可以在“设置”里改；选择 AI 解读时，这次想要的帮助也会发给你配置的模型。</p>
       </header>
 
       {step === "intent" && (
         <>
-          <p className="text-sm text-muted">这次想让牌帮你做什么？</p>
+          <p className="text-sm text-muted">通常更希望从这里获得什么帮助？</p>
           <div className="hairline">
             {INTENTS.map((it) => (
               <button

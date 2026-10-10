@@ -107,7 +107,7 @@ export function PerspectivePanel({ record, onSaved }: { record: ReadingRecord; o
 
       {ai && remaining.length > 0 && (
         <>
-          <p className="text-xs leading-relaxed text-muted">点下面任一个，会把你的问题、自解、牌面和之前给过的读法发送给模型 API（和“AI 辅助”一样）。</p>
+          <p className="text-xs leading-relaxed text-muted">点下面任一个，会把你的问题、自解、牌面、这次想要的帮助和之前给过的读法发送给模型 API（和“AI 辅助”一样）。</p>
           <div className="flex flex-wrap gap-2">
             {remaining.map((tone) => (
               <button

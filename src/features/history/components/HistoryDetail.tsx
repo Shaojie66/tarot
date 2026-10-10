@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CardImage } from "@/components/CardImage";
 import { getCard } from "@/features/cards/cards";
 import { TOPIC_LABELS } from "@/features/cards/schema";
@@ -16,6 +16,9 @@ import {
 } from "@/features/reading/contract";
 import { getSpread } from "@/features/reading/spread";
 import { PerspectivePanel } from "@/features/perspective/PerspectivePanel";
+import { markDone } from "@/features/recall/recall";
+import { RecordRecallPanel } from "@/features/recall/RecordRecallPanel";
+import { useRecordRecall } from "@/features/recall/useRecordRecall";
 import { SharePanel } from "@/features/share/SharePanel";
 import { deleteRecord, getRecord, updateReview } from "@/features/reading/storage";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime } from "../labels";
@@ -177,11 +180,20 @@ function Detail({ record, onChange, onDeleted }: { record: ReadingRecord; onChan
 
 function ReviewEditor({ record, onSaved }: { record: ReadingRecord; onSaved: (r: ReadingRecord) => void }) {
   const initial = record.review;
+  const recall = useRecordRecall(record.id);
+  const heading = useRef<HTMLHeadingElement>(null);
+  // 从到期提示进来（#review）：滚动并聚焦到“回看”区，不抢其他普通导航的焦点
+  useEffect(() => {
+    if (window.location.hash === "#review") {
+      heading.current?.focus();
+      heading.current?.scrollIntoView({ block: "start" });
+    }
+  }, []);
   const [moods, setMoods] = useState<Review["moods"]>(initial?.moods ?? []);
   const [note, setNote] = useState(initial?.note ?? "");
   const [status, setStatus] = useState<NonNullable<Review["followUp"]>["status"] | null>(initial?.followUp?.status ?? null);
   const [followNote, setFollowNote] = useState(initial?.followUp?.note ?? "");
-  const [state, setState] = useState<"idle" | "saving" | "saved" | "failed">("idle");
+  const [state, setState] = useState<"idle" | "saving" | "saved" | "failed" | "completed" | "completeFailed">("idle");
 
   const dirty =
     stableMoods(moods) !== stableMoods(initial?.moods ?? []) ||
@@ -194,8 +206,19 @@ function ReviewEditor({ record, onSaved }: { record: ReadingRecord; onSaved: (r:
     setMoods((cur) => (cur.includes(m) ? cur.filter((x) => x !== m) : cur.length >= 3 ? cur : [...cur, m]));
   }
 
-  async function save() {
+  const pending = recall?.status === "pending" ? recall : null;
+
+  /** 先确认回看内容保存，再结束提醒；两步分别报告，失败只重试没完成的那一步。 */
+  async function saveAndComplete() {
+    if (!pending) return;
     setState("saving");
+    if (dirty) {
+      if (!(await persist())) return setState("failed");
+    }
+    setState(markDone(pending.id) ? "completed" : "completeFailed");
+  }
+
+  async function persist(): Promise<boolean> {
     const now = new Date().toISOString();
     const empty = moods.length === 0 && !note.trim() && status === null;
     const review: Review | null = empty
@@ -208,18 +231,24 @@ function ReviewEditor({ record, onSaved }: { record: ReadingRecord; onSaved: (r:
         };
     try {
       onSaved(await updateReview(record.id, review));
-      setState("saved");
+      return true;
     } catch {
-      setState("failed");
+      return false;
     }
   }
 
+  async function save() {
+    setState("saving");
+    setState((await persist()) ? "saved" : "failed");
+  }
+
   return (
-    <section aria-labelledby="review-title" className="space-y-4">
-      <h3 id="review-title" className="font-serif text-lg">
+    <section id="review" aria-labelledby="review-title" className="space-y-4">
+      <h3 id="review-title" ref={heading} tabIndex={-1} className="font-serif text-lg outline-offset-4">
         回看
       </h3>
       <p className="text-xs text-muted">这些是你事后补的，和当时的解读、当时的决定分开存放，随时可以改。</p>
+      <RecordRecallPanel recordId={record.id} recall={recall} />
 
       <fieldset className="space-y-2">
         <legend className="text-sm">现在回头看，当时的心情（最多 3 个）</legend>
@@ -298,9 +327,16 @@ function ReviewEditor({ record, onSaved }: { record: ReadingRecord; onSaved: (r:
         <button type="button" disabled={!dirty || state === "saving"} onClick={() => void save()} className="rounded-full bg-accent px-5 py-1.5 text-bg disabled:opacity-40">
           保存回看
         </button>
+        {pending && (
+          <button type="button" disabled={state === "saving"} onClick={() => void saveAndComplete()} className="rounded-full border border-accent px-5 py-1.5 text-accent disabled:opacity-40">
+            保存回看并完成
+          </button>
+        )}
         <p role="status" className="text-sm text-muted" data-testid="review-status">
           {state === "saved" && "已保存"}
+          {state === "completed" && "已保存，这条提醒已结束"}
           {state === "failed" && "保存失败：浏览器存储不可用，内容还在这里，可以再试一次"}
+          {state === "completeFailed" && "回看内容已保存，但提醒没能结束。再点一次“保存回看并完成”只会重试这一步"}
         </p>
       </div>
     </section>

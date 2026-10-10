@@ -74,9 +74,11 @@ test("建档选了“3 天后”回读：保存后安排一条；到期时首页
   await page.goto("/history");
   await expect(page.getByTestId("recall-banner")).toBeVisible();
 
-  // 点“去看看”→ 记录详情
-  await page.getByTestId("recall-banner").getByRole("link", { name: "去看看" }).click();
-  await expect(page).toHaveURL(new RegExp(`/history/${recall.recordId}$`));
+  // 点“去回看”→ 记录详情的回看区（只打开，不改变状态）
+  await page.getByTestId("recall-banner").getByRole("link", { name: "去回看" }).click();
+  await expect(page).toHaveURL(new RegExp(`/history/${recall.recordId}#review$`));
+  await expect(page.getByRole("heading", { name: "回看", exact: true })).toBeFocused();
+  expect((await recalls(page))[0].status).toBe("pending");
 
   // 删除记录 → 回读被清掉，提示消失
   await page.getByRole("button", { name: "删除这条记录" }).click();
@@ -87,7 +89,73 @@ test("建档选了“3 天后”回读：保存后安排一条；到期时首页
   await expect(page.getByTestId("recall-banner")).toHaveCount(0);
 });
 
-test("忽略提示后不再出现", async ({ page }) => {
+async function latestRecordId(page: Page) {
+  return page.evaluate(
+    () =>
+      new Promise<string>((resolve) => {
+        indexedDB.open("tarot").onsuccess = (e) => {
+          const db = (e.target as IDBOpenDBRequest).result;
+          db.transaction("records").objectStore("records").getAll().onsuccess = (ev) => resolve((ev.target as IDBRequest).result.at(-1).id);
+        };
+      }),
+  );
+}
+
+/** 走完一次占卜，并把它的回读改成“已到期”（没有默认节奏时直接写一条）。 */
+async function readingWithDueRecall(page: Page) {
+  await openScenarios(page);
+  await page.getByRole("button", { name: "全部跳过，直接开始" }).click();
+  await finishReading(page);
+  const recordId = await latestRecordId(page);
+  await page.evaluate((id) => {
+    localStorage.setItem(
+      "tarot:recall:v1",
+      JSON.stringify([{ id: "recall-0001", recordId: id, dueAt: new Date(Date.now() - 1000).toISOString(), status: "pending", createdAt: new Date(Date.now() - 86_400_000).toISOString(), completedAt: null }]),
+    );
+  }, recordId);
+  await page.goto("/");
+  await expect(page.getByTestId("recall-banner")).toBeVisible();
+  return recordId;
+}
+
+test("到期提示“不再提醒”：永久结束，刷新后不再出现", async ({ page }) => {
+  await readingWithDueRecall(page);
+  await page.getByTestId("recall-banner").getByRole("button", { name: "不再提醒" }).click();
+  await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+  expect((await recalls(page))[0].status).toBe("dismissed");
+  await page.reload();
+  await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+});
+
+test("去回看 → 已回看：不要求写字，结束提醒，不改变“后来做了吗”", async ({ page }) => {
+  await readingWithDueRecall(page);
+  await page.getByTestId("recall-banner").getByRole("link", { name: "去回看" }).click();
+  await expect(page.getByTestId("recall-state")).toContainText("安排在");
+  await page.getByRole("button", { name: "已回看", exact: true }).click();
+  await expect(page.getByTestId("recall-state")).toContainText("已回看");
+  expect((await recalls(page))[0].status).toBe("done");
+  await expect(page.getByTestId("follow-up-view")).toHaveText("还没有记录");
+  await page.goto("/");
+  await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+});
+
+test("保存回看并完成：先存笔记再结束提醒；之后可以重新安排", async ({ page }) => {
+  await readingWithDueRecall(page);
+  await page.getByTestId("recall-banner").getByRole("link", { name: "去回看" }).click();
+  await page.getByLabel("回看笔记").fill("合成笔记：回头看，没那么急了");
+  await page.getByRole("button", { name: "保存回看并完成" }).click();
+  await expect(page.getByTestId("review-status")).toContainText("这条提醒已结束");
+  expect((await recalls(page))[0].status).toBe("done");
+  await page.reload();
+  await expect(page.getByLabel("回看笔记")).toHaveValue("合成笔记：回头看，没那么急了");
+  await page.getByRole("button", { name: "3 天后提醒我" }).click();
+  await expect(page.getByTestId("recall-state")).toContainText("安排在");
+  const [r] = await recalls(page);
+  expect(r.status).toBe("pending");
+  expect(await recalls(page)).toHaveLength(1); // 同一条，不新增
+});
+
+test("指向已不存在记录的提醒不会留下提示", async ({ page }) => {
   await page.goto("/");
   await page.evaluate(() => {
     localStorage.setItem(
@@ -96,11 +164,63 @@ test("忽略提示后不再出现", async ({ page }) => {
     );
   });
   await page.reload();
-  await expect(page.getByTestId("recall-banner")).toBeVisible();
-  await page.getByRole("button", { name: "先不管" }).click();
+  await expect.poll(async () => (await recalls(page)).length).toBe(0);
   await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+});
+
+test("另一个标签页处理了提醒，这一页的提示跟着消失", async ({ page, context }) => {
+  await readingWithDueRecall(page);
+  const other = await context.newPage();
+  await other.goto("/");
+  await other.getByTestId("recall-banner").getByRole("button", { name: "不再提醒" }).click();
+  await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+});
+
+test("保存后显示实际安排的回看时间，可以只对这一条取消；默认节奏不变", async ({ page }) => {
+  await openScenarios(page);
+  await page.getByRole("button", { name: "先不选，下一步" }).click();
+  await page.getByRole("button", { name: "下一步" }).click();
+  await page.getByRole("button", { name: /3 天后/ }).click();
+  await finishReading(page);
+  await expect(page.getByTestId("saved-recall")).toContainText("安排在");
+  await page.getByRole("button", { name: "不提醒这条" }).click();
+  await expect(page.getByTestId("recall-state")).toContainText("不再提醒");
+  expect((await recalls(page))[0].status).toBe("dismissed");
+  expect((await profile(page)).recallCadence).toBe("3days");
   await page.reload();
-  await expect(page.getByTestId("recall-banner")).toHaveCount(0);
+  expect(await recalls(page)).toHaveLength(1); // 刷新恢复结果也不会再新增或复活
+  expect((await recalls(page))[0].status).toBe("dismissed");
+});
+
+test("保存后把默认节奏改成一周，恢复出来的旧结果不会被补发提醒", async ({ page }) => {
+  await openScenarios(page);
+  await page.getByRole("button", { name: "全部跳过，直接开始" }).click();
+  await finishReading(page);
+  expect(await recalls(page)).toEqual([]);
+  await page.evaluate(() => localStorage.setItem("tarot:profile:v1", JSON.stringify({ onboarded: true, intent: null, topics: [], recallCadence: "7days" })));
+  await page.goto("/reading");
+  await expect(page.getByTestId("save-status")).toHaveText("已保存在这台设备的浏览器里");
+  expect(await recalls(page)).toEqual([]);
+});
+
+test("抽牌前可以“仅本次”调整想要的帮助：本次记录用它，下一次回到偏好", async ({ page }) => {
+  await openScenarios(page);
+  await page.getByRole("button", { name: "做个决定" }).click();
+  await page.getByRole("button", { name: "就这些，开始" }).click();
+  await page.getByRole("button", { name: "留在原地，还是换个方向？" }).click();
+  await expect(page.getByLabel(/这次想要的帮助/)).toHaveValue("decide");
+  await page.getByLabel(/这次想要的帮助/).selectOption("companion");
+  await page.getByRole("button", { name: "快速抽牌" }).click();
+  await page.getByRole("button", { name: "跳过" }).click();
+  await page.getByRole("button", { name: "本地解读" }).click();
+  await expect(page.getByTestId("save-status")).toHaveText("已保存在这台设备的浏览器里");
+  expect((await savedRequest(page)).intent).toBe("companion");
+  expect((await profile(page)).intent).toBe("decide"); // 偏好没变
+
+  // 下一次：回到偏好（做个决定）
+  await page.getByRole("button", { name: "再问一个问题" }).click();
+  await page.getByRole("button", { name: "留在原地，还是换个方向？" }).click();
+  await expect(page.getByLabel(/这次想要的帮助/)).toHaveValue("decide");
 });
 
 async function savedRequest(page: Page) {

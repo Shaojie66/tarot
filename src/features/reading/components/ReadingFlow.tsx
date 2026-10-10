@@ -25,8 +25,11 @@ import { orderScenarios, type ScenarioId } from "../scenarios";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
 import { clearSession, getDraftWritable, loadSession, saveFlowRecord, storeSession, subscribeDraftHealth } from "../storage";
 import { ProfileOnboarding } from "@/features/profile/ProfileOnboarding";
+import { INTENTS, INTENT_LABELS, type Intent } from "@/features/profile/intent";
 import { useProfile } from "@/features/profile/profile";
 import { addRecall } from "@/features/recall/recall";
+import { RecordRecallPanel } from "@/features/recall/RecordRecallPanel";
+import { useRecordRecall } from "@/features/recall/useRecordRecall";
 import { DrawTable } from "./DrawTable";
 import { ResultView } from "./ResultView";
 
@@ -72,8 +75,17 @@ export function ReadingFlow() {
   const inflight = useRef<AbortController | null>(null);
   /** 同步防重：state 来不及更新时的第二次点击也只会发出一个请求 */
   const busyRequest = useRef<number | null>(null);
-  /** 记录已创建的未来回读，避免 saveNonce 变化时重复创建 */
-  const recallCreated = useRef<Set<string>>(new Set());
+  /** 已处理过“要不要自动安排回读”的记录：新记录首次保存时只判断一次；恢复出来的旧结果不补发 */
+  const recallHandled = useRef<Set<string>>(new Set());
+  /** 默认节奏只在新记录首次保存那一刻取值，之后改默认不影响它 */
+  const cadenceRef = useRef(profile.recallCadence);
+  useEffect(() => {
+    cadenceRef.current = profile.recallCadence;
+  }, [profile.recallCadence]);
+  /** 自动安排回读失败的记录 id：记录已保存，提醒没保存 */
+  const [recallFailedFor, setRecallFailedFor] = useState<string | null>(null);
+  /** 仅本次的意图：undefined = 沿用偏好；在抽牌那一刻固定进请求与记录 */
+  const [intentOverride, setIntentOverride] = useState<Intent | undefined>(undefined);
 
   // 离开页面 / 组件卸载：中止进行中的解读请求
   useEffect(
@@ -94,6 +106,7 @@ export function ReadingFlow() {
         // 草稿里的选择是用户最近一次的操作，数据库写入可能还没落地（点完立刻刷新），所以以草稿为准；
         // 恢复后下面的保存 effect 会把它写回同一条记录。旧版草稿的默认选择已在迁移时降为“未决定”。
         const restored = saved;
+        if (restored.recordId) recallHandled.current.add(restored.recordId);
         if (!cancelled) dispatch({ type: "restore", state: restored });
       }
       if (!cancelled) setHydrated(true);
@@ -129,11 +142,11 @@ export function ReadingFlow() {
     })
       .then(() => {
         if (!stale) dispatch({ type: "saved" });
-        // 建档设了未来回读节奏时，保存成功即安排一次"回来看看当时的自己"
-        const cadenceDays = profile.recallCadence === "3days" ? 3 : profile.recallCadence === "7days" ? 7 : null;
-        if (cadenceDays !== null && !recallCreated.current.has(recordId)) {
-          recallCreated.current.add(recordId);
-          addRecall(recordId, cadenceDays);
+        // 正式记录保存成功后，才按当时的默认节奏为这条新记录安排一次“回来看看当时的自己”
+        if (!recallHandled.current.has(recordId)) {
+          recallHandled.current.add(recordId);
+          const cadenceDays = cadenceRef.current === "3days" ? 3 : cadenceRef.current === "7days" ? 7 : null;
+          if (cadenceDays !== null && !addRecall(recordId, cadenceDays)) setRecallFailedFor(recordId);
         }
       })
       .catch(() => !stale && dispatch({ type: "saveFailed" }));
@@ -142,7 +155,7 @@ export function ReadingFlow() {
     };
     // state 的其余字段在结果生成后不再变化
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hydrated, result, choice, recordId, createdAt, versions, saveNonce, profile.recallCadence]);
+  }, [hydrated, result, choice, recordId, createdAt, versions, saveNonce]);
 
   // 问题改写（有 key 时）。失败不阻塞流程，直接用原问题。
   useEffect(() => {
@@ -163,6 +176,7 @@ export function ReadingFlow() {
     inflight.current = null;
     busyRequest.current = null;
     clearSession();
+    setIntentOverride(undefined);
     dispatch({ type: "reset" });
   }, []);
 
@@ -215,8 +229,8 @@ export function ReadingFlow() {
       cards: drawCards({ count: spread.positions.length, allowReversed }),
       deckId: settings.deckId,
       allowReversed,
-      // “此刻”卡没有具体问题：陪伴语气；其余按建档 / 设置里选的意图（没选就是中性默认）
-      intent: state.scenario === "topicless" ? ("companion" as const) : profile.intent,
+      // 优先用户“仅本次”的选择；“此刻”卡没有具体问题，默认陪伴语气；其余按偏好里的意图（没选就是中性默认）
+      intent: intentOverride ?? (state.scenario === "topicless" ? ("companion" as const) : profile.intent),
     };
   }
 
@@ -277,6 +291,13 @@ export function ReadingFlow() {
       {state.cards || state.stage === "draw" ? (
         <section aria-label="抽牌" className="space-y-4">
           <QuestionBanner topic={state.topic} question={state.question} />
+          {!state.cards && (
+            <IntentLine
+              value={intentOverride ?? (state.scenario === "topicless" ? "companion" : profile.intent)}
+              inherited={intentOverride === undefined}
+              onChange={setIntentOverride}
+            />
+          )}
           <DrawTable
             spread={spread}
             deck={state.cards ? state.deckId : settings.deckId}
@@ -302,6 +323,7 @@ export function ReadingFlow() {
           source={state.generation.source}
           error={state.generation.error}
           sections={state.generation.sections}
+          intent={state.intent}
           onGenerate={generate}
           onCancel={cancel}
         />
@@ -320,6 +342,10 @@ export function ReadingFlow() {
           onAction={(status, text) => dispatch({ type: "setAction", status, text })}
           onRestart={restart}
         />
+      )}
+
+      {state.stage === "result" && state.result && state.saveStatus === "saved" && state.recordId && (
+        <SavedRecall recordId={state.recordId} failedAutoSchedule={recallFailedFor === state.recordId} />
       )}
 
       {state.stage !== "topic" && state.stage !== "result" && (
@@ -447,7 +473,7 @@ function QuestionStep({
         {aiAvailable ? (
           <>
             <p className="text-xs leading-relaxed text-muted">
-              选一种方式继续。<b>全程本地</b>：不调用模型，问题只留在你的浏览器里。<b>AI 辅助</b>：问题会发送给模型 API 做改写；之后解读时还会发送自解和牌面，服务端不保存。
+              选一种方式继续。<b>全程本地</b>：不调用模型，问题只留在你的浏览器里。<b>AI 辅助</b>：问题会发送给模型 API 做改写；之后解读时还会发送自解、牌面和这次想要的帮助（你的偏好或抽牌前的选择），服务端不保存。
             </p>
             <div className="flex flex-wrap gap-3">
               <button type="button" disabled={!question} onClick={() => onSubmit(question, "local")} className="rounded-full bg-accent px-5 py-2 text-bg disabled:opacity-40">
@@ -594,6 +620,7 @@ function GenerateStep({
   source,
   error,
   sections,
+  intent,
   onGenerate,
   onCancel,
 }: {
@@ -603,6 +630,7 @@ function GenerateStep({
   source: "ai" | "local" | null;
   error: ReadingErrorCode | null;
   sections: Partial<ReadingBody>;
+  intent: Intent | null;
   onGenerate: (source: "ai" | "local") => void;
   onCancel: () => void;
 }) {
@@ -660,9 +688,48 @@ function GenerateStep({
       </div>
       <p className="text-xs text-muted">
         {aiAvailable === false && "没有配置 API key：本地解读用牌义和规则模板组织，不联网调用模型。"}
-        {showAi && "AI 解读会把问题、自解和牌面发送给模型 API；本地解读不发送任何内容。"}
+        {showAi && `AI 解读会把问题、自解和牌面发送给模型 API${intent ? `，同时附上这次想要的帮助（${INTENT_LABELS[intent]}）` : ""}；本地解读不发送任何内容。`}
         {showAi && mode === "ai" && " 问题改写阶段已经发送过问题；这一步选本地解读不会再发送内容。"}
       </p>
+    </section>
+  );
+}
+
+/** 抽牌前显示这次想要的帮助；默认沿用偏好，“仅本次调整”只影响这一次，抽牌时固定。 */
+function IntentLine({ value, inherited, onChange }: { value: Intent | null; inherited: boolean; onChange: (intent: Intent | undefined) => void }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 text-sm">
+      <label htmlFor="intent-once" className="text-muted">
+        这次想要的帮助{inherited ? "（沿用你的偏好）" : "（仅本次）"}
+      </label>
+      <select
+        id="intent-once"
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value === "" ? undefined : (e.target.value as Intent))}
+        className="min-h-11 rounded-none border-0 border-b border-line bg-transparent py-1"
+      >
+        {value === null && <option value="">未选（中性默认）</option>}
+        {INTENTS.map((it) => (
+          <option key={it} value={it}>
+            {INTENT_LABELS[it]}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+/** 记录保存成功之后的回看安排：如实显示已安排的时间，可调整或取消；自动安排失败时明说。 */
+function SavedRecall({ recordId, failedAutoSchedule }: { recordId: string; failedAutoSchedule: boolean }) {
+  const recall = useRecordRecall(recordId);
+  return (
+    <section aria-label="回看提醒" className="hairline space-y-2 pt-5" data-testid="saved-recall">
+      {failedAutoSchedule && recall === null && (
+        <p role="alert" className="text-sm leading-relaxed">
+          记录已保存，回看提醒没能保存。可以在下面重新安排。
+        </p>
+      )}
+      <RecordRecallPanel recordId={recordId} recall={recall} variant="saved" />
     </section>
   );
 }

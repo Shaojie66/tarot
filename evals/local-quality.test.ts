@@ -40,7 +40,7 @@ describe.each(samples)("本地解读样本 %s", (_id, request) => {
 
   it("两种读法有不同的适用条件；行动有对象和完成标准；追问是开放式", () => {
     expect(result.interpretations[0]).not.toBe(result.interpretations[1]);
-    for (const r of result.interpretations) expect(r).toMatch(/时，/);
+    for (const r of result.interpretations) expect(r).toMatch(/时，|^如果/);
     expect(result.action.length).toBeGreaterThan(20);
     expect(result.question).toMatch(/？$/);
     expect(result.question).not.toMatch(/吗？$/);
@@ -162,13 +162,13 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
   const reqOf = (s: { topic: string; intent: string; cards: unknown }) => make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] });
   const run = (id: string) => buildLocalReading(reqOf(byId(id)));
 
-  it("样本命中哪个主张是确定的；3 个样本仍没有对应主张，回到 v2.1 的按位置路径", () => {
+  it("样本命中哪个主张是确定的；4 个样本仍没有对应主张，回到 v2.1 的按位置路径", () => {
     const focusOf = Object.fromEntries(data.samples.map((s) => [s.id, selectLocalFocus(reqOf(s))]));
     expect(focusOf).toEqual({
       "relationship-clarify-A": "invest-cooperate",
       "career-decide-B": "load-transition",
       "career-clarify": "small-trial",
-      "career-companion": "load-transition",
+      "career-companion": null, // v2.3：没有一张牌在讲过渡 / 收尾，不再套“负担与过渡”
       "relationship-decide": null,
       "relationship-companion": "settle-feelings",
       "self-clarify": null,
@@ -317,12 +317,61 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         expect(now.cards, s.id).toEqual(s.output.cards);
         expect(now.interpretations, s.id).toEqual(s.output.interpretations);
         expect(now.question, s.id).toBe(s.output.question);
-        if (req.intent === "companion") expect(now.action, s.id).toBe(s.output.action.replace(/做的时候留意：[^。]*。$/, ""));
-        else expect(now.action, s.id).toBe(s.output.action);
+        // 差异只允许两类：陪伴不再追加“做的时候留意”；v2.3 补上的“不紧急 / 有期限的事以期限为准”
+        const norm = (t: string) => t.replace(/做的时候留意：[^。]*。$/, "").replace(/；有期限的事以期限为准/g, "").replace(/不紧急可以延期的|不紧急的/g, (m) => (m.includes("延期") ? "可以延期的" : ""));
+        expect(norm(now.action), s.id).toBe(norm(s.output.action));
       }
     }
     // 5 个主张命中 13 个样本；其余 3 个仍是 v2.1 路径
-    expect(changed).toHaveLength(13);
-    expect(data.samples.length - changed.length).toBe(3);
+    expect(changed).toHaveLength(12);
+    expect(data.samples.length - changed.length).toBe(4);
+  });
+});
+
+describe("v2.3：口径与适用范围（针对第三轮风险审查）", () => {
+  it("主张里每张牌的关系句都带“可能 / 也许 / 或许”，不把牌义写成用户的状态", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    for (const focus of LOCAL_V2.focuses) {
+      for (const [tag, role] of Object.entries(focus.roles)) {
+        expect(role.relation, `${focus.id}/${tag}`).toMatch(/^(可能|也许|或许)/);
+        // 条件句（以“如果”开头）里的比较不算断言；其余写法里不得出现把牌义当成用户状态的措辞
+        if (!role.detail.startsWith("如果")) expect(`${role.relation}${role.detail}`, `${focus.id}/${tag}`).not.toMatch(/说明你|说明情绪|指出承诺|给出一个正在|比继续自责|比继续硬撑更有用|(?<!是否)已经偏(多|重)/);
+      }
+    }
+  });
+
+  it("命中主张的样本，整体里的关系句都有“可能”", () => {
+    for (const s of data.samples) {
+      const req = make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] });
+      if (!selectLocalFocus(req)) continue;
+      const hits = buildLocalReading(req).overall.match(/可能/g) ?? [];
+      expect(hits.length, s.id).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it("凡是建议延期 / 暂放 / 挪到明天的行动或读法，都带“不紧急”或“有期限的事以期限为准”", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    const delays = /延期|延后|暂放|先放着|挪到明天|明天再|明天同一时间/;
+    for (const focus of LOCAL_V2.focuses) {
+      const texts = [...Object.values(focus.actions), ...focus.branches, ...Object.values(focus.topicActions ?? {}).flatMap((a) => Object.values(a ?? {})), ...(focus.turns ?? []).flatMap((t) => Object.values(t.actions ?? {}))];
+      for (const t of texts) if (delays.test(t)) expect(t, `${focus.id}: ${t}`).toMatch(/期限|不紧急/);
+    }
+  });
+
+  it("v2.1 路径（逐牌内容）里的延期 / 顺延 / 留到明天，同样带“不紧急”或“有期限的事以期限为准”", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    const delays = /延期|延后|顺延|暂放|先放着|挪到明天|明天再|明天同一时间|其余.*明天|留到明天/;
+    for (const [id, card] of Object.entries(LOCAL_V2.cards)) {
+      for (const side of [card.upright, card.reversed]) {
+        for (const t of [side.obstacle.check, side.next.check, ...Object.values(side.next.actions)]) if (delays.test(t)) expect(t, id).toMatch(/期限|不紧急/);
+      }
+    }
+  });
+
+  it("“负担与过渡”只在有一张牌真的在讲过渡 / 收尾时命中，且读法不预设用户要开始变动", () => {
+    const withoutTransition = make({ topic: "career", intent: "companion", cards: [{ cardId: "queen-of-wands", position: 0, reversed: true }, { cardId: "four-of-swords", position: 1, reversed: false }, { cardId: "two-of-pentacles", position: 2, reversed: true }] });
+    expect(selectLocalFocus(withoutTransition)).not.toBe("load-transition");
+    const withTransition = buildLocalReading(make({ topic: "career", intent: "clarify", cards: [{ cardId: "two-of-pentacles", position: 0, reversed: false }, { cardId: "four-of-swords", position: 1, reversed: false }, { cardId: "six-of-swords", position: 2, reversed: true }] }));
+    for (const r of withTransition.interpretations) expect(r).toMatch(/^如果正在考虑一个变动/);
   });
 });

@@ -75,6 +75,8 @@ const focusSchema = z.strictObject({
   claim: z.string().min(4),
   weights: z.record(z.string(), z.number().int().min(1)),
   need: z.number().int().min(1),
+  /** 适用范围：至少一张牌带有这些标记之一才命中（比如“过渡”类主张要求有一张牌真的在讲过渡 / 收尾） */
+  requireAny: z.array(z.string()).optional(),
   roles: z.record(z.string(), z.strictObject({ relation: z.string().min(4), detail: z.string().min(8) })),
   stance: z.strictObject({ clarify: z.string().min(4), decide: z.string().min(4), companion: z.string().min(4) }),
   branches: z.tuple([z.string().min(8), z.string().min(8)]),
@@ -142,6 +144,7 @@ function pickFocus(request: ReadingRequest): PickedFocus | null {
     });
     const contributing = roleTags.filter((t) => t !== null).length;
     const score = roleTags.reduce((sum, t) => sum + (t ? focus.weights[t] : 0), 0);
+    if (focus.requireAny && !sides.some((side) => side.tags.some((t) => focus.requireAny!.includes(t)))) continue;
     if (contributing >= 2 && score >= focus.need && (!best || score > best.score)) best = { picked: { focus, roleTags }, score };
   }
   return best?.picked ?? null;

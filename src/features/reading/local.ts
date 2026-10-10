@@ -47,16 +47,22 @@ export const LOCAL_TEMPLATE = templateSchema.parse(data);
 // 每张牌的每个朝向都写了：在“此刻 / 阻碍 / 下一步”三个位置上的贡献、两条核对路径的条件句、三种意图的行动和一个追问。
 // 三张牌都有 v2 内容才使用；缺任何一张就整体回退到上面的 v1 模板（不拼半新半旧）。
 // 本地规则不读取问题正文；问题和自解只作为用户自己的记录展示。
+const obstacleSchema = z.strictObject({ focus: z.string().min(4), text: z.string().min(8), check: z.string().min(8) });
+const actionsSchema = z.strictObject({ clarify: z.string().min(8), decide: z.string().min(8), companion: z.string().min(8) });
+const nextSchema = z.strictObject({
+  text: z.string().min(8),
+  check: z.string().min(8),
+  actions: actionsSchema,
+  question: z.string().min(4).endsWith("？"),
+});
+/** 个别牌在某些主题下语境会错配（比如关系问题读成职场协作），可以给该主题单独写变体；没写就用默认。 */
+const topicVariantSchema = z.strictObject({ gist: z.string().optional(), obstacle: obstacleSchema.optional(), next: z.strictObject({ text: z.string().optional(), check: z.string().optional(), actions: actionsSchema.optional(), question: z.string().optional() }).optional() });
 const sideV2Schema = z.strictObject({
   gist: z.string().min(2),
   situation: z.string().min(8),
-  obstacle: z.strictObject({ focus: z.string().min(4), text: z.string().min(8), check: z.string().min(8) }),
-  next: z.strictObject({
-    text: z.string().min(8),
-    check: z.string().min(8),
-    actions: z.strictObject({ clarify: z.string().min(8), decide: z.string().min(8), companion: z.string().min(8) }),
-    question: z.string().min(4).endsWith("？"),
-  }),
+  obstacle: obstacleSchema,
+  next: nextSchema,
+  byTopic: z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, topicVariantSchema.optional()])) as Record<Topic, z.ZodOptional<typeof topicVariantSchema>>).optional(),
 });
 const v2Schema = z.strictObject({
   version: z.string(),
@@ -100,31 +106,38 @@ function roles(count: number) {
 
 function buildV2(request: ReadingRequest): ReadingResult {
   const intent = request.intent ?? "clarify";
-  const where = LOCAL_V2.locative[request.topic];
+  const topic = request.topic;
+  const where = LOCAL_V2.locative[topic];
   const fillIn = (text: string) => text.replaceAll("{in}", where);
   const byPosition = [...request.cards].sort((a, b) => a.position - b.position);
   const [first, middle, last] = byPosition.map((c) => v2Side(c.cardId, c.reversed)!);
 
+  // 主题变体：阻碍位 / 下一步里该主题单独写过的部分覆盖默认
+  const gistOf = (side: SideV2) => side.byTopic?.[topic]?.gist ?? side.gist;
+  const obstacle = { ...middle.obstacle, ...middle.byTopic?.[topic]?.obstacle };
+  const nextVar = last.byTopic?.[topic]?.next;
+  const next = { ...last.next, ...nextVar, actions: { ...last.next.actions, ...nextVar?.actions } };
+
   const cards = byPosition.map((c, i) => {
-    const side = [first, middle, last][i];
-    const text = i === 0 ? side.situation : i === 1 ? side.obstacle.text : side.next.text;
+    const text = i === 0 ? first.situation : i === 1 ? obstacle.text : next.text;
     return { cardId: c.cardId, position: c.position, reversed: c.reversed, text: fillIn(text) };
   });
 
   const overall = [
     request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "",
-    `这组牌的重点是${middle.obstacle.focus}。`,
-    `从「${first.gist}」出发，卡在「${middle.gist}」，下一步指向「${last.gist}」。`,
-    LOCAL_V2.closing[intent],
+    `这组牌值得先核对的是：${obstacle.focus}。`,
+    `「${gistOf(first)}」是眼下的底色，「${gistOf(last)}」是可以先动的一步。`,
+    LOCAL_V2.closing[intent].replaceAll("{focus}", obstacle.focus).replaceAll("{next}", gistOf(last)),
   ].join("");
 
   return {
     source: "local",
     overall,
     cards,
-    interpretations: [fillIn(middle.obstacle.check), fillIn(last.next.check)],
-    action: fillIn(last.next.actions[intent]),
-    question: last.next.question,
+    interpretations: [fillIn(obstacle.check), fillIn(next.check)],
+    // 行动由末牌的动作决定，再带上阻碍牌的核对点，让行动和整体判断连在一起
+    action: `${fillIn(next.actions[intent])}做的时候留意：${obstacle.focus}。`,
+    question: next.question,
   };
 }
 

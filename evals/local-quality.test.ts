@@ -14,6 +14,8 @@ const samples = data.samples.map((s) => [s.id, make({ topic: s.topic as ReadingR
 
 const flat = (r: ReturnType<typeof buildLocalReading>) => [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("\n");
 /** 不应在普通完成结果里反复出现的固定免责 / 退缩句（LQ06：能力说明集中在来源处，选择权靠按钮） */
+/** AI 盲评指出的、凭空预设用户处境或情境的短语（不限于样本，扫描全部 v2 内容文本） */
+const PRESUPPOSED = ["刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升"];
 const BOILERPLATE = ["不是答案", "不替你做决定", "不替你决定", "只是一个建议", "不用今天决定", "不必告诉任何人"];
 
 describe.each(samples)("本地解读样本 %s", (_id, request) => {
@@ -28,7 +30,7 @@ describe.each(samples)("本地解读样本 %s", (_id, request) => {
   });
 
   it("首段先给观点（有“重点”句），不是牌名目录；没有固定免责套话", () => {
-    expect(result.overall).toMatch(/这组牌的重点是.+。/);
+    expect(result.overall).toMatch(/这组牌值得先核对的是：.+。/);
     for (const phrase of BOILERPLATE) expect(flat(result), phrase).not.toContain(phrase);
   });
 
@@ -79,9 +81,10 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
   });
 
   it("翻正逆位：同一张阻碍牌正位 / 逆位给出不同的重点", () => {
-    const r = buildLocalReading(withCards([["queen-of-wands", true], ["three-of-pentacles", false], ["page-of-pentacles", false]]));
-    expect(r.overall).not.toBe(r0.overall);
-    expect(r.interpretations[0]).not.toBe(r0.interpretations[0]);
+    const up = buildLocalReading(withCards([["queen-of-wands", true], ["four-of-swords", false], ["page-of-pentacles", false]]));
+    const rev = buildLocalReading(withCards([["queen-of-wands", true], ["four-of-swords", true], ["page-of-pentacles", false]]));
+    expect(rev.overall).not.toBe(up.overall);
+    expect(rev.interpretations[0]).not.toBe(up.interpretations[0]);
   });
 
   it("换主题：牌面解读与重点来自同一份内容，但行动里的对象随主题变化", () => {
@@ -91,7 +94,9 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
     const job = buildLocalReading(make({ topic: "career", intent: "clarify", cards }));
     expect(rel.action).toContain("这段关系里");
     expect(job.action).toContain("这份工作里");
-    expect(rel.cards).toEqual(job.cards);
+    // 首牌与末牌的说明不随主题变；阻碍位若该牌有主题变体则按主题改写（见下一条）
+    expect(rel.cards[0]).toEqual(job.cards[0]);
+    expect(rel.cards[2].text).toBe(job.cards[2].text);
   });
 
   it("换意图：行动与整体结尾变化，牌面说明不变；decide / companion 的行动不是同一句", () => {
@@ -112,6 +117,20 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
   });
 });
 
+describe("主题变体：个别牌在关系 / 去留主题下不套职场协作语境（AI 盲评指出的主题错配）", () => {
+  const cards = [{ cardId: "the-hermit", position: 0, reversed: true }, { cardId: "three-of-pentacles", position: 1, reversed: true }, { cardId: "six-of-swords", position: 2, reversed: false }] as ReadingRequest["cards"];
+  it("关系：重点说期待而不是分工；行动只涉及自己", () => {
+    const r = buildLocalReading(make({ topic: "relationship", intent: "clarify", cards }));
+    expect(r.overall).toContain("双方的期待有没有说清楚");
+    expect(r.overall).not.toContain("分工");
+    expect(r.action).not.toMatch(/联系|发消息|一起|对方回复/);
+  });
+  it("事业：仍按分工与约定", () => {
+    const r = buildLocalReading(make({ topic: "career", intent: "clarify", cards }));
+    expect(r.overall).toContain("约定有没有说清楚");
+  });
+});
+
 describe("回退：任一张牌没有 v2 内容，整体回退到 v1 模板，结果仍通过硬检查", () => {
   it("样稿牌 + 未写内容的牌", () => {
     const req = make({ cards: [{ cardId: "the-hermit", position: 0, reversed: false }, { cardId: "the-fool", position: 1, reversed: false }, { cardId: "page-of-pentacles", position: 2, reversed: false }] });
@@ -120,5 +139,13 @@ describe("回退：任一张牌没有 v2 内容，整体回退到 v1 模板，�
     expect(readingResultSchema.parse(r).source).toBe("local");
     expect(resultMatchesDraw(r, req)).toBe(true);
     expect(r).toEqual(buildLocalReading(req, { legacy: true }));
+  });
+});
+
+describe("v2 内容全文扫描", () => {
+  it("没有已被评审指出的预设短语", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    const text = JSON.stringify(LOCAL_V2.cards);
+    for (const phrase of PRESUPPOSED) expect(text, phrase).not.toContain(phrase);
   });
 });

@@ -5,7 +5,7 @@ import { writeFileSync } from "node:fs";
 import { describe, it } from "vitest";
 import { getCard } from "@/features/cards/cards";
 import { readingRequestSchema } from "@/features/reading/contract";
-import { buildLocalReading } from "@/features/reading/local";
+import { LOCAL_V2, buildLocalReading } from "@/features/reading/local";
 import data from "./local-quality/cases.json";
 
 const show = (r: ReturnType<typeof buildLocalReading>) =>
@@ -26,7 +26,7 @@ describe.skipIf(!process.env.PRINT_LOCAL_SAMPLES)("print local samples", () => {
       body.push(`## 样本 ${i + 1}｜${s.topicless ? "此刻（无具体问题）" : s.topic}｜意图 ${s.intent}\n\n牌：${cards}\n\n### 版本 1\n\n${show(a)}\n\n### 版本 2\n\n${show(b)}\n\n评分与偏好（填写）：偏好 □1 □2 □平；观点 / 三牌 / 主题 / 行动 / 语言 各 0–2：\n`);
       key.push(`| ${i + 1} | ${s.id} | 版本 1 = ${swap ? "新" : "旧"}，版本 2 = ${swap ? "旧" : "新"} |`);
     }
-    writeFileSync("docs/local-reading-samples-2026-10-10.md", `# 本地解读样本：旧版 vs 候选（盲看）\n\n> 16 个冻结样本（\`evals/local-quality/cases.json\`）。每例两个版本，顺序已打乱；**评分前不要看** \`local-reading-samples-key-2026-10-10.md\`。\n> 按 PRD 的 0–2 分逐项评分（观点明确、三牌关联、主题匹配、行动具体、语言直接），并选更偏好的版本。建议至少 12/16 偏好候选版（平局不算）。\n> 样本只用 12 张已写好内容的样稿牌；其余牌仍走旧模板。**评分时请注明评审人和人数；AI 预审不能当人工通过。**\n\n${body.join("\n---\n\n")}`);
-    writeFileSync("docs/local-reading-samples-key-2026-10-10.md", `# 盲看对照表（评分后再看）\n\n| # | 样本 | 版本对应 |\n|---|---|---|\n${key.join("\n")}\n`);
+    writeFileSync(`docs/local-reading-samples-${LOCAL_V2.version}.md`, `# 本地解读样本：旧版 vs 候选（盲看）\n\n> 16 个冻结样本（\`evals/local-quality/cases.json\`）。每例两个版本，顺序已打乱；**评分前不要看** \`local-reading-samples-key-${LOCAL_V2.version}.md\`。\n> 按 PRD 的 0–2 分逐项评分（观点明确、三牌关联、主题匹配、行动具体、语言直接），并选更偏好的版本。建议至少 12/16 偏好候选版（平局不算）。\n> 样本只用 12 张已写好内容的样稿牌；其余牌仍走旧模板。**评分时请注明评审人和人数；AI 预审不能当人工通过。**\n\n${body.join("\n---\n\n")}`);
+    writeFileSync(`docs/local-reading-samples-key-${LOCAL_V2.version}.md`, `# 盲看对照表（评分后再看）\n\n| # | 样本 | 版本对应 |\n|---|---|---|\n${key.join("\n")}\n`);
   });
 });

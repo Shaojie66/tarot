@@ -38,7 +38,7 @@ describe("runAiReading", () => {
       "action",
       "question",
     ]);
-    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v6", model: "mock-model" } });
+    expect(events.at(-1)).toMatchObject({ type: "result", result: { source: "ai" }, versions: { prompt: "v7", model: "mock-model" } });
     expect(provider.calls[0].prompt).toContain("cardId: the-tower | position: 0 | reversed: false");
     expect(provider.calls[0].jsonSchema).toBeDefined();
   });
@@ -238,7 +238,7 @@ describe("runPerspective（换个视角）", () => {
 
   it("通过校验：返回视角正文与版本（deep 模型、prompt v3），请求里带着视角与已给过的读法", async () => {
     const { outcome, provider } = await run(done(goodBody), "rational");
-    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v6", model: "mock-model" } });
+    expect(outcome).toMatchObject({ type: "ok", versions: { prompt: "v7", model: "mock-model" } });
     expect(provider.calls[0].tier).toBe("deep");
     expect(provider.calls[0].prompt).toContain("rational");
     expect(provider.calls[0].prompt).toContain(previous[0]);

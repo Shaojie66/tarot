@@ -60,19 +60,23 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
     expect(r.overall).not.toBe(r0.overall);
   });
 
+  // 以下几条对照用一个没有命中共同解释的组合做基线（走按位置组织的路径），其余路径见“共同解释”一节
+  const plainCards: [string, boolean][] = [["the-hermit", true], ["three-of-pentacles", true], ["six-of-swords", false]];
+  const plain = buildLocalReading(withCards(plainCards));
+
   it("换阻碍牌：重点句、阻碍位说明、第一种读法都变", () => {
-    const r = buildLocalReading(withCards([["queen-of-wands", true], ["four-of-swords", false], ["page-of-pentacles", false]]));
-    expect(r.overall).not.toBe(r0.overall);
-    expect(r.cards[1].text).not.toBe(r0.cards[1].text);
-    expect(r.interpretations[0]).not.toBe(r0.interpretations[0]);
-    expect(r.interpretations[1]).toBe(r0.interpretations[1]);
+    const r = buildLocalReading(withCards([["the-hermit", true], ["four-of-swords", false], ["six-of-swords", false]]));
+    expect(r.overall).not.toBe(plain.overall);
+    expect(r.cards[1].text).not.toBe(plain.cards[1].text);
+    expect(r.interpretations[0]).not.toBe(plain.interpretations[0]);
   });
 
-  it("换末牌：第二种读法、行动、追问都变", () => {
-    const r = buildLocalReading(withCards([["queen-of-wands", true], ["three-of-pentacles", true], ["knight-of-swords", false]]));
-    expect(r.interpretations[1]).not.toBe(r0.interpretations[1]);
-    expect(r.action).not.toBe(r0.action);
-    expect(r.question).not.toBe(r0.question);
+  it("换末牌：第二种读法、行动、追问都变（未命中共同解释的组合）", () => {
+    const r = buildLocalReading(withCards([["the-hermit", true], ["three-of-pentacles", true], ["knight-of-swords", true]]));
+    expect(selectLocalFocus(withCards([["the-hermit", true], ["three-of-pentacles", true], ["knight-of-swords", true]]))).toBeNull();
+    expect(r.interpretations[1]).not.toBe(plain.interpretations[1]);
+    expect(r.action).not.toBe(plain.action);
+    expect(r.question).not.toBe(plain.question);
   });
 
   it("换位置：同样三张牌换顺序，说明与重点随位置职责变化，牌 ID / 朝向仍精确对应位置", () => {
@@ -91,8 +95,8 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
   });
 
   it("换主题：牌面解读与重点来自同一份内容，但行动里的对象随主题变化", () => {
-    // 末牌隐士的行动写了“{in}”，随主题换成对应的对象
-    const cards = withCards([["queen-of-wands", true], ["three-of-pentacles", true], ["the-hermit", false]]).cards;
+    // “负担与过渡”的行动写了“{in}”，随主题换成对应的对象
+    const cards = withCards([["two-of-pentacles", false], ["four-of-swords", false], ["six-of-swords", true]]).cards;
     const rel = buildLocalReading(make({ topic: "relationship", intent: "clarify", cards }));
     const job = buildLocalReading(make({ topic: "career", intent: "clarify", cards }));
     expect(rel.action).toContain("这段关系里");
@@ -158,14 +162,26 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
   const reqOf = (s: { topic: string; intent: string; cards: unknown }) => make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] });
   const run = (id: string) => buildLocalReading(reqOf(byId(id)));
 
-  it("样本命中哪个主张是确定的：3 / 11 / 15 → 节奏与试验；12 / 13 → 热情与兼顾；其余回到 v2.1 路径", () => {
+  it("样本命中哪个主张是确定的；3 个样本仍没有对应主张，回到 v2.1 的按位置路径", () => {
     const focusOf = Object.fromEntries(data.samples.map((s) => [s.id, selectLocalFocus(reqOf(s))]));
-    expect(focusOf["career-clarify"]).toBe("small-trial");
-    expect(focusOf["crossroads-decide"]).toBe("small-trial");
-    expect(focusOf["topicless-3"]).toBe("small-trial");
-    expect(focusOf["crossroads-companion"]).toBe("warm-juggle");
-    expect(focusOf["topicless-1"]).toBe("warm-juggle");
-    expect(focusOf["relationship-clarify-A"]).toBeNull();
+    expect(focusOf).toEqual({
+      "relationship-clarify-A": "invest-cooperate",
+      "career-decide-B": "load-transition",
+      "career-clarify": "small-trial",
+      "career-companion": "load-transition",
+      "relationship-decide": null,
+      "relationship-companion": "settle-feelings",
+      "self-clarify": null,
+      "self-decide": "load-transition",
+      "self-companion": "settle-feelings",
+      "crossroads-clarify": "load-transition",
+      "crossroads-decide": "small-trial",
+      "crossroads-companion": "warm-juggle",
+      "topicless-1": "warm-juggle",
+      "topicless-2": "settle-feelings",
+      "topicless-3": "small-trial",
+      "topicless-4": null,
+    });
   });
 
   it("命中主张时：整体先给主张，再说三张牌各自怎么支持 / 制约 / 转折；两条读法围绕同一个分支条件", () => {
@@ -223,17 +239,43 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
     expect(b.cards[0].text).not.toBe(a.cards[0].text);
   });
 
-  it("已知局限：末牌换成不在这个主张里的牌，主张仍成立，行动不变；只有末牌自己的说明和整体里的关系句变化", () => {
-    // 这是当前规则的实际行为，不是理想行为：“下一步”位置的牌若与主张无关，行动仍由主张决定。
-    // 要让末牌改变行动，需要在步骤 4 里给主张增加“末牌相反时”的转折规则；此处先把现状写成测试，避免被误当成已经解决。
+  it("末牌与主张相反时有转折：热情与兼顾的末牌换成“果断的骑士”，整体补一句转折，行动换成可以慢慢来的版本", () => {
     const base = byId("topicless-1");
     const swapped = { ...base, cards: base.cards.map((c, i) => (i === 2 ? { ...c, cardId: "knight-of-swords" } : c)) };
     const a = buildLocalReading(reqOf(base));
     const b = buildLocalReading(reqOf(swapped));
-    expect(selectLocalFocus(reqOf(swapped))).toBe("warm-juggle");
-    expect(b.action).toBe(a.action);
+    expect(selectLocalFocus(reqOf(swapped))).toBe("warm-juggle"); // 主张仍成立：前两张牌支撑它
+    expect(b.overall).toContain("末牌的节奏偏急");
+    expect(b.action).not.toBe(a.action);
+    expect(b.action).toMatch(/慢慢/);
     expect(b.cards[2].text).not.toBe(a.cards[2].text);
-    expect(b.overall).toContain("带来「果断直接」这一层背景");
+  });
+
+  it("末牌转折不是万能：末牌换成与主张无关、也不相反的牌，行动仍由主张决定（已知局限，转折只覆盖编辑写明的相反标记）", () => {
+    const base = byId("topicless-1");
+    const swapped = { ...base, cards: base.cards.map((c, i) => (i === 2 ? { ...c, cardId: "the-hermit" } : c)) };
+    expect(buildLocalReading(reqOf(swapped)).action).toBe(buildLocalReading(reqOf(base)).action);
+  });
+
+  it("关系主题下“投入与配合”的行动只涉及自己，不预设联系对方或一起完成", () => {
+    const r = run("relationship-clarify-A");
+    expect(r.overall).toContain("这组牌的重点是让投入变成能说清楚的配合");
+    expect(r.action).not.toMatch(/一起|联系|发消息|对方回复/);
+    expect(r.action).toContain("只写你自己的部分");
+  });
+
+  it("“负担与过渡”不预设用户要走；decide 的行动在比较选项的代价", () => {
+    const r = run("career-decide-B");
+    expect(r.overall).toContain("先看清负担");
+    expect([r.overall, ...r.interpretations, r.action, r.question].join("")).not.toMatch(/把“走”之前|想走却没走/);
+    expect(r.action).toMatch(/每个选项/);
+  });
+
+  it("“安顿情绪”不预设有一件事让用户起伏，也不要求立刻判断", () => {
+    for (const id of ["relationship-companion", "self-companion", "topicless-2"]) {
+      const r = run(id);
+      expect([r.action, r.question].join(""), id).not.toMatch(/刚才那件小事|今天让你起伏最大/);
+    }
   });
 });
 
@@ -279,7 +321,8 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         else expect(now.action, s.id).toBe(s.output.action);
       }
     }
-    // 本阶段只有两个主张：命中的样本是内容原型的一部分，不是全部
-    expect(changed).toEqual(expect.arrayContaining(["career-clarify:small-trial", "crossroads-decide:small-trial", "topicless-3:small-trial", "crossroads-companion:warm-juggle", "topicless-1:warm-juggle"]));
+    // 5 个主张命中 13 个样本；其余 3 个仍是 v2.1 路径
+    expect(changed).toHaveLength(13);
+    expect(data.samples.length - changed.length).toBe(3);
   });
 });

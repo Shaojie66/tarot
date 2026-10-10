@@ -79,7 +79,11 @@ const focusSchema = z.strictObject({
   stance: z.strictObject({ clarify: z.string().min(4), decide: z.string().min(4), companion: z.string().min(4) }),
   branches: z.tuple([z.string().min(8), z.string().min(8)]),
   actions: actionsSchema,
+  /** 个别主题下语境不同的行动（比如关系主题里“一起完成”要改成只涉及自己），没写就用 actions */
+  topicActions: z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, actionsSchema.optional()])) as Record<Topic, z.ZodOptional<typeof actionsSchema>>).optional(),
   questions: z.strictObject({ clarify: z.string().endsWith("？"), decide: z.string().endsWith("？"), companion: z.string().endsWith("？") }),
+  /** 转折：末牌（“下一步”位置）带着与主张相反的标记时，补一句整体的转折，必要时换掉行动 */
+  turns: z.array(z.strictObject({ whenNext: z.array(z.string()), overall: z.string().min(8), actions: actionsSchema.optional() })).optional(),
 });
 type Focus = z.infer<typeof focusSchema>;
 
@@ -168,12 +172,18 @@ function buildFocused(request: ReadingRequest, { focus, roleTags }: PickedFocus)
     })
     .join("，");
 
+  // 末牌（下一步）的标记与主张相反时：补一句转折，并按需要换掉行动
+  const nextTags = sides[2].tags;
+  const turn = focus.turns?.find((t) => t.whenNext.some((tag) => nextTags.includes(tag)));
+  const baseActions = { ...focus.actions, ...focus.topicActions?.[request.topic] };
+  const action = fillIn((turn?.actions ?? baseActions)[intent]);
+
   return {
     source: "local",
-    overall: [request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "", `这组牌的重点是${focus.claim}。`, `${relation}。`, focus.stance[intent]].join(""),
+    overall: [request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "", `这组牌的重点是${focus.claim}。`, `${relation}。`, turn ? turn.overall : focus.stance[intent]].join(""),
     cards,
     interpretations: [fillIn(focus.branches[0]), fillIn(focus.branches[1])],
-    action: fillIn(focus.actions[intent]),
+    action,
     question: focus.questions[intent],
   };
 }

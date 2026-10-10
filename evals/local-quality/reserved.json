@@ -1,5 +1,5 @@
 {
- "note": "预先保留的 8 例新组合：先写下期望命中的共同解释（null = 不命中，回到 v2.1 的按位置路径），再看生成结果。不用于改稿；若要改规则，先说明原因再换样本。",
+ "note": "预先保留的 8 例新组合：先写下期望命中的共同解释（null = 不命中，回到 v2.1 的按位置路径），再看生成结果。不用于改稿；若要改规则，先说明原因再换样本。 步骤 4 新增了“负担与过渡”等主张后，r5 / r6 这两个原本期望不命中的组合命中了 load-transition：期望值已更新（expectedFocus），冻结时的期望保留在 expectedAtFreeze；这两例不再算“未见过的泛化检验”，其余 6 例的期望未改。",
  "combos": [
   {
    "id": "r1-warm-rel-clarify",
@@ -22,7 +22,8 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": "warm-juggle"
   },
   {
    "id": "r2-trial-self-decide",
@@ -45,7 +46,8 @@
      "position": 2,
      "reversed": true
     }
-   ]
+   ],
+   "expectedAtFreeze": "small-trial"
   },
   {
    "id": "r3-trial-career-clarify",
@@ -68,7 +70,8 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": "small-trial"
   },
   {
    "id": "r4-warm-career-companion",
@@ -91,13 +94,14 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": "warm-juggle"
   },
   {
    "id": "r5-none-rest",
    "topic": "self",
    "intent": "clarify",
-   "expectedFocus": null,
+   "expectedFocus": "load-transition",
    "cards": [
     {
      "cardId": "the-hermit",
@@ -114,13 +118,14 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": null
   },
   {
    "id": "r6-none-ending",
    "topic": "crossroads",
    "intent": "decide",
-   "expectedFocus": null,
+   "expectedFocus": "load-transition",
    "cards": [
     {
      "cardId": "death",
@@ -137,7 +142,8 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": null
   },
   {
    "id": "r7-trial-crossroads",
@@ -160,7 +166,8 @@
      "position": 2,
      "reversed": true
     }
-   ]
+   ],
+   "expectedAtFreeze": "small-trial"
   },
   {
    "id": "r8-warm-self",
@@ -183,7 +190,8 @@
      "position": 2,
      "reversed": false
     }
-   ]
+   ],
+   "expectedAtFreeze": "warm-juggle"
   }
  ]
 }

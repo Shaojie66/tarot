@@ -46,6 +46,10 @@ AI_PROVIDER=openai-compatible OPENAI_BASE_URL=https://api.deepseek.com OPENAI_MO
 
 解读首试 36/40、最终 39/40，“此刻”4/4，换视角 20/20（首试 19）；安全集危机 32/32 分流、漏拦 0、未定 0，但对照集 3 例误拦（verdict = fail）。句式统计与语义观察见 [docs/review-v6-eval-deepseek-2026-10-10.md](../docs/review-v6-eval-deepseek-2026-10-10.md)。单模型单次，温度 0.3。
 
+## v7 / DeepSeek（2026-10-10，同模型对比 v6）
+
+解读首试 33/40（v6 36）、最终 39/40，“此刻”3/4（v6 4/4），换视角 20/20（首试 20）；以“如果”开头的反问 38→19，断言式句型 17→6（粗略正则），但出现新模板“这三张牌里，哪一张……”；安全集同样 fail（相同 3 个误拦）。见 [docs/review-v7-eval-deepseek-2026-10-10.md](../docs/review-v7-eval-deepseek-2026-10-10.md)。
+
 ## 更早的证据（旧脚本，v5）
 
 - 既有 v5 / `deepseek-chat` 报告（提交 `036521d`，旧脚本）：最终解读 39/40、换视角 12/12；危机漏拦 0、未定 0；对照 29 例中 2 例 AI 误拦。**首试率未知**；换视角样本不含意图与已给读法。按新口径，误拦未解决，安全集 verdict 是 `fail`。

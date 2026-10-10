@@ -179,7 +179,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
       "crossroads-companion": "warm-juggle",
       "topicless-1": "warm-juggle",
       "topicless-2": "settle-feelings",
-      "topicless-3": "small-trial",
+      "topicless-3": null, // v2.5：陪伴时没有要做的决定，“做决定与做试验”不适用
       "topicless-4": null,
     });
   });
@@ -208,7 +208,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
   });
 
   it("陪伴：同一主张换成低负担动作，不强制写字 / 列清单 / 追加自查", () => {
-    for (const id of ["topicless-1", "topicless-3", "crossroads-companion"]) {
+    for (const id of ["topicless-1", "crossroads-companion"]) {
       const r = run(id);
       expect(r.action, id).not.toMatch(/写下|记下|列出|留意|核对|清单/);
       expect(r.action.length).toBeGreaterThan(15);
@@ -320,9 +320,9 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         expect(now.action, s.id).not.toContain("做的时候留意");
       }
     }
-    // 5 个主张命中 12 个样本；其余 4 个仍走按位置的路径
-    expect(changed).toHaveLength(12);
-    expect(data.samples.length - changed.length).toBe(4);
+    // 5 个主张命中 11 个样本；其余 5 个仍走按位置的路径
+    expect(changed).toHaveLength(11);
+    expect(data.samples.length - changed.length).toBe(5);
   });
 });
 
@@ -398,16 +398,57 @@ describe("v2.4：主题变体、雷同与逐牌差异", () => {
     expect(fourteen.overall).toContain("死神（逆位）可能在提示有一件该收尾的事还拖着");
   });
 
-  it("没有具体问题（陪伴）时，“节奏与试验”的读法不再预设“难以撤回的承诺”", () => {
+  it("陪伴意图下“节奏与试验”不适用：此刻（无问题）的样本回到按位置的路径，读法讲“等待还是硬推”，不预设“做决定”", () => {
+    const sample = data.samples.find((x) => x.id === "topicless-3")!;
+    const req = make({ topic: sample.topic as ReadingRequest["topic"], intent: sample.intent as ReadingRequest["intent"], cards: sample.cards as ReadingRequest["cards"] });
+    expect(selectLocalFocus(req)).toBeNull();
     const r = run("topicless-3");
-    expect(r.interpretations.join("")).not.toContain("难以撤回");
-    expect(r.interpretations[1]).toContain("五分钟");
+    expect(r.interpretations.join("")).toMatch(/等别人|等待|硬推/);
+    expect(r.overall + r.interpretations.join("")).not.toMatch(/做决定|难以撤回/);
   });
+
+  it("热情与兼顾的陪伴按末牌分：末牌是“热度”和“小喜欢”时行动与追问不同（样本 12 / 13 不再逐字相同）", () => {
+    const [a, b] = [run("crossroads-companion"), run("topicless-1")];
+    expect(a.action).not.toBe(b.action);
+    expect(a.question).not.toBe(b.question);
+  });
+
+  it("安顿与恢复：读法也跟着末牌变，三个样本两条读法互不相同", () => {
+    const three = [run("relationship-companion"), run("self-companion"), run("topicless-2")].map((r) => r.interpretations.join("|"));
+    expect(new Set(three).size).toBe(3);
+  });
+
 
   it("去留主题的“负担与过渡”读法讲两个选项的消耗，不预设“现有负担已经占满”", () => {
     const r = run("crossroads-clarify");
     expect(r.interpretations.join("")).not.toContain("现有负担已经占满");
     expect(r.interpretations[0]).toMatch(/两个选项/);
     expect(r.action.length).toBeLessThan(80);
+  });
+});
+
+describe("v2.5：延后类措辞的全文扫描（含牌说明、变体、转折）", () => {
+  it("focus 里任何字符串，只要建议先不处理 / 延后 / 等稳下来 / 明天再，就带“不紧急”或“有期限的事以期限为准”", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    const delays = /先别急着处理|不必急着去碰|等稳下来|等情绪缓一点再|暂放|延期|延后|顺延|挪到明天|明天再|明天同一时间|留到明天|其余.*明天/;
+    const strings: string[] = [];
+    const walk = (v: unknown) => {
+      if (typeof v === "string") strings.push(v);
+      else if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === "object") Object.values(v).forEach(walk);
+    };
+    walk(LOCAL_V2.focuses);
+    for (const t of strings) if (delays.test(t)) expect(t).toMatch(/期限|不紧急/);
+  });
+
+  it("未命中主张的整体不再用“这组牌里出现了「A」「B」和「C」”这类标签句，也不重复开头", () => {
+    for (const id of ["relationship-decide", "self-clarify", "topicless-4", "career-companion"]) {
+      const s = data.samples.find((x) => x.id === id)!;
+      const r = buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
+      expect(r.overall, id).not.toContain("这组牌里出现了");
+      expect(r.overall, id).toContain("下一步的方向：");
+      const focus = r.overall.match(/值得先核对的是：([^。]+)。/)?.[1];
+      if (focus) expect(r.overall.split(focus).length - 1, id).toBe(1);
+    }
   });
 });

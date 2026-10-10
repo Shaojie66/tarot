@@ -83,6 +83,8 @@ const focusSchema = z.strictObject({
   claim: z.string().min(4),
   weights: z.record(z.string(), z.number().int().min(1)),
   need: z.number().int().min(1),
+  /** 这些意图下不适用（比如陪伴时没有要做的决定，“做决定与做试验”就不成立），回到按位置的路径 */
+  excludeIntents: z.array(z.string()).optional(),
   /** 适用范围：至少一张牌带有这些标记之一才命中（比如“过渡”类主张要求有一张牌真的在讲过渡 / 收尾） */
   requireAny: z.array(z.string()).optional(),
   roles: z.record(z.string(), z.strictObject({ relation: z.string().min(4), detail: z.string().min(8) })),
@@ -98,7 +100,7 @@ const focusSchema = z.strictObject({
   /** 陪伴等意图下换一组读法 */
   intentBranches: z.record(z.string(), z.tuple([z.string(), z.string()])).optional(),
   /** 末牌（下一步）带着某个标记时，行动 / 追问按该标记换（让行动跟着最后一张牌，而不是千篇一律） */
-  nextVariants: z.record(z.string(), z.strictObject({ actions: z.record(z.string(), z.string()).optional(), questions: z.record(z.string(), z.string()).optional() })).optional(),
+  nextVariants: z.record(z.string(), z.strictObject({ actions: z.record(z.string(), z.string()).optional(), questions: z.record(z.string(), z.string()).optional(), branches: z.tuple([z.string(), z.string()]).optional() })).optional(),
   turns: z.array(z.strictObject({ whenNext: z.array(z.string()), overall: z.string().min(8), actions: actionsSchema.optional() })).optional(),
 });
 type Focus = z.infer<typeof focusSchema>;
@@ -158,6 +160,7 @@ function pickFocus(request: ReadingRequest): PickedFocus | null {
     });
     const contributing = roleTags.filter((t) => t !== null).length;
     const score = roleTags.reduce((sum, t) => sum + (t ? focus.weights[t] : 0), 0);
+    if (focus.excludeIntents?.includes(request.intent ?? "clarify")) continue;
     if (focus.requireAny && !sides.some((side) => side.tags.some((t) => focus.requireAny!.includes(t)))) continue;
     if (contributing >= 2 && score >= focus.need && (!best || score > best.score)) best = { picked: { focus, roleTags }, score };
   }
@@ -184,7 +187,7 @@ function buildFocused(request: ReadingRequest, { focus: base, roleTags }: Picked
   const lastVariant = sides[2].tags.map((t) => base.nextVariants?.[t]).find((v) => v !== undefined);
   const actions: Record<string, string> = { ...base.actions, ...base.topicActions?.[request.topic], ...variant?.actions, ...lastVariant?.actions };
   const questions: Record<string, string> = { ...base.questions, ...variant?.questions, ...lastVariant?.questions };
-  const branches = base.intentBranches?.[intent] ?? variant?.branches ?? base.branches;
+  const branches = base.intentBranches?.[intent] ?? lastVariant?.branches ?? variant?.branches ?? base.branches;
   const claim = variant?.claim ?? base.claim;
 
   const cards = byPosition.map((c, i) => {
@@ -224,7 +227,6 @@ function buildV2(request: ReadingRequest): ReadingResult {
   const [first, middle, last] = byPosition.map((c) => v2Side(c.cardId, c.reversed)!);
 
   // 主题变体：阻碍位 / 下一步里该主题单独写过的部分覆盖默认
-  const gistOf = (side: SideV2) => side.byTopic?.[topic]?.gist ?? side.gist;
   const obstacle = { ...middle.obstacle, ...middle.byTopic?.[topic]?.obstacle };
   const nextVar = last.byTopic?.[topic]?.next;
   const next = { ...last.next, ...nextVar, actions: { ...last.next.actions, ...nextVar?.actions } };
@@ -234,11 +236,13 @@ function buildV2(request: ReadingRequest): ReadingResult {
     return { cardId: c.cardId, position: c.position, reversed: c.reversed, text: fillIn(text) };
   });
 
+  const closing = LOCAL_V2.closing[intent];
   const overall = [
     request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "",
     `这组牌值得先核对的是：${obstacle.focus}。`,
-    `这组牌里出现了「${gistOf(first)}」「${gistOf(middle)}」和「${gistOf(last)}」。`,
-    LOCAL_V2.closing[intent].replaceAll("{focus}", obstacle.focus).replaceAll("{next}", gistOf(last)),
+    // 下一步用末牌自己的说明，而不是标签拼接
+    `下一步的方向：${next.text}`,
+    closing,
   ].join("");
 
   return {

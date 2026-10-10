@@ -1,0 +1,88 @@
+{
+  "format": "tarot-backup",
+  "backupVersion": 1,
+  "exportedAt": "2026-10-10T00:00:00.000Z",
+  "contentVersion": "cards-2026-10-09",
+  "records": [
+    {
+      "id": "obs-record-0002",
+      "schemaVersion": 2,
+      "deckId": "rws-1909",
+      "settings": {
+        "allowReversed": true
+      },
+      "createdAt": "2026-10-03T21:00:00.000Z",
+      "request": {
+        "spreadId": "three-card",
+        "topic": "career",
+        "originalQuestion": "（合成）接下来的半年，我想把精力放在哪里？",
+        "question": "（合成）接下来的半年，我想把精力放在哪里？",
+        "selfReading": "",
+        "intent": "clarify",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 1,
+            "reversed": false
+          },
+          {
+            "cardId": "ace-of-pentacles",
+            "position": 2,
+            "reversed": true
+          }
+        ]
+      },
+      "result": {
+        "source": "local",
+        "overall": "此刻的处境——隐士（独处、内省）；卡住你的东西——宝剑六（过渡、离开）；可以试的下一步——星币王牌（逆位）（错失机会、计划不实）。这三张牌不是答案，是三个观察角度。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "暂时从喧闹中退出来，向内寻找自己的答案。放在「此刻的处境」上看：适合深入钻研、沉淀，而不是扩张社交。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "正在离开动荡，驶向更平静的水域。放在「卡住你的东西」上看：转换到一个更好的环境。"
+          },
+          {
+            "cardId": "ace-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "机会没有抓住，或者计划缺乏现实基础。放在「可以试的下一步」上看：机会还没成熟，或者你还没准备好。这张牌是逆位，可以理解为这股力量被卡住、过度或向内。"
+          }
+        ],
+        "interpretations": [
+          "如果把「宝剑六」看成外部的阻力：转换到一个更好的环境。那么「星币王牌（逆位）」提示的一小步是：先算清楚现实这笔账。",
+          "如果把「宝剑六」看成你心里的声音：你在从困境中慢慢走出来。那么「星币王牌（逆位）」提示的一小步是：生活的基础需要先稳住。"
+        ],
+        "action": "先放慢一点：今天整理一项具体的现实条件：收入、时间、技能中的一项，写清楚现在的数字。",
+        "question": "你的计划里，哪一部分还不够落地？"
+      },
+      "choice": {
+        "interpretation": null,
+        "rejected": [],
+        "action": {
+          "status": "skipped",
+          "text": ""
+        }
+      },
+      "versions": {
+        "content": "cards-2026-10-09",
+        "prompt": null,
+        "model": null
+      }
+    }
+  ],
+  "daily": [],
+  "recalls": [],
+  "profile": null
+}

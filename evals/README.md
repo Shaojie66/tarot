@@ -77,7 +77,7 @@ AI_PROVIDER=openai-compatible OPENAI_BASE_URL=https://api.deepseek.com OPENAI_MO
 
 ## 尚未完成
 
-- 实施并验收本地 L1–L3，建立正向内容评分；当前本地 40 例结构通过不能替代它。
+- 本地 L1 / L2 已实现 v2.1 的 12 张内容原型，两轮 AI 预审已有；人工内容验收待做。下一轮按 [PLAN v1.5](../docs/PLAN.md) 修正解释链，并与冻结的 v2.1 对比；现有样本生成器仍使用 `legacy: true` 作基线，仅改版本号会继续比较 v1。比较基线与逐例记录要求见 [技术复评](../docs/review-local-v2-1-next-plan-2026-10-10.md#4-第二轮评分应该怎样使用)。
 - 人工语义审读既有 v6 / v7 合成结果；继续处理安全集误拦。DeepSeek 新脚本已经跑过，不再列为首次运行待办。
 - 用 Anthropic key 跑完整集；首轮冒烟对比 `effort: "low"` 与默认 effort 的成功率、延迟和语义分，给出“解读升级到 deep 的判据”。
 - 3–5 人首次使用观察（系统等待与用户思考分开计时）。

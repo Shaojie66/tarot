@@ -28,6 +28,7 @@
 ## 目录约定
 - `src/app` 路由；`src/features/<领域>` 业务逻辑；`src/components` 跨领域 UI 组件；`src/lib` 通用基础设施。
 - `content/cards/{major,wands,cups,swords,pentacles}.json` 牌义数据，由 `src/features/cards/cards.ts` 加载并 Zod 校验。
+- `content/local-reading.json`（本地解读 v1 模板，作为回退）与 `content/local-reading-v2.json`（经过编辑的牌面内容：每张牌每个朝向写好三个位置的贡献、两条核对路径、三种意图的行动、追问；三张牌都有 v2 内容才使用，否则整体回退 v1）。本地规则不读问题正文；改内容后跑 `pnpm check`，并用 `PRINT_LOCAL_SAMPLES=1 pnpm vitest run evals/print-local-samples.test.ts` 重新生成盲看样本。
 - `content/questions.json` 示例问题库：只收开放式问题（"怎么 / 是什么"），不收"会不会"式预测问题。
 - `content/prompts/vN/` 版本化 prompt，改 prompt 新建版本目录，不原地修改。
 - `public/decks/<deck-id>/` 牌组图片（`rws-1909` 原版、`ai-v1` 等重绘），每个牌组带 `SOURCES.md`，在 `src/features/cards/deck.ts` 登记；业务代码通过 `cardImageSrc()` 取路径，不写死。只用 1909 原版公有领域扫描或基于它的重绘。

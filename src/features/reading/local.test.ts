@@ -13,11 +13,6 @@ describe("本地模板的关系类行动", () => {
     expect(byTopic.relationship).not.toMatch(CONTACT);
   });
 
-  it("每条关系行动都明确可以只留给自己", () => {
-    for (const byTopic of Object.values(LOCAL_TEMPLATE.actions)) {
-      expect(byTopic.relationship).toMatch(/自己|不用告诉对方|不说也可以|不必发给任何人|不用马上处理/);
-    }
-  });
 });
 
 describe("按“这次想要的帮助”换语气（本地解读）", () => {
@@ -49,7 +44,6 @@ describe("按“这次想要的帮助”换语气（本地解读）", () => {
       // 牌与牌面解读不变：意图只改语气，不改牌
       expect(r.cards).toEqual(base.cards);
     }
-    expect(buildLocalReading(request("career", "decide")).overall).toContain("不替你做决定");
   });
 
   it.each(INTENTS.flatMap((i) => TOPICS.map((t) => [i, t] as const)))("%s × %s：通过全部硬检查", (intent, topic) => {

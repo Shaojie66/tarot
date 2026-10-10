@@ -2,9 +2,11 @@
 
 import { z } from "zod";
 import data from "../../../content/local-reading.json";
+import dataV2 from "../../../content/local-reading-v2.json";
 import { getCard, type Card } from "@/features/cards/cards";
+import { isCardId } from "@/features/cards/ids";
 import { TOPICS, type CardSide, type Topic } from "@/features/cards/schema";
-import type { ReadingRequest, ReadingResult } from "./contract";
+import { CONTENT_VERSION, type ReadingRequest, type ReadingResult } from "./contract";
 import { getSpread } from "./spread";
 
 const topicMap = z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, z.string().min(4)])) as Record<Topic, z.ZodString>);
@@ -41,6 +43,44 @@ const templateSchema = z.strictObject({
 
 export const LOCAL_TEMPLATE = templateSchema.parse(data);
 
+// ── v2：经过编辑的牌面内容（content/local-reading-v2.json）。
+// 每张牌的每个朝向都写了：在“此刻 / 阻碍 / 下一步”三个位置上的贡献、两条核对路径的条件句、三种意图的行动和一个追问。
+// 三张牌都有 v2 内容才使用；缺任何一张就整体回退到上面的 v1 模板（不拼半新半旧）。
+// 本地规则不读取问题正文；问题和自解只作为用户自己的记录展示。
+const sideV2Schema = z.strictObject({
+  gist: z.string().min(2),
+  situation: z.string().min(8),
+  obstacle: z.strictObject({ focus: z.string().min(4), text: z.string().min(8), check: z.string().min(8) }),
+  next: z.strictObject({
+    text: z.string().min(8),
+    check: z.string().min(8),
+    actions: z.strictObject({ clarify: z.string().min(8), decide: z.string().min(8), companion: z.string().min(8) }),
+    question: z.string().min(4).endsWith("？"),
+  }),
+});
+const v2Schema = z.strictObject({
+  version: z.string(),
+  locative: z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, z.string().min(2)])) as Record<Topic, z.ZodString>),
+  closing: z.strictObject({ clarify: z.string(), decide: z.string(), companion: z.string() }),
+  cards: z.record(z.string().refine(isCardId, "unknown card id"), z.strictObject({ upright: sideV2Schema, reversed: sideV2Schema })),
+});
+export const LOCAL_V2 = v2Schema.parse(dataV2);
+type SideV2 = z.infer<typeof sideV2Schema>;
+
+function v2Side(cardId: string, reversed: boolean): SideV2 | undefined {
+  const entry = (LOCAL_V2.cards as Record<string, { upright: SideV2; reversed: SideV2 }>)[cardId];
+  return entry ? (reversed ? entry.reversed : entry.upright) : undefined;
+}
+
+function coveredV2(request: ReadingRequest): boolean {
+  return request.cards.length === 3 && request.cards.every((c) => v2Side(c.cardId, c.reversed) !== undefined);
+}
+
+/** 本地解读用到的内容版本：这组牌走了 v2 就带上标记，旧记录的快照不受影响。 */
+export function localContentVersion(request: ReadingRequest): string {
+  return coveredV2(request) ? `${CONTENT_VERSION}+${LOCAL_V2.version}` : CONTENT_VERSION;
+}
+
 function fill(template: string, values: Record<string, string>): string {
   return template.replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? "");
 }
@@ -58,7 +98,38 @@ function roles(count: number) {
   return { situation: 0, obstacle: Math.min(1, count - 1), next: count - 1 };
 }
 
-export function buildLocalReading(request: ReadingRequest): ReadingResult {
+function buildV2(request: ReadingRequest): ReadingResult {
+  const intent = request.intent ?? "clarify";
+  const where = LOCAL_V2.locative[request.topic];
+  const fillIn = (text: string) => text.replaceAll("{in}", where);
+  const byPosition = [...request.cards].sort((a, b) => a.position - b.position);
+  const [first, middle, last] = byPosition.map((c) => v2Side(c.cardId, c.reversed)!);
+
+  const cards = byPosition.map((c, i) => {
+    const side = [first, middle, last][i];
+    const text = i === 0 ? side.situation : i === 1 ? side.obstacle.text : side.next.text;
+    return { cardId: c.cardId, position: c.position, reversed: c.reversed, text: fillIn(text) };
+  });
+
+  const overall = [
+    request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "",
+    `这组牌的重点是${middle.obstacle.focus}。`,
+    `从「${first.gist}」出发，卡在「${middle.gist}」，下一步指向「${last.gist}」。`,
+    LOCAL_V2.closing[intent],
+  ].join("");
+
+  return {
+    source: "local",
+    overall,
+    cards,
+    interpretations: [fillIn(middle.obstacle.check), fillIn(last.next.check)],
+    action: fillIn(last.next.actions[intent]),
+    question: last.next.question,
+  };
+}
+
+export function buildLocalReading(request: ReadingRequest, options: { legacy?: boolean } = {}): ReadingResult {
+  if (!options.legacy && coveredV2(request)) return buildV2(request);
   const spread = getSpread(request.spreadId);
   const T = LOCAL_TEMPLATE;
   const tone = request.intent === "decide" || request.intent === "companion" ? T.intents[request.intent] : null;

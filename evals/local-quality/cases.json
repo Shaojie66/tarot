@@ -1,0 +1,389 @@
+{
+ "note": "本地解读质量的冻结样本（PRD LQ 验收）：16 个代表样本 = 四主题 × 三意图 12 例 + “此刻”无题 4 例。牌来自已写好 v2 内容的 12 张样稿牌。不要为让结果好看而改样本；要改先写原因。",
+ "samples": [
+  {
+   "id": "relationship-clarify-A",
+   "topic": "relationship",
+   "intent": "clarify",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "career-decide-B",
+   "topic": "career",
+   "intent": "decide",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "two-of-pentacles",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "career-clarify",
+   "topic": "career",
+   "intent": "clarify",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "career-companion",
+   "topic": "career",
+   "intent": "companion",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "relationship-decide",
+   "topic": "relationship",
+   "intent": "decide",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "relationship-companion",
+   "topic": "relationship",
+   "intent": "companion",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "the-tower",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "self-clarify",
+   "topic": "self",
+   "intent": "clarify",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "death",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-hermit",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-decide",
+   "topic": "self",
+   "intent": "decide",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "knight-of-swords",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "death",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "self-companion",
+   "topic": "self",
+   "intent": "companion",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "crossroads-clarify",
+   "topic": "crossroads",
+   "intent": "clarify",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "death",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "eight-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-decide",
+   "topic": "crossroads",
+   "intent": "decide",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "knight-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "crossroads-companion",
+   "topic": "crossroads",
+   "intent": "companion",
+   "topicless": false,
+   "question": "（合成）这件事我想弄清楚。",
+   "cards": [
+    {
+     "cardId": "the-tower",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "topicless-1",
+   "topic": "self",
+   "intent": "companion",
+   "topicless": true,
+   "question": "（合成）没有具体问题，就想看看此刻的自己。",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "topicless-2",
+   "topic": "self",
+   "intent": "companion",
+   "topicless": true,
+   "question": "（合成）没有具体问题，就想看看此刻的自己。",
+   "cards": [
+    {
+     "cardId": "the-tower",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "death",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "topicless-3",
+   "topic": "self",
+   "intent": "companion",
+   "topicless": true,
+   "question": "（合成）没有具体问题，就想看看此刻的自己。",
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "eight-of-wands",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "topicless-4",
+   "topic": "self",
+   "intent": "companion",
+   "topicless": true,
+   "question": "（合成）没有具体问题，就想看看此刻的自己。",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  }
+ ]
+}

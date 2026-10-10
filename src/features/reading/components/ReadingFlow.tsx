@@ -19,7 +19,7 @@ import {
   type ReadingRequest,
 } from "../contract";
 import { flowReducer, initialFlow, type FlowState, type Mode } from "../flow";
-import { buildLocalReading } from "../local";
+import { buildLocalReading, localContentVersion } from "../local";
 import { QUESTION_BANK } from "../questions";
 import { orderScenarios, type ScenarioId } from "../scenarios";
 import { DEFAULT_SPREAD, getSpread } from "../spread";
@@ -199,7 +199,7 @@ export function ReadingFlow() {
           type: "generated",
           requestId,
           result: buildLocalReading(request),
-          versions: { content: CONTENT_VERSION, prompt: null, model: null },
+          versions: { content: localContentVersion(request), prompt: null, model: null },
           ...meta,
         });
         busyRequest.current = null;

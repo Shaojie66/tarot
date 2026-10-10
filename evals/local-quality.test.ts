@@ -100,7 +100,7 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
     const rel = buildLocalReading(make({ topic: "relationship", intent: "clarify", cards }));
     const job = buildLocalReading(make({ topic: "career", intent: "clarify", cards }));
     expect(rel.action).toContain("这段关系里");
-    expect(job.action).toContain("这份工作里");
+    expect(job.action).toContain("工作里");
     // 首牌与末牌的说明不随主题变；阻碍位若该牌有主题变体则按主题改写（见下一条）
     expect(rel.cards[0]).toEqual(job.cards[0]);
     expect(rel.cards[2].text).toBe(job.cards[2].text);
@@ -442,14 +442,46 @@ describe("v2.5：延后类措辞的全文扫描（含牌说明、变体、转折
     for (const t of strings) if (delays.test(t)) expect(t).toMatch(/期限|不紧急/);
   });
 
-  it("未命中主张的整体不再用“这组牌里出现了「A」「B」和「C」”这类标签句，也不重复开头", () => {
+  it("未命中主张的整体不再用标签句，不重复开头，也不把逐牌说明在整体里再抄一遍", () => {
     for (const id of ["relationship-decide", "self-clarify", "topicless-4", "career-companion"]) {
       const s = data.samples.find((x) => x.id === id)!;
       const r = buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
       expect(r.overall, id).not.toContain("这组牌里出现了");
-      expect(r.overall, id).toContain("下一步的方向：");
+      for (const c of r.cards) expect(r.overall, `${id}/${c.cardId}`).not.toContain(c.text);
+      expect(r.overall, id).toMatch(/读法/);
       const focus = r.overall.match(/值得先核对的是：([^。]+)。/)?.[1];
       if (focus) expect(r.overall.split(focus).length - 1, id).toBe(1);
     }
+  });
+});
+
+describe("v2.6：陪伴语气、主题体现与期限句的位置", () => {
+  const run = (id: string) => {
+    const s = data.samples.find((x) => x.id === id)!;
+    return buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
+  };
+
+  it("陪伴行动只在真的会“延后”什么时才带期限句：喝水 / 慢呼吸这类行动不带", () => {
+    for (const id of ["self-companion", "relationship-companion"]) expect(run(id).action, id).not.toContain("期限");
+  });
+
+  it("关系主题的陪伴：样本 6 里看得出是关于这段关系（整体、行动、追问都点到）", () => {
+    const r = run("relationship-companion");
+    expect(r.overall).toContain("这段关系");
+    expect(r.action).toContain("这段关系");
+    expect(r.question).toContain("这段关系");
+  });
+
+  it("去留主题的陪伴：样本 12 点到两个选项，而不只是“小喜欢”", () => {
+    const r = run("crossroads-companion");
+    expect(r.overall).toContain("两个选项");
+    expect(r.question).toContain("两个选项");
+  });
+
+  it("死神（逆位）一行不再塞三层意思：只有“稳住自己”和“可撤回的小改动”", () => {
+    const r = run("topicless-2");
+    const death = r.cards[2].text;
+    expect(death).not.toContain("期限");
+    expect(death.length).toBeLessThan(60);
   });
 });

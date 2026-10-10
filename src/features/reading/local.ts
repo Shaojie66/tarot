@@ -185,8 +185,9 @@ function buildFocused(request: ReadingRequest, { focus: base, roleTags }: Picked
   const variant = base.topicVariants?.[request.topic];
   const roles = { ...base.roles, ...variant?.roles };
   const lastVariant = sides[2].tags.map((t) => base.nextVariants?.[t]).find((v) => v !== undefined);
-  const actions: Record<string, string> = { ...base.actions, ...base.topicActions?.[request.topic], ...variant?.actions, ...lastVariant?.actions };
-  const questions: Record<string, string> = { ...base.questions, ...variant?.questions, ...lastVariant?.questions };
+  // 优先级：默认 < 末牌变体 < 主题变体（主题变体最具体，直接对应这次选的主题）
+  const actions: Record<string, string> = { ...base.actions, ...base.topicActions?.[request.topic], ...lastVariant?.actions, ...variant?.actions };
+  const questions: Record<string, string> = { ...base.questions, ...lastVariant?.questions, ...variant?.questions };
   const branches = base.intentBranches?.[intent] ?? lastVariant?.branches ?? variant?.branches ?? base.branches;
   const claim = variant?.claim ?? base.claim;
 
@@ -240,8 +241,7 @@ function buildV2(request: ReadingRequest): ReadingResult {
   const overall = [
     request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "",
     `这组牌值得先核对的是：${obstacle.focus}。`,
-    // 下一步用末牌自己的说明，而不是标签拼接
-    `下一步的方向：${next.text}`,
+    // 收尾句指向下面两条读法，不再把末牌的说明在整体里重复一遍
     closing,
   ].join("");
 

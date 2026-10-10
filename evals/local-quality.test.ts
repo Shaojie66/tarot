@@ -315,7 +315,8 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         expect(now.interpretations, s.id).not.toEqual(s.output.interpretations);
       } else {
         // 未命中主张的样本回到按位置的路径：v2.4 去掉了“是眼下的底色 / 是可以先动的一步”模板句和“做的时候留意”尾巴，牌面说明保持
-        expect(now.cards, s.id).toEqual(s.output.cards);
+        // 牌的 ID / 位置 / 朝向不变；说明文字可以因为主题变体（如关系里的宝剑六）而改变
+        expect(now.cards.map((c) => [c.cardId, c.position, c.reversed]), s.id).toEqual(s.output.cards.map((c) => [c.cardId, c.position, c.reversed]));
         expect(now.overall, s.id).not.toContain("是眼下的底色");
         expect(now.action, s.id).not.toContain("做的时候留意");
       }

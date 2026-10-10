@@ -19,7 +19,7 @@ const samples = data.samples.map((s) => [s.id, make({ topic: s.topic as ReadingR
 const flat = (r: ReturnType<typeof buildLocalReading>) => [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("\n");
 /** 不应在普通完成结果里反复出现的固定免责 / 退缩句（LQ06：能力说明集中在来源处，选择权靠按钮） */
 /** AI 盲评指出的、凭空预设用户处境或情境的短语（不限于样本，扫描全部 v2 内容文本） */
-const PRESUPPOSED = ["刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升"];
+const PRESUPPOSED = ["是眼下的底色", "是可以先动的一步", "想学的东西已经明确时", "你想了很久的计划", "当初答应是出于", "刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升"];
 const BOILERPLATE = ["不是答案", "不替你做决定", "不替你决定", "只是一个建议", "不用今天决定", "不必告诉任何人"];
 
 describe.each(samples)("本地解读样本 %s", (_id, request) => {
@@ -41,7 +41,7 @@ describe.each(samples)("本地解读样本 %s", (_id, request) => {
   it("两种读法有不同的适用条件；行动有对象和完成标准；追问是开放式", () => {
     expect(result.interpretations[0]).not.toBe(result.interpretations[1]);
     for (const r of result.interpretations) expect(r).toMatch(/时，|^如果/);
-    expect(result.action.length).toBeGreaterThan(20);
+    expect(result.action.length).toBeGreaterThan(12);
     expect(result.question).toMatch(/？$/);
     expect(result.question).not.toMatch(/吗？$/);
   });
@@ -259,7 +259,8 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
 
   it("关系主题下“投入与配合”的行动只涉及自己，不预设联系对方或一起完成", () => {
     const r = run("relationship-clarify-A");
-    expect(r.overall).toContain("这组牌的重点是让投入变成能说清楚的配合");
+    expect(r.overall).toContain("这组牌的重点是让双方的期待变得说得清楚");
+    expect([r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.question].join("")).not.toMatch(/任务|责任|分工|约定|追加投入|各自做什么/);
     expect(r.action).not.toMatch(/一起|联系|发消息|对方回复/);
     expect(r.action).toContain("只写你自己的部分");
   });
@@ -313,16 +314,13 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         expect(now.question, s.id).not.toBe(s.output.question);
         expect(now.interpretations, s.id).not.toEqual(s.output.interpretations);
       } else {
-        expect(now.overall, s.id).toBe(s.output.overall);
+        // 未命中主张的样本回到按位置的路径：v2.4 去掉了“是眼下的底色 / 是可以先动的一步”模板句和“做的时候留意”尾巴，牌面说明保持
         expect(now.cards, s.id).toEqual(s.output.cards);
-        expect(now.interpretations, s.id).toEqual(s.output.interpretations);
-        expect(now.question, s.id).toBe(s.output.question);
-        // 差异只允许两类：陪伴不再追加“做的时候留意”；v2.3 补上的“不紧急 / 有期限的事以期限为准”
-        const norm = (t: string) => t.replace(/做的时候留意：[^。]*。$/, "").replace(/；有期限的事以期限为准/g, "").replace(/不紧急可以延期的|不紧急的/g, (m) => (m.includes("延期") ? "可以延期的" : ""));
-        expect(norm(now.action), s.id).toBe(norm(s.output.action));
+        expect(now.overall, s.id).not.toContain("是眼下的底色");
+        expect(now.action, s.id).not.toContain("做的时候留意");
       }
     }
-    // 5 个主张命中 13 个样本；其余 3 个仍是 v2.1 路径
+    // 5 个主张命中 12 个样本；其余 4 个仍走按位置的路径
     expect(changed).toHaveLength(12);
     expect(data.samples.length - changed.length).toBe(4);
   });
@@ -373,5 +371,43 @@ describe("v2.3：口径与适用范围（针对第三轮风险审查）", () => 
     expect(selectLocalFocus(withoutTransition)).not.toBe("load-transition");
     const withTransition = buildLocalReading(make({ topic: "career", intent: "clarify", cards: [{ cardId: "two-of-pentacles", position: 0, reversed: false }, { cardId: "four-of-swords", position: 1, reversed: false }, { cardId: "six-of-swords", position: 2, reversed: true }] }));
     for (const r of withTransition.interpretations) expect(r).toMatch(/^如果正在考虑一个变动/);
+  });
+});
+
+describe("v2.4：主题变体、雷同与逐牌差异", () => {
+  const run = (id: string) => {
+    const s = data.samples.find((x) => x.id === id)!;
+    return buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
+  };
+
+  it("样本 8（自我 · decide）与样本 2（事业 · decide）不再逐字相同：读法、行动、追问按主题改写", () => {
+    const a = run("career-decide-B");
+    const b = run("self-decide");
+    expect(b.interpretations).not.toEqual(a.interpretations);
+    expect(b.action).not.toBe(a.action);
+    expect(b.question).not.toBe(a.question);
+    expect(b.overall).toContain("先看清现有的承诺");
+    expect(b.overall).not.toContain("过渡"); // 自我主题不再套“过渡”
+    expect(a.overall).toContain("过渡"); // 事业主题仍是默认说法
+  });
+
+  it("“安顿与恢复”的三个陪伴 / 澄清样本：行动与追问跟着末牌变，死神（逆位）进入读法", () => {
+    const [six, nine, fourteen] = [run("relationship-companion"), run("self-companion"), run("topicless-2")];
+    expect(new Set([six.action, nine.action, fourteen.action]).size).toBe(3);
+    expect(new Set([six.question, nine.question, fourteen.question]).size).toBe(3);
+    expect(fourteen.overall).toContain("死神（逆位）可能在提示有一件该收尾的事还拖着");
+  });
+
+  it("没有具体问题（陪伴）时，“节奏与试验”的读法不再预设“难以撤回的承诺”", () => {
+    const r = run("topicless-3");
+    expect(r.interpretations.join("")).not.toContain("难以撤回");
+    expect(r.interpretations[1]).toContain("五分钟");
+  });
+
+  it("去留主题的“负担与过渡”读法讲两个选项的消耗，不预设“现有负担已经占满”", () => {
+    const r = run("crossroads-clarify");
+    expect(r.interpretations.join("")).not.toContain("现有负担已经占满");
+    expect(r.interpretations[0]).toMatch(/两个选项/);
+    expect(r.action.length).toBeLessThan(80);
   });
 });

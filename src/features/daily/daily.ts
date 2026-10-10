@@ -8,6 +8,7 @@ import { z } from "zod";
 import { DECKS, DEFAULT_DECK, type DeckId } from "@/features/cards/deck";
 import { isCardId, type CardId } from "@/features/cards/ids";
 import { drawCards } from "@/features/draw/draw";
+import { CapacityError } from "@/lib/capacity";
 
 export const DAILY_KEY = "tarot:daily:v1";
 /** 只保留最近这么多天，防止无限增长（约一年）。 */
@@ -128,12 +129,17 @@ export function mergeDaily(incoming: DailyEntry[]): { added: number; skipped: nu
   const existing = loadDaily();
   const have = new Set(existing.map((e) => e.dayKey));
   const fresh = incoming.filter((e) => !have.has(e.dayKey));
+  // 超容量整批拒绝：不为了容纳导入内容而按日期挤掉本机旧条目（抽牌时的滚动保留另算）
+  if (existing.length + fresh.length > DAILY_MAX_ENTRIES) throw new CapacityError("daily");
   if (fresh.length > 0 && !store([...existing, ...fresh])) throw new Error("daily storage unavailable");
   return { added: fresh.length, skipped: incoming.length - fresh.length };
 }
 
-export function clearDaily(): void {
+export function clearDaily(): boolean {
   try {
     localStorage.removeItem(DAILY_KEY);
-  } catch {}
+    return true;
+  } catch {
+    return false;
+  }
 }

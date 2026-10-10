@@ -167,6 +167,34 @@ test("导入：同 ID 内容不同 → 冲突，默认保留本机，勾选才�
   await expect(page.getByTestId("action-decision")).toHaveText("这次先不做");
 });
 
+test("导入预览后另一个窗口改了同一条记录：确认时不覆盖，提示本机有更新并重新预览", async ({ page, context }) => {
+  await localReading(page, "合成问题：并发");
+  await page.goto("/history");
+  await page.getByRole("button", { name: "导出备份" }).click();
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: /^下载/ }).click()]);
+  const good = JSON.parse(readFileSync((await download.path())!, "utf8"));
+  good.records[0].choice = { interpretation: 0, rejected: [], action: { status: "skipped", text: "" } };
+  await page.getByLabel("选择备份文件").setInputFiles({ name: "stale.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(good)) });
+  await page.getByLabel(/改用文件里的版本/).check();
+
+  // 预览之后，另一个窗口给这条记录写了笔记
+  const other = await context.newPage();
+  await other.goto("/history");
+  await other.getByRole("link", { name: /并发/ }).click();
+  await other.getByLabel("回看笔记").fill("合成笔记：另一个窗口写的");
+  await other.getByRole("button", { name: "保存回看" }).click();
+  await expect(other.getByTestId("review-status")).toHaveText("已保存");
+
+  await page.getByRole("button", { name: "确认导入" }).click();
+  await expect(page.getByTestId("import-error")).toContainText("本机内容在你预览之后有更新");
+  await expect(page.getByTestId("import-preview")).toBeVisible();
+  await expect(page.getByLabel(/改用文件里的版本/)).not.toBeChecked(); // 旧的覆盖勾选不沿用
+
+  await page.getByRole("link", { name: /并发/ }).first().click();
+  await expect(page.getByLabel("回看笔记")).toHaveValue("合成笔记：另一个窗口写的"); // 没被覆盖
+  await expect(page.getByTestId("action-decision")).toHaveText("还没决定");
+});
+
 test("删除单条记录需要确认", async ({ page }) => {
   await localReading(page, "合成问题：删除我");
   await page.goto("/history");

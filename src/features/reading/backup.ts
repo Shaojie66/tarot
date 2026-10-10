@@ -1,10 +1,10 @@
-// 私密完整备份：导出 / 导入预检。纯函数，不碰存储；写入由 storage.writeImported 在单个事务里完成。
+// 私密完整备份：导出 / 导入预检。纯函数，不碰存储；写入由 storage.applyImport 完成（写入时会重新核对本机现状）。
 // 备份含问题、自解、笔记等私密明文，用于无损恢复；它不是分享格式（分享走白名单，见 docs/PLAN.md「导出边界」）。
 // 不含：进行中草稿、API key / 配置、设备信息。
 
-import { dailyEntrySchema, type DailyEntry } from "@/features/daily/daily";
+import { DAILY_MAX_ENTRIES, dailyEntrySchema, type DailyEntry } from "@/features/daily/daily";
 import { profileBackupSchema, type Profile } from "@/features/profile/profile";
-import { recallSchema, type Recall } from "@/features/recall/recall";
+import { MAX_RECALLS, recallBackupSchema, type Recall } from "@/features/recall/recall";
 import { CONTENT_VERSION, readingRecordSchema, type ReadingRecord } from "./contract";
 
 export const BACKUP_FORMAT = "tarot-backup";
@@ -66,6 +66,7 @@ export type RejectReason =
   | { kind: "duplicate_ids"; ids: string[] }
   | { kind: "invalid_daily"; total: number }
   | { kind: "invalid_recalls"; total: number }
+  | { kind: "over_capacity"; what: "daily" | "recalls"; have: number; incoming: number; max: number }
   | { kind: "invalid_profile" };
 
 export interface Conflict {
@@ -86,6 +87,8 @@ export interface ImportPreview {
   /** 回读：指向的记录存在（本机已有或随本次导入）、且本机该记录还没有回读的才补上 */
   recallsAdd: Recall[];
   recallsSkip: number;
+  /** 回读 id 与本机某条相同、却指向别的记录：不导入，单独计数，不算成功新增 */
+  recallsIdConflict: number;
   /** 建档：文件里有，且本机还没建档 → 采用；本机已建档 → 不覆盖（profileIgnored） */
   profileApply: Profile | null;
   profileIgnored: boolean;
@@ -96,6 +99,10 @@ export interface ImportContext {
   dailyKeys?: ReadonlySet<string>;
   /** 本机已有回读所指向的记录 id */
   recallRecordIds?: ReadonlySet<string>;
+  /** 本机已有回读自身的 id */
+  recallIds?: ReadonlySet<string>;
+  /** 本机已有回读条数（容量判断）；缺省按 recallRecordIds 的大小 */
+  recallCount?: number;
   /** 本机是否已经建档 */
   profileOnboarded?: boolean;
 }
@@ -179,13 +186,15 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
   if (file.recalls !== undefined) {
     if (!Array.isArray(file.recalls)) return { ok: false, reason: { kind: "invalid_recalls", total: 1 } };
     const seenRecords = new Set<string>();
+    const seenIds = new Set<string>();
     let bad = 0;
     for (const raw of file.recalls) {
-      const parsed = recallSchema.safeParse(raw);
-      // 同一条记录只能有一条回读；格式不对或重复 → 拒绝整个文件
-      if (!parsed.success || seenRecords.has(parsed.data.recordId)) bad++;
+      const parsed = recallBackupSchema.safeParse(raw);
+      // 格式 / 日期 / 状态不对，同一条记录有多条回读，或回读 id 重复 → 拒绝整个文件
+      if (!parsed.success || seenRecords.has(parsed.data.recordId) || seenIds.has(parsed.data.id)) bad++;
       else {
         seenRecords.add(parsed.data.recordId);
+        seenIds.add(parsed.data.id);
         recalls.push(parsed.data);
       }
     }
@@ -201,17 +210,31 @@ export function parseBackup(text: string, existing: ReadonlyMap<string, ReadingR
 
   const knownRecords = new Set<string>([...existing.keys(), ...records.map((r) => r.id)]);
   const localRecallRecords = ctx.recallRecordIds ?? new Set<string>();
-  const recallsAdd = recalls.filter((r) => knownRecords.has(r.recordId) && !localRecallRecords.has(r.recordId));
+  const localRecallIds = ctx.recallIds ?? new Set<string>();
+  const candidates = recalls.filter((r) => knownRecords.has(r.recordId) && !localRecallRecords.has(r.recordId));
+  const recallsAdd = candidates.filter((r) => !localRecallIds.has(r.id));
+  const recallsIdConflict = candidates.length - recallsAdd.length;
+
+  // 容量：超了就整个文件拒绝，不挤掉本机已有的内容
+  const dailyAdd = daily.filter((d) => !existingDailyKeys.has(d.dayKey));
+  if (existingDailyKeys.size + dailyAdd.length > DAILY_MAX_ENTRIES) {
+    return { ok: false, reason: { kind: "over_capacity", what: "daily", have: existingDailyKeys.size, incoming: dailyAdd.length, max: DAILY_MAX_ENTRIES } };
+  }
+  const haveRecalls = ctx.recallCount ?? localRecallRecords.size;
+  if (haveRecalls + recallsAdd.length > MAX_RECALLS) {
+    return { ok: false, reason: { kind: "over_capacity", what: "recalls", have: haveRecalls, incoming: recallsAdd.length, max: MAX_RECALLS } };
+  }
 
   const preview: ImportPreview = {
     recallsAdd,
-    recallsSkip: recalls.length - recallsAdd.length,
+    recallsSkip: recalls.length - recallsAdd.length - recallsIdConflict,
+    recallsIdConflict,
     profileApply: profileFromFile && !ctx.profileOnboarded ? profileFromFile : null,
     profileIgnored: !!profileFromFile && !!ctx.profileOnboarded,
     add: [],
     skip: [],
     conflicts: [],
-    dailyAdd: daily.filter((d) => !existingDailyKeys.has(d.dayKey)),
+    dailyAdd,
     dailySkip: daily.filter((d) => existingDailyKeys.has(d.dayKey)).length,
   };
   for (const incoming of records) {
@@ -247,10 +270,71 @@ export function describeRejection(reason: RejectReason): string {
     case "invalid_daily":
       return `备份里有 ${reason.total} 条每日一张记录无法通过检查（格式错误或日期重复），整个文件都没有导入。`;
     case "invalid_recalls":
-      return `备份里有 ${reason.total} 条回读提醒无法通过检查（格式错误，或同一条记录有多条），整个文件都没有导入。`;
+      return `备份里有 ${reason.total} 条回读提醒无法通过检查（格式、日期或状态不对，或 id / 对应记录重复），整个文件都没有导入。`;
+    case "over_capacity": {
+      const label = reason.what === "daily" ? "每日一张" : "回看提醒";
+      return `${label}最多保留 ${reason.max} 条，本机已有 ${reason.have} 条，文件里还要补 ${reason.incoming} 条，会超出上限。为避免挤掉已有内容，整个文件都没有导入。`;
+    }
     case "invalid_profile":
       return "备份里的建档信息无法通过检查，整个文件都没有导入。";
     case "duplicate_ids":
       return `备份文件内有重复的记录 ID（${reason.ids.join("、")}），没有导入任何内容。`;
   }
+}
+
+/** 写入计划：预览 + 用户选择，外加“预览时本机是什么样”，供写入时核对有没有被改过。 */
+export interface ImportPlan {
+  records: { incoming: ReadingRecord; /** 预览时本机该 id 的版本；null = 当时本机没有 */ expected: ReadingRecord | null }[];
+  dailyAdd: DailyEntry[];
+  recallsAdd: Recall[];
+  profileApply: Profile | null;
+}
+
+export function buildImportPlan(preview: ImportPreview, useIncoming: ReadonlySet<string> = new Set()): ImportPlan {
+  return {
+    records: [
+      ...preview.add.map((incoming) => ({ incoming, expected: null })),
+      ...preview.conflicts.filter((c) => useIncoming.has(c.incoming.id)).map((c) => ({ incoming: c.incoming, expected: c.existing })),
+    ],
+    dailyAdd: preview.dailyAdd,
+    recallsAdd: preview.recallsAdd,
+    profileApply: preview.profileApply,
+  };
+}
+
+export type ImportStepName = "records" | "daily" | "recalls" | "profile";
+/** unconfirmed：写入没报错，但读回来对不上，不能确认是否已写入 */
+export type ImportStepState = "ok" | "failed" | "unconfirmed" | "not_attempted";
+
+export interface ImportResult {
+  /**
+   * done：全部完成；stale：写入前发现本机内容在预览后变了，什么都没写；
+   * partial：一部分已写入、一部分没有；failed：什么都没写入（出错）。
+   */
+  status: "done" | "stale" | "partial" | "failed";
+  staleReason?: string;
+  steps: Record<ImportStepName, { state: ImportStepState; added: number }>;
+}
+
+const STEP_LABEL: Record<ImportStepName, string> = { records: "记录", daily: "每日一张", recalls: "回看提醒", profile: "偏好" };
+
+/** 如实描述一次导入的结果：哪些已写入、哪些没有、哪些无法确认。不使用“整批已回滚”这类无法保证的说法。 */
+export function describeImportResult(result: ImportResult): string {
+  const names = Object.keys(result.steps) as ImportStepName[];
+  const pick = (state: ImportStepState) => names.filter((n) => result.steps[n].state === state).map((n) => STEP_LABEL[n]);
+  if (result.status === "stale") {
+    return `本机内容在你预览之后有更新（${result.staleReason ?? "已变化"}），为避免覆盖，这次没有写入任何内容。请重新核对后再导入。`;
+  }
+  const failed = pick("failed");
+  const unconfirmed = pick("unconfirmed");
+  const notTried = pick("not_attempted");
+  const wrote = names.filter((n) => result.steps[n].state === "ok" && result.steps[n].added > 0).map((n) => `${STEP_LABEL[n]} ${result.steps[n].added}`);
+  if (result.status === "failed") {
+    return `写入失败，没有写入任何内容。浏览器存储可能不可用或已满。`;
+  }
+  const parts = [`已写入：${wrote.length ? wrote.join("、") : "无"}`];
+  if (failed.length) parts.push(`写入失败：${failed.join("、")}`);
+  if (unconfirmed.length) parts.push(`无法确认是否写入：${unconfirmed.join("、")}`);
+  if (notTried.length) parts.push(`未尝试：${notTried.join("、")}`);
+  return `导入只完成了一部分。${parts.join("；")}。可以重试（已写入的不会重复），也可以刷新后以实际内容为准。`;
 }

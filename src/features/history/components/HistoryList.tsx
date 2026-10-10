@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getCard } from "@/features/cards/cards";
 import { TOPIC_LABELS } from "@/features/cards/schema";
-import { backupFileName, buildBackup, describeRejection, parseBackup, recordsToWrite, type ImportPreview } from "@/features/reading/backup";
+import { MAX_BACKUP_BYTES, backupFileName, buildBackup, buildImportPlan, describeImportResult, describeRejection, parseBackup, type ImportPreview } from "@/features/reading/backup";
 import type { ReadingRecord } from "@/features/reading/contract";
 import { loadDaily } from "@/features/daily/daily";
 import { loadProfile } from "@/features/profile/profile";
 import { loadAll as loadRecalls } from "@/features/recall/recall";
-import { applyImport, clearEverything, listRecords, type RecordList } from "@/features/reading/storage";
+import { applyImport, clearEverything, listRecords, snapshotForExport, type ClearPart, type RecordList } from "@/features/reading/storage";
 import { randomId } from "@/lib/id";
 import { ACTION_STATUS_LABEL, FOLLOW_UP_LABEL, formatTime, snippet } from "../labels";
 
@@ -24,6 +24,8 @@ export function HistoryList() {
   const [useIncoming, setUseIncoming] = useState<Set<string>>(new Set());
   const [importError, setImportError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  /** 选中的备份文件文本：预览过期时用最新数据重新预检 */
+  const fileText = useRef<string | null>(null);
 
   const reload = useCallback(() => {
     listRecords().then(
@@ -38,10 +40,17 @@ export function HistoryList() {
     reload();
   }, [reload]);
 
-  function download() {
-    if (!data) return;
+  async function download() {
+    let snap;
+    try {
+      snap = await snapshotForExport();
+    } catch {
+      setPanel(null);
+      return setNotice("没能读到一份稳定的最新数据（读取失败，或另一个窗口正在修改），这次没有生成备份。请稍后再试。");
+    }
+    setData({ records: snap.records, unreadable: snap.unreadable });
     const now = new Date();
-    const blob = new Blob([JSON.stringify(buildBackup(data.records, now, { daily: loadDaily(), recalls: loadRecalls(), profile: loadProfile() }), null, 2)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(buildBackup(snap.records, now, { daily: snap.daily, recalls: snap.recalls, profile: snap.profile }), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -49,55 +58,91 @@ export function HistoryList() {
     a.click();
     URL.revokeObjectURL(url);
     setPanel(null);
-    setNotice(`已导出 ${data.records.length} 条记录。文件里是明文，请自己保管好。`);
+    const partial = snap.unreadable > 0 ? `注意：有 ${snap.unreadable} 条读不出来的条目没有包含在内，这不是完整备份。` : "";
+    setNotice(`已导出 ${snap.records.length} 条记录、${snap.daily.length} 条每日一张、${snap.recalls.length} 条回看提醒（读取于 ${formatTime(snap.readAt)}）。${partial}文件里是明文，请自己保管好。`);
+  }
+
+  /** 用此刻最新的本机数据生成预览（不沿用页面加载时的快照）。 */
+  async function buildPreview(text: string): Promise<{ preview: ImportPreview } | { error: string }> {
+    let fresh: RecordList;
+    try {
+      fresh = await listRecords();
+    } catch {
+      return { error: "读取不了本机记录，没有导入任何内容。" };
+    }
+    setData(fresh);
+    const recalls = loadRecalls();
+    const result = parseBackup(text, new Map(fresh.records.map((r) => [r.id, r])), {
+      dailyKeys: new Set(loadDaily().map((d) => d.dayKey)),
+      recallRecordIds: new Set(recalls.map((r) => r.recordId)),
+      recallIds: new Set(recalls.map((r) => r.id)),
+      recallCount: recalls.length,
+      profileOnboarded: loadProfile().onboarded,
+    });
+    return result.ok ? { preview: result.preview } : { error: describeRejection(result.reason) };
   }
 
   async function onFile(file: File | undefined) {
     setImportError(null);
     setNotice(null);
     setPreview(null);
-    if (!file || !data) return;
+    fileText.current = null;
+    if (!file) return;
+    // 先看大小再读内容：超大文件不进内存
+    if (file.size > MAX_BACKUP_BYTES) return setImportError(describeRejection({ kind: "too_large", bytes: file.size }));
     const text = await file.text().catch(() => null);
-    if (text === null) return setImportError("读取文件失败，没有导入任何内容。");
-    const result = parseBackup(text, new Map(data.records.map((r) => [r.id, r])), {
-      dailyKeys: new Set(loadDaily().map((d) => d.dayKey)),
-      recallRecordIds: new Set(loadRecalls().map((r) => r.recordId)),
-      profileOnboarded: loadProfile().onboarded,
-    });
-    if (!result.ok) return setImportError(describeRejection(result.reason));
-    setUseIncoming(new Set());
-    setPreview(result.preview);
     if (fileInput.current) fileInput.current.value = "";
+    if (text === null) return setImportError("读取文件失败，没有导入任何内容。");
+    const built = await buildPreview(text);
+    if ("error" in built) return setImportError(built.error);
+    fileText.current = text;
+    setUseIncoming(new Set());
+    setPreview(built.preview);
   }
 
   async function confirmImport() {
     if (!preview) return;
-    const toWrite = recordsToWrite(preview, useIncoming);
-    try {
-      await applyImport(toWrite, { dailyAdd: preview.dailyAdd, recallsAdd: preview.recallsAdd, profileApply: preview.profileApply });
-      setNotice(`已导入 ${toWrite.length} 条记录、${preview.dailyAdd.length} 条每日一张、${preview.recallsAdd.length} 条回看提醒${preview.profileApply ? "，并采用了备份里的偏好" : ""}；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
+    setImportError(null);
+    const result = await applyImport(buildImportPlan(preview, useIncoming));
+    if (result.status === "done") {
+      const s = result.steps;
+      setNotice(`已导入 ${s.records.added} 条记录、${s.daily.added} 条每日一张、${s.recalls.added} 条回看提醒${s.profile.added ? "，并采用了备份里的偏好" : ""}；跳过 ${preview.skip.length} 条相同记录；保留本机版本 ${preview.conflicts.length - [...useIncoming].length} 条。`);
       setPreview(null);
-      reload();
-    } catch {
-      setImportError("写入失败，这次没有写入任何内容（整批已回滚）。浏览器存储可能不可用或已满。");
+      fileText.current = null;
+    } else if (result.status === "stale" && fileText.current) {
+      // 本机在预览后变了：不沿用旧的选择，用最新数据重新生成预览
+      const built = await buildPreview(fileText.current);
+      setUseIncoming(new Set());
+      if ("error" in built) {
+        setPreview(null);
+        setImportError(`${describeImportResult(result)} ${built.error}`);
+      } else {
+        setPreview(built.preview);
+        setImportError(describeImportResult(result));
+      }
+    } else {
+      // 部分写入 / 失败：保留预览供幂等重试，并按实际存储重读列表
+      setImportError(describeImportResult(result));
     }
+    reload();
   }
 
   async function confirmClear() {
     try {
-      await clearEverything();
+      const { failed } = await clearEverything();
       setPanel(null);
-      setNotice("已清空全部记录和进行中的草稿。");
-      reload();
+      const labels: Record<ClearPart, string> = { daily: "每日一张", draft: "进行中的草稿", recalls: "回看提醒" };
+      setNotice(failed.length === 0 ? "已清空全部记录、每日一张、回看提醒和进行中的草稿。" : `记录已清空，但 ${failed.map((f) => labels[f]).join("、")} 没能清掉，可以再点一次清空重试。`);
     } catch {
-      setNotice("清空失败：浏览器存储不可用。");
+      setNotice("清空失败：浏览器存储不可用，记录可能没有被清掉。刷新后以实际内容为准。");
     }
+    reload();
   }
 
   if (loadError) {
     return (
       <p role="alert" className="py-10 text-sm leading-relaxed">
-        读取不了这个浏览器里的记录（存储可能被禁用，比如隐私模式）。记录没有丢，换回普通窗口就能看到。
+        读取不了这个浏览器里的记录（存储可能被禁用，比如隐私模式），现在无法确认里面有什么。这里没有做任何修改；换回普通窗口再试。
       </p>
     );
   }
@@ -153,8 +198,11 @@ export function HistoryList() {
             <p className="leading-relaxed">
               备份文件包含你的问题、自解、笔记、偏好等<b>明文</b>，可能被浏览器的下载目录或系统云盘同步。不含 API key、设置（逆位 / 牌组）和进行中的草稿。这是给你自己恢复用的，不是用来分享的。
             </p>
-            <button type="button" onClick={download} className="rounded-full bg-accent px-4 py-1.5 text-bg">
-              下载 {data.records.length} 条记录
+            {data.unreadable > 0 && (
+              <p className="leading-relaxed text-accent">有 {data.unreadable} 条记录读不出来，不会包含在备份里，所以这不是一份完整备份。</p>
+            )}
+            <button type="button" onClick={() => void download()} className="rounded-full bg-accent px-4 py-1.5 text-bg">
+              {data.unreadable > 0 ? `仅导出能读取的 ${data.records.length} 条记录（不完整）` : `下载 ${data.records.length} 条记录`}
             </button>
           </div>
         )}
@@ -162,7 +210,7 @@ export function HistoryList() {
         {panel === "clear" && (
           <div className="space-y-2 rounded-lg bg-surface p-3" role="alert">
             <p className="leading-relaxed">
-              将删除这个浏览器里的全部 {data.records.length} 条记录、每日一张的记录{data.unreadable > 0 ? `（和 ${data.unreadable} 条读不出来的条目）` : ""}，以及进行中的草稿。删除后无法恢复，建议先导出备份。
+              将删除这个浏览器里的全部 {data.records.length} 条记录、每日一张的记录、回看提醒{data.unreadable > 0 ? `（和 ${data.unreadable} 条读不出来的条目）` : ""}，以及进行中的草稿；你的偏好和设置会保留。删除后无法恢复，建议先导出备份。
             </p>
             <div className="flex gap-3">
               <button type="button" onClick={() => void confirmClear()} className="rounded-full border border-accent px-4 py-1.5 text-accent">
@@ -184,7 +232,7 @@ export function HistoryList() {
         {preview && (
           <div className="space-y-3 rounded-lg bg-surface p-3" role="group" aria-label="导入预览" data-testid="import-preview">
             <p className="leading-relaxed">
-              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。每日一张：补上本机没有的 <b>{preview.dailyAdd.length}</b> 天，已有的 {preview.dailySkip} 天不覆盖。回看提醒：补上 <b>{preview.recallsAdd.length}</b> 条{preview.recallsSkip > 0 && `（${preview.recallsSkip} 条已有或找不到对应记录，跳过）`}。{preview.profileApply && " 备份里有你的偏好（牌想帮你做什么 / 常来的主题 / 回看节奏），这台设备还没建档，会采用它。"}{preview.profileIgnored && " 备份里的偏好不会覆盖这台设备已有的设置。"}
+              预检通过。将新增 <b>{preview.add.length}</b> 条；<b>{preview.skip.length}</b> 条与本机完全相同，会跳过；<b>{preview.conflicts.length}</b> 条与本机同一 ID 但内容不同。每日一张：补上本机没有的 <b>{preview.dailyAdd.length}</b> 天，已有的 {preview.dailySkip} 天不覆盖。回看提醒：补上 <b>{preview.recallsAdd.length}</b> 条{preview.recallsSkip > 0 && `（${preview.recallsSkip} 条已有或找不到对应记录，跳过）`}{preview.recallsIdConflict > 0 && `（${preview.recallsIdConflict} 条与本机提醒编号冲突，不导入）`}。{preview.profileApply && " 备份里有你的偏好（牌想帮你做什么 / 常来的主题 / 回看节奏），这台设备还没建档，会采用它。"}{preview.profileIgnored && " 备份里的偏好不会覆盖这台设备已有的设置。"}
             </p>
             {preview.conflicts.length > 0 && (
               <fieldset className="space-y-2">

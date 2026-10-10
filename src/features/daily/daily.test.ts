@@ -138,13 +138,17 @@ describe("parseDaily / mergeDaily", () => {
     expect(all).toHaveLength(2);
   });
 
-  it("条目数有上限，保留最近的", () => {
-    const many = Array.from({ length: DAILY_MAX_ENTRIES + 20 }, (_, i) => entry(new Date(Date.UTC(2024, 0, 1 + i)).toISOString().slice(0, 10)));
-    mergeDaily(many);
-    const kept = loadDaily();
-    expect(kept).toHaveLength(DAILY_MAX_ENTRIES);
-    expect(kept.some((e) => e.dayKey === many[0].dayKey)).toBe(false);
-    expect(kept.some((e) => e.dayKey === many.at(-1)!.dayKey)).toBe(true);
+  it("导入超出容量：整批拒绝，本机已有条目逐项不变（不按日期挤掉旧的）", () => {
+    const old = Array.from({ length: DAILY_MAX_ENTRIES }, (_, i) => entry(new Date(Date.UTC(2024, 0, 1 + i)).toISOString().slice(0, 10)));
+    mergeDaily(old);
+    const before = JSON.stringify(loadDaily());
+    expect(() => mergeDaily([entry("2030-01-01")])).toThrow(/capacity/);
+    expect(JSON.stringify(loadDaily())).toBe(before);
+    // 399 + 1 恰好放得下
+    localStorage.removeItem(DAILY_KEY);
+    mergeDaily(old.slice(1));
+    expect(mergeDaily([entry("2030-01-01")]).added).toBe(1);
+    expect(loadDaily()).toHaveLength(DAILY_MAX_ENTRIES);
   });
 
   it("clearDaily", () => {

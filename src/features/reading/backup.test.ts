@@ -1,6 +1,6 @@
 import "fake-indexeddb/auto";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { BACKUP_VERSION, MAX_BACKUP_BYTES, backupFileName, buildBackup, parseBackup, recordsToWrite, stableStringify } from "./backup";
+import { BACKUP_VERSION, type ImportPlan, MAX_BACKUP_BYTES, backupFileName, buildBackup, parseBackup, recordsToWrite, stableStringify } from "./backup";
 import { CONTENT_VERSION, RECORD_SCHEMA_VERSION, type Perspective, type ReadingRecord, type Review } from "./contract";
 import { buildLocalReading } from "./local";
 import { addPerspective, applyImport, clearEverything, deleteRecord, getRecord, listRecords, saveFlowRecord, saveRecord, updateReview, writeImported } from "./storage";
@@ -261,15 +261,24 @@ describe("每日一张随备份往返", () => {
   });
 });
 
-describe("applyImport：记录与每日一张要么都写要么都不写", () => {
-  it("记录事务失败 → 每日一张恢复为导入前", async () => {
+const plan = (records: ReadingRecord[], extras: Partial<ImportPlan> = {}): ImportPlan => ({
+  records: records.map((incoming) => ({ incoming, expected: null })),
+  dailyAdd: [],
+  recallsAdd: [],
+  profileApply: null,
+  ...extras,
+});
+
+describe("applyImport：非法记录在任何写入之前就被拦下", () => {
+  it("记录校验失败 → 什么都不写，每日一张保持导入前", async () => {
     const store = new Map<string, string>();
     vi.stubGlobal("localStorage", { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v), removeItem: (k: string) => void store.delete(k) });
     store.set("tarot:daily:v1", JSON.stringify([{ dayKey: "2026-09-01", timeZone: "UTC", drawnAt: "2026-09-01T08:00:00.000Z", cardId: "death", reversed: false, deckId: "rws-1909", settings: { allowReversed: true } }]));
     const before = store.get("tarot:daily:v1");
     const bad = { ...makeRecord("record-0009"), id: "x" } as ReadingRecord;
     const newDay = { dayKey: "2026-10-02", timeZone: "UTC", drawnAt: "2026-10-02T08:00:00.000Z", cardId: "the-fool" as const, reversed: false, deckId: "rws-1909" as const, settings: { allowReversed: true } };
-    await expect(applyImport([bad], [newDay])).rejects.toThrow();
+    const result = await applyImport(plan([bad], { dailyAdd: [newDay] }));
+    expect(result.status).toBe("failed");
     expect(store.get("tarot:daily:v1")).toBe(before);
     vi.unstubAllGlobals();
   });
@@ -389,19 +398,20 @@ describe("回读与建档随备份往返", () => {
 
     it("成功：记录、回读、建档都写入", async () => {
       const store = stubStorage();
-      await applyImport([makeRecord(ID_A)], { recallsAdd: [recall(ID_A)], profileApply: profile });
+      const result = await applyImport(plan([makeRecord(ID_A)], { recallsAdd: [recall(ID_A)], profileApply: profile }));
+      expect(result.status).toBe("done");
       expect((await getRecord(ID_A))?.id).toBe(ID_A);
       expect(JSON.parse(store.get("tarot:recall:v1")!)).toHaveLength(1);
       expect(JSON.parse(store.get("tarot:profile:v1")!)).toMatchObject({ onboarded: true, intent: "decide" });
       vi.unstubAllGlobals();
     });
 
-    it("记录事务失败：回读与建档都恢复成导入前（包括原本为空）", async () => {
+    it("记录校验失败：回读与建档都没有被写入（包括原本为空）", async () => {
       const store = stubStorage();
       store.set("tarot:recall:v1", JSON.stringify([recall("record-0777")]));
       const before = store.get("tarot:recall:v1");
       const bad = { ...makeRecord("record-0009"), id: "x" } as ReadingRecord;
-      await expect(applyImport([bad], { recallsAdd: [recall(ID_B)], profileApply: profile })).rejects.toThrow();
+      expect((await applyImport(plan([bad], { recallsAdd: [recall(ID_B)], profileApply: profile }))).status).toBe("failed");
       expect(store.get("tarot:recall:v1")).toBe(before);
       expect(store.has("tarot:profile:v1")).toBe(false);
       vi.unstubAllGlobals();
@@ -410,7 +420,7 @@ describe("回读与建档随备份往返", () => {
     it("同一条记录已有回读：mergeRecalls 不重复", async () => {
       const store = stubStorage();
       store.set("tarot:recall:v1", JSON.stringify([recall(ID_A, "recall-local-0001")]));
-      await applyImport([], { recallsAdd: [recall(ID_A, "recall-file-00001")] });
+      await applyImport(plan([], { recallsAdd: [recall(ID_A, "recall-file-00001")] }));
       expect(JSON.parse(store.get("tarot:recall:v1")!)).toHaveLength(1);
       vi.unstubAllGlobals();
     });

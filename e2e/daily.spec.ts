@@ -83,6 +83,8 @@ test("每日一张进入备份，清空时一并清除，导入后补回", async
   await page.getByLabel("选择备份文件").setInputFiles(path);
   await expect(page.getByTestId("import-preview")).toContainText("补上本机没有的 1 天");
   await page.getByRole("button", { name: "确认导入" }).click();
+  // 等写入完成的提示再离开页面：导入是分步写入，中途跳走就是中断
+  await expect(page.getByTestId("history-notice")).toContainText("已导入");
   await page.goto("/daily");
   await expect(page.getByTestId("daily-card").getByRole("heading")).toHaveText(title);
 });

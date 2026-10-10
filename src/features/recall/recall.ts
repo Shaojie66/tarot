@@ -3,6 +3,7 @@
 // 纯本地（localStorage），不写进记录本身（不动 IndexedDB schema）；删除记录时级联清理。
 
 import { z } from "zod";
+import { CapacityError } from "@/lib/capacity";
 import { randomId } from "@/lib/id";
 
 export type RecallStatus = "pending" | "done" | "dismissed";
@@ -18,7 +19,7 @@ export interface Recall {
 }
 
 export const RECALL_KEY = "tarot:recall:v1";
-const MAX_RECALLS = 200;
+export const MAX_RECALLS = 200;
 
 export const recallSchema = z.strictObject({
   id: z.string().min(8),
@@ -30,6 +31,25 @@ export const recallSchema = z.strictObject({
 });
 
 const listSchema = z.array(recallSchema).catch([]);
+
+/** 备份里的日期：必须是可解析的 ISO 时间，统一规范成 UTC，保证字符串排序和“是否到期”的比较有意义。 */
+const isoUtc = z.iso.datetime({ offset: true }).transform((s) => new Date(s).toISOString());
+
+/**
+ * 备份里的回读：比读本机存储时严格（本机读取要容忍旧数据，备份文件有问题就该拒绝）。
+ * 状态与完成时间必须一致：pending 没有完成时间，done / dismissed 必须有。
+ */
+export const recallBackupSchema = z
+  .strictObject({
+    id: z.string().min(8),
+    recordId: z.string().min(8),
+    dueAt: isoUtc,
+    status: z.enum(["pending", "done", "dismissed"]),
+    createdAt: isoUtc,
+    completedAt: isoUtc.nullable(),
+  })
+  .refine((r) => (r.status === "pending") === (r.completedAt === null), { message: "status 与 completedAt 不一致" });
+
 
 /** 按"3 天后 / 一周后"计算到期时间（以调用时的本地时刻为基准）。 */
 export function dueAfter(days: number, now: Date = new Date()): string {
@@ -52,7 +72,10 @@ export function addRecall(recordId: string, days: number): Recall | null {
     createdAt,
     completedAt: null,
   };
-  if (!write([item, ...loadAll()].slice(0, MAX_RECALLS))) return null;
+  // 满了就不再新增（返回 null 让调用方如实告诉用户“没安排成功”），绝不为了腾位置挤掉已有的提醒
+  const all = loadAll();
+  if (all.length >= MAX_RECALLS) return null;
+  if (!write([item, ...all])) return null;
   return item;
 }
 
@@ -72,14 +95,15 @@ export function removeRecallsForRecord(recordId: string): boolean {
 
 /**
  * 导入（备份）：补上本机该记录还没有回读的条目；一条记录只保留一条。返回新增条数。
- * 写入失败抛错（调用方负责整体回滚）。
+ * 超出容量或写入失败都抛错，且不写入任何东西——不会为了容纳新内容挤掉已有提醒。
  */
 export function mergeRecalls(incoming: Recall[]): { added: number; skipped: number } {
   const existing = loadAll();
   const have = new Set(existing.map((r) => r.recordId));
   const ids = new Set(existing.map((r) => r.id));
   const fresh = incoming.filter((r) => !have.has(r.recordId) && !ids.has(r.id));
-  if (fresh.length > 0 && !write([...fresh, ...existing].slice(0, MAX_RECALLS))) throw new Error("recall storage unavailable");
+  if (existing.length + fresh.length > MAX_RECALLS) throw new CapacityError("recall");
+  if (fresh.length > 0 && !write([...fresh, ...existing])) throw new Error("recall storage unavailable");
   return { added: fresh.length, skipped: incoming.length - fresh.length };
 }
 

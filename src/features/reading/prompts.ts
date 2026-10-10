@@ -8,7 +8,7 @@ import type { ReadingRequest, Tone } from "./contract";
 import { getSpread } from "./spread";
 import type { Intent } from "@/features/profile/intent";
 
-export const PROMPT_VERSION = "v5";
+export const PROMPT_VERSION = "v6";
 
 const cache = new Map<string, string>();
 

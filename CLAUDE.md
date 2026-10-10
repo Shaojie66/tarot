@@ -50,7 +50,7 @@ Next.js 16（App Router，`src/`）+ React 19 + Tailwind 4 + TypeScript，pnpm�
 - 页面改动用 dev server（`.claude/launch.json` 的 `dev`，端口 3210）在手机视口下看一遍，并查控制台报错
 - `pnpm e2e`：Playwright 手机视口 E2E（无 key 路径，含 PWA 离线、无障碍回归），涉及流程页面时跑；`E2E_BASE_URL=... pnpm e2e` 可对已运行的实例（如容器）跑同一套
 - `node scripts/verify-lan.mjs`（需先 build）：局域网授权矩阵；`node scripts/verify-deck.mjs`：牌组完整性
-- 改 prompt：新建 `content/prompts/vN/`（当前 v5：含换视角与“这次想要的帮助”），跑 `pnpm test`（mock 评测）；有 key 时再跑 `pnpm eval:live`
+- 改 prompt：新建 `content/prompts/vN/`（当前 v6：v5 的换视角与“这次想要的帮助”，加上不断言处境 / 行动不涉及联系他人 / 反问与读法句式不固化），跑 `pnpm test`（mock 评测）；有 key 时再跑 `pnpm eval:live`
 
 ## Design Context
 

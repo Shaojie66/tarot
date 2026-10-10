@@ -59,13 +59,33 @@ const nextSchema = z.strictObject({
 const topicVariantSchema = z.strictObject({ gist: z.string().optional(), obstacle: obstacleSchema.optional(), next: z.strictObject({ text: z.string().optional(), check: z.string().optional(), actions: actionsSchema.optional(), question: z.string().optional() }).optional() });
 const sideV2Schema = z.strictObject({
   gist: z.string().min(2),
+  /** 编辑标记（不是从句子里猜出来的）：这个朝向带有哪些主题，用来选择共同解释；词表见各 focus 的 weights */
+  tags: z.array(z.string().min(2)),
   situation: z.string().min(8),
   obstacle: obstacleSchema,
   next: nextSchema,
   byTopic: z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, topicVariantSchema.optional()])) as Record<Topic, z.ZodOptional<typeof topicVariantSchema>>).optional(),
 });
+/**
+ * 共同解释（focus）：先按三张牌的编辑标记选出一个主张，再围绕它渲染整体、两条读法、行动与追问。
+ * weights 给每个标记在这个主张里的分量；至少两张牌有贡献且总分 ≥ need 才算命中，否则回到按位置组织的 v2.1 路径。
+ */
+const focusSchema = z.strictObject({
+  id: z.string().min(2),
+  claim: z.string().min(4),
+  weights: z.record(z.string(), z.number().int().min(1)),
+  need: z.number().int().min(1),
+  roles: z.record(z.string(), z.strictObject({ relation: z.string().min(4), detail: z.string().min(8) })),
+  stance: z.strictObject({ clarify: z.string().min(4), decide: z.string().min(4), companion: z.string().min(4) }),
+  branches: z.tuple([z.string().min(8), z.string().min(8)]),
+  actions: actionsSchema,
+  questions: z.strictObject({ clarify: z.string().endsWith("？"), decide: z.string().endsWith("？"), companion: z.string().endsWith("？") }),
+});
+type Focus = z.infer<typeof focusSchema>;
+
 const v2Schema = z.strictObject({
   version: z.string(),
+  focuses: z.array(focusSchema),
   locative: z.strictObject(Object.fromEntries(TOPICS.map((t) => [t, z.string().min(2)])) as Record<Topic, z.ZodString>),
   closing: z.strictObject({ clarify: z.string(), decide: z.string(), companion: z.string() }),
   cards: z.record(z.string().refine(isCardId, "unknown card id"), z.strictObject({ upright: sideV2Schema, reversed: sideV2Schema })),
@@ -104,7 +124,63 @@ function roles(count: number) {
   return { situation: 0, obstacle: Math.min(1, count - 1), next: count - 1 };
 }
 
+type PickedFocus = { focus: Focus; roleTags: (string | null)[] };
+
+function pickFocus(request: ReadingRequest): PickedFocus | null {
+  const sides = [...request.cards].sort((a, b) => a.position - b.position).map((c) => v2Side(c.cardId, c.reversed)!);
+  let best: { picked: PickedFocus; score: number } | null = null;
+  for (const focus of LOCAL_V2.focuses) {
+    // 每张牌取它在这个主张里分量最大的一个标记
+    const roleTags = sides.map((side) => {
+      let top: string | null = null;
+      for (const tag of side.tags) if (focus.weights[tag] && (top === null || focus.weights[tag] > focus.weights[top])) top = tag;
+      return top;
+    });
+    const contributing = roleTags.filter((t) => t !== null).length;
+    const score = roleTags.reduce((sum, t) => sum + (t ? focus.weights[t] : 0), 0);
+    if (contributing >= 2 && score >= focus.need && (!best || score > best.score)) best = { picked: { focus, roleTags }, score };
+  }
+  return best?.picked ?? null;
+}
+
+/** 这组牌命中哪个共同解释（没命中或没有 v2 内容返回 null）。供测试和人工审读时追查。 */
+export function selectLocalFocus(request: ReadingRequest): string | null {
+  return coveredV2(request) ? (pickFocus(request)?.focus.id ?? null) : null;
+}
+
+function buildFocused(request: ReadingRequest, { focus, roleTags }: PickedFocus): ReadingResult {
+  const intent = request.intent ?? "clarify";
+  const where = LOCAL_V2.locative[request.topic];
+  const fillIn = (text: string) => text.replaceAll("{in}", where);
+  const byPosition = [...request.cards].sort((a, b) => a.position - b.position);
+  const sides = byPosition.map((c) => v2Side(c.cardId, c.reversed)!);
+  const label = (i: number) => `${getCard(byPosition[i].cardId).nameZh}${byPosition[i].reversed ? "（逆位）" : ""}`;
+  const fallbackText = (i: number) => (i === 0 ? sides[0].situation : i === 1 ? sides[1].obstacle.text : sides[2].next.text);
+
+  const cards = byPosition.map((c, i) => {
+    const role = roleTags[i] ? focus.roles[roleTags[i]!] : undefined;
+    return { cardId: c.cardId, position: c.position, reversed: c.reversed, text: fillIn(role ? role.detail : fallbackText(i)) };
+  });
+  const relation = byPosition
+    .map((_, i) => {
+      const role = roleTags[i] ? focus.roles[roleTags[i]!] : undefined;
+      return role ? `${label(i)}${role.relation}` : `${label(i)}带来「${sides[i].gist}」这一层背景`;
+    })
+    .join("，");
+
+  return {
+    source: "local",
+    overall: [request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "", `这组牌的重点是${focus.claim}。`, `${relation}。`, focus.stance[intent]].join(""),
+    cards,
+    interpretations: [fillIn(focus.branches[0]), fillIn(focus.branches[1])],
+    action: fillIn(focus.actions[intent]),
+    question: focus.questions[intent],
+  };
+}
+
 function buildV2(request: ReadingRequest): ReadingResult {
+  const picked = pickFocus(request);
+  if (picked) return buildFocused(request, picked);
   const intent = request.intent ?? "clarify";
   const topic = request.topic;
   const where = LOCAL_V2.locative[topic];
@@ -136,7 +212,7 @@ function buildV2(request: ReadingRequest): ReadingResult {
     cards,
     interpretations: [fillIn(obstacle.check), fillIn(next.check)],
     // 行动由末牌的动作决定，再带上阻碍牌的核对点，让行动和整体判断连在一起
-    action: `${fillIn(next.actions[intent])}做的时候留意：${obstacle.focus}。`,
+    action: intent === "companion" ? fillIn(next.actions[intent]) : `${fillIn(next.actions[intent])}做的时候留意：${obstacle.focus}。`,
     question: next.question,
   };
 }

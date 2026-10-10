@@ -1,0 +1,952 @@
+{
+ "note": "冻结的 v2.1 输出（提交 00364cb）。v2.2 起所有“候选 vs 基线”的比较都以此为基线；不要重新生成。要换基线先写原因并另存新文件。",
+ "commit": "00364cb",
+ "contentVersion": "local-v2.1-sample",
+ "localContentVersion": "cards-2026-10-09+local-v2.1-sample",
+ "samples": [
+  {
+   "id": "relationship-clarify-A",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "relationship",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "clarify",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：双方的期待有没有说清楚。「透支与自我怀疑」是眼下的底色，「踏实起步」是可以先动的一步。先从最容易核对的那一点开始。",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": true,
+      "text": "透支与自我怀疑的提示：投入和补给可能不对等。"
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": true,
+      "text": "关系里的期待没有说清时，容易靠猜；先说清一件具体的期待，通常比继续揣测更有用。"
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false,
+      "text": "认真做一件小的具体功课，积累第一份实际经验。"
+     }
+    ],
+    "interpretations": [
+     "期待还不清楚时，先写下自己想要的一件具体的事，再决定要不要说、怎么说。",
+     "对这段关系想弄清的事已经明确时，先选一个只涉及自己的小办法去了解。"
+    ],
+    "action": "用 15 分钟写下你对这段关系最想弄清楚的一件事，再写一个只涉及你自己、能弄清它的最小办法。做的时候留意：双方的期待有没有说清楚。",
+    "question": "关于这段关系，你最想先弄清楚的一件事是什么？"
+   },
+   "sha256": "84684d33045f9c3209ae617e347ea2152288414a5ea5aa075a876267a977d2ba"
+  },
+  {
+   "id": "career-decide-B",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "career",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "decide",
+    "cards": [
+     {
+      "cardId": "two-of-pentacles",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：有没有留出恢复的时间。「兼顾平衡」是眼下的底色，「离不开」是可以先动的一步。放进选择里看：先补最能回答「有没有留出恢复的时间」的那一项信息。",
+    "cards": [
+     {
+      "cardId": "two-of-pentacles",
+      "position": 0,
+      "reversed": false,
+      "text": "兼顾的提示：几件事同时在顾，目前可能还在平衡。"
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false,
+      "text": "累了很久的时候，判断质量容易下降，恢复期往往应该先于决定。"
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 2,
+      "reversed": true,
+      "text": "先处理一个跟着你的问题，再谈换环境。"
+     }
+    ],
+    "interpretations": [
+     "已经累了很久、判断开始变差时，先给自己一个明确的休息窗口，再做决定。",
+     "同样的问题在不同环境里反复出现时，先写下它出现的情境，找出共同点。"
+    ],
+    "action": "把“走”之前必须先处理的一件事写出来，写清它的完成标准，再评估走的时间。做的时候留意：有没有留出恢复的时间。",
+    "question": "同样的问题，最近三次是在什么情境下出现的？"
+   },
+   "sha256": "992c6ffb11cd01e6f3e78adf3ad58a3545a90abf66629dd2a60204c151604773"
+  },
+  {
+   "id": "career-clarify",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "career",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "clarify",
+    "cards": [
+     {
+      "cardId": "eight-of-wands",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "knight-of-swords",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：行动之前，后果有没有想过。「节奏被打乱」是眼下的底色，「只想不做」是可以先动的一步。先从最容易核对的那一点开始。",
+    "cards": [
+     {
+      "cardId": "eight-of-wands",
+      "position": 0,
+      "reversed": true,
+      "text": "节奏被打乱的提示：事情可能卡在等待上，也可能是推得太急。"
+     },
+     {
+      "cardId": "knight-of-swords",
+      "position": 1,
+      "reversed": true,
+      "text": "想立刻回应时，先等一晚再写出后果，常常会改变做法；有期限的事以期限为准。"
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": true,
+      "text": "把学过的东西用出来一次。"
+     }
+    ],
+    "interpretations": [
+     "想立刻回应或行动时，先等一晚，再把后果写出三条。",
+     "已经学了不少时，先选一件学过的内容，用在一个真实的小任务里。"
+    ],
+    "action": "把你想了很久的计划写成三步，挑最小的一步，在日历里定一个明天的 20 分钟去做。做的时候留意：行动之前，后果有没有想过。",
+    "question": "你已经学到的东西里，哪一样可以马上用一次？"
+   },
+   "sha256": "03b28a553a01448f310961dec7321b70a72d01daea2ff68fa81e3eaad0639c9e"
+  },
+  {
+   "id": "career-companion",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "career",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：有没有留出恢复的时间。「透支与自我怀疑」是眼下的底色，「承诺过多」是可以先动的一步。这次把步子放小，只做一件和「承诺过多」有关的事。",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": true,
+      "text": "透支与自我怀疑的提示：投入和补给可能不对等。"
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false,
+      "text": "累了很久的时候，判断质量容易下降，恢复期往往应该先于决定。"
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 2,
+      "reversed": true,
+      "text": "做减法，而不是更努力地兼顾。"
+     }
+    ],
+    "interpretations": [
+     "已经累了很久、判断开始变差时，先给自己一个明确的休息窗口，再做决定。",
+     "时间已经排不下时，先划掉一项，而不是挤压所有项。"
+    ],
+    "action": "今天只做三件事：一件必须做的、一件小的、一件让自己恢复的，其余明天再说。做的时候留意：有没有留出恢复的时间。",
+    "question": "这些承诺里，哪一项当初答应是出于“应该”？"
+   },
+   "sha256": "47a442bdac378d9f8b3f8a1209180e177707d241e14484307e89ed29cc206549"
+  },
+  {
+   "id": "relationship-decide",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "relationship",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "decide",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：双方的期待有没有说清楚。「独处变回避」是眼下的底色，「过渡与调整」是可以先动的一步。放进选择里看：先补最能回答「双方的期待有没有说清楚」的那一项信息。",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": true,
+      "text": "独处的提示有两面：一面是整理，一面是躲开，值得分清现在更像哪一种。"
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": true,
+      "text": "关系里的期待没有说清时，容易靠猜；先说清一件具体的期待，通常比继续揣测更有用。"
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 2,
+      "reversed": false,
+      "text": "把过渡期缩短到“下一站”，而不是一次到终点。"
+     }
+    ],
+    "interpretations": [
+     "期待还不清楚时，先写下自己想要的一件具体的事，再决定要不要说、怎么说。",
+     "想要的状态还不清楚时，先写下一个你希望的中间状态（频率、距离或方式）。"
+    ],
+    "action": "为你在考虑的两个方向各写一句“选它意味着要付出什么”，只写你自己的部分。做的时候留意：双方的期待有没有说清楚。",
+    "question": "在这段关系里，你想要的中间状态是什么样的？"
+   },
+   "sha256": "44b42671cc5bde468b34b97143d9c92a85ec77558d58e9f7d5718f5405c0bad9"
+  },
+  {
+   "id": "relationship-companion",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "relationship",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "the-tower",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：有没有一个隐约的信号一直没被看过。「情绪起伏」是眼下的底色，「停不下来」是可以先动的一步。这次把步子放小，只做一件和「停不下来」有关的事。",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": true,
+      "text": "情绪起伏的提示：情绪较响的时候，判断容易被它带着走。"
+     },
+     {
+      "cardId": "the-tower",
+      "position": 1,
+      "reversed": true,
+      "text": "被放到一边的不安，要等把事实和猜测分开之后才好判断。"
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 2,
+      "reversed": true,
+      "text": "用一个小步骤重新启动。"
+     }
+    ],
+    "interpretations": [
+     "有一个隐约的不对劲反复出现时，先把它写下来，标明哪些是看到的事实、哪些是猜测。",
+     "已经休息够了时，选一件 20 分钟能做完的小事，作为重新出发的第一步。"
+    ],
+    "action": "做一件需要动手的小事（整理桌面、浇花），10 分钟后看看焦躁有没有变化。做的时候留意：有没有一个隐约的信号一直没被看过。",
+    "question": "休息之后，你最想先重新做的是哪一件事？"
+   },
+   "sha256": "33f0b9a98b2ca6c52c2da67e77d3d791a89b0ae3f30e31e5677ed2f9c5d5caf1"
+  },
+  {
+   "id": "self-clarify",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "clarify",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "death",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "the-hermit",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：维持原样的成本和调整的成本各是多少。「细小的感受」是眼下的底色，「向内整理」是可以先动的一步。先从最容易核对的那一点开始。",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": false,
+      "text": "细小感受的提示：一个微弱的感受值得被认真看一眼。"
+     },
+     {
+      "cardId": "death",
+      "position": 1,
+      "reversed": true,
+      "text": "反复推迟一个调整时，把两边的成本都摊开，比凭感觉更容易判断。"
+     },
+     {
+      "cardId": "the-hermit",
+      "position": 2,
+      "reversed": false,
+      "text": "给自己一段不被打断的整理时间，再决定要不要向外说。"
+     }
+    ],
+    "interpretations": [
+     "发现自己在反复推迟某个决定时，先算一笔账：再拖一个月要付出的时间、精力和机会。",
+     "手头信息已经够用时，先用一段安静时间把判断理出来，再去找人讨论。"
+    ],
+    "action": "用 20 分钟独自写下这件事里你最在意的三件事，按重要程度排序，写完圈出排在最前面的一条。做的时候留意：维持原样的成本和调整的成本各是多少。",
+    "question": "撇开别人怎么说，你自己最在意的那一条是什么？"
+   },
+   "sha256": "a47b9eaae7db69c2886769cd4be462623b0ab5090e0161cd670f793a9a1b79e7"
+  },
+  {
+   "id": "self-decide",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "decide",
+    "cards": [
+     {
+      "cardId": "knight-of-swords",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "death",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：答应的事和能做的事对不对得上。「果断直接」是眼下的底色，「阶段收尾」是可以先动的一步。放进选择里看：先补最能回答「答应的事和能做的事对不对得上」的那一项信息。",
+    "cards": [
+     {
+      "cardId": "knight-of-swords",
+      "position": 0,
+      "reversed": false,
+      "text": "果断直接的提示：思路清楚时，适合直接解决一件事。"
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 1,
+      "reversed": true,
+      "text": "开始顾此失彼时，先看清承诺清单，比再努力兼顾更有效。"
+     },
+     {
+      "cardId": "death",
+      "position": 2,
+      "reversed": false,
+      "text": "为收尾做一个具体的动作，把位置腾出来。"
+     }
+    ],
+    "interpretations": [
+     "开始顾此失彼时，先列出所有承诺，标出哪些可以延期、缩小或退出。",
+     "已经想清楚要收尾的部分时，先定一个小的退场步骤，而不是一次全放下。"
+    ],
+    "action": "为你正在比较的选项各写一条“选它意味着放下什么”，并标出你更能接受放下的那一项。做的时候留意：答应的事和能做的事对不对得上。",
+    "question": "有没有哪一部分，当初要解决的事已经完成了？"
+   },
+   "sha256": "65ee4822b23539a5c915904e46fff5276ec0426fa0e7be3de761afea3ed0815e"
+  },
+  {
+   "id": "self-companion",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：有没有留出恢复的时间。「向内整理」是眼下的底色，「情绪起伏」是可以先动的一步。这次把步子放小，只做一件和「情绪起伏」有关的事。",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": false,
+      "text": "向内整理的提示：先安静下来理一理自己的想法，再决定要不要听更多意见。"
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": false,
+      "text": "累了很久的时候，判断质量容易下降，恢复期往往应该先于决定。"
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 2,
+      "reversed": true,
+      "text": "先安顿情绪，再做需要冷静的判断。"
+     }
+    ],
+    "interpretations": [
+     "已经累了很久、判断开始变差时，先给自己一个明确的休息窗口，再做决定。",
+     "刚被某件小事触动时，先做一个让身体平静的小动作，再看事情本身。"
+    ],
+    "action": "做 5 分钟慢呼吸或喝一杯温水，之后只写一句“我现在需要的是……”。做的时候留意：有没有留出恢复的时间。",
+    "question": "如果最近有一件小事让情绪起伏很大，其中哪一部分是事实，哪一部分是你的解读？"
+   },
+   "sha256": "4215ccca36e077065c070969609cf7ad44598e445df97a3c1c2f5d700400466b"
+  },
+  {
+   "id": "crossroads-clarify",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "crossroads",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "clarify",
+    "cards": [
+     {
+      "cardId": "death",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "eight-of-wands",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：是什么在拖着脚步。「阶段收尾」是眼下的底色，「顺势推进」是可以先动的一步。先从最容易核对的那一点开始。",
+    "cards": [
+     {
+      "cardId": "death",
+      "position": 0,
+      "reversed": false,
+      "text": "阶段收尾的提示：有些做法可能已经完成了它的作用。"
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 1,
+      "reversed": true,
+      "text": "想走却没走时，原因通常可以分成资源、顾虑和没处理完的事三类。"
+     },
+     {
+      "cardId": "eight-of-wands",
+      "position": 2,
+      "reversed": false,
+      "text": "趁势把一件悬着的事推到有结果。"
+     }
+    ],
+    "interpretations": [
+     "想走却一直没走时，先把拖住你的原因分成“资源 / 顾虑 / 未了的事”三类。",
+     "时机看起来对、条件基本具备时，先定一个本周内的截止点，推进到有结果。"
+    ],
+    "action": "选一件悬着的事，写下本周内要到达的具体结果和截止日期，再写出第一步。做的时候留意：是什么在拖着脚步。",
+    "question": "这一周内，你能让哪件事先有一个结果？"
+   },
+   "sha256": "f00307d00f9d7cea25e8241b0ff569e631172926f36e501b307c9be7793634e9"
+  },
+  {
+   "id": "crossroads-decide",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "crossroads",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "decide",
+    "cards": [
+     {
+      "cardId": "knight-of-swords",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：各个选项需要别人配合的部分有没有说清楚。「冲得太快」是眼下的底色，「踏实起步」是可以先动的一步。放进选择里看：先补最能回答「各个选项需要别人配合的部分有没有说清楚」的那一项信息。",
+    "cards": [
+     {
+      "cardId": "knight-of-swords",
+      "position": 0,
+      "reversed": true,
+      "text": "速度压过判断的提示：太快的时候，后果容易被忽略。"
+     },
+     {
+      "cardId": "three-of-pentacles",
+      "position": 1,
+      "reversed": false,
+      "text": "选项里需要别人配合的部分没有说清时，比较会失真；先把每个选项需要谁、需要什么写出来。"
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false,
+      "text": "认真做一件小的具体功课，积累第一份实际经验。"
+     }
+    ],
+    "interpretations": [
+     "选项依赖别人配合时，先写出每个选项需要谁、需要做什么，再比较。",
+     "想学的东西已经明确时，先安排一个固定的学习或练习时段。"
+    ],
+    "action": "为每个选项各做一次 30 分钟的小调研，记下“已知 / 未知”各两条，比较哪个更值得继续。做的时候留意：各个选项需要别人配合的部分有没有说清楚。",
+    "question": "要开始这件事，最小的一次练习是什么？"
+   },
+   "sha256": "2fdf81d0aaa3bef833f1a79a13ba2e12e87a16d939499b95be32609b53f37b99"
+  },
+  {
+   "id": "crossroads-companion",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "crossroads",
+    "originalQuestion": "（合成）这件事我想弄清楚。",
+    "question": "（合成）这件事我想弄清楚。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "the-tower",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "queen-of-wands",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：有没有一个细小的感受还没被命名。「结构被震动」是眼下的底色，「热度与自信」是可以先动的一步。这次把步子放小，只做一件和「热度与自信」有关的事。",
+    "cards": [
+     {
+      "cardId": "the-tower",
+      "position": 0,
+      "reversed": false,
+      "text": "结构被震动的提示：原来的安排可能已经不像从前那样稳，先承认这一点。"
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 1,
+      "reversed": false,
+      "text": "没被命名的感受，容易一直在背景里影响判断。"
+     },
+     {
+      "cardId": "queen-of-wands",
+      "position": 2,
+      "reversed": false,
+      "text": "用你的热度带动一件具体的事，让它被别人看见。"
+     }
+    ],
+    "interpretations": [
+     "总觉得有点在意、却说不清是什么时，先给这个感受起一个名字，再看它对应什么具体情境。",
+     "已经知道想推进什么时，先做一个能展示出来的最小版本。"
+    ],
+    "action": "今天做一件让你有精神的小事，比如放一首喜欢的歌做 10 分钟家务，做完记一句感受。做的时候留意：有没有一个细小的感受还没被命名。",
+    "question": "哪一件事，是你想起来就愿意先动手的？"
+   },
+   "sha256": "b0b9bfd5c38d45d81a8d7f3801278188c3d9599ffc3e1465aa0902c54c1aaa6c"
+  },
+  {
+   "id": "topicless-1",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）没有具体问题，就想看看此刻的自己。",
+    "question": "（合成）没有具体问题，就想看看此刻的自己。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：要兼顾的事有没有超出余量。「热度与自信」是眼下的底色，「细小的感受」是可以先动的一步。这次把步子放小，只做一件和「细小的感受」有关的事。",
+    "cards": [
+     {
+      "cardId": "queen-of-wands",
+      "position": 0,
+      "reversed": false,
+      "text": "热度与自信的提示：这是一个适合把想要的东西说清楚的位置。"
+     },
+     {
+      "cardId": "two-of-pentacles",
+      "position": 1,
+      "reversed": false,
+      "text": "几件事同时悬着、又没有排优先级时，每件都只会被做一点。"
+     },
+     {
+      "cardId": "page-of-cups",
+      "position": 2,
+      "reversed": false,
+      "text": "顺着那个小小的感受，做一次轻量的探索。"
+     }
+    ],
+    "interpretations": [
+     "几件事同时悬着时，先排出优先级，只保证最重要的一件。",
+     "这个感受带着好奇而不是压力时，先做一次低成本的小尝试。"
+    ],
+    "action": "今天留 10 分钟给一个小小的喜欢（一首歌、一张图、一口热茶），然后记一句感受。做的时候留意：要兼顾的事有没有超出余量。",
+    "question": "最近哪一刻，你心里动了一下？"
+   },
+   "sha256": "5a5c6eacee7d33f7bf50e1062daa481cea1c036137869cf535bd71c4a2085aba"
+  },
+  {
+   "id": "topicless-2",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）没有具体问题，就想看看此刻的自己。",
+    "question": "（合成）没有具体问题，就想看看此刻的自己。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "the-tower",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "death",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：是还需要休息，还是该重新出发。「不安被压下」是眼下的底色，「拖着不收尾」是可以先动的一步。这次把步子放小，只做一件和「拖着不收尾」有关的事。",
+    "cards": [
+     {
+      "cardId": "the-tower",
+      "position": 0,
+      "reversed": true,
+      "text": "被压下的不安或变动余波的提示：有些信号可能还没被正面看过。"
+     },
+     {
+      "cardId": "four-of-swords",
+      "position": 1,
+      "reversed": true,
+      "text": "休息之后仍然焦躁时，值得分清担心的是某件具体的事，还是单纯停不下来。"
+     },
+     {
+      "cardId": "death",
+      "position": 2,
+      "reversed": true,
+      "text": "先做一个可以撤回的小调整，试一试变化的手感。"
+     }
+    ],
+    "interpretations": [
+     "休息之后依然焦躁时，先看是在担心某件具体的事，还是单纯停不下来。",
+     "担心一步到位太重时，选一个可撤回的小改动先试一周。"
+    ],
+    "action": "今天只做一个很小的改变，比如换一条回家的路，做完记一句感受。做的时候留意：是还需要休息，还是该重新出发。",
+    "question": "如果继续维持原样，每个月要付出的是什么？"
+   },
+   "sha256": "8fc41c8a8443720a4b58a00293730bf7d3fd756d68d2d8d04c3255e31cf2d839"
+  },
+  {
+   "id": "topicless-3",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）没有具体问题，就想看看此刻的自己。",
+    "question": "（合成）没有具体问题，就想看看此刻的自己。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": false
+     },
+     {
+      "cardId": "eight-of-wands",
+      "position": 1,
+      "reversed": true
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：事情是在等待，还是在被硬推。「向内整理」是眼下的底色，「踏实起步」是可以先动的一步。这次把步子放小，只做一件和「踏实起步」有关的事。",
+    "cards": [
+     {
+      "cardId": "the-hermit",
+      "position": 0,
+      "reversed": false,
+      "text": "向内整理的提示：先安静下来理一理自己的想法，再决定要不要听更多意见。"
+     },
+     {
+      "cardId": "eight-of-wands",
+      "position": 1,
+      "reversed": true,
+      "text": "进展慢的事，通常先要分清它在等别人、等条件，还是在等自己。"
+     },
+     {
+      "cardId": "page-of-pentacles",
+      "position": 2,
+      "reversed": false,
+      "text": "认真做一件小的具体功课，积累第一份实际经验。"
+     }
+    ],
+    "interpretations": [
+     "事情迟迟没有进展时，先区分它在等别人、等条件还是在等你，再决定等还是推。",
+     "想学的东西已经明确时，先安排一个固定的学习或练习时段。"
+    ],
+    "action": "今天只学一个很小的东西（读一页、看一个短视频），做完记一句收获。做的时候留意：事情是在等待，还是在被硬推。",
+    "question": "要开始这件事，最小的一次练习是什么？"
+   },
+   "sha256": "e23b1f642b892f461220586b8b7cf591612c883116c5778a8cf4a23a6ed8352a"
+  },
+  {
+   "id": "topicless-4",
+   "request": {
+    "spreadId": "three-card",
+    "topic": "self",
+    "originalQuestion": "（合成）没有具体问题，就想看看此刻的自己。",
+    "question": "（合成）没有具体问题，就想看看此刻的自己。",
+    "selfReading": "",
+    "intent": "companion",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": true
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 1,
+      "reversed": false
+     },
+     {
+      "cardId": "knight-of-swords",
+      "position": 2,
+      "reversed": true
+     }
+    ]
+   },
+   "output": {
+    "source": "local",
+    "overall": "这组牌值得先核对的是：过渡期需要的资源够不够。「情绪起伏」是眼下的底色，「冲得太快」是可以先动的一步。这次把步子放小，只做一件和「冲得太快」有关的事。",
+    "cards": [
+     {
+      "cardId": "page-of-cups",
+      "position": 0,
+      "reversed": true,
+      "text": "情绪起伏的提示：情绪较响的时候，判断容易被它带着走。"
+     },
+     {
+      "cardId": "six-of-swords",
+      "position": 1,
+      "reversed": false,
+      "text": "考虑离开某个状态时，把时间、精力和不确定性摊开来看，比只盯着目的地更稳。"
+     },
+     {
+      "cardId": "knight-of-swords",
+      "position": 2,
+      "reversed": true,
+      "text": "把行动延后一步，先检查后果。"
+     }
+    ],
+    "interpretations": [
+     "已经在考虑离开某个状态时，先列出过渡期需要的资源，对照现在有多少。",
+     "结果不确定时，先写出最坏和最可能两种后果，再动手。"
+    ],
+    "action": "今天如果有想立刻做的事，先写下来，放到明天再看一眼；有期限的事以期限为准。做的时候留意：过渡期需要的资源够不够。",
+    "question": "这件事如果做得太急，最可能错在哪一步？"
+   },
+   "sha256": "3f79bf7153276e8961ac2b7c89b5e2563d084a106ad5f80469d95656ad5bde11"
+  }
+ ]
+}

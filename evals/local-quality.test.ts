@@ -4,8 +4,12 @@
 import { describe, expect, it } from "vitest";
 import { readingRequestSchema, readingResultSchema, resultMatchesDraw, type ReadingRequest } from "@/features/reading/contract";
 import { findForbiddenPhrase } from "@/features/reading/guard";
-import { buildLocalReading, localContentVersion } from "@/features/reading/local";
+import { createHash } from "node:crypto";
+import { stableStringify } from "@/features/reading/backup";
+import { buildLocalReading, localContentVersion, selectLocalFocus } from "@/features/reading/local";
+import baseline from "./local-quality/baseline-v2.1.json";
 import data from "./local-quality/cases.json";
+import reserved from "./local-quality/reserved.json";
 
 const make = (over: Partial<ReadingRequest> & Pick<ReadingRequest, "cards">): ReadingRequest =>
   readingRequestSchema.parse({ spreadId: "three-card", topic: "relationship", originalQuestion: "q", question: "合成问题", selfReading: "", ...over });
@@ -30,7 +34,7 @@ describe.each(samples)("本地解读样本 %s", (_id, request) => {
   });
 
   it("首段先给观点（有“重点”句），不是牌名目录；没有固定免责套话", () => {
-    expect(result.overall).toMatch(/这组牌值得先核对的是：.+。/);
+    expect(result.overall).toMatch(/这组牌(的重点是|值得先核对的是：).+。/);
     for (const phrase of BOILERPLATE) expect(flat(result), phrase).not.toContain(phrase);
   });
 
@@ -50,11 +54,10 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
     make({ topic: "relationship", intent: "clarify", ...over, cards: cards.map(([cardId, reversed], position) => ({ cardId, position, reversed })) as ReadingRequest["cards"] });
   const r0 = buildLocalReading(base);
 
-  it("换首牌：此刻的牌与整体变化，读法与行动不变（首牌只负责现状，不影响核对路径）", () => {
+  it("换首牌：此刻的牌与整体变化（未命中共同解释的组合里，首牌只影响现状与整体）", () => {
     const r = buildLocalReading(withCards([["the-hermit", false], ["three-of-pentacles", true], ["page-of-pentacles", false]]));
     expect(r.cards[0].text).not.toBe(r0.cards[0].text);
     expect(r.overall).not.toBe(r0.overall);
-    expect(r.interpretations).toEqual(r0.interpretations);
   });
 
   it("换阻碍牌：重点句、阻碍位说明、第一种读法都变", () => {
@@ -147,5 +150,136 @@ describe("v2 内容全文扫描", () => {
     const { LOCAL_V2 } = await import("@/features/reading/local");
     const text = JSON.stringify(LOCAL_V2.cards);
     for (const phrase of PRESUPPOSED) expect(text, phrase).not.toContain(phrase);
+  });
+});
+
+describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追问（v2.2 的组合逻辑）", () => {
+  const byId = (id: string) => data.samples.find((s) => s.id === id)!;
+  const reqOf = (s: { topic: string; intent: string; cards: unknown }) => make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] });
+  const run = (id: string) => buildLocalReading(reqOf(byId(id)));
+
+  it("样本命中哪个主张是确定的：3 / 11 / 15 → 节奏与试验；12 / 13 → 热情与兼顾；其余回到 v2.1 路径", () => {
+    const focusOf = Object.fromEntries(data.samples.map((s) => [s.id, selectLocalFocus(reqOf(s))]));
+    expect(focusOf["career-clarify"]).toBe("small-trial");
+    expect(focusOf["crossroads-decide"]).toBe("small-trial");
+    expect(focusOf["topicless-3"]).toBe("small-trial");
+    expect(focusOf["crossroads-companion"]).toBe("warm-juggle");
+    expect(focusOf["topicless-1"]).toBe("warm-juggle");
+    expect(focusOf["relationship-clarify-A"]).toBeNull();
+  });
+
+  it("命中主张时：整体先给主张，再说三张牌各自怎么支持 / 制约 / 转折；两条读法围绕同一个分支条件", () => {
+    const r = run("career-clarify");
+    expect(r.overall).toContain("这组牌的重点是把“做决定”和“做试验”分开");
+    for (const name of ["权杖八（逆位）", "宝剑骑士（逆位）", "星币侍从（逆位）"]) expect(r.overall).toContain(name);
+    expect(r.interpretations[0]).toMatch(/承诺/);
+    expect(r.interpretations[1]).toMatch(/体验|试/);
+    // 行动和追问都围绕“小试验”，不再要求另外的核对
+    expect(r.action).toContain("到哪里停");
+    expect(r.question).toContain("试验");
+    expect(r.action).not.toContain("做的时候留意");
+  });
+
+  it("样本 3：既不叫停也不催促——没有“学过的内容”那类与主张冲突的读法", () => {
+    const r = run("career-clarify");
+    expect(r.interpretations.join("")).not.toMatch(/学过|学习|等一晚/);
+  });
+
+  it("样本 11：decide 的追问继续讨论选项，不再回到“最小的一次练习”", () => {
+    const r = run("crossroads-decide");
+    expect(r.question).not.toContain("最小的一次练习");
+    expect(r.question).toMatch(/选项/);
+  });
+
+  it("陪伴：同一主张换成低负担动作，不强制写字 / 列清单 / 追加自查", () => {
+    for (const id of ["topicless-1", "topicless-3", "crossroads-companion"]) {
+      const r = run(id);
+      expect(r.action, id).not.toMatch(/写下|记下|列出|留意|核对|清单/);
+      expect(r.action.length).toBeGreaterThan(15);
+    }
+    // 未命中主张的陪伴样本（回到 v2.1 路径）也不再追加核对尾巴
+    expect(run("self-companion").action).not.toContain("做的时候留意");
+  });
+
+  it("三种意图在同一主张下给出不同的取舍：clarify 做小试验，decide 比较选项，companion 轻量", () => {
+    const cards = byId("career-clarify").cards as ReadingRequest["cards"];
+    const by = (intent: "clarify" | "decide" | "companion") => buildLocalReading(make({ topic: "career", intent, cards }));
+    const [c, d, p] = [by("clarify"), by("decide"), by("companion")];
+    expect(new Set([c.action, d.action, p.action]).size).toBe(3);
+    expect(new Set([c.question, d.question, p.question]).size).toBe(3);
+    expect(c.interpretations).toEqual(d.interpretations); // 读法围绕同一个主张，不随意图改
+    expect(d.action).toMatch(/每个选项/);
+  });
+
+  it("语义相反的首牌：把“热情”首牌换成“休息”后，主张消失，整体与行动都改变", () => {
+    const base = byId("topicless-1");
+    const swapped = { ...base, cards: base.cards.map((c, i) => (i === 0 ? { ...c, cardId: "four-of-swords" } : c)) };
+    expect(selectLocalFocus(reqOf(base))).toBe("warm-juggle");
+    // 剩下两张牌（兼顾、圣杯侍从）仍凑够两张贡献 → 主张保留，但首牌不再贡献，整体里的描述必须变化
+    const a = buildLocalReading(reqOf(base));
+    const b = buildLocalReading(reqOf(swapped));
+    expect(b.overall).not.toBe(a.overall);
+    expect(b.overall).toContain("带来「停下来恢复」这一层背景");
+    expect(b.cards[0].text).not.toBe(a.cards[0].text);
+  });
+
+  it("已知局限：末牌换成不在这个主张里的牌，主张仍成立，行动不变；只有末牌自己的说明和整体里的关系句变化", () => {
+    // 这是当前规则的实际行为，不是理想行为：“下一步”位置的牌若与主张无关，行动仍由主张决定。
+    // 要让末牌改变行动，需要在步骤 4 里给主张增加“末牌相反时”的转折规则；此处先把现状写成测试，避免被误当成已经解决。
+    const base = byId("topicless-1");
+    const swapped = { ...base, cards: base.cards.map((c, i) => (i === 2 ? { ...c, cardId: "knight-of-swords" } : c)) };
+    const a = buildLocalReading(reqOf(base));
+    const b = buildLocalReading(reqOf(swapped));
+    expect(selectLocalFocus(reqOf(swapped))).toBe("warm-juggle");
+    expect(b.action).toBe(a.action);
+    expect(b.cards[2].text).not.toBe(a.cards[2].text);
+    expect(b.overall).toContain("带来「果断直接」这一层背景");
+  });
+});
+
+describe("预先保留的 8 例新组合（未用于改稿）", () => {
+  it.each(reserved.combos.map((c) => [c.id, c] as const))("%s", (_id, c) => {
+    const req = make({ topic: c.topic as ReadingRequest["topic"], intent: c.intent as ReadingRequest["intent"], cards: c.cards as ReadingRequest["cards"] });
+    expect(selectLocalFocus(req)).toBe(c.expectedFocus);
+    const r = buildLocalReading(req);
+    expect(readingResultSchema.parse(r).source).toBe("local");
+    expect(resultMatchesDraw(r, req)).toBe(true);
+    expect(findForbiddenPhrase([flat(r)])).toBeNull();
+    if (c.intent === "companion") expect(r.action).not.toContain("做的时候留意");
+  });
+});
+
+describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
+  const sha = (value: unknown) => createHash("sha256").update(stableStringify(value)).digest("hex");
+
+  it("基线文件完整：输入与冻结样本一致，每条输出的摘要值对得上", () => {
+    expect(baseline.commit).toBe("00364cb");
+    expect(baseline.samples.map((s) => s.id)).toEqual(data.samples.map((s) => s.id));
+    for (const s of baseline.samples) expect(sha(s.output), s.id).toBe(s.sha256);
+  });
+
+  it("逐例比较：命中共同解释的样本整体 / 读法 / 行动 / 追问都与 v2.1 不同；未命中的与 v2.1 的差异只来自“陪伴不再追加核对”", () => {
+    const changed: string[] = [];
+    for (const s of baseline.samples) {
+      const req = readingRequestSchema.parse(s.request);
+      const now = buildLocalReading(req);
+      const focus = selectLocalFocus(req);
+      if (focus) {
+        changed.push(`${s.id}:${focus}`);
+        expect(now.overall, s.id).not.toBe(s.output.overall);
+        expect(now.action, s.id).not.toBe(s.output.action);
+        expect(now.question, s.id).not.toBe(s.output.question);
+        expect(now.interpretations, s.id).not.toEqual(s.output.interpretations);
+      } else {
+        expect(now.overall, s.id).toBe(s.output.overall);
+        expect(now.cards, s.id).toEqual(s.output.cards);
+        expect(now.interpretations, s.id).toEqual(s.output.interpretations);
+        expect(now.question, s.id).toBe(s.output.question);
+        if (req.intent === "companion") expect(now.action, s.id).toBe(s.output.action.replace(/做的时候留意：[^。]*。$/, ""));
+        else expect(now.action, s.id).toBe(s.output.action);
+      }
+    }
+    // 本阶段只有两个主张：命中的样本是内容原型的一部分，不是全部
+    expect(changed).toEqual(expect.arrayContaining(["career-clarify:small-trial", "crossroads-decide:small-trial", "topicless-3:small-trial", "crossroads-companion:warm-juggle", "topicless-1:warm-juggle"]));
   });
 });

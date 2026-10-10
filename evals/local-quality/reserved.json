@@ -1,0 +1,189 @@
+{
+ "note": "预先保留的 8 例新组合：先写下期望命中的共同解释（null = 不命中，回到 v2.1 的按位置路径），再看生成结果。不用于改稿；若要改规则，先说明原因再换样本。",
+ "combos": [
+  {
+   "id": "r1-warm-rel-clarify",
+   "topic": "relationship",
+   "intent": "clarify",
+   "expectedFocus": "warm-juggle",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "r2-trial-self-decide",
+   "topic": "self",
+   "intent": "decide",
+   "expectedFocus": "small-trial",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "r3-trial-career-clarify",
+   "topic": "career",
+   "intent": "clarify",
+   "expectedFocus": "small-trial",
+   "cards": [
+    {
+     "cardId": "knight-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "r4-warm-career-companion",
+   "topic": "career",
+   "intent": "companion",
+   "expectedFocus": "warm-juggle",
+   "cards": [
+    {
+     "cardId": "two-of-pentacles",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "r5-none-rest",
+   "topic": "self",
+   "intent": "clarify",
+   "expectedFocus": null,
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "four-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "r6-none-ending",
+   "topic": "crossroads",
+   "intent": "decide",
+   "expectedFocus": null,
+   "cards": [
+    {
+     "cardId": "death",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "the-tower",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  },
+  {
+   "id": "r7-trial-crossroads",
+   "topic": "crossroads",
+   "intent": "clarify",
+   "expectedFocus": "small-trial",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ]
+  },
+  {
+   "id": "r8-warm-self",
+   "topic": "self",
+   "intent": "companion",
+   "expectedFocus": "warm-juggle",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ]
+  }
+ ]
+}

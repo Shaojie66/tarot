@@ -787,7 +787,7 @@
         ],
         "sampleFileNote": "2026-10-11 修订为 v2.9 时，带评语的 v2.7 评分表另存到此路径（内容未改）；batch-0-samples.md 现在是 v2.9 的表。"
       },
-      "heldout": "docs/local-reading-expansion/batch-0-heldout.json（修订前固定的 24 个留出组合 + 108 例牌族主题矩阵）",
+      "heldout": "docs/local-reading-expansion/batch-0-heldout.json（heldout：v2.9 前固定，已用于改稿，现只作回归；heldout2：v2.10 前固定；family：牌族主题矩阵）",
       "revisions": [
         {
           "version": "local-v2.9-sample",
@@ -1192,6 +1192,242 @@
               "不同牌组命中同一主张时，读法 / 行动 / 追问逐字相同；死神（逆位）与宝剑六共用“过渡”角色句。",
               "关系主题一律写“这段关系”，默认有一段具体的关系；事业、去留主题在部分结果里看不出来。"
             ]
+          }
+        },
+        {
+          "version": "local-v2.10-sample",
+          "date": "2026-10-11",
+          "author": "Claude（Opus 5.5）",
+          "basedOn": "v2.9 的规则审读：48 例里 15 例连不成一条线，全部来自按位置路径",
+          "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
+          "previousSampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.9-sample.md",
+          "changes": [
+            "新增 3 个后备共同解释：inner-first（先听自己；锚牌标记 reflect / sensitivity）、rebuild（收尾与重建；upheaval / ending）、momentum-check（势头与确认；momentum / decisive）。依据是全量枚举（10560 个组合），不是评分表的 24 例。",
+            "引擎：focus.fallback——后备主张只接原有 5 个主张都不命中的组合；原来命中的组合一例不变（测试里全量枚举对账）。",
+            "写内容之前先在 reserved.json 追加 r9–r20、在 batch-0-heldout.json 追加 heldout2。通读输出后把 rebuild 的锚牌从（高塔 / 死神 / 宝剑四逆位）收窄为（高塔 / 死神），r14 的期望随之更新。"
+          ],
+          "routing": {
+            "note": "12 张牌全部有序三牌组合（含正逆位）的路径分布，百分比",
+            "beforeMissClarify": 56.9,
+            "beforeMissCompanion": 62.5,
+            "after": {
+              "clarify": {
+                "rebuild": 10.2,
+                "inner-first": 14.3,
+                "settle-feelings": 13.8,
+                "load-transition": 15.9,
+                "warm-juggle": 5.5,
+                "invest-cooperate": 2.4,
+                "miss": 19.6,
+                "small-trial": 5.6,
+                "momentum-check": 12.8
+              },
+              "companion": {
+                "rebuild": 10.6,
+                "inner-first": 14.8,
+                "settle-feelings": 13.8,
+                "load-transition": 15.9,
+                "warm-juggle": 5.5,
+                "invest-cooperate": 2.4,
+                "miss": 23.9,
+                "momentum-check": 13.2
+              }
+            }
+          },
+          "aiRecheck": {
+            "type": "ai-blind-recheck",
+            "note": "AI 复评，不是人工验收，不改变批次放行状态；humanReview 仍为空。评审为 Claude 子智能体，只读打乱后的材料。",
+            "scoredAt": "盲评与规则审读看的是最后一轮文字修正之前的文本；之后按评审意见改了约 25 处措辞（主张用词、无牌支撑的“旧的安排 / 重建”、一例明确预设、关系主题口径等），那一轮只过了自动扫描和作者通读。",
+            "blindPairs": {
+              "scope": "只比较前后文字有变化的样本：评分表 9 对 + heldout2 12 对",
+              "n": 21,
+              "beforeAvg": 7.48,
+              "afterAvg": 9.05,
+              "beforePass": 12,
+              "afterPass": 20,
+              "beforeCoherent": 7,
+              "afterCoherent": 21,
+              "threeCardBefore": 1,
+              "threeCardAfter": 1.57,
+              "prefer": {
+                "after": 12,
+                "before": 2,
+                "tie": 7
+              },
+              "preferredOld": [
+                "S4",
+                "S23"
+              ],
+              "samples": [
+                {
+                  "id": "S1",
+                  "focus": "rebuild",
+                  "before": "1/1/2/2/2",
+                  "after": "2/1/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "S4",
+                  "focus": "rebuild",
+                  "before": "2/1/2/2/2",
+                  "after": "2/1/2/1/1",
+                  "prefer": "before"
+                },
+                {
+                  "id": "S8",
+                  "focus": "momentum-check",
+                  "before": "1/1/2/2/2",
+                  "after": "2/2/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "S11",
+                  "focus": "inner-first",
+                  "before": "1/1/1/2/1",
+                  "after": "2/1/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "S12",
+                  "focus": "inner-first",
+                  "before": "1/1/2/1/1",
+                  "after": "2/2/2/2/1",
+                  "prefer": "after"
+                },
+                {
+                  "id": "S13",
+                  "focus": "rebuild",
+                  "before": "2/1/2/2/2",
+                  "after": "2/2/2/2/2",
+                  "prefer": "平"
+                },
+                {
+                  "id": "S20",
+                  "focus": "momentum-check",
+                  "before": "1/1/2/2/1",
+                  "after": "2/2/1/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "S23",
+                  "focus": "inner-first",
+                  "before": "2/1/2/2/2",
+                  "after": "2/1/1/2/2",
+                  "prefer": "before"
+                },
+                {
+                  "id": "S24",
+                  "focus": "rebuild",
+                  "before": "1/1/2/1/1",
+                  "after": "2/2/2/2/1",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N1",
+                  "focus": "momentum-check",
+                  "before": "2/1/1/2/1",
+                  "after": "2/2/2/2/1",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N2",
+                  "focus": "rebuild",
+                  "before": "1/1/2/2/2",
+                  "after": "2/1/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N4",
+                  "focus": "inner-first",
+                  "before": "1/1/2/2/2",
+                  "after": "2/1/2/2/2",
+                  "prefer": "平"
+                },
+                {
+                  "id": "N7",
+                  "focus": "rebuild",
+                  "before": "1/1/1/1/2",
+                  "after": "2/2/2/2/1",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N9",
+                  "focus": "momentum-check",
+                  "before": "2/1/2/2/2",
+                  "after": "2/2/2/2/1",
+                  "prefer": "平"
+                },
+                {
+                  "id": "N11",
+                  "focus": "inner-first",
+                  "before": "1/1/1/1/1",
+                  "after": "2/2/2/2/1",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N16",
+                  "focus": "rebuild",
+                  "before": "1/1/2/2/2",
+                  "after": "2/1/2/2/2",
+                  "prefer": "平"
+                },
+                {
+                  "id": "N17",
+                  "focus": "rebuild",
+                  "before": "1/1/1/2/1",
+                  "after": "2/2/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N21",
+                  "focus": "rebuild",
+                  "before": "2/1/2/2/1",
+                  "after": "2/1/2/2/2",
+                  "prefer": "平"
+                },
+                {
+                  "id": "N22",
+                  "focus": "rebuild",
+                  "before": "1/1/2/2/1",
+                  "after": "2/2/2/2/2",
+                  "prefer": "after"
+                },
+                {
+                  "id": "N23",
+                  "focus": "rebuild",
+                  "before": "2/1/2/2/2",
+                  "after": "2/2/2/2/1",
+                  "prefer": "平"
+                },
+                {
+                  "id": "N24",
+                  "focus": "inner-first",
+                  "before": "1/1/2/2/2",
+                  "after": "2/1/2/2/2",
+                  "prefer": "平"
+                }
+              ],
+              "scoreOrder": "观点/三牌/主题/行动/语言"
+            },
+            "rulesAudit": {
+              "scope": "修订后的 31 例（评分表 9 + heldout2 12 + heldout 10）",
+              "coherent": 29,
+              "anchored": 29,
+              "clearBlockingSamples": [
+                "H22"
+              ],
+              "lightBlockingItemCount": 16,
+              "samenessGroups": 16,
+              "harmfulSamenessGroups": 15
+            },
+            "knownLimits": [
+              "换牌不换话（本轮最主要的未解决问题）：31 例只有 3 个重点句；读法、行动、追问按“主张 × 意图”固定，9 组例子除逐牌说明外逐字相同，其中一组两副牌没有一张相同。规则审读的结论是“主要问题是换牌不换话，不是冒认”。靠“按末牌换行动”的变体只缓解了一小部分。",
+              "只靠一张锚牌立论时，换掉另外两张牌结论不变；被晾着的常常是最贴主题的那张（阻碍位的牌）。盲评里偏好旧版的两例（S4、S23）都是这种情况。",
+              "位置语义弱：同一张牌在此刻 / 阻碍 / 下一步三个位置用同一句角色句。",
+              "整体里“可能在提示……”三连仍在（31 例约 93 次），被评为防御性句式的直接来源。",
+              "后备层与同分按顺序是 12 张牌阶段的简化；约一成组合有两个新主张都能接。"
+            ],
+            "recommendation": "下一步不是继续加主张或改句子，而是让后备主张只给“重点 + 每张牌与重点的关系”，读法、行动、追问改由牌自己给（读法一取锚牌的条件，读法二、行动、追问取末牌按主题取值的内容），这样换牌就会换话。属于渲染结构改动，需先出方案。"
           }
         }
       ]

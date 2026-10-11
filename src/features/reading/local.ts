@@ -89,8 +89,10 @@ const focusSchema = z.strictObject({
   need: z.number().int().min(1),
   /** 这些意图下不适用（比如陪伴时没有要做的决定，“做决定与做试验”就不成立），回到按位置的路径 */
   excludeIntents: z.array(z.string()).optional(),
-  /** 适用范围：至少一张牌带有这些标记之一才命中（比如“过渡”类主张要求有一张牌真的在讲过渡 / 收尾） */
+  /** 适用范围：至少一张牌带有这些标记之一才命中（比如“过渡”类主张要求有一张牌真的在讲过渡 / 收尾；后备主张用它指定“锚牌”） */
   requireAny: z.array(z.string()).optional(),
+  /** 后备主张：只在非后备主张都不命中时才参与选择，不抢原来命中的组合（v2.10；牌和主张多起来之后要换成统一的打分规则） */
+  fallback: z.boolean().optional(),
   roles: z.record(z.string(), z.strictObject({ relation: z.string().min(4), detail: z.string().min(8) })),
   /**
    * 衔接：这张牌的标记不在 weights 里（不参与选主张）时，按标记给一句它对主张的作用，必要时换掉它的说明。
@@ -170,9 +172,14 @@ function roles(count: number) {
 type PickedFocus = { focus: Focus; roleTags: (string | null)[] };
 
 function pickFocus(request: ReadingRequest): PickedFocus | null {
+  // 先看原有主张；都不命中时才看后备主张（各层内取分高者，同分按文件里的顺序）
+  return pickAmong(request, LOCAL_V2.focuses.filter((f) => !f.fallback)) ?? pickAmong(request, LOCAL_V2.focuses.filter((f) => f.fallback));
+}
+
+function pickAmong(request: ReadingRequest, focuses: Focus[]): PickedFocus | null {
   const sides = [...request.cards].sort((a, b) => a.position - b.position).map((c) => v2Side(c.cardId, c.reversed)!);
   let best: { picked: PickedFocus; score: number } | null = null;
-  for (const focus of LOCAL_V2.focuses) {
+  for (const focus of focuses) {
     // 每张牌取它在这个主张里分量最大的一个标记
     const roleTags = sides.map((side) => {
       let top: string | null = null;

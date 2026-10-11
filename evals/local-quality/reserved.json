@@ -1,5 +1,5 @@
 {
- "note": "预先保留的 8 例新组合：先写下期望命中的共同解释（null = 不命中，回到 v2.1 的按位置路径），再看生成结果。不用于改稿；若要改规则，先说明原因再换样本。 步骤 4 新增了“负担与过渡”等主张后，r5 / r6 这两个原本期望不命中的组合命中了 load-transition：期望值已更新（expectedFocus），冻结时的期望保留在 expectedAtFreeze；这两例不再算“未见过的泛化检验”，其余 6 例的期望未改。",
+ "note": "预先保留的 8 例新组合：先写下期望命中的共同解释（null = 不命中，回到 v2.1 的按位置路径），再看生成结果。不用于改稿；若要改规则，先说明原因再换样本。 步骤 4 新增了“负担与过渡”等主张后，r5 / r6 这两个原本期望不命中的组合命中了 load-transition：期望值已更新（expectedFocus），冻结时的期望保留在 expectedAtFreeze；这两例不再算“未见过的泛化检验”，其余 6 例的期望未改。 v2.10（2026-10-11）新增 3 个后备主张之前追加 r9–r20：每个新主张 3 例，另有 3 个反例（没有锚牌不命中、原来命中的不被抢、只有锚牌没有搭档不命中）。期望由选择规则算出，写入时内容还没写。 写完内容、通读输出之后，把“收尾与重建”的锚牌从（高塔 / 死神 / 宝剑四逆位）收窄为（高塔 / 死神）：只有宝剑四逆位在场时，主张里“什么已经告一段落”没有牌支撑。r14 因此从 rebuild 变为不命中，期望值已更新（expectedFocus），冻结时的期望保留在 expectedAtFreeze；r14 不再算“未见过的泛化检验”，r9–r13、r15–r20 的期望未改。",
  "combos": [
   {
    "id": "r1-warm-rel-clarify",
@@ -192,6 +192,294 @@
     }
    ],
    "expectedAtFreeze": "warm-juggle"
+  },
+  {
+   "id": "r9-inner-career-clarify",
+   "topic": "career",
+   "intent": "clarify",
+   "expectedFocus": "inner-first",
+   "cards": [
+    {
+     "cardId": "three-of-pentacles",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "the-hermit",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "inner-first"
+  },
+  {
+   "id": "r10-inner-rel-companion",
+   "topic": "relationship",
+   "intent": "companion",
+   "expectedFocus": "inner-first",
+   "cards": [
+    {
+     "cardId": "page-of-cups",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "the-hermit",
+     "position": 2,
+     "reversed": true
+    }
+   ],
+   "expectedAtFreeze": "inner-first"
+  },
+  {
+   "id": "r11-inner-cross-decide",
+   "topic": "crossroads",
+   "intent": "decide",
+   "expectedFocus": "inner-first",
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "inner-first"
+  },
+  {
+   "id": "r12-rebuild-self-clarify",
+   "topic": "self",
+   "intent": "clarify",
+   "expectedFocus": "rebuild",
+   "cards": [
+    {
+     "cardId": "the-tower",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ],
+   "expectedAtFreeze": "rebuild"
+  },
+  {
+   "id": "r13-rebuild-career-decide",
+   "topic": "career",
+   "intent": "decide",
+   "expectedFocus": "rebuild",
+   "cards": [
+    {
+     "cardId": "death",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "rebuild"
+  },
+  {
+   "id": "r14-rebuild-cross-companion",
+   "topic": "crossroads",
+   "intent": "companion",
+   "expectedFocus": null,
+   "cards": [
+    {
+     "cardId": "four-of-swords",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "queen-of-wands",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "rebuild"
+  },
+  {
+   "id": "r15-momentum-career-clarify",
+   "topic": "career",
+   "intent": "clarify",
+   "expectedFocus": "momentum-check",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 2,
+     "reversed": true
+    }
+   ],
+   "expectedAtFreeze": "momentum-check"
+  },
+  {
+   "id": "r16-momentum-self-decide",
+   "topic": "self",
+   "intent": "decide",
+   "expectedFocus": "momentum-check",
+   "cards": [
+    {
+     "cardId": "queen-of-wands",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "momentum-check"
+  },
+  {
+   "id": "r17-momentum-rel-companion",
+   "topic": "relationship",
+   "intent": "companion",
+   "expectedFocus": "momentum-check",
+   "cards": [
+    {
+     "cardId": "eight-of-wands",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ],
+   "expectedAtFreeze": "momentum-check"
+  },
+  {
+   "id": "r18-guard-no-anchor",
+   "topic": "career",
+   "intent": "clarify",
+   "expectedFocus": null,
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": true
+    },
+    {
+     "cardId": "two-of-pentacles",
+     "position": 1,
+     "reversed": false
+    },
+    {
+     "cardId": "three-of-pentacles",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": null
+  },
+  {
+   "id": "r19-guard-no-steal",
+   "topic": "crossroads",
+   "intent": "clarify",
+   "expectedFocus": "settle-feelings",
+   "cards": [
+    {
+     "cardId": "the-tower",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "page-of-cups",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 2,
+     "reversed": false
+    }
+   ],
+   "expectedAtFreeze": "settle-feelings"
+  },
+  {
+   "id": "r20-guard-anchor-alone",
+   "topic": "self",
+   "intent": "clarify",
+   "expectedFocus": null,
+   "cards": [
+    {
+     "cardId": "the-hermit",
+     "position": 0,
+     "reversed": false
+    },
+    {
+     "cardId": "six-of-swords",
+     "position": 1,
+     "reversed": true
+    },
+    {
+     "cardId": "knight-of-swords",
+     "position": 2,
+     "reversed": true
+    }
+   ],
+   "expectedAtFreeze": null
   }
  ]
 }

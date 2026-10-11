@@ -165,7 +165,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
   const reqOf = (s: { topic: string; intent: string; cards: unknown }) => make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] });
   const run = (id: string) => buildLocalReading(reqOf(byId(id)));
 
-  it("样本命中哪个主张是确定的；4 个样本仍没有对应主张，回到 v2.1 的按位置路径", () => {
+  it("样本命中哪个主张是确定的；3 个样本仍没有对应主张，回到按位置路径（v2.10 的后备主张接住了另外 2 个）", () => {
     const focusOf = Object.fromEntries(data.samples.map((s) => [s.id, selectLocalFocus(reqOf(s))]));
     expect(focusOf).toEqual({
       "relationship-clarify-A": "invest-cooperate",
@@ -174,7 +174,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
       "career-companion": null, // v2.3：没有一张牌在讲过渡 / 收尾，不再套“负担与过渡”
       "relationship-decide": null,
       "relationship-companion": "settle-feelings",
-      "self-clarify": null,
+      "self-clarify": "inner-first", // v2.10：隐士在阻碍位，原有主张都不命中 → 后备主张“先听自己”
       "self-decide": "load-transition",
       "self-companion": "settle-feelings",
       "crossroads-clarify": "load-transition",
@@ -182,7 +182,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
       "crossroads-companion": "warm-juggle",
       "topicless-1": "warm-juggle",
       "topicless-2": "settle-feelings",
-      "topicless-3": null, // v2.5：陪伴时没有要做的决定，“做决定与做试验”不适用
+      "topicless-3": "inner-first", // v2.5：陪伴时“做决定与做试验”不适用；v2.10：隐士在首位 → 后备主张“先听自己”
       "topicless-4": null,
     });
   });
@@ -291,7 +291,7 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
   });
 });
 
-describe("预先保留的 8 例新组合（未用于改稿）", () => {
+describe("预先保留的组合（8 例 + v2.10 写内容之前追加的 12 例；未用于改稿）", () => {
   it.each(reserved.combos.map((c) => [c.id, c] as const))("%s", (_id, c) => {
     const req = make({ topic: c.topic as ReadingRequest["topic"], intent: c.intent as ReadingRequest["intent"], cards: c.cards as ReadingRequest["cards"] });
     expect(selectLocalFocus(req)).toBe(c.expectedFocus);
@@ -332,9 +332,10 @@ describe("冻结的 v2.1 基线（候选 vs 基线，不再对 v1）", () => {
         expect(now.action, s.id).not.toContain("做的时候留意");
       }
     }
-    // 5 个主张命中 11 个样本；其余 5 个仍走按位置的路径
-    expect(changed).toHaveLength(11);
-    expect(data.samples.length - changed.length).toBe(5);
+    // 原有 5 个主张命中 11 个样本；v2.10 的后备主张再接住 2 个；其余 3 个仍走按位置的路径
+    expect(changed).toHaveLength(13);
+    expect(changed.filter((x) => /inner-first|rebuild|momentum-check/.test(x))).toHaveLength(2);
+    expect(data.samples.length - changed.length).toBe(3);
   });
 });
 
@@ -410,13 +411,15 @@ describe("v2.4：主题变体、雷同与逐牌差异", () => {
     expect(fourteen.overall).toContain("死神（逆位）可能在提示有一件该收尾的事还拖着");
   });
 
-  it("陪伴意图下“节奏与试验”不适用：此刻（无问题）的样本回到按位置的路径，读法讲“等待还是硬推”，不预设“做决定”", () => {
+  it("陪伴意图下“节奏与试验”不适用：此刻（无问题）的样本不套“做决定与做试验”，也不预设“做决定”（v2.10 起由后备主张“先听自己”接住）", () => {
     const sample = data.samples.find((x) => x.id === "topicless-3")!;
     const req = make({ topic: sample.topic as ReadingRequest["topic"], intent: sample.intent as ReadingRequest["intent"], cards: sample.cards as ReadingRequest["cards"] });
-    expect(selectLocalFocus(req)).toBeNull();
+    expect(selectLocalFocus(req)).not.toBe("small-trial");
+    expect(selectLocalFocus(req)).toBe("inner-first");
     const r = run("topicless-3");
-    expect(r.interpretations.join("")).toMatch(/等别人|等待|硬推/);
     expect(r.overall + r.interpretations.join("")).not.toMatch(/做决定|难以撤回/);
+    // 陪伴：读法与行动都不布置书写
+    expect(r.interpretations.join("") + r.action).not.toMatch(/写下|写出|列出|清单|两栏/);
   });
 
   it("热情与兼顾的陪伴按末牌分：末牌是“热度”和“小喜欢”时行动与追问不同（样本 12 / 13 不再逐字相同）", () => {
@@ -600,18 +603,19 @@ describe("v2.9：按 AI 编辑审读打回后的全文扫描（预设、延后�
   });
 
   it("按位置路径的整体是两拍：先核对阻碍牌的点，再交代末牌的方向；三种意图的收尾不同", () => {
-    const cards: [string, boolean][] = [["the-hermit", true], ["death", false], ["the-tower", false]];
+    // 星币二 / 隐士（逆位）/ 宝剑六（逆位）：没有锚牌，原有主张也不命中，仍走按位置路径
+    const cards: [string, boolean][] = [["two-of-pentacles", false], ["the-hermit", true], ["six-of-swords", true]];
     const by = (intent: "clarify" | "decide" | "companion") => buildLocalReading(req("career", intent, cards));
-    expect(selectLocalFocus(req("career", "clarify", cards))).toBeNull();
-    expect(by("clarify").overall).toContain("值得先核对的是：有没有一个做法已经完成了它的作用");
-    expect(by("clarify").overall).toContain("核对之后可以试的一步：把最基本的几件事先稳住。");
-    expect(by("decide").overall).toContain("做决定之前可以先试的一步：把最基本的几件事先稳住。");
-    expect(by("companion").overall).toContain("只试这一小步：把最基本的几件事先稳住。");
+    for (const intent of ["clarify", "decide", "companion"] as const) expect(selectLocalFocus(req("career", intent, cards)), intent).toBeNull();
+    expect(by("clarify").overall).toContain("值得先核对的是：如果最近常一个人想事情，是在整理，还是在回避");
+    expect(by("clarify").overall).toContain("核对之后可以试的一步：如果有问题反复出现，先把它看清。");
+    expect(by("decide").overall).toContain("做决定之前可以先试的一步：如果有问题反复出现，先把它看清。");
+    expect(by("companion").overall).toContain("只试这一小步：如果有问题反复出现，先把它看清。");
     // 三张牌的要点之间用分号隔开（句内有逗号时分得清哪里换牌）
     expect(by("clarify").overall.split("；").length).toBe(3);
-    // 行动与追问落在这一步上（评分表样本 1：原来的追问预设“这次变动”已经发生）
-    expect(by("clarify").action).toContain("稳固");
-    expect(by("clarify").question).toMatch(/^如果.+稳住/);
+    // 行动与追问落在这一步上，而且都是条件口径
+    expect(by("clarify").action).toMatch(/^如果.+反复出现/);
+    expect(by("clarify").question).toMatch(/^如果.+反复出现/);
   });
 
   it("主题变体也能改写首牌的说明：关系主题里星币三不讲分工（评分表样本 10）", () => {
@@ -622,7 +626,9 @@ describe("v2.9：按 AI 编辑审读打回后的全文扫描（预设、延后�
   });
 
   it("合作牌族的末牌：自我主题讲自己的完成标准，去留主题讲选项依赖的条件，都不写多人分工（评分表样本 13、22）", () => {
-    const self = buildLocalReading(req("self", "clarify", [["four-of-swords", true], ["death", false], ["three-of-pentacles", false]]));
+    // 自我：星币二 / 宝剑六（逆位）/ 星币三——没有锚牌，仍走按位置路径
+    expect(selectLocalFocus(req("self", "clarify", [["two-of-pentacles", false], ["six-of-swords", true], ["three-of-pentacles", false]]))).toBeNull();
+    const self = buildLocalReading(req("self", "clarify", [["two-of-pentacles", false], ["six-of-swords", true], ["three-of-pentacles", false]]));
     expect([self.overall, self.cards[2].text, self.interpretations[1], self.action, self.question].join("")).not.toMatch(/分工|各自负责|共同的小任务/);
     expect(self.action).toContain("完成");
     const crossroads = buildLocalReading(req("crossroads", "clarify", [["page-of-pentacles", false], ["the-hermit", true], ["three-of-pentacles", false]]));
@@ -657,5 +663,115 @@ describe("v2.9：按 AI 编辑审读打回后的全文扫描（预设、延后�
     expect(r.overall).toContain("权杖王后可能在提示热度可以先用来照顾自己");
     expect(r.cards[2].text).not.toContain("被别人看见");
     expect(r.interpretations.join("")).not.toMatch(/两栏|写下/);
+  });
+});
+
+describe("v2.10：3 个后备共同解释（先听自己 / 收尾与重建 / 势头与确认）", () => {
+  type Focus = (typeof LOCAL_V2.focuses)[number];
+  const FRESH = ["inner-first", "rebuild", "momentum-check"];
+  const ids = Object.keys(LOCAL_V2.cards);
+  const tagsOf = (cardId: string, reversed: boolean) => (LOCAL_V2.cards as Record<string, { upright: { tags: string[] }; reversed: { tags: string[] } }>)[cardId][reversed ? "reversed" : "upright"].tags;
+  /** 选择规则的参照实现（只用来和引擎对账）：每张牌取权重最大的标记，至少两张贡献且总分 ≥ need */
+  const scoreOf = (focus: Focus, tags: string[][], intent: string) => {
+    if (focus.excludeIntents?.includes(intent)) return null;
+    if (focus.requireAny && !tags.some((t) => t.some((x) => focus.requireAny!.includes(x)))) return null;
+    const tops = tags.map((t) => t.reduce<string | null>((top, x) => (focus.weights[x] && (top === null || focus.weights[x] > focus.weights[top]) ? x : top), null));
+    const score = tops.reduce((n, x) => n + (x ? focus.weights[x] : 0), 0);
+    return tops.filter(Boolean).length >= 2 && score >= focus.need ? score : null;
+  };
+  const bestOf = (pool: Focus[], tags: string[][], intent: string) => pool.reduce<{ id: string; score: number } | null>((b, f) => { const s = scoreOf(f, tags, intent); return s !== null && (!b || s > b.score) ? { id: f.id, score: s } : b; }, null);
+  const req = (topic: ReadingRequest["topic"], intent: NonNullable<ReadingRequest["intent"]>, cards: [string, boolean][]) =>
+    make({ topic, intent, cards: cards.map(([cardId, reversed], position) => ({ cardId, position, reversed })) as ReadingRequest["cards"] });
+  const all = (r: ReturnType<typeof buildLocalReading>) => [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("\n");
+
+  it("新主张都是后备层，并且都指定了锚牌；原有 5 个主张的权重和范围没有变", () => {
+    for (const f of LOCAL_V2.focuses.filter((x) => FRESH.includes(x.id))) {
+      expect(f.fallback, f.id).toBe(true);
+      expect(f.requireAny?.length, f.id).toBeGreaterThan(0);
+      for (const tag of f.requireAny!) expect(f.weights[tag], `${f.id}/${tag} 锚牌标记要有最高权重`).toBe(2);
+    }
+    expect(LOCAL_V2.focuses.filter((x) => !x.fallback).map((x) => x.id)).toEqual(["small-trial", "warm-juggle", "load-transition", "settle-feelings", "invest-cooperate"]);
+  });
+
+  it("全量枚举（12 张牌 × 正逆位 × 顺序 × 三种意图）：原来命中的组合一例不变；后备主张只接原来不命中的组合，而且锚牌在场", () => {
+    const originals = LOCAL_V2.focuses.filter((f) => !f.fallback);
+    const counts: Record<string, number> = {};
+    let total = 0;
+    for (const a of ids) for (const b of ids) for (const c of ids) {
+      if (a === b || a === c || b === c) continue;
+      for (let mask = 0; mask < 8; mask++) {
+        const cards: [string, boolean][] = [[a, !!(mask & 1)], [b, !!(mask & 2)], [c, !!(mask & 4)]];
+        const tags = cards.map(([id, rev]) => tagsOf(id, rev));
+        for (const intent of ["clarify", "decide", "companion"] as const) {
+          const before = bestOf(originals, tags, intent)?.id ?? null;
+          const now = selectLocalFocus(req("career", intent, cards));
+          if (before) expect(now, `${cards.join("/")} ${intent}`).toBe(before);
+          else if (now) {
+            const focus = LOCAL_V2.focuses.find((f) => f.id === now)!;
+            expect(focus.fallback, `${cards.join("/")} ${intent}`).toBe(true);
+            expect(tags.some((t) => t.some((x) => focus.requireAny!.includes(x))), `${cards.join("/")} 没有锚牌却命中 ${now}`).toBe(true);
+          }
+          if (intent === "clarify") { counts[now ?? "(未命中)"] = (counts[now ?? "(未命中)"] ?? 0) + 1; total++; }
+        }
+      }
+    }
+    const share = (id: string) => (counts[id] ?? 0) / total;
+    // 设计时的预期：未命中 56.9% → 约 17%；三个新主张各占一成多，没有哪个一家独大
+    expect(total).toBe(10560);
+    expect(share("(未命中)")).toBeLessThan(0.2);
+    for (const id of FRESH) {
+      expect(share(id), id).toBeGreaterThan(0.08);
+      expect(share(id), id).toBeLessThan(0.2);
+    }
+  });
+
+  it("命中后备主张时：整体先给主张，三张牌都出现；没有专门角色句的搭档牌用它自己按主题取值的要点（关系主题里星币三不讲分工）", () => {
+    // 评分表样本 1：隐士（逆位）/ 死神 / 高塔，事业 · 理清——原来走按位置路径
+    const r = buildLocalReading(req("career", "clarify", [["the-hermit", true], ["death", false], ["the-tower", false]]));
+    expect(selectLocalFocus(req("career", "clarify", [["the-hermit", true], ["death", false], ["the-tower", false]]))).toBe("rebuild");
+    expect(r.overall).toContain("这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。");
+    for (const name of ["隐士（逆位）", "死神", "高塔"]) expect(r.overall).toContain(name);
+    expect(r.overall).not.toContain("值得先核对的是");
+    // 预留组合 r9 的牌换到关系主题：星币三只有权重、没有角色句 → 用它在关系主题下的一句话要点与说明
+    const rel = buildLocalReading(req("relationship", "clarify", [["three-of-pentacles", false], ["the-hermit", false], ["two-of-pentacles", false]]));
+    expect(selectLocalFocus(req("relationship", "clarify", [["three-of-pentacles", false], ["the-hermit", false], ["two-of-pentacles", false]]))).toBe("inner-first");
+    expect(rel.overall).toContain("星币三可能在提示期待有没有说清");
+    expect(all(rel)).not.toMatch(/分工|各自负责/);
+  });
+
+  it("关系主题：三个新主张的行动都只涉及自己，不预设联系对方或“一起”", () => {
+    const combos: [string, [string, boolean][]][] = [
+      ["inner-first", [["page-of-cups", false], ["queen-of-wands", true], ["the-hermit", true]]],
+      ["rebuild", [["the-tower", false], ["three-of-pentacles", true], ["page-of-pentacles", true]]],
+      ["momentum-check", [["eight-of-wands", false], ["knight-of-swords", true], ["six-of-swords", true]]],
+    ];
+    for (const [id, cards] of combos) {
+      for (const intent of ["clarify", "decide", "companion"] as const) {
+        const request = req("relationship", intent, cards);
+        expect(selectLocalFocus(request), `${id}/${intent}`).toBe(id);
+        const r = buildLocalReading(request);
+        expect(r.action, `${id}/${intent}`).not.toMatch(/联系|发消息|一起|对方回复|告诉对方|约对方/);
+        if (intent !== "companion") expect(r.overall + r.action, `${id}/${intent}`).toMatch(/这段关系|自己/);
+      }
+    }
+  });
+
+  it("行动跟着末牌变：同一主张下，末牌换成不同类型的牌，行动与追问不同（缓解“同一主张千篇一律”）", () => {
+    const withLast = (last: [string, boolean]) => buildLocalReading(req("career", "clarify", [["two-of-pentacles", false], ["the-hermit", false], last]));
+    const [push, study, plain] = [withLast(["knight-of-swords", false]), withLast(["page-of-pentacles", false]), withLast(["queen-of-wands", true])];
+    for (const last of [["knight-of-swords", false], ["page-of-pentacles", false], ["queen-of-wands", true]] as [string, boolean][]) expect(selectLocalFocus(req("career", "clarify", [["two-of-pentacles", false], ["the-hermit", false], last]))).toBe("inner-first");
+    expect(new Set([push.action, study.action, plain.action]).size).toBe(3);
+    expect(new Set([push.question, study.question, plain.question]).size).toBe(3);
+    expect(push.action).toContain("最直接的一步");
+    expect(study.action).toContain("小功课");
+  });
+
+  it("自我主题下，末牌是星币三时行动落在“完成”的标准上，不写多人分工（评分表样本 13，现在命中“收尾与重建”）", () => {
+    const request = req("self", "clarify", [["four-of-swords", true], ["death", false], ["three-of-pentacles", false]]);
+    expect(selectLocalFocus(request)).toBe("rebuild");
+    const r = buildLocalReading(request);
+    expect(all(r)).not.toMatch(/分工|各自负责|共同的小任务|需要谁/);
+    expect(r.action).toContain("完成");
+    expect(r.cards[2].text).toContain("完成标准");
   });
 });

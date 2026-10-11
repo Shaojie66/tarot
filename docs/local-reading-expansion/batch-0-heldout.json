@@ -1,5 +1,5 @@
 {
- "note": "批次 0 的留出组合：2026-10-11 修订 v2.9 之前按固定公式生成（不看输出），不用于改稿，只用于复评“同牌的其他组合”（PROCESS §3.5）。heldout：每张牌再出 2 个组合，搭档 / 位置 / 正逆位的轮换方式与评分表不同，四主题 × 三意图各 2 例，与评分表 24 例无重合。family：牌族主题矩阵（星币三、星币侍从、宝剑六、死神、权杖王后、星币二 × 正逆位 × 关系 / 自我 / 去留 × 三个位置），只用来查主题适配。格式：主题|意图|牌1,牌2,牌3（:r = 逆位）。渲染：COMBOS_FILE=本文件 COMBOS_KEY=heldout OUT=tmp/heldout.md pnpm vitest run evals/print-combos.test.ts。要换组合先写原因。",
+ "note": "批次 0 的留出组合：2026-10-11 修订 v2.9 之前按固定公式生成（不看输出），不用于改稿，只用于复评“同牌的其他组合”（PROCESS §3.5）。heldout：每张牌再出 2 个组合，搭档 / 位置 / 正逆位的轮换方式与评分表不同，四主题 × 三意图各 2 例，与评分表 24 例无重合。family：牌族主题矩阵（星币三、星币侍从、宝剑六、死神、权杖王后、星币二 × 正逆位 × 关系 / 自我 / 去留 × 三个位置），只用来查主题适配。格式：主题|意图|牌1,牌2,牌3（:r = 逆位）。渲染：COMBOS_FILE=本文件 COMBOS_KEY=heldout OUT=tmp/heldout.md pnpm vitest run evals/print-combos.test.ts。要换组合先写原因。 heldout2：v2.10（新增 3 个后备主张）之前按另一条公式固定的 24 个组合，四主题 × 三意图各 2 例，与评分表、heldout、冻结样本、预留组合都不重合。第一组 heldout 在 v2.9 修订时看过并据此改过稿（留出组合 3 / 15 等），之后只作回归对照，不再算干净的留出集。",
  "fixedAt": "2026-10-11（修订前；当时的内容提交为 b2864ec）",
  "heldout": [
   "career|clarify|four-of-swords:r,the-hermit,queen-of-wands:r",
@@ -136,5 +136,31 @@
   "crossroads|clarify|two-of-pentacles:r,page-of-cups,knight-of-swords",
   "crossroads|decide|four-of-swords,two-of-pentacles:r,knight-of-swords",
   "crossroads|companion|knight-of-swords,page-of-cups,two-of-pentacles:r"
+ ],
+ "heldout2": [
+  "relationship|decide|eight-of-wands,knight-of-swords,the-hermit:r",
+  "self|decide|knight-of-swords,the-hermit:r,death",
+  "crossroads|decide|death:r,six-of-swords,four-of-swords",
+  "career|decide|the-hermit,three-of-pentacles,death:r",
+  "relationship|companion|page-of-pentacles,the-tower:r,queen-of-wands",
+  "self|companion|the-tower:r,page-of-cups,knight-of-swords",
+  "crossroads|companion|queen-of-wands,death,eight-of-wands:r",
+  "career|companion|two-of-pentacles,eight-of-wands:r,four-of-swords",
+  "relationship|clarify|queen-of-wands:r,knight-of-swords,page-of-pentacles",
+  "self|clarify|death,eight-of-wands,queen-of-wands:r",
+  "crossroads|clarify|the-hermit,page-of-cups:r,two-of-pentacles",
+  "career|clarify|page-of-cups:r,four-of-swords,death",
+  "relationship|decide|queen-of-wands,six-of-swords,four-of-swords:r",
+  "self|decide|three-of-pentacles,four-of-swords:r,page-of-pentacles",
+  "crossroads|decide|six-of-swords:r,two-of-pentacles,queen-of-wands",
+  "career|decide|the-tower,two-of-pentacles,six-of-swords:r",
+  "relationship|companion|death,knight-of-swords:r,the-tower",
+  "self|companion|knight-of-swords:r,four-of-swords,three-of-pentacles",
+  "crossroads|companion|page-of-cups,the-hermit,two-of-pentacles:r",
+  "career|companion|page-of-pentacles,two-of-pentacles:r,queen-of-wands",
+  "relationship|clarify|three-of-pentacles:r,two-of-pentacles,death",
+  "self|clarify|eight-of-wands,the-tower,three-of-pentacles:r",
+  "crossroads|clarify|the-tower,page-of-pentacles:r,six-of-swords",
+  "career|clarify|page-of-pentacles:r,six-of-swords,the-hermit"
  ]
 }

@@ -77,6 +77,9 @@
 ## 7. 标记词表与共同解释
 
 - **标记**（`tags`）用于选共同解释，不是给用户看的。已用：`solitude reflect avoid upheaval aftermath ending ending-resist transition transition-stuck warmth enthusiasm energy depletion self-doubt pace-fast momentum pace-snag pace-rushed small-liking sensitivity emotion-high rest restless restart decisive consequence juggle overload cooperate cooperate-gap trial start-small plan-no-action`。**新增标记要在这里登记**（一句话含义），并说明哪个共同解释会用它。
-- **共同解释（focus）** 现有 5 个：`small-trial`（节奏与试验）、`warm-juggle`（热情与兼顾）、`load-transition`（负担与过渡）、`settle-feelings`（安顿与恢复）、`invest-cooperate`（投入与配合）。扩写到更多牌后**要新增主张**（例如大阿卡纳里的“自我认同”“转折与代价”“关系与边界”），新增一个主张需要：≥3 张牌的标记能命中它、`roles` 覆盖每个用到的标记、两条读法围绕同一个条件、三种意图的行动与追问、关系 / 自我 / 去留的变体检查，并**先写预先保留的组合与期望命中**（`evals/local-quality/reserved.json` 的做法）再看输出。
+- **共同解释（focus）** 现有 8 个。原有 5 个：`small-trial`（节奏与试验）、`warm-juggle`（热情与兼顾）、`load-transition`（负担与过渡）、`settle-feelings`（安顿与恢复）、`invest-cooperate`（投入与配合）。v2.10 新增 3 个后备主张（`fallback: true`）：`inner-first`（先听自己；锚牌标记 `reflect` / `sensitivity`）、`rebuild`（收尾与重建；`upheaval` / `ending`。起初还把 `restart` 当锚牌，通读输出后降为搭档：只有宝剑四逆位在场时，主张里“什么已经告一段落”没有牌支撑）、`momentum-check`（势头与确认；`momentum` / `decisive`）。
+  - **锚牌**：新主张都用 `requireAny` 要求至少一张带锚牌标记的牌在场，主张才有牌支撑；只靠三张搭档牌凑分不算命中（v2.10 的第一版模拟没加这条，占比虚高到 28%）。
+  - **后备层**：`fallback: true` 的主张只接“非后备主张都不命中”的组合，不抢原来命中的组合；后备主张之间取分高者，同分按文件里的顺序。这是 12 张牌阶段的简化，牌和主张多起来之后要回头换成统一的打分规则。
+  - **搭档标记可以不写角色句**：给了权重但 `roles` 里没有的标记，渲染时用这张牌自己按主题取值的一句话要点和说明（主题变体因此直接复用）。锚牌标记和语义最强的几个搭档必须写角色句，说明它和主张的关系。扩写到更多牌后**要新增主张**（例如大阿卡纳里的“自我认同”“转折与代价”“关系与边界”），新增一个主张需要：≥3 张牌的标记能命中它、`roles` 覆盖每个用到的标记、两条读法围绕同一个条件、三种意图的行动与追问、关系 / 自我 / 去留的变体检查，并**先写预先保留的组合与期望命中**（`evals/local-quality/reserved.json` 的做法）再看输出。
 - **没有贡献标记的牌**（命中主张，但这张牌的标记不在该主张的 `weights` 里）：整体里用它的 `oneLine`，不再写“带来「……」这一层背景”。如果这张牌的默认说明会和主张相抵（比如“安顿与恢复”里末牌是热度、默认说明却催人向外推进），在该主张的 `support` 里按标记补一条衔接：`relation`（以“可能”开头，说明它对主张的作用）和可选的 `detail`（替换这张牌的说明）。`support` **不参与选主张**，加减它不会改变命中分布。
 - 没有命中主张的组合走按位置的路径（整体 = 阻碍牌的核对点 + 三张牌的 `oneLine` + 末牌的 `next.aim`）。两拍对应牌阵自己的结构（卡住的地方 → 可以试的下一步）：整体先交代两拍，读法一 / 读法二分别展开，行动和问句落在第二拍上。命中率是质量指标之一：`evals/local-sweep.test.ts` 会打印各主张的命中分布，当前 12 张牌里约 59% 的组合没有命中主张。

@@ -56,9 +56,11 @@ const nextSchema = z.strictObject({
   question: z.string().min(4).endsWith("？"),
 });
 /** 个别牌在某些主题下语境会错配（比如关系问题读成职场协作），可以给该主题单独写变体；没写就用默认。 */
-const topicVariantSchema = z.strictObject({ gist: z.string().optional(), obstacle: obstacleSchema.optional(), next: z.strictObject({ text: z.string().optional(), check: z.string().optional(), actions: actionsSchema.optional(), question: z.string().optional() }).optional() });
+const topicVariantSchema = z.strictObject({ gist: z.string().optional(), oneLine: z.string().optional(), obstacle: obstacleSchema.optional(), next: z.strictObject({ text: z.string().optional(), check: z.string().optional(), actions: actionsSchema.optional(), question: z.string().optional() }).optional() });
 const sideV2Schema = z.strictObject({
   gist: z.string().min(2),
+  /** 一句话要点（以“可能……”开头的谓语），用在整体里综合三张牌；与逐牌说明是不同的句子，避免整体抄逐牌说明 */
+  oneLine: z.string().min(4).startsWith("可能"),
   /** 编辑标记（不是从句子里猜出来的）：这个朝向带有哪些主题，用来选择共同解释；词表见各 focus 的 weights */
   tags: z.array(z.string().min(2)),
   situation: z.string().min(8),
@@ -238,10 +240,14 @@ function buildV2(request: ReadingRequest): ReadingResult {
   });
 
   const closing = LOCAL_V2.closing[intent];
+  const labelOf = (i: number) => `${getCard(byPosition[i].cardId).nameZh}${byPosition[i].reversed ? "（逆位）" : ""}`;
+  const sidesInOrder = [first, middle, last];
+  // 整体用每张牌的“一句话要点”综合三张牌（不抄逐牌说明，也不是没有内容的指引）
+  const synthesis = sidesInOrder.map((side, i) => `${labelOf(i)}${side.byTopic?.[topic]?.oneLine ?? side.oneLine}`).join("，");
   const overall = [
     request.selfReading ? fill(LOCAL_TEMPLATE.selfReadingLead, { self: request.selfReading }) : "",
     `这组牌值得先核对的是：${obstacle.focus}。`,
-    // 收尾句指向下面两条读法，不再把末牌的说明在整体里重复一遍
+    `${synthesis}。`,
     closing,
   ].join("");
 

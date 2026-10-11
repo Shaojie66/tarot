@@ -1,5 +1,5 @@
 {
- "version": "local-v2.6-sample",
+ "version": "local-v2.7-sample",
  "locative": {
   "career": "工作里",
   "relationship": "这段关系里",
@@ -7,9 +7,9 @@
   "crossroads": "这个选择里"
  },
  "closing": {
-  "clarify": "先看下面两条读法，哪一条更像你现在的情况，就从那一条开始。",
-  "decide": "比较选项时，先看它们在这一点上各是什么情况；下面两条读法对应不同的条件。",
-  "companion": "这次把步子放小，挑一条读法对应的小事做就够了。"
+  "clarify": "",
+  "decide": "比较选项时，先看它们在这一点上各是什么情况。",
+  "companion": "这次把步子放小。"
  },
  "cards": {
   "the-hermit": {
@@ -34,7 +34,8 @@
     "tags": [
      "solitude",
      "reflect"
-    ]
+    ],
+    "oneLine": "可能在提示先向内整理"
    },
    "reversed": {
     "gist": "独处变回避",
@@ -57,7 +58,8 @@
     "tags": [
      "solitude",
      "avoid"
-    ]
+    ],
+    "oneLine": "可能在提示独处是在整理还是在回避"
    }
   },
   "the-tower": {
@@ -81,7 +83,8 @@
     },
     "tags": [
      "upheaval"
-    ]
+    ],
+    "oneLine": "可能在提示一个结构被震动"
    },
    "reversed": {
     "gist": "不安被压下",
@@ -104,7 +107,8 @@
     "tags": [
      "avoid",
      "aftermath"
-    ]
+    ],
+    "oneLine": "可能在提示有些不安被放到一边"
    }
   },
   "death": {
@@ -129,7 +133,8 @@
     "tags": [
      "ending",
      "transition"
-    ]
+    ],
+    "oneLine": "可能在提示一个阶段在收尾"
    },
    "reversed": {
     "gist": "拖着不收尾",
@@ -152,7 +157,8 @@
     "tags": [
      "ending-resist",
      "transition"
-    ]
+    ],
+    "oneLine": "可能在提示收尾被拖着"
    }
   },
   "queen-of-wands": {
@@ -178,7 +184,8 @@
      "warmth",
      "enthusiasm",
      "energy"
-    ]
+    ],
+    "oneLine": "可能在带来向外的热度"
    },
    "reversed": {
     "gist": "透支与自我怀疑",
@@ -201,7 +208,8 @@
     "tags": [
      "depletion",
      "self-doubt"
-    ]
+    ],
+    "oneLine": "可能在提醒投入和补给是否对得上"
    }
   },
   "eight-of-wands": {
@@ -226,7 +234,8 @@
     "tags": [
      "pace-fast",
      "momentum"
-    ]
+    ],
+    "oneLine": "可能在给出推进的势头"
    },
    "reversed": {
     "gist": "节奏被打乱",
@@ -249,7 +258,8 @@
     "tags": [
      "pace-snag",
      "pace-rushed"
-    ]
+    ],
+    "oneLine": "可能在提示节奏被打乱"
    }
   },
   "page-of-cups": {
@@ -274,7 +284,8 @@
     "tags": [
      "small-liking",
      "sensitivity"
-    ]
+    ],
+    "oneLine": "可能在提示一个细小的感受"
    },
    "reversed": {
     "gist": "情绪起伏",
@@ -296,7 +307,8 @@
     },
     "tags": [
      "emotion-high"
-    ]
+    ],
+    "oneLine": "可能在提示情绪比较响"
    }
   },
   "four-of-swords": {
@@ -320,7 +332,8 @@
     },
     "tags": [
      "rest"
-    ]
+    ],
+    "oneLine": "可能在提示先停一停"
    },
    "reversed": {
     "gist": "停不下来",
@@ -343,7 +356,8 @@
     "tags": [
      "restless",
      "restart"
-    ]
+    ],
+    "oneLine": "可能在提示停不下来，或者该重新出发"
    }
   },
   "six-of-swords": {
@@ -382,12 +396,14 @@
        "question": "在这段关系里，你想要的中间状态是什么样的？",
        "text": "把变化缩到“下一站”：先想清楚自己想要的一个中间状态，而不是一次到终点。"
       },
-      "gist": "过渡与调整"
+      "gist": "过渡与调整",
+      "oneLine": "可能在指向一段需要慢慢来的变化"
      }
     },
     "tags": [
      "transition"
-    ]
+    ],
+    "oneLine": "可能在指向一段过渡"
    },
    "reversed": {
     "gist": "离不开",
@@ -424,12 +440,14 @@
        "question": "在这段关系里，你想要的中间状态是什么样的？",
        "text": "先把拖住决定的原因分清，再谈下一步。"
       },
-      "gist": "迟迟没推进的决定"
+      "gist": "迟迟没推进的决定",
+      "oneLine": "可能在提示有个决定迟迟没推进"
      }
     },
     "tags": [
      "transition-stuck"
-    ]
+    ],
+    "oneLine": "可能在提示有什么拖着脚步"
    }
   },
   "knight-of-swords": {
@@ -454,7 +472,8 @@
     "tags": [
      "decisive",
      "pace-fast"
-    ]
+    ],
+    "oneLine": "可能在给出果断的力量"
    },
    "reversed": {
     "gist": "冲得太快",
@@ -477,7 +496,8 @@
     "tags": [
      "pace-rushed",
      "consequence"
-    ]
+    ],
+    "oneLine": "可能在提醒速度压过了判断"
    }
   },
   "two-of-pentacles": {
@@ -510,7 +530,8 @@
     },
     "tags": [
      "juggle"
-    ]
+    ],
+    "oneLine": "可能在提示同时顾着几件事"
    },
    "reversed": {
     "gist": "承诺过多",
@@ -542,7 +563,8 @@
     "tags": [
      "overload",
      "juggle"
-    ]
+    ],
+    "oneLine": "可能在提示承诺是否偏多"
    }
   },
   "three-of-pentacles": {
@@ -582,7 +604,8 @@
     },
     "tags": [
      "cooperate"
-    ]
+    ],
+    "oneLine": "可能在提示分工和标准"
    },
    "reversed": {
     "gist": "配合不畅",
@@ -620,7 +643,8 @@
     },
     "tags": [
      "cooperate-gap"
-    ]
+    ],
+    "oneLine": "可能在提示配合方式有缺口"
    }
   },
   "page-of-pentacles": {
@@ -658,7 +682,8 @@
     "tags": [
      "trial",
      "start-small"
-    ]
+    ],
+    "oneLine": "可能在把第一步缩小"
    },
    "reversed": {
     "gist": "只想不做",
@@ -694,7 +719,8 @@
     "tags": [
      "trial",
      "plan-no-action"
-    ]
+    ],
+    "oneLine": "可能在提示计划和行动之间缺一个开始"
    }
   }
  },
@@ -867,7 +893,17 @@
      },
      "questions": {
       "companion": "哪一件小事，一想到就让你有点精神？"
-     }
+     },
+     "branches": [
+      "如果热度还在、只是没有出口，给它一个固定的小时段，不必一次做完。",
+      "如果热度来得快、去得也快，先挑一件小事，用二十分钟试试它能撑多久。"
+     ]
+    },
+    "small-liking": {
+     "branches": [
+      "如果同时在顾的事不止一件，先选一件最想靠近的，其余不紧急的暂放，看精力会不会回来。",
+      "如果这个小喜欢还说不清是什么，先给它五分钟，看哪一件让你想继续。"
+     ]
     }
    },
    "topicVariants": {

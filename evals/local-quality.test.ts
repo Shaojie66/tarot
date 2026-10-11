@@ -442,13 +442,13 @@ describe("v2.5：延后类措辞的全文扫描（含牌说明、变体、转折
     for (const t of strings) if (delays.test(t)) expect(t).toMatch(/期限|不紧急/);
   });
 
-  it("未命中主张的整体不再用标签句，不重复开头，也不把逐牌说明在整体里再抄一遍", () => {
+  it("未命中主张的整体用“一句话要点”综合三张牌：不是标签句、不重复开头、不抄逐牌说明、也不是没有内容的指引", () => {
     for (const id of ["relationship-decide", "self-clarify", "topicless-4", "career-companion"]) {
       const s = data.samples.find((x) => x.id === id)!;
       const r = buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
       expect(r.overall, id).not.toContain("这组牌里出现了");
       for (const c of r.cards) expect(r.overall, `${id}/${c.cardId}`).not.toContain(c.text);
-      expect(r.overall, id).toMatch(/读法/);
+      expect(r.overall, id).toMatch(/可能/);
       const focus = r.overall.match(/值得先核对的是：([^。]+)。/)?.[1];
       if (focus) expect(r.overall.split(focus).length - 1, id).toBe(1);
     }
@@ -483,5 +483,34 @@ describe("v2.6：陪伴语气、主题体现与期限句的位置", () => {
     const death = r.cards[2].text;
     expect(death).not.toContain("期限");
     expect(death.length).toBeLessThan(60);
+  });
+});
+
+describe("v2.7：未命中主张的整体用一句话要点综合三张牌；热情与兼顾的读法不再雷同", () => {
+  const run = (id: string) => {
+    const s = data.samples.find((x) => x.id === id)!;
+    return buildLocalReading(make({ topic: s.topic as ReadingRequest["topic"], intent: s.intent as ReadingRequest["intent"], cards: s.cards as ReadingRequest["cards"] }));
+  };
+
+  it("每个朝向都有以“可能”开头的一句话要点，且与它自己的逐牌说明不是同一句", async () => {
+    const { LOCAL_V2 } = await import("@/features/reading/local");
+    for (const [id, card] of Object.entries(LOCAL_V2.cards)) {
+      for (const side of [card.upright, card.reversed]) {
+        expect(side.oneLine, id).toMatch(/^可能/);
+        for (const t of [side.situation, side.obstacle.text, side.next.text]) expect(t, id).not.toContain(side.oneLine.replace(/^可能(在)?/, ""));
+      }
+    }
+  });
+
+  it("未命中主张的样本：整体里三张牌的名字都出现，各带一句“可能……”，没有空指引", () => {
+    for (const id of ["relationship-decide", "self-clarify", "topicless-4", "career-companion"]) {
+      const r = run(id);
+      expect((r.overall.match(/可能/g) ?? []).length, id).toBeGreaterThanOrEqual(3);
+      expect(r.overall, id).not.toMatch(/下面两条读法|挑一条读法/);
+    }
+  });
+
+  it("热情与兼顾：末牌是“热度”和“小喜欢”时两条读法不同（样本 12 / 13）", () => {
+    expect(run("crossroads-companion").interpretations).not.toEqual(run("topicless-1").interpretations);
   });
 });

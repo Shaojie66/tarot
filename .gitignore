@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+# vitest 的 JSON 报告（含本机绝对路径，不进版本库）
+/.vitest/
 
 # next.js
 /.next/

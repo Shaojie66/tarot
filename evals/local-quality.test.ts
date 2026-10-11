@@ -19,7 +19,7 @@ const samples = data.samples.map((s) => [s.id, make({ topic: s.topic as ReadingR
 const flat = (r: ReturnType<typeof buildLocalReading>) => [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("\n");
 /** 不应在普通完成结果里反复出现的固定免责 / 退缩句（LQ06：能力说明集中在来源处，选择权靠按钮） */
 /** AI 盲评指出的、凭空预设用户处境或情境的短语（不限于样本，扫描全部 v2 内容文本） */
-const PRESUPPOSED = ["是眼下的底色", "是可以先动的一步", "想学的东西已经明确时", "你想了很久的计划", "当初答应是出于", "刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升"];
+const PRESUPPOSED = ["是眼下的底色", "是可以先动的一步", "想学的东西已经明确时", "你想了很久的计划", "当初答应是出于", "刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升", "先承认"];
 const BOILERPLATE = ["不是答案", "不替你做决定", "不替你决定", "只是一个建议", "不用今天决定", "不必告诉任何人"];
 
 describe.each(samples)("本地解读样本 %s", (_id, request) => {

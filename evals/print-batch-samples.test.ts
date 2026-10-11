@@ -1,8 +1,10 @@
 // 生成某一批次的人工评分表：BATCH=1 pnpm vitest run evals/print-batch-samples.test.ts
 // 每张新牌与两张已写完的旧牌组合（轮换位置、正逆位、主题、意图），输出到 docs/local-reading-expansion/batch-N-samples.md。
 // 没有基线可比（旧牌组合以前是 v1 路径），所以是绝对评分：每例 0–2 分五项，门槛是每例 ≥8/10 且无单项 0。平时跳过。
+// 已有的评分表不会被悄悄覆盖：别的内容版本的表先另存为 batch-N-samples.<旧版本>.md（评语和修订前原文都留着）；
+// 同一版本且已带评语的表直接报错，要重跑先手动另存。
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { describe, it } from "vitest";
 import { TOPICS, TOPIC_LABELS } from "@/features/cards/schema";
 import { getCard } from "@/features/cards/cards";
@@ -46,8 +48,20 @@ describe.skipIf(Number.isNaN(batchNo))("print batch samples", () => {
         );
       }
     }
+    const target = `docs/local-reading-expansion/batch-${batchNo}-samples.md`;
+    if (existsSync(target)) {
+      const existing = readFileSync(target, "utf8");
+      const previous = existing.match(/内容版本：([^。\s]+)。/)?.[1];
+      if (previous && previous !== LOCAL_V2.version) {
+        const archive = `docs/local-reading-expansion/batch-${batchNo}-samples.${previous}.md`;
+        if (existsSync(archive)) throw new Error(`${archive} 已存在：先确认要保留哪一份，再重跑`);
+        copyFileSync(target, archive);
+      } else if (existing.includes("<!-- BEGIN:")) {
+        throw new Error(`${target} 是同一内容版本且已带评语：先手动另存，再重跑`);
+      }
+    }
     writeFileSync(
-      `docs/local-reading-expansion/batch-${batchNo}-samples.md`,
+      target,
       `# 批次 ${batchNo} 人工评分表\n\n> 新牌与旧牌组合（轮换位置、正逆位、主题、意图）。评分标准同 PRD：观点明确、三牌关联、主题匹配、行动具体、语言直接，各 0–2 分；**门槛：每例 ≥8/10 且无单项 0**。评审人：____　日期：____　评分后把结果记进 reviews.json。内容版本：${LOCAL_V2.version}。AI 预审不能代替这张表。\n\n${out.join("\n---\n\n")}`,
     );
   });

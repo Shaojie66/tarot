@@ -6,7 +6,8 @@ import { readingRequestSchema, readingResultSchema, resultMatchesDraw, type Read
 import { findForbiddenPhrase } from "@/features/reading/guard";
 import { createHash } from "node:crypto";
 import { stableStringify } from "@/features/reading/backup";
-import { buildLocalReading, localContentVersion, selectLocalFocus } from "@/features/reading/local";
+import { LOCAL_V2, buildLocalReading, localContentVersion, selectLocalFocus } from "@/features/reading/local";
+import { TOPICS } from "@/features/cards/schema";
 import baseline from "./local-quality/baseline-v2.1.json";
 import data from "./local-quality/cases.json";
 import reserved from "./local-quality/reserved.json";
@@ -19,7 +20,7 @@ const samples = data.samples.map((s) => [s.id, make({ topic: s.topic as ReadingR
 const flat = (r: ReturnType<typeof buildLocalReading>) => [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("\n");
 /** 不应在普通完成结果里反复出现的固定免责 / 退缩句（LQ06：能力说明集中在来源处，选择权靠按钮） */
 /** AI 盲评指出的、凭空预设用户处境或情境的短语（不限于样本，扫描全部 v2 内容文本） */
-const PRESUPPOSED = ["是眼下的底色", "是可以先动的一步", "想学的东西已经明确时", "你想了很久的计划", "当初答应是出于", "刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升", "先承认"];
+const PRESUPPOSED = ["是眼下的底色", "是可以先动的一步", "想学的东西已经明确时", "你想了很久的计划", "当初答应是出于", "刚才那件小事", "卡住的是", "带着疲惫硬做判断", "已经开始漏球", "答应的事比能做的多", "你一直在回避", "你的状态正在上升", "先承认", "最近三次", "这次变动里", "过渡期里", "省下的半小时", "学过的东西", "让“离开”更近", "今天最想快点解决的事"];
 const BOILERPLATE = ["不是答案", "不替你做决定", "不替你决定", "只是一个建议", "不用今天决定", "不必告诉任何人"];
 
 describe.each(samples)("本地解读样本 %s", (_id, request) => {
@@ -101,9 +102,11 @@ describe("定向对照：换一个输入，结果有理由地变化（LQ02 / LQ0
     const job = buildLocalReading(make({ topic: "career", intent: "clarify", cards }));
     expect(rel.action).toContain("这段关系里");
     expect(job.action).toContain("工作里");
-    // 首牌与末牌的说明不随主题变；阻碍位若该牌有主题变体则按主题改写（见下一条）
+    // 首牌的说明不随主题变；v2.9 起关系主题下“负担与过渡”有自己的变体：末牌（宝剑六逆位）讲“调整迟迟没开始”，不套去留的“过渡 / 脚步”
     expect(rel.cards[0]).toEqual(job.cards[0]);
-    expect(rel.cards[2].text).toBe(job.cards[2].text);
+    expect(rel.cards[2].text).toContain("这段关系里有个调整迟迟没开始");
+    expect(job.cards[2].text).not.toContain("这段关系");
+    expect(rel.overall).not.toMatch(/过渡|拖住脚步/);
   });
 
   it("换意图：行动与整体结尾变化，牌面说明不变；decide / companion 的行动不是同一句", () => {
@@ -235,20 +238,28 @@ describe("共同解释：先选主张，再渲染整体 / 读法 / 行动 / 追�
     const a = buildLocalReading(reqOf(base));
     const b = buildLocalReading(reqOf(swapped));
     expect(b.overall).not.toBe(a.overall);
-    expect(b.overall).toContain("带来「停下来恢复」这一层背景");
+    // v2.9：没有贡献标记的牌不再只是“带来「……」这一层背景”，而是说出它对主张的作用（support），没写就用它的一句话要点
+    expect(b.overall).toContain("宝剑四可能在提示靠近喜欢的事之前，可以先停一停");
+    expect(b.overall).not.toContain("这一层背景");
     expect(b.cards[0].text).not.toBe(a.cards[0].text);
   });
 
-  it("末牌与主张相反时有转折：热情与兼顾的末牌换成“果断的骑士”，整体补一句转折，行动换成可以慢慢来的版本", () => {
+  it("末牌与主张相反时有转折，而且转折说得出理由：果断的骑士 → 把劲头用在有停点的小试探上；冲得太快的骑士 → 放到能慢慢来的小事上", () => {
     const base = byId("topicless-1");
-    const swapped = { ...base, cards: base.cards.map((c, i) => (i === 2 ? { ...c, cardId: "knight-of-swords" } : c)) };
+    const withLast = (reversed: boolean) => ({ ...base, cards: base.cards.map((c, i) => (i === 2 ? { ...c, cardId: "knight-of-swords", reversed } : c)) });
     const a = buildLocalReading(reqOf(base));
-    const b = buildLocalReading(reqOf(swapped));
-    expect(selectLocalFocus(reqOf(swapped))).toBe("warm-juggle"); // 主张仍成立：前两张牌支撑它
-    expect(b.overall).toContain("末牌的节奏偏急");
-    expect(b.action).not.toBe(a.action);
-    expect(b.action).toMatch(/慢慢/);
-    expect(b.cards[2].text).not.toBe(a.cards[2].text);
+    const [decisive, rushed] = [buildLocalReading(reqOf(withLast(false))), buildLocalReading(reqOf(withLast(true)))];
+    expect(selectLocalFocus(reqOf(withLast(false)))).toBe("warm-juggle"); // 主张仍成立：前两张牌支撑它
+    // v2.9：正位的骑士不是“偏急”，是推进的劲头——转折要解释它怎么和“收拢热情”接上，而不是一律叫人慢下来
+    expect(decisive.overall).toContain("最后一张牌带着推进的劲头");
+    expect(decisive.action).toMatch(/停|到点/);
+    expect(rushed.overall).toContain("最后一张牌提醒速度可能压过判断");
+    expect(rushed.action).toMatch(/慢慢/);
+    for (const b of [decisive, rushed]) {
+      expect(b.action).not.toBe(a.action);
+      expect(b.cards[2].text).not.toBe(a.cards[2].text);
+    }
+    expect(decisive.overall).not.toBe(rushed.overall);
   });
 
   it("末牌转折不是万能：末牌换成与主张无关、也不相反的牌，行动仍由主张决定（已知局限，转折只覆盖编辑写明的相反标记）", () => {
@@ -512,5 +523,139 @@ describe("v2.7：未命中主张的整体用一句话要点综合三张牌；热
 
   it("热情与兼顾：末牌是“热度”和“小喜欢”时两条读法不同（样本 12 / 13）", () => {
     expect(run("crossroads-companion").interpretations).not.toEqual(run("topicless-1").interpretations);
+  });
+});
+
+describe("v2.9：按 AI 编辑审读打回后的全文扫描（预设、延后边界、陪伴负担、下一步方向、主题变体）", () => {
+  type Side = (typeof LOCAL_V2.cards)[keyof typeof LOCAL_V2.cards]["upright"];
+  const sides = Object.entries(LOCAL_V2.cards).flatMap(([id, card]) => ([["upright", card!.upright], ["reversed", card!.reversed]] as const).map(([o, side]) => [`${id}.${o}`, side as Side] as const));
+  /** 每个朝向在每个主题下实际使用的内容（主题变体覆盖默认） */
+  const resolved = sides.flatMap(([name, side]) =>
+    TOPICS.map((topic) => {
+      const v = side.byTopic?.[topic];
+      return { name: `${name}@${topic}`, oneLine: v?.oneLine ?? side.oneLine, situation: v?.situation ?? side.situation, obstacle: { ...side.obstacle, ...v?.obstacle }, next: { ...side.next, ...v?.next, actions: { ...side.next.actions, ...v?.next?.actions } } };
+    }),
+  );
+  const strings = (value: unknown, path = ""): [string, string][] =>
+    typeof value === "string" ? [[path, value]] : Array.isArray(value) ? value.flatMap((v, i) => strings(v, `${path}[${i}]`)) : value && typeof value === "object" ? Object.entries(value).flatMap(([k, v]) => strings(v, path ? `${path}.${k}` : k)) : [];
+  const allStrings = strings({ cards: LOCAL_V2.cards, focuses: LOCAL_V2.focuses, closing: LOCAL_V2.closing });
+  const req = (topic: ReadingRequest["topic"], intent: NonNullable<ReadingRequest["intent"]>, cards: [string, boolean][]) =>
+    make({ topic, intent, cards: cards.map(([cardId, reversed], position) => ({ cardId, position, reversed })) as ReadingRequest["cards"] });
+
+  it("延后边界覆盖全部字符串：让人暂停决定 / 延后处理的句子，同一句里有“不紧急”或期限（不只查行动和读法）", () => {
+    const delays = /不拍板|先于决定|再做决定|再去处理|再处理其|不用做任何决定|待查清单|先等一晚|休息之后再|排[在到].{0,6}之后|延期|延后|顺延|暂放|先放着|挪到明天|排到明天|明天再|明天同一时间|留到明天|其余.*明天|先别急着处理|不必急着去碰|等稳下来|等情绪缓一点再/;
+    for (const [path, text] of allStrings) if (delays.test(text)) expect(text, path).toMatch(/期限|不紧急/);
+  });
+
+  it("陪伴行动不强制写字 / 记录 / 列清单 / 核对（逐牌、主题变体、主张、转折、末牌变体全部扫描）", () => {
+    const forced = /写下|记下|记一句|写一句|只写|列出|列两栏|分两栏|清单|核对/;
+    const companions = allStrings.filter(([path]) => /actions\.companion$|topicActions\.[a-z]+\.companion$/.test(path));
+    expect(companions.length).toBeGreaterThan(40);
+    for (const [path, text] of companions) expect(text, path).not.toMatch(forced);
+    // 陪伴意图下的读法也不要求分析（安顿与恢复的陪伴读法）
+    for (const focus of LOCAL_V2.focuses) for (const text of focus.intentBranches?.companion ?? []) expect(text, focus.id).not.toMatch(forced);
+  });
+
+  it("读法在三种意图下共用（含陪伴）：逐牌的读法只给条件和方向，不要求写 / 列；主张在陪伴时实际用到的读法同样如此", () => {
+    const forced = /写下|写出|写成|写清|列出|记下|清单|两栏/;
+    for (const r of resolved) for (const check of [r.obstacle.check, r.next.check]) expect(check, r.name).not.toMatch(forced);
+    for (const focus of LOCAL_V2.focuses) {
+      if (focus.excludeIntents?.includes("companion")) continue;
+      const used = [...(focus.intentBranches?.companion ?? focus.branches), ...Object.values(focus.nextVariants ?? {}).flatMap((v) => v.branches ?? [])];
+      for (const text of used) expect(text, focus.id).not.toMatch(forced);
+    }
+  });
+
+  it("追问是开放式、不预设：全部问句以“？”结尾，不以“吗 / 是不是 / 要不要”收尾，不含已知的预设短语", () => {
+    const questions = allStrings.filter(([path]) => /question$|questions\.[a-z]+$/.test(path));
+    expect(questions.length).toBeGreaterThan(50);
+    for (const [path, text] of questions) {
+      expect(text, path).toMatch(/？$/);
+      expect(text, path).not.toMatch(/(吗|是不是|要不要)？$/);
+    }
+    const everything = allStrings.map(([, t]) => t).join("\n");
+    for (const phrase of PRESUPPOSED) expect(everything, phrase).not.toContain(phrase);
+  });
+
+  it("每个朝向在每个主题下：下一步方向（aim）是短语、不抄逐牌说明；读法是条件句；一句话要点以“可能”开头且不抄说明", () => {
+    for (const r of resolved) {
+      expect(r.next.aim.length, r.name).toBeGreaterThanOrEqual(4);
+      expect(r.next.aim.length, r.name).toBeLessThanOrEqual(30);
+      expect(r.next.aim, r.name).not.toMatch(/[。？！：]/);
+      expect(r.next.text, r.name).not.toContain(r.next.aim);
+      for (const check of [r.obstacle.check, r.next.check]) expect(check, r.name).toMatch(/时，|^如果/);
+      expect(r.oneLine, r.name).toMatch(/^可能/);
+      for (const t of [r.situation, r.obstacle.text, r.next.text]) expect(t, r.name).not.toContain(r.oneLine.replace(/^可能(在)?/, ""));
+      expect(r.next.question, r.name).toMatch(/？$/);
+    }
+  });
+
+  it("主张里的衔接（support）以“可能”开头，且只给不参与选主张的标记写", () => {
+    for (const focus of LOCAL_V2.focuses) {
+      for (const [tag, s] of Object.entries(focus.support ?? {})) {
+        expect(s.relation, `${focus.id}/${tag}`).toMatch(/^(可能|也许|或许)/);
+        expect(focus.weights[tag], `${focus.id}/${tag} 已有权重，应写进 roles`).toBeUndefined();
+      }
+    }
+  });
+
+  it("按位置路径的整体是两拍：先核对阻碍牌的点，再交代末牌的方向；三种意图的收尾不同", () => {
+    const cards: [string, boolean][] = [["the-hermit", true], ["death", false], ["the-tower", false]];
+    const by = (intent: "clarify" | "decide" | "companion") => buildLocalReading(req("career", intent, cards));
+    expect(selectLocalFocus(req("career", "clarify", cards))).toBeNull();
+    expect(by("clarify").overall).toContain("值得先核对的是：有没有一个做法已经完成了它的作用");
+    expect(by("clarify").overall).toContain("核对之后可以试的一步：把最基本的几件事先稳住。");
+    expect(by("decide").overall).toContain("做决定之前可以先试的一步：把最基本的几件事先稳住。");
+    expect(by("companion").overall).toContain("只试这一小步：把最基本的几件事先稳住。");
+    // 三张牌的要点之间用分号隔开（句内有逗号时分得清哪里换牌）
+    expect(by("clarify").overall.split("；").length).toBe(3);
+    // 行动与追问落在这一步上（评分表样本 1：原来的追问预设“这次变动”已经发生）
+    expect(by("clarify").action).toContain("稳固");
+    expect(by("clarify").question).toMatch(/^如果.+稳住/);
+  });
+
+  it("主题变体也能改写首牌的说明：关系主题里星币三不讲分工（评分表样本 10）", () => {
+    const r = buildLocalReading(req("relationship", "clarify", [["three-of-pentacles", false], ["the-tower", true], ["queen-of-wands", false]]));
+    expect(r.cards[0].text).toContain("期待");
+    expect([r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("")).not.toMatch(/分工|做成一个最粗糙的版本|拿给谁看/);
+    expect(r.action).not.toMatch(/联系|发消息|一起|对方回复/);
+  });
+
+  it("合作牌族的末牌：自我主题讲自己的完成标准，去留主题讲选项依赖的条件，都不写多人分工（评分表样本 13、22）", () => {
+    const self = buildLocalReading(req("self", "clarify", [["four-of-swords", true], ["death", false], ["three-of-pentacles", false]]));
+    expect([self.overall, self.cards[2].text, self.interpretations[1], self.action, self.question].join("")).not.toMatch(/分工|各自负责|共同的小任务/);
+    expect(self.action).toContain("完成");
+    const crossroads = buildLocalReading(req("crossroads", "clarify", [["page-of-pentacles", false], ["the-hermit", true], ["three-of-pentacles", false]]));
+    expect([crossroads.overall, crossroads.cards[2].text, crossroads.interpretations[1], crossroads.action, crossroads.question].join("")).not.toMatch(/分工|各自负责|共同的小任务/);
+    expect(crossroads.action).toContain("条件");
+    // 学习牌族：去留主题的首牌不讲“学一件新事”
+    expect(crossroads.cards[0].text).not.toMatch(/学/);
+  });
+
+  it("离开牌族不预设要走：自我主题的陪伴里，宝剑六（逆位）的行动和追问不推进“离开”、不冒认“最近三次”（评分表样本 21）", () => {
+    const r = buildLocalReading(req("self", "companion", [["two-of-pentacles", false], ["three-of-pentacles", false], ["six-of-swords", true]]));
+    const all = [r.overall, ...r.cards.map((c) => c.text), ...r.interpretations, r.action, r.question].join("");
+    expect(all).not.toMatch(/离开|换环境|想走|三次|分工/);
+    expect(r.question).toMatch(/^如果/);
+    // 关系主题里死神讲相处方式的收尾，不读成结束关系
+    const death = buildLocalReading(req("relationship", "clarify", [["the-hermit", false], ["eight-of-wands", false], ["death", false]]));
+    expect(death.cards[2].text).toContain("相处方式");
+  });
+
+  it("负担类主张不把“读者超载”当成前提：自我主题下行动与追问都是条件口径，结果里没有内部说法“末牌”", () => {
+    const r = buildLocalReading(req("self", "clarify", [["two-of-pentacles", true], ["page-of-pentacles", false], ["death", true]]));
+    expect(selectLocalFocus(req("self", "clarify", [["two-of-pentacles", true], ["page-of-pentacles", false], ["death", true]]))).toBe("load-transition");
+    expect(r.action).toContain("如果偏多");
+    expect(r.question).toMatch(/^如果/);
+    expect(r.overall).not.toMatch(/过渡|再决定要放下哪一项/);
+    expect(allStrings.map(([, t]) => t).join("\n")).not.toContain("末牌");
+  });
+
+  it("命中主张时，没有贡献的牌按主题变体取说明，并且陪伴读法不要求分两栏分析（评分表样本 6）", () => {
+    const r = buildLocalReading(req("crossroads", "companion", [["the-tower", true], ["four-of-swords", false], ["queen-of-wands", false]]));
+    expect(selectLocalFocus(req("crossroads", "companion", [["the-tower", true], ["four-of-swords", false], ["queen-of-wands", false]]))).toBe("settle-feelings");
+    expect(r.overall).toContain("权杖王后可能在提示热度可以先用来照顾自己");
+    expect(r.cards[2].text).not.toContain("被别人看见");
+    expect(r.interpretations.join("")).not.toMatch(/两栏|写下/);
   });
 });

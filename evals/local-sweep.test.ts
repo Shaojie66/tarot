@@ -58,7 +58,10 @@ describe(`组合扫描（${ids.length} 张已写完的牌）`, () => {
       const all = [result.overall, ...result.cards.map((x) => x.text), ...result.interpretations, result.action, result.question];
       expect(findForbiddenPhrase(all), label).toBeNull();
       expect(all.join(""), label).not.toMatch(/\{[a-z]+\}|undefined|null/);
-      expect(all.join(""), label).not.toMatch(/是眼下的底色|是可以先动的一步|做的时候留意/);
+      expect(all.join(""), label).not.toMatch(/是眼下的底色|是可以先动的一步|做的时候留意|这一层背景/);
+      // v2.9：陪伴意图的行动不强制写字 / 记录；任何结果里，暂停决定或延后处理的行动都带边界
+      if (intent === "companion") expect(result.action, label).not.toMatch(/写下|记下|记一句|写一句|只写|列出|列两栏|分两栏|清单|核对/);
+      if (/不拍板|挪到明天|排到明天|明天再|明天同一时间|延期|延后|顺延/.test(result.action)) expect(result.action, label).toMatch(/期限|不紧急/);
       for (const card of result.cards) expect(result.overall, label).not.toContain(card.text);
       expect(result.interpretations[0], label).not.toBe(result.interpretations[1]);
       expect(result.question, label).toMatch(/？$/);

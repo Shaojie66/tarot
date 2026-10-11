@@ -12,7 +12,8 @@
     "test": "vitest run",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "e2e": "playwright test",
-    "eval:live": "vitest run --config vitest.live.config.mts"
+    "eval:live": "vitest run --config vitest.live.config.mts",
+    "local:coverage": "node scripts/local-coverage.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.132.1",

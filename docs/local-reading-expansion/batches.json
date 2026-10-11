@@ -1,0 +1,156 @@
+{
+ "note": "扩写批次计划：每批 6 张牌（12 个朝向），按 major → wands → cups → swords → pentacles 顺序。批次内的牌可以按需要调整，但改动要写进 PROCESS.md 的变更记录。status：planned / drafting / in_review / accepted。",
+ "batches": [
+  {
+   "id": 0,
+   "status": "done",
+   "cards": [
+    "the-hermit",
+    "death",
+    "the-tower",
+    "eight-of-wands",
+    "queen-of-wands",
+    "page-of-cups",
+    "four-of-swords",
+    "six-of-swords",
+    "knight-of-swords",
+    "two-of-pentacles",
+    "three-of-pentacles",
+    "page-of-pentacles"
+   ],
+   "note": "样稿 12 张（v2.7）。已通过 AI 预审 10 轮，人工评分未做。"
+  },
+  {
+   "id": 1,
+   "status": "planned",
+   "cards": [
+    "the-fool",
+    "the-magician",
+    "the-high-priestess",
+    "the-empress",
+    "the-emperor",
+    "the-hierophant"
+   ]
+  },
+  {
+   "id": 2,
+   "status": "planned",
+   "cards": [
+    "the-lovers",
+    "the-chariot",
+    "strength",
+    "wheel-of-fortune",
+    "justice",
+    "the-hanged-man"
+   ]
+  },
+  {
+   "id": 3,
+   "status": "planned",
+   "cards": [
+    "temperance",
+    "the-devil",
+    "the-star",
+    "the-moon",
+    "the-sun",
+    "judgement"
+   ]
+  },
+  {
+   "id": 4,
+   "status": "planned",
+   "cards": [
+    "the-world",
+    "ace-of-wands",
+    "two-of-wands",
+    "three-of-wands",
+    "four-of-wands",
+    "five-of-wands"
+   ]
+  },
+  {
+   "id": 5,
+   "status": "planned",
+   "cards": [
+    "six-of-wands",
+    "seven-of-wands",
+    "nine-of-wands",
+    "ten-of-wands",
+    "page-of-wands",
+    "knight-of-wands"
+   ]
+  },
+  {
+   "id": 6,
+   "status": "planned",
+   "cards": [
+    "king-of-wands",
+    "ace-of-cups",
+    "two-of-cups",
+    "three-of-cups",
+    "four-of-cups",
+    "five-of-cups"
+   ]
+  },
+  {
+   "id": 7,
+   "status": "planned",
+   "cards": [
+    "six-of-cups",
+    "seven-of-cups",
+    "eight-of-cups",
+    "nine-of-cups",
+    "ten-of-cups",
+    "knight-of-cups"
+   ]
+  },
+  {
+   "id": 8,
+   "status": "planned",
+   "cards": [
+    "queen-of-cups",
+    "king-of-cups",
+    "ace-of-swords",
+    "two-of-swords",
+    "three-of-swords",
+    "five-of-swords"
+   ]
+  },
+  {
+   "id": 9,
+   "status": "planned",
+   "cards": [
+    "seven-of-swords",
+    "eight-of-swords",
+    "nine-of-swords",
+    "ten-of-swords",
+    "page-of-swords",
+    "queen-of-swords"
+   ]
+  },
+  {
+   "id": 10,
+   "status": "planned",
+   "cards": [
+    "king-of-swords",
+    "ace-of-pentacles",
+    "four-of-pentacles",
+    "five-of-pentacles",
+    "six-of-pentacles",
+    "seven-of-pentacles"
+   ]
+  },
+  {
+   "id": 11,
+   "status": "planned",
+   "cards": [
+    "eight-of-pentacles",
+    "nine-of-pentacles",
+    "ten-of-pentacles",
+    "knight-of-pentacles",
+    "queen-of-pentacles",
+    "king-of-pentacles"
+   ]
+  }
+ ]
+}

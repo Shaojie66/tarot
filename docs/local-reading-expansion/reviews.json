@@ -1,0 +1,9 @@
+{
+ "note": "每批的评审记录。aiPrescreen：是否做过 AI 盲评预审（子智能体 / 其他模型）；humanReview：人工评分是否完成（评审人、人数、日期、结果）。AI 预审不能填进 humanReview。",
+ "reviews": {
+  "0": {
+   "aiPrescreen": "docs/review-local-reading-ai-prescreen-2026-10-10.md（Claude 子智能体 10 轮；DeepSeek 1 轮）",
+   "humanReview": null
+  }
+ }
+}

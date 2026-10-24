@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Shaojie66/tarot/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Shaojie66/tarot?style=flat&color=d6a65c" /></a>
+  <a href="https://github.com/Shaojie66/tarot"><img alt="Stars" src="https://img.shields.io/github/stars/Shaojie66/tarot?style=flat&color=d6a65c" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue?style=flat" /></a>
   <img alt="Node.js 20+" src="https://img.shields.io/badge/node-20%2B-339933?style=flat" />
   <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-black?style=flat" />

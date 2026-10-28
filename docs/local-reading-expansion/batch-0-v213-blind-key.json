@@ -1,0 +1,201 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "self|clarify|two-of-pentacles,eight-of-wands,knight-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "pause"
+   },
+   "b": {
+    "spec": "self|clarify|two-of-pentacles,eight-of-wands,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "补 vs 缓",
+   "a": {
+    "spec": "relationship|clarify|eight-of-wands,knight-of-swords:r,queen-of-wands:r",
+    "focus": "momentum-check",
+    "mode": "refuel"
+   },
+   "b": {
+    "spec": "relationship|clarify|eight-of-wands,knight-of-swords:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "歇 vs 查证",
+   "a": {
+    "spec": "career|clarify|the-hermit,three-of-pentacles:r,the-tower:r",
+    "focus": "inner-first",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "career|clarify|the-hermit,three-of-pentacles:r,four-of-swords",
+    "focus": "inner-first",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "减一项 vs 小试",
+   "a": {
+    "spec": "crossroads|clarify|death,page-of-pentacles:r,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|clarify|death,page-of-pentacles:r,knight-of-swords",
+    "focus": "rebuild",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "回看 vs 查证",
+   "a": {
+    "spec": "career|clarify|the-hermit,knight-of-swords:r,the-tower:r",
+    "focus": "inner-first",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "career|clarify|the-hermit,knight-of-swords:r,death",
+    "focus": "inner-first",
+    "mode": "recall"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "缓 vs 歇",
+   "a": {
+    "spec": "self|clarify|eight-of-wands,page-of-pentacles:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "self|clarify|eight-of-wands,page-of-pentacles:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "小试 vs 停一拍",
+   "a": {
+    "spec": "relationship|clarify|page-of-cups,eight-of-wands,page-of-pentacles:r",
+    "focus": "inner-first",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "relationship|clarify|page-of-cups,eight-of-wands,the-tower",
+    "focus": "inner-first",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "减一项 vs 补",
+   "a": {
+    "spec": "crossroads|clarify|the-hermit,page-of-pentacles:r,queen-of-wands:r",
+    "focus": "inner-first",
+    "mode": "refuel"
+   },
+   "b": {
+    "spec": "crossroads|clarify|the-hermit,page-of-pentacles:r,death",
+    "focus": "inner-first",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "career|decide|two-of-pentacles:r,eight-of-wands,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "career|decide|two-of-pentacles:r,eight-of-wands,knight-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "补 vs 减一项",
+   "a": {
+    "spec": "self|decide|page-of-cups,page-of-pentacles:r,queen-of-wands:r",
+    "focus": "inner-first",
+    "mode": "refuel"
+   },
+   "b": {
+    "spec": "self|decide|page-of-cups,page-of-pentacles:r,the-tower",
+    "focus": "inner-first",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 11,
+   "probe": "缓 vs 查证",
+   "a": {
+    "spec": "crossroads|decide|eight-of-wands,knight-of-swords:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   },
+   "b": {
+    "spec": "crossroads|decide|eight-of-wands,knight-of-swords:r,the-tower:r",
+    "focus": "momentum-check",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 12,
+   "probe": "收集句 vs 缓",
+   "a": {
+    "spec": "relationship|decide|queen-of-wands,death,knight-of-swords",
+    "focus": "rebuild",
+    "mode": "gather"
+   },
+   "b": {
+    "spec": "relationship|decide|queen-of-wands,death,page-of-cups:r",
+    "focus": "rebuild",
+    "mode": "settle"
+   }
+  },
+  {
+   "pair": 13,
+   "probe": "查证 vs 写下来",
+   "a": {
+    "spec": "career|decide|page-of-cups,three-of-pentacles:r,page-of-pentacles",
+    "focus": "inner-first",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "career|decide|page-of-cups,three-of-pentacles:r,knight-of-swords",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 14,
+   "probe": "回看 vs 歇",
+   "a": {
+    "spec": "self|decide|eight-of-wands,knight-of-swords:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "self|decide|eight-of-wands,knight-of-swords:r,death",
+    "focus": "momentum-check",
+    "mode": "recall"
+   }
+  }
+ ]
+}

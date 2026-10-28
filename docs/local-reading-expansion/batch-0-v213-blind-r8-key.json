@@ -1,0 +1,201 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "career|clarify|the-tower,three-of-pentacles,page-of-pentacles",
+    "focus": "rebuild",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "career|clarify|the-tower,three-of-pentacles,eight-of-wands:r",
+    "focus": "rebuild",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "relationship|decide|the-hermit,three-of-pentacles,queen-of-wands",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "relationship|decide|the-hermit,three-of-pentacles,the-tower:r",
+    "focus": "inner-first",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "self|clarify|two-of-pentacles,page-of-pentacles,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "self|clarify|two-of-pentacles,page-of-pentacles,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "crossroads|decide|the-tower:r,page-of-pentacles,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|decide|the-tower:r,page-of-pentacles,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "career|clarify|page-of-pentacles,death:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "career|clarify|page-of-pentacles,death:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "relationship|decide|eight-of-wands,death:r,page-of-pentacles",
+    "focus": "momentum-check",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "relationship|decide|eight-of-wands,death:r,three-of-pentacles",
+    "focus": "momentum-check",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "self|clarify|page-of-cups,the-tower,knight-of-swords",
+    "focus": "inner-first",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "self|clarify|page-of-cups,the-tower,three-of-pentacles",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "crossroads|decide|three-of-pentacles:r,the-tower,knight-of-swords:r",
+    "focus": "rebuild",
+    "mode": "recall"
+   },
+   "b": {
+    "spec": "crossroads|decide|three-of-pentacles:r,the-tower,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "career|clarify|two-of-pentacles:r,the-hermit,page-of-pentacles:r",
+    "focus": "inner-first",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "career|clarify|two-of-pentacles:r,the-hermit,eight-of-wands:r",
+    "focus": "inner-first",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "relationship|decide|four-of-swords:r,the-hermit,two-of-pentacles:r",
+    "focus": "inner-first",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "relationship|decide|four-of-swords:r,the-hermit,three-of-pentacles",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 11,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "self|clarify|knight-of-swords,page-of-cups,death:r",
+    "focus": "inner-first",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "self|clarify|knight-of-swords,page-of-cups,eight-of-wands:r",
+    "focus": "inner-first",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 12,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "crossroads|decide|three-of-pentacles:r,page-of-cups,knight-of-swords:r",
+    "focus": "inner-first",
+    "mode": "pause"
+   },
+   "b": {
+    "spec": "crossroads|decide|three-of-pentacles:r,page-of-cups,four-of-swords",
+    "focus": "inner-first",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 13,
+   "probe": "D 批：clarify",
+   "a": {
+    "spec": "career|clarify|page-of-pentacles:r,page-of-cups:r,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "career|clarify|page-of-pentacles:r,page-of-cups:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 14,
+   "probe": "D 批：decide",
+   "a": {
+    "spec": "relationship|decide|eight-of-wands,page-of-cups:r,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "relationship|decide|eight-of-wands,page-of-cups:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  }
+ ]
+}

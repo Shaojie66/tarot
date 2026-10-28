@@ -162,5 +162,1648 @@
   "self|clarify|eight-of-wands,the-tower,three-of-pentacles:r",
   "crossroads|clarify|the-tower,page-of-pentacles:r,six-of-swords",
   "career|clarify|page-of-pentacles:r,six-of-swords,the-hermit"
- ]
+ ],
+ "heldout3": [
+  "career|clarify|three-of-pentacles:r,knight-of-swords,the-hermit",
+  "career|clarify|two-of-pentacles,the-tower,the-hermit:r",
+  "career|decide|the-tower,knight-of-swords,page-of-pentacles",
+  "career|decide|page-of-pentacles,queen-of-wands,knight-of-swords",
+  "career|companion|eight-of-wands,page-of-pentacles,the-hermit:r",
+  "career|companion|the-hermit,knight-of-swords,four-of-swords",
+  "relationship|clarify|the-tower,two-of-pentacles,page-of-pentacles:r",
+  "relationship|clarify|four-of-swords:r,knight-of-swords,queen-of-wands",
+  "relationship|decide|the-hermit:r,knight-of-swords,six-of-swords",
+  "relationship|decide|eight-of-wands,the-hermit:r,page-of-cups",
+  "relationship|companion|two-of-pentacles:r,three-of-pentacles:r,the-hermit",
+  "relationship|companion|the-tower,the-hermit:r,two-of-pentacles",
+  "self|clarify|eight-of-wands,three-of-pentacles,page-of-pentacles:r",
+  "self|clarify|page-of-cups,eight-of-wands:r,queen-of-wands:r",
+  "self|decide|the-hermit,three-of-pentacles,knight-of-swords",
+  "self|decide|three-of-pentacles:r,the-tower,queen-of-wands",
+  "self|companion|the-tower,queen-of-wands,four-of-swords",
+  "self|companion|eight-of-wands,queen-of-wands,four-of-swords",
+  "crossroads|clarify|the-tower:r,the-hermit,three-of-pentacles",
+  "crossroads|clarify|eight-of-wands:r,the-tower,death",
+  "crossroads|decide|page-of-pentacles:r,death,three-of-pentacles:r",
+  "crossroads|decide|page-of-pentacles,eight-of-wands,four-of-swords:r",
+  "crossroads|companion|knight-of-swords,eight-of-wands:r,queen-of-wands:r",
+  "crossroads|companion|the-hermit:r,eight-of-wands,page-of-cups"
+ ],
+ "heldout3Protocol": {
+  "fixedAt": "2026-10-11",
+  "seed": 2026101103,
+  "version": "local-v2.10-sample",
+  "commit": "9148317",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). topic/intent/slot chooses FALLBACK_IDS[(topicIndex+intentIndex+slot)%3]; take first unused ordered oriented draw. Exclude draws regardless of topic/intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json"
+  ],
+  "excludedDraws": [
+   "death,eight-of-wands,queen-of-wands:r",
+   "death,knight-of-swords:r,the-tower",
+   "death,knight-of-swords:r,two-of-pentacles",
+   "death,page-of-cups,knight-of-swords",
+   "death,page-of-cups:r,the-tower",
+   "death,page-of-pentacles:r,page-of-cups",
+   "death,six-of-swords,the-tower",
+   "death,six-of-swords:r,eight-of-wands",
+   "death,the-hermit,eight-of-wands",
+   "death:r,four-of-swords,page-of-cups:r",
+   "death:r,page-of-cups,knight-of-swords",
+   "death:r,six-of-swords,four-of-swords",
+   "death:r,the-hermit,eight-of-wands",
+   "eight-of-wands,death,six-of-swords:r",
+   "eight-of-wands,knight-of-swords,the-hermit:r",
+   "eight-of-wands,knight-of-swords:r,four-of-swords",
+   "eight-of-wands,knight-of-swords:r,six-of-swords:r",
+   "eight-of-wands,six-of-swords,queen-of-wands:r",
+   "eight-of-wands,the-hermit,death",
+   "eight-of-wands,the-hermit,death:r",
+   "eight-of-wands,the-hermit,page-of-pentacles",
+   "eight-of-wands,the-hermit,page-of-pentacles:r",
+   "eight-of-wands,the-hermit,queen-of-wands",
+   "eight-of-wands,the-hermit,queen-of-wands:r",
+   "eight-of-wands,the-hermit,six-of-swords",
+   "eight-of-wands,the-hermit,six-of-swords:r",
+   "eight-of-wands,the-hermit,three-of-pentacles",
+   "eight-of-wands,the-hermit,three-of-pentacles:r",
+   "eight-of-wands,the-hermit,two-of-pentacles",
+   "eight-of-wands,the-hermit,two-of-pentacles:r",
+   "eight-of-wands,the-tower,three-of-pentacles:r",
+   "eight-of-wands,three-of-pentacles,two-of-pentacles:r",
+   "eight-of-wands:r,knight-of-swords:r,page-of-pentacles:r",
+   "eight-of-wands:r,knight-of-swords:r,two-of-pentacles:r",
+   "eight-of-wands:r,page-of-pentacles:r,knight-of-swords:r",
+   "eight-of-wands:r,six-of-swords,four-of-swords",
+   "four-of-swords,death,knight-of-swords",
+   "four-of-swords,death:r,knight-of-swords",
+   "four-of-swords,page-of-cups:r,knight-of-swords",
+   "four-of-swords,page-of-pentacles,knight-of-swords",
+   "four-of-swords,page-of-pentacles:r,knight-of-swords",
+   "four-of-swords,queen-of-wands,knight-of-swords",
+   "four-of-swords,queen-of-wands:r,knight-of-swords",
+   "four-of-swords,six-of-swords,knight-of-swords",
+   "four-of-swords,six-of-swords:r,knight-of-swords",
+   "four-of-swords,the-tower:r,two-of-pentacles",
+   "four-of-swords,three-of-pentacles,knight-of-swords",
+   "four-of-swords,three-of-pentacles:r,knight-of-swords",
+   "four-of-swords,two-of-pentacles,knight-of-swords",
+   "four-of-swords,two-of-pentacles:r,knight-of-swords",
+   "four-of-swords:r,death,three-of-pentacles",
+   "four-of-swords:r,the-hermit,queen-of-wands:r",
+   "four-of-swords:r,three-of-pentacles,queen-of-wands",
+   "knight-of-swords,eight-of-wands,two-of-pentacles:r",
+   "knight-of-swords,page-of-cups,death",
+   "knight-of-swords,page-of-cups,death:r",
+   "knight-of-swords,page-of-cups,page-of-pentacles",
+   "knight-of-swords,page-of-cups,page-of-pentacles:r",
+   "knight-of-swords,page-of-cups,queen-of-wands",
+   "knight-of-swords,page-of-cups,queen-of-wands:r",
+   "knight-of-swords,page-of-cups,six-of-swords",
+   "knight-of-swords,page-of-cups,six-of-swords:r",
+   "knight-of-swords,page-of-cups,three-of-pentacles",
+   "knight-of-swords,page-of-cups,three-of-pentacles:r",
+   "knight-of-swords,page-of-cups,two-of-pentacles",
+   "knight-of-swords,page-of-cups,two-of-pentacles:r",
+   "knight-of-swords,the-hermit:r,death",
+   "knight-of-swords,the-tower:r,two-of-pentacles",
+   "knight-of-swords,two-of-pentacles,page-of-cups:r",
+   "knight-of-swords,two-of-pentacles:r,death",
+   "knight-of-swords:r,four-of-swords,page-of-pentacles",
+   "knight-of-swords:r,four-of-swords,the-hermit",
+   "knight-of-swords:r,four-of-swords,three-of-pentacles",
+   "knight-of-swords:r,six-of-swords,queen-of-wands:r",
+   "knight-of-swords:r,three-of-pentacles,page-of-pentacles",
+   "page-of-cups,death:r,the-hermit",
+   "page-of-cups,queen-of-wands,knight-of-swords",
+   "page-of-cups,queen-of-wands:r,the-hermit:r",
+   "page-of-cups,the-hermit,two-of-pentacles:r",
+   "page-of-cups,the-hermit:r,the-tower",
+   "page-of-cups,two-of-pentacles:r,knight-of-swords",
+   "page-of-cups:r,four-of-swords,death",
+   "page-of-cups:r,six-of-swords,knight-of-swords:r",
+   "page-of-cups:r,the-hermit,knight-of-swords",
+   "page-of-cups:r,the-tower:r,four-of-swords:r",
+   "page-of-cups:r,three-of-pentacles,four-of-swords:r",
+   "page-of-pentacles,page-of-cups,knight-of-swords",
+   "page-of-pentacles,page-of-cups:r,eight-of-wands",
+   "page-of-pentacles,queen-of-wands:r,page-of-cups",
+   "page-of-pentacles,the-hermit,eight-of-wands",
+   "page-of-pentacles,the-hermit:r,three-of-pentacles",
+   "page-of-pentacles,the-tower:r,queen-of-wands",
+   "page-of-pentacles,two-of-pentacles:r,queen-of-wands",
+   "page-of-pentacles:r,death,queen-of-wands",
+   "page-of-pentacles:r,page-of-cups,eight-of-wands:r",
+   "page-of-pentacles:r,page-of-cups,knight-of-swords",
+   "page-of-pentacles:r,six-of-swords,the-hermit",
+   "page-of-pentacles:r,the-hermit,eight-of-wands",
+   "page-of-pentacles:r,two-of-pentacles,the-hermit:r",
+   "queen-of-wands,death,eight-of-wands:r",
+   "queen-of-wands,four-of-swords:r,six-of-swords",
+   "queen-of-wands,page-of-cups,knight-of-swords",
+   "queen-of-wands,six-of-swords,four-of-swords:r",
+   "queen-of-wands,the-hermit,eight-of-wands",
+   "queen-of-wands,the-tower:r,the-hermit",
+   "queen-of-wands,three-of-pentacles:r,death",
+   "queen-of-wands,two-of-pentacles,page-of-cups",
+   "queen-of-wands:r,eight-of-wands,the-tower:r",
+   "queen-of-wands:r,four-of-swords,two-of-pentacles:r",
+   "queen-of-wands:r,knight-of-swords,page-of-pentacles",
+   "queen-of-wands:r,page-of-cups,knight-of-swords",
+   "queen-of-wands:r,the-hermit,eight-of-wands",
+   "queen-of-wands:r,three-of-pentacles:r,page-of-pentacles",
+   "queen-of-wands:r,two-of-pentacles,six-of-swords:r",
+   "six-of-swords,page-of-cups,knight-of-swords",
+   "six-of-swords,the-hermit,eight-of-wands",
+   "six-of-swords,the-hermit:r,page-of-pentacles",
+   "six-of-swords:r,page-of-cups,knight-of-swords",
+   "six-of-swords:r,the-hermit,eight-of-wands",
+   "six-of-swords:r,three-of-pentacles,queen-of-wands:r",
+   "six-of-swords:r,two-of-pentacles,queen-of-wands",
+   "the-hermit,death:r,page-of-pentacles",
+   "the-hermit,eight-of-wands:r,page-of-pentacles",
+   "the-hermit,four-of-swords,page-of-cups:r",
+   "the-hermit,four-of-swords,six-of-swords",
+   "the-hermit,knight-of-swords,six-of-swords",
+   "the-hermit,page-of-cups:r,two-of-pentacles",
+   "the-hermit,six-of-swords:r,knight-of-swords:r",
+   "the-hermit,three-of-pentacles,death:r",
+   "the-hermit:r,death,the-tower",
+   "the-hermit:r,three-of-pentacles:r,six-of-swords",
+   "the-hermit:r,two-of-pentacles,three-of-pentacles",
+   "the-tower,death,eight-of-wands",
+   "the-tower,death:r,eight-of-wands",
+   "the-tower,four-of-swords,death:r",
+   "the-tower,four-of-swords:r,the-hermit",
+   "the-tower,page-of-cups,queen-of-wands",
+   "the-tower,page-of-cups:r,knight-of-swords",
+   "the-tower,page-of-pentacles,eight-of-wands",
+   "the-tower,page-of-pentacles:r,eight-of-wands",
+   "the-tower,page-of-pentacles:r,six-of-swords",
+   "the-tower,queen-of-wands,eight-of-wands",
+   "the-tower,queen-of-wands:r,eight-of-wands",
+   "the-tower,six-of-swords,eight-of-wands",
+   "the-tower,six-of-swords:r,eight-of-wands",
+   "the-tower,the-hermit,page-of-cups:r",
+   "the-tower,three-of-pentacles,eight-of-wands",
+   "the-tower,three-of-pentacles:r,eight-of-wands",
+   "the-tower,three-of-pentacles:r,page-of-pentacles:r",
+   "the-tower,two-of-pentacles,eight-of-wands",
+   "the-tower,two-of-pentacles,six-of-swords:r",
+   "the-tower,two-of-pentacles:r,eight-of-wands",
+   "the-tower:r,four-of-swords,queen-of-wands",
+   "the-tower:r,four-of-swords:r,death:r",
+   "the-tower:r,page-of-cups,knight-of-swords",
+   "the-tower:r,six-of-swords,three-of-pentacles:r",
+   "the-tower:r,the-hermit,six-of-swords:r",
+   "three-of-pentacles,four-of-swords:r,page-of-pentacles",
+   "three-of-pentacles,page-of-cups,knight-of-swords",
+   "three-of-pentacles,the-hermit,eight-of-wands",
+   "three-of-pentacles,the-hermit,two-of-pentacles",
+   "three-of-pentacles,the-tower:r,queen-of-wands",
+   "three-of-pentacles,two-of-pentacles:r,the-tower",
+   "three-of-pentacles:r,page-of-cups,knight-of-swords",
+   "three-of-pentacles:r,the-hermit,eight-of-wands",
+   "three-of-pentacles:r,two-of-pentacles,death",
+   "two-of-pentacles,eight-of-wands:r,four-of-swords",
+   "two-of-pentacles,four-of-swords,six-of-swords:r",
+   "two-of-pentacles,page-of-cups,knight-of-swords",
+   "two-of-pentacles,queen-of-wands,page-of-cups",
+   "two-of-pentacles,queen-of-wands,page-of-pentacles:r",
+   "two-of-pentacles,the-hermit,eight-of-wands",
+   "two-of-pentacles,three-of-pentacles,six-of-swords:r",
+   "two-of-pentacles:r,page-of-cups,knight-of-swords",
+   "two-of-pentacles:r,page-of-pentacles,death:r",
+   "two-of-pentacles:r,six-of-swords,the-tower",
+   "two-of-pentacles:r,the-hermit,eight-of-wands"
+  ],
+  "exclusionDigest": "ceddbb0fbe2a6367bea2b7f266d30a5161f843deb29db0f3cf87b23e23e1f2f6",
+  "inputsDigest": "bd134c2debaf3ae8d5528aa6be1b74424142e2d928008a4fec20a93ad0066937",
+  "blind": [
+   "career|clarify|three-of-pentacles:r,knight-of-swords,the-hermit",
+   "self|clarify|page-of-cups,eight-of-wands:r,queen-of-wands:r",
+   "relationship|decide|eight-of-wands,the-hermit:r,page-of-cups",
+   "self|decide|the-hermit,three-of-pentacles,knight-of-swords",
+   "career|companion|the-hermit,knight-of-swords,four-of-swords",
+   "relationship|companion|two-of-pentacles:r,three-of-pentacles:r,the-hermit",
+   "career|clarify|two-of-pentacles,the-tower,the-hermit:r",
+   "relationship|clarify|the-tower,two-of-pentacles,page-of-pentacles:r",
+   "career|decide|the-tower,knight-of-swords,page-of-pentacles",
+   "self|decide|three-of-pentacles:r,the-tower,queen-of-wands",
+   "relationship|companion|the-tower,the-hermit:r,two-of-pentacles",
+   "self|companion|the-tower,queen-of-wands,four-of-swords",
+   "relationship|clarify|four-of-swords:r,knight-of-swords,queen-of-wands",
+   "self|clarify|eight-of-wands,three-of-pentacles,page-of-pentacles:r",
+   "career|decide|page-of-pentacles,queen-of-wands,knight-of-swords",
+   "relationship|decide|the-hermit:r,knight-of-swords,six-of-swords",
+   "career|companion|eight-of-wands,page-of-pentacles,the-hermit:r",
+   "self|companion|eight-of-wands,queen-of-wands,four-of-swords"
+  ],
+  "mechanism": [
+   "relationship|clarify|the-hermit,the-tower,page-of-pentacles:r",
+   "self|companion|the-hermit,the-tower:r,six-of-swords",
+   "relationship|clarify|queen-of-wands,eight-of-wands,the-tower",
+   "self|companion|page-of-pentacles:r,queen-of-wands:r,the-tower",
+   "relationship|clarify|eight-of-wands,six-of-swords:r,page-of-pentacles",
+   "self|companion|page-of-pentacles:r,eight-of-wands:r,knight-of-swords"
+  ],
+  "swaps": [
+   [
+    "relationship|clarify|four-of-swords,page-of-cups,knight-of-swords",
+    "relationship|clarify|four-of-swords,page-of-cups,queen-of-wands:r"
+   ],
+   [
+    "self|companion|the-hermit,page-of-cups,three-of-pentacles:r",
+    "self|companion|the-hermit,page-of-cups,the-tower"
+   ],
+   [
+    "relationship|clarify|knight-of-swords,death,three-of-pentacles",
+    "relationship|clarify|knight-of-swords,death,the-hermit:r"
+   ],
+   [
+    "self|companion|the-tower,eight-of-wands,queen-of-wands",
+    "self|companion|the-tower,eight-of-wands,the-hermit:r"
+   ],
+   [
+    "relationship|clarify|queen-of-wands:r,eight-of-wands,four-of-swords:r",
+    "relationship|clarify|queen-of-wands:r,eight-of-wands,knight-of-swords"
+   ],
+   [
+    "self|companion|page-of-pentacles:r,eight-of-wands,four-of-swords:r",
+    "self|companion|page-of-pentacles:r,eight-of-wands,queen-of-wands"
+   ]
+  ],
+  "status": "reviewed-used-for-revision",
+  "note": "Inputs selected from IDs/tags/routing only. New outputs are sealed until candidate freeze; old heldout/heldout2 are development material.",
+  "candidateFreeze": {
+   "version": "local-v2.11-sample",
+   "frozenAt": "2026-10-12T10:11:37.154Z",
+   "inputsDigest": "bd134c2debaf3ae8d5528aa6be1b74424142e2d928008a4fec20a93ad0066937",
+   "contentHash": "e74dbbdd4bf3de4928d3dd4b0a494efeefa5c79f666d8d10eb0493b60e1fed66",
+   "engineHash": "6adbf1dad08c711ed4201dfeee479677f7954b5b32310b046b1477407bb7e9b1",
+   "outputDigest": "e5d8e14828a77e4a835c4a600283d411af55f97eac46b3a7d47bb87bfce138c8"
+  },
+  "usedForRevision": true
+ },
+ "heldout4": [
+  "career|clarify|the-hermit,page-of-cups:r,queen-of-wands",
+  "career|clarify|three-of-pentacles,six-of-swords:r,the-tower",
+  "career|decide|three-of-pentacles,the-tower,queen-of-wands",
+  "career|decide|three-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+  "career|companion|page-of-pentacles,the-hermit:r,knight-of-swords",
+  "career|companion|knight-of-swords:r,page-of-cups,death",
+  "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+  "relationship|clarify|two-of-pentacles,four-of-swords:r,knight-of-swords",
+  "relationship|decide|knight-of-swords,six-of-swords:r,the-tower:r",
+  "relationship|decide|four-of-swords:r,the-hermit,page-of-pentacles",
+  "relationship|companion|knight-of-swords:r,page-of-cups,the-hermit:r",
+  "relationship|companion|death,four-of-swords:r,the-hermit",
+  "self|clarify|knight-of-swords,three-of-pentacles:r,the-tower:r",
+  "self|clarify|page-of-cups,knight-of-swords:r,the-hermit",
+  "self|decide|knight-of-swords,eight-of-wands,page-of-cups",
+  "self|decide|the-tower,knight-of-swords:r,death:r",
+  "self|companion|death,eight-of-wands:r,page-of-pentacles",
+  "self|companion|eight-of-wands,three-of-pentacles,four-of-swords",
+  "crossroads|clarify|the-hermit,four-of-swords:r,two-of-pentacles:r",
+  "crossroads|clarify|three-of-pentacles:r,eight-of-wands:r,the-tower",
+  "crossroads|decide|queen-of-wands,page-of-pentacles,death",
+  "crossroads|decide|eight-of-wands,page-of-pentacles:r,death:r",
+  "crossroads|companion|knight-of-swords,two-of-pentacles:r,page-of-pentacles",
+  "crossroads|companion|the-hermit,eight-of-wands,four-of-swords:r"
+ ],
+ "heldout4Protocol": {
+  "fixedAt": "2026-10-12",
+  "seed": 2026101204,
+  "version": "local-v2.10-sample",
+  "commit": "9148317",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). topic/intent/slot chooses FALLBACK_IDS[(topicIndex+intentIndex+slot)%3]; take first unused ordered oriented draw. Exclude draws regardless of topic/intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json"
+  ],
+  "excludedDraws": [
+   "death,eight-of-wands,queen-of-wands:r",
+   "death,knight-of-swords:r,the-tower",
+   "death,knight-of-swords:r,two-of-pentacles",
+   "death,page-of-cups,knight-of-swords",
+   "death,page-of-cups:r,the-tower",
+   "death,page-of-pentacles:r,page-of-cups",
+   "death,six-of-swords,the-tower",
+   "death,six-of-swords:r,eight-of-wands",
+   "death,the-hermit,eight-of-wands",
+   "death:r,four-of-swords,page-of-cups:r",
+   "death:r,page-of-cups,knight-of-swords",
+   "death:r,six-of-swords,four-of-swords",
+   "death:r,the-hermit,eight-of-wands",
+   "eight-of-wands,death,six-of-swords:r",
+   "eight-of-wands,knight-of-swords,the-hermit:r",
+   "eight-of-wands,knight-of-swords:r,four-of-swords",
+   "eight-of-wands,knight-of-swords:r,six-of-swords:r",
+   "eight-of-wands,page-of-pentacles,the-hermit:r",
+   "eight-of-wands,queen-of-wands,four-of-swords",
+   "eight-of-wands,six-of-swords,queen-of-wands:r",
+   "eight-of-wands,six-of-swords:r,page-of-pentacles",
+   "eight-of-wands,the-hermit,death",
+   "eight-of-wands,the-hermit,death:r",
+   "eight-of-wands,the-hermit,page-of-pentacles",
+   "eight-of-wands,the-hermit,page-of-pentacles:r",
+   "eight-of-wands,the-hermit,queen-of-wands",
+   "eight-of-wands,the-hermit,queen-of-wands:r",
+   "eight-of-wands,the-hermit,six-of-swords",
+   "eight-of-wands,the-hermit,six-of-swords:r",
+   "eight-of-wands,the-hermit,three-of-pentacles",
+   "eight-of-wands,the-hermit,three-of-pentacles:r",
+   "eight-of-wands,the-hermit,two-of-pentacles",
+   "eight-of-wands,the-hermit,two-of-pentacles:r",
+   "eight-of-wands,the-hermit:r,page-of-cups",
+   "eight-of-wands,the-tower,three-of-pentacles:r",
+   "eight-of-wands,three-of-pentacles,page-of-pentacles:r",
+   "eight-of-wands,three-of-pentacles,two-of-pentacles:r",
+   "eight-of-wands:r,knight-of-swords:r,page-of-pentacles:r",
+   "eight-of-wands:r,knight-of-swords:r,two-of-pentacles:r",
+   "eight-of-wands:r,page-of-pentacles:r,knight-of-swords:r",
+   "eight-of-wands:r,six-of-swords,four-of-swords",
+   "eight-of-wands:r,the-tower,death",
+   "four-of-swords,death,knight-of-swords",
+   "four-of-swords,death:r,knight-of-swords",
+   "four-of-swords,page-of-cups,knight-of-swords",
+   "four-of-swords,page-of-cups,queen-of-wands:r",
+   "four-of-swords,page-of-cups:r,knight-of-swords",
+   "four-of-swords,page-of-pentacles,knight-of-swords",
+   "four-of-swords,page-of-pentacles:r,knight-of-swords",
+   "four-of-swords,queen-of-wands,knight-of-swords",
+   "four-of-swords,queen-of-wands:r,knight-of-swords",
+   "four-of-swords,six-of-swords,knight-of-swords",
+   "four-of-swords,six-of-swords:r,knight-of-swords",
+   "four-of-swords,the-tower:r,two-of-pentacles",
+   "four-of-swords,three-of-pentacles,knight-of-swords",
+   "four-of-swords,three-of-pentacles:r,knight-of-swords",
+   "four-of-swords,two-of-pentacles,knight-of-swords",
+   "four-of-swords,two-of-pentacles:r,knight-of-swords",
+   "four-of-swords:r,death,three-of-pentacles",
+   "four-of-swords:r,knight-of-swords,queen-of-wands",
+   "four-of-swords:r,the-hermit,queen-of-wands:r",
+   "four-of-swords:r,three-of-pentacles,queen-of-wands",
+   "knight-of-swords,death,the-hermit:r",
+   "knight-of-swords,death,three-of-pentacles",
+   "knight-of-swords,eight-of-wands,two-of-pentacles:r",
+   "knight-of-swords,eight-of-wands:r,queen-of-wands:r",
+   "knight-of-swords,page-of-cups,death",
+   "knight-of-swords,page-of-cups,death:r",
+   "knight-of-swords,page-of-cups,page-of-pentacles",
+   "knight-of-swords,page-of-cups,page-of-pentacles:r",
+   "knight-of-swords,page-of-cups,queen-of-wands",
+   "knight-of-swords,page-of-cups,queen-of-wands:r",
+   "knight-of-swords,page-of-cups,six-of-swords",
+   "knight-of-swords,page-of-cups,six-of-swords:r",
+   "knight-of-swords,page-of-cups,three-of-pentacles",
+   "knight-of-swords,page-of-cups,three-of-pentacles:r",
+   "knight-of-swords,page-of-cups,two-of-pentacles",
+   "knight-of-swords,page-of-cups,two-of-pentacles:r",
+   "knight-of-swords,the-hermit:r,death",
+   "knight-of-swords,the-tower:r,two-of-pentacles",
+   "knight-of-swords,two-of-pentacles,page-of-cups:r",
+   "knight-of-swords,two-of-pentacles:r,death",
+   "knight-of-swords:r,four-of-swords,page-of-pentacles",
+   "knight-of-swords:r,four-of-swords,the-hermit",
+   "knight-of-swords:r,four-of-swords,three-of-pentacles",
+   "knight-of-swords:r,six-of-swords,queen-of-wands:r",
+   "knight-of-swords:r,three-of-pentacles,page-of-pentacles",
+   "page-of-cups,death:r,the-hermit",
+   "page-of-cups,eight-of-wands:r,queen-of-wands:r",
+   "page-of-cups,queen-of-wands,knight-of-swords",
+   "page-of-cups,queen-of-wands:r,the-hermit:r",
+   "page-of-cups,the-hermit,two-of-pentacles:r",
+   "page-of-cups,the-hermit:r,the-tower",
+   "page-of-cups,two-of-pentacles:r,knight-of-swords",
+   "page-of-cups:r,four-of-swords,death",
+   "page-of-cups:r,six-of-swords,knight-of-swords:r",
+   "page-of-cups:r,the-hermit,knight-of-swords",
+   "page-of-cups:r,the-tower:r,four-of-swords:r",
+   "page-of-cups:r,three-of-pentacles,four-of-swords:r",
+   "page-of-pentacles,eight-of-wands,four-of-swords:r",
+   "page-of-pentacles,page-of-cups,knight-of-swords",
+   "page-of-pentacles,page-of-cups:r,eight-of-wands",
+   "page-of-pentacles,queen-of-wands,knight-of-swords",
+   "page-of-pentacles,queen-of-wands:r,page-of-cups",
+   "page-of-pentacles,the-hermit,eight-of-wands",
+   "page-of-pentacles,the-hermit:r,three-of-pentacles",
+   "page-of-pentacles,the-tower:r,queen-of-wands",
+   "page-of-pentacles,two-of-pentacles:r,queen-of-wands",
+   "page-of-pentacles:r,death,queen-of-wands",
+   "page-of-pentacles:r,death,three-of-pentacles:r",
+   "page-of-pentacles:r,eight-of-wands,four-of-swords:r",
+   "page-of-pentacles:r,eight-of-wands,queen-of-wands",
+   "page-of-pentacles:r,eight-of-wands:r,knight-of-swords",
+   "page-of-pentacles:r,page-of-cups,eight-of-wands:r",
+   "page-of-pentacles:r,page-of-cups,knight-of-swords",
+   "page-of-pentacles:r,queen-of-wands:r,the-tower",
+   "page-of-pentacles:r,six-of-swords,the-hermit",
+   "page-of-pentacles:r,the-hermit,eight-of-wands",
+   "page-of-pentacles:r,two-of-pentacles,the-hermit:r",
+   "queen-of-wands,death,eight-of-wands:r",
+   "queen-of-wands,eight-of-wands,the-tower",
+   "queen-of-wands,four-of-swords:r,six-of-swords",
+   "queen-of-wands,page-of-cups,knight-of-swords",
+   "queen-of-wands,six-of-swords,four-of-swords:r",
+   "queen-of-wands,the-hermit,eight-of-wands",
+   "queen-of-wands,the-tower:r,the-hermit",
+   "queen-of-wands,three-of-pentacles:r,death",
+   "queen-of-wands,two-of-pentacles,page-of-cups",
+   "queen-of-wands:r,eight-of-wands,four-of-swords:r",
+   "queen-of-wands:r,eight-of-wands,knight-of-swords",
+   "queen-of-wands:r,eight-of-wands,the-tower:r",
+   "queen-of-wands:r,four-of-swords,two-of-pentacles:r",
+   "queen-of-wands:r,knight-of-swords,page-of-pentacles",
+   "queen-of-wands:r,page-of-cups,knight-of-swords",
+   "queen-of-wands:r,the-hermit,eight-of-wands",
+   "queen-of-wands:r,three-of-pentacles:r,page-of-pentacles",
+   "queen-of-wands:r,two-of-pentacles,six-of-swords:r",
+   "six-of-swords,page-of-cups,knight-of-swords",
+   "six-of-swords,the-hermit,eight-of-wands",
+   "six-of-swords,the-hermit:r,page-of-pentacles",
+   "six-of-swords:r,page-of-cups,knight-of-swords",
+   "six-of-swords:r,the-hermit,eight-of-wands",
+   "six-of-swords:r,three-of-pentacles,queen-of-wands:r",
+   "six-of-swords:r,two-of-pentacles,queen-of-wands",
+   "the-hermit,death:r,page-of-pentacles",
+   "the-hermit,eight-of-wands:r,page-of-pentacles",
+   "the-hermit,four-of-swords,page-of-cups:r",
+   "the-hermit,four-of-swords,six-of-swords",
+   "the-hermit,knight-of-swords,four-of-swords",
+   "the-hermit,knight-of-swords,six-of-swords",
+   "the-hermit,page-of-cups,the-tower",
+   "the-hermit,page-of-cups,three-of-pentacles:r",
+   "the-hermit,page-of-cups:r,two-of-pentacles",
+   "the-hermit,six-of-swords:r,knight-of-swords:r",
+   "the-hermit,the-tower,page-of-pentacles:r",
+   "the-hermit,the-tower:r,six-of-swords",
+   "the-hermit,three-of-pentacles,death:r",
+   "the-hermit,three-of-pentacles,knight-of-swords",
+   "the-hermit:r,death,the-tower",
+   "the-hermit:r,eight-of-wands,page-of-cups",
+   "the-hermit:r,knight-of-swords,six-of-swords",
+   "the-hermit:r,three-of-pentacles:r,six-of-swords",
+   "the-hermit:r,two-of-pentacles,three-of-pentacles",
+   "the-tower,death,eight-of-wands",
+   "the-tower,death:r,eight-of-wands",
+   "the-tower,eight-of-wands,queen-of-wands",
+   "the-tower,eight-of-wands,the-hermit:r",
+   "the-tower,four-of-swords,death:r",
+   "the-tower,four-of-swords:r,the-hermit",
+   "the-tower,knight-of-swords,page-of-pentacles",
+   "the-tower,page-of-cups,queen-of-wands",
+   "the-tower,page-of-cups:r,knight-of-swords",
+   "the-tower,page-of-pentacles,eight-of-wands",
+   "the-tower,page-of-pentacles:r,eight-of-wands",
+   "the-tower,page-of-pentacles:r,six-of-swords",
+   "the-tower,queen-of-wands,eight-of-wands",
+   "the-tower,queen-of-wands,four-of-swords",
+   "the-tower,queen-of-wands:r,eight-of-wands",
+   "the-tower,six-of-swords,eight-of-wands",
+   "the-tower,six-of-swords:r,eight-of-wands",
+   "the-tower,the-hermit,page-of-cups:r",
+   "the-tower,the-hermit:r,two-of-pentacles",
+   "the-tower,three-of-pentacles,eight-of-wands",
+   "the-tower,three-of-pentacles:r,eight-of-wands",
+   "the-tower,three-of-pentacles:r,page-of-pentacles:r",
+   "the-tower,two-of-pentacles,eight-of-wands",
+   "the-tower,two-of-pentacles,page-of-pentacles:r",
+   "the-tower,two-of-pentacles,six-of-swords:r",
+   "the-tower,two-of-pentacles:r,eight-of-wands",
+   "the-tower:r,four-of-swords,queen-of-wands",
+   "the-tower:r,four-of-swords:r,death:r",
+   "the-tower:r,page-of-cups,knight-of-swords",
+   "the-tower:r,six-of-swords,three-of-pentacles:r",
+   "the-tower:r,the-hermit,six-of-swords:r",
+   "the-tower:r,the-hermit,three-of-pentacles",
+   "three-of-pentacles,four-of-swords:r,page-of-pentacles",
+   "three-of-pentacles,page-of-cups,knight-of-swords",
+   "three-of-pentacles,the-hermit,eight-of-wands",
+   "three-of-pentacles,the-hermit,two-of-pentacles",
+   "three-of-pentacles,the-tower:r,queen-of-wands",
+   "three-of-pentacles,two-of-pentacles:r,the-tower",
+   "three-of-pentacles:r,knight-of-swords,the-hermit",
+   "three-of-pentacles:r,page-of-cups,knight-of-swords",
+   "three-of-pentacles:r,the-hermit,eight-of-wands",
+   "three-of-pentacles:r,the-tower,queen-of-wands",
+   "three-of-pentacles:r,two-of-pentacles,death",
+   "two-of-pentacles,eight-of-wands:r,four-of-swords",
+   "two-of-pentacles,four-of-swords,six-of-swords:r",
+   "two-of-pentacles,page-of-cups,knight-of-swords",
+   "two-of-pentacles,queen-of-wands,page-of-cups",
+   "two-of-pentacles,queen-of-wands,page-of-pentacles:r",
+   "two-of-pentacles,the-hermit,eight-of-wands",
+   "two-of-pentacles,the-tower,the-hermit:r",
+   "two-of-pentacles,three-of-pentacles,six-of-swords:r",
+   "two-of-pentacles:r,page-of-cups,knight-of-swords",
+   "two-of-pentacles:r,page-of-pentacles,death:r",
+   "two-of-pentacles:r,six-of-swords,the-tower",
+   "two-of-pentacles:r,the-hermit,eight-of-wands",
+   "two-of-pentacles:r,three-of-pentacles:r,the-hermit"
+  ],
+  "exclusionDigest": "56e7054b9db382825b498ad105bf99b2f0fd573d13b6a4745038b67b49d4bff3",
+  "inputsDigest": "6f7a1b3240fdf3debfcdaed05f080d678e0e4d55415dd67e64185e15c1ffba19",
+  "blind": [
+   "career|clarify|the-hermit,page-of-cups:r,queen-of-wands",
+   "self|clarify|page-of-cups,knight-of-swords:r,the-hermit",
+   "relationship|decide|four-of-swords:r,the-hermit,page-of-pentacles",
+   "self|decide|knight-of-swords,eight-of-wands,page-of-cups",
+   "career|companion|knight-of-swords:r,page-of-cups,death",
+   "relationship|companion|knight-of-swords:r,page-of-cups,the-hermit:r",
+   "career|clarify|three-of-pentacles,six-of-swords:r,the-tower",
+   "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+   "career|decide|three-of-pentacles,the-tower,queen-of-wands",
+   "self|decide|the-tower,knight-of-swords:r,death:r",
+   "relationship|companion|death,four-of-swords:r,the-hermit",
+   "self|companion|death,eight-of-wands:r,page-of-pentacles",
+   "relationship|clarify|two-of-pentacles,four-of-swords:r,knight-of-swords",
+   "self|clarify|knight-of-swords,three-of-pentacles:r,the-tower:r",
+   "career|decide|three-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+   "relationship|decide|knight-of-swords,six-of-swords:r,the-tower:r",
+   "career|companion|page-of-pentacles,the-hermit:r,knight-of-swords",
+   "self|companion|eight-of-wands,three-of-pentacles,four-of-swords"
+  ],
+  "mechanism": [
+   "relationship|clarify|page-of-cups,queen-of-wands:r,the-tower",
+   "self|companion|the-hermit,three-of-pentacles,the-tower:r",
+   "relationship|clarify|the-tower,queen-of-wands,the-hermit:r",
+   "self|companion|the-tower,knight-of-swords,the-hermit:r",
+   "relationship|clarify|the-tower:r,six-of-swords:r,eight-of-wands",
+   "self|companion|two-of-pentacles:r,page-of-pentacles:r,eight-of-wands"
+  ],
+  "swaps": [
+   [
+    "relationship|clarify|the-hermit,two-of-pentacles:r,eight-of-wands:r",
+    "relationship|clarify|the-hermit,two-of-pentacles:r,the-tower"
+   ],
+   [
+    "self|companion|page-of-cups,the-hermit,eight-of-wands",
+    "self|companion|page-of-cups,the-hermit,death:r"
+   ],
+   [
+    "relationship|clarify|the-tower,eight-of-wands,three-of-pentacles:r",
+    "relationship|clarify|the-tower,eight-of-wands,death"
+   ],
+   [
+    "self|companion|death,the-tower:r,queen-of-wands",
+    "self|companion|death,the-tower:r,eight-of-wands:r"
+   ],
+   [
+    "relationship|clarify|eight-of-wands,two-of-pentacles,three-of-pentacles",
+    "relationship|clarify|eight-of-wands,two-of-pentacles,the-hermit:r"
+   ],
+   [
+    "self|companion|two-of-pentacles:r,eight-of-wands,three-of-pentacles",
+    "self|companion|two-of-pentacles:r,eight-of-wands,the-hermit:r"
+   ]
+  ],
+  "status": "reviewed-not-used-for-revision",
+  "note": "Inputs selected from IDs/tags/routing only. Reviewed after final candidate freeze. No subsequent content revision; if these cases inform a future revision, mark them used and first fix a fresh holdout.",
+  "usedForRevision": false,
+  "candidateFreeze": {
+   "version": "local-v2.11-sample",
+   "frozenAt": "2026-10-12T15:08:09.714Z",
+   "inputsDigest": "6f7a1b3240fdf3debfcdaed05f080d678e0e4d55415dd67e64185e15c1ffba19",
+   "contentHash": "9777f07404e97cc11f546bf42f8186e14226fc9710b55962c76874e159ace379",
+   "engineHash": "187489167e50f0129c89f710194b32a4b931bc30b0b2ee0629f50e3f0d433489",
+   "outputDigest": "291e86af39f4992d9f5d767dbda9559cc76074c42247c83ab0b5a77f39e89206"
+  },
+  "reviewFile": "docs/local-reading-expansion/batch-0-v211-round2-review.json",
+  "reviewOutcome": "coherence-guardrail-failed; three-card and companion guardrails passed"
+ },
+ "heldout5": [
+  "career|clarify|page-of-cups,four-of-swords,eight-of-wands",
+  "relationship|clarify|knight-of-swords,page-of-pentacles:r,the-tower",
+  "self|clarify|knight-of-swords,eight-of-wands,the-hermit:r",
+  "crossroads|clarify|three-of-pentacles:r,the-hermit:r,page-of-cups",
+  "career|clarify|death,three-of-pentacles:r,the-tower:r",
+  "self|clarify|three-of-pentacles:r,the-hermit,queen-of-wands",
+  "career|decide|four-of-swords,queen-of-wands:r,the-tower",
+  "relationship|decide|knight-of-swords:r,death:r,eight-of-wands",
+  "self|decide|page-of-pentacles,three-of-pentacles,the-hermit",
+  "crossroads|decide|the-tower,page-of-pentacles,two-of-pentacles:r",
+  "career|decide|four-of-swords,eight-of-wands,knight-of-swords:r",
+  "self|decide|three-of-pentacles:r,page-of-pentacles:r,the-tower",
+  "career|companion|three-of-pentacles,knight-of-swords,eight-of-wands",
+  "relationship|companion|the-hermit,knight-of-swords:r,page-of-pentacles:r",
+  "self|companion|three-of-pentacles:r,the-tower,page-of-pentacles:r",
+  "crossroads|companion|death,knight-of-swords:r,eight-of-wands",
+  "career|companion|the-hermit,death,knight-of-swords:r",
+  "self|companion|eight-of-wands,six-of-swords:r,knight-of-swords:r"
+ ],
+ "heldout5Protocol": {
+  "fixedAt": "2026-10-24",
+  "seed": 2026102401,
+  "version": "local-v2.11-sample",
+  "commit": "11272aa",
+  "note": "Fixed before any v2.12 content or code change. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Working tree held the uncommitted v2.11 candidate at fix time; routing is unchanged by v2.12, so focus assignment stays valid. Any case that informs a revision must be marked used and replaced by a fresh holdout before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json"
+  ],
+  "excludedTriples": 226,
+  "exclusionDigest": "608603c1adbc37c6b86410011d0ddad9d2bc1b1bd33e5c5a004051ca787e6419",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "self|companion|eight-of-wands,six-of-swords:r,knight-of-swords:r",
+    "self|companion|eight-of-wands,death:r,knight-of-swords:r"
+   ],
+   [
+    "self|decide|page-of-pentacles,three-of-pentacles,the-hermit",
+    "self|decide|page-of-pentacles,knight-of-swords,the-hermit"
+   ],
+   [
+    "self|companion|three-of-pentacles:r,the-tower,page-of-pentacles:r",
+    "self|companion|three-of-pentacles:r,death,page-of-pentacles:r"
+   ],
+   [
+    "career|clarify|page-of-cups,four-of-swords,eight-of-wands",
+    "career|clarify|page-of-cups,three-of-pentacles,eight-of-wands"
+   ],
+   [
+    "self|decide|three-of-pentacles:r,page-of-pentacles:r,the-tower",
+    "self|decide|three-of-pentacles:r,queen-of-wands,the-tower"
+   ],
+   [
+    "crossroads|decide|the-tower,page-of-pentacles,two-of-pentacles:r",
+    "crossroads|decide|the-tower,three-of-pentacles:r,two-of-pentacles:r"
+   ],
+   [
+    "career|decide|four-of-swords,eight-of-wands,knight-of-swords:r",
+    "career|decide|four-of-swords,eight-of-wands,page-of-pentacles"
+   ],
+   [
+    "career|clarify|death,three-of-pentacles:r,the-tower:r",
+    "career|clarify|death,three-of-pentacles:r,knight-of-swords"
+   ],
+   [
+    "career|companion|the-hermit,death,knight-of-swords:r",
+    "career|companion|the-hermit,death,queen-of-wands"
+   ],
+   [
+    "relationship|clarify|knight-of-swords,page-of-pentacles:r,the-tower",
+    "relationship|clarify|knight-of-swords,page-of-pentacles:r,death"
+   ],
+   [
+    "career|companion|three-of-pentacles,knight-of-swords,eight-of-wands",
+    "career|companion|three-of-pentacles,knight-of-swords,queen-of-wands"
+   ],
+   [
+    "relationship|companion|the-hermit,knight-of-swords:r,page-of-pentacles:r",
+    "relationship|companion|the-hermit,knight-of-swords:r,queen-of-wands:r"
+   ]
+  ],
+  "blind": [
+   "career|clarify|page-of-cups,four-of-swords,eight-of-wands",
+   "relationship|clarify|knight-of-swords,page-of-pentacles:r,the-tower",
+   "self|clarify|knight-of-swords,eight-of-wands,the-hermit:r",
+   "crossroads|clarify|three-of-pentacles:r,the-hermit:r,page-of-cups",
+   "career|clarify|death,three-of-pentacles:r,the-tower:r",
+   "self|clarify|three-of-pentacles:r,the-hermit,queen-of-wands",
+   "career|decide|four-of-swords,queen-of-wands:r,the-tower",
+   "relationship|decide|knight-of-swords:r,death:r,eight-of-wands",
+   "self|decide|page-of-pentacles,three-of-pentacles,the-hermit",
+   "crossroads|decide|the-tower,page-of-pentacles,two-of-pentacles:r",
+   "career|decide|four-of-swords,eight-of-wands,knight-of-swords:r",
+   "self|decide|three-of-pentacles:r,page-of-pentacles:r,the-tower",
+   "career|companion|three-of-pentacles,knight-of-swords,eight-of-wands",
+   "relationship|companion|the-hermit,knight-of-swords:r,page-of-pentacles:r",
+   "self|companion|three-of-pentacles:r,the-tower,page-of-pentacles:r",
+   "crossroads|companion|death,knight-of-swords:r,eight-of-wands",
+   "career|companion|the-hermit,death,knight-of-swords:r",
+   "self|companion|eight-of-wands,six-of-swords:r,knight-of-swords:r"
+  ],
+  "inputsDigest": "dac4738775c13548923ba1d7aa240420f25256d56a95b6c2029f348e2c0626b8",
+  "status": "reviewed-gates-not-met",
+  "usedForRevision": false,
+  "candidateFreeze": {
+   "version": "local-v2.12-sample",
+   "frozenAt": "2026-10-24T20:04:20.958Z",
+   "inputsDigest": "dac4738775c13548923ba1d7aa240420f25256d56a95b6c2029f348e2c0626b8",
+   "contentHash": "4f60c71531d023250bafcaedba48a38b4634042c78175f094d176e47c829a6a8",
+   "contractHash": "1654cbd47ab36773362c841240a035289919e7c960473b2d27ef9a86d044801a",
+   "engineHash": "9615ab663953e381da5a17b063116b51a5273a85c4e865c3fc251c28e73aabf8",
+   "outputDigest": "a624b2b80f587efb0ca39e45cc7bd8bade45833a242d24e6fa14814bbeaf90c1"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout5.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v212-blind-20261024",
+  "reviewFile": "docs/local-reading-expansion/batch-0-v212-review.json",
+  "reviewOutcome": "coherence 17/18 and three-card 1.72 passed; companion analysis burden 0.00 -> 1.00 failed; last-card swaps 0/6 meaningful; single AI reviewer, not human acceptance"
+ },
+ "heldout6": [
+  "career|clarify|three-of-pentacles:r,page-of-pentacles,page-of-cups",
+  "relationship|clarify|death,eight-of-wands,the-tower:r",
+  "self|clarify|knight-of-swords,the-hermit:r,queen-of-wands",
+  "crossroads|clarify|the-hermit:r,knight-of-swords,page-of-cups",
+  "career|clarify|knight-of-swords:r,four-of-swords:r,death",
+  "self|clarify|queen-of-wands,the-hermit,knight-of-swords",
+  "career|decide|the-tower,two-of-pentacles,four-of-swords",
+  "relationship|decide|six-of-swords:r,eight-of-wands,page-of-pentacles:r",
+  "self|decide|knight-of-swords,page-of-pentacles,page-of-cups",
+  "crossroads|decide|death,page-of-pentacles:r,queen-of-wands",
+  "career|decide|knight-of-swords,two-of-pentacles:r,queen-of-wands:r",
+  "self|decide|page-of-pentacles,death,knight-of-swords",
+  "career|companion|six-of-swords:r,knight-of-swords,two-of-pentacles",
+  "relationship|companion|queen-of-wands:r,the-hermit,page-of-pentacles:r",
+  "self|companion|death:r,the-tower,page-of-pentacles:r",
+  "crossroads|companion|page-of-pentacles,knight-of-swords,queen-of-wands:r",
+  "career|companion|four-of-swords:r,the-hermit,eight-of-wands",
+  "self|companion|two-of-pentacles,six-of-swords,knight-of-swords"
+ ],
+ "heldout6Protocol": {
+  "fixedAt": "2026-10-27",
+  "seed": 2026102701,
+  "version": "local-v2.13-sample",
+  "commit": "11272aa",
+  "note": "Fixed after the v2.13 content was written (24 obstacle × 24 end-card sides) and before the final review. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Excludes every card-ID triple used in calibration, the ten v2.13 mini blind rounds, v2.12 frozen material and heldout1–5, so no input here informed any v2.13 revision. Routing is unchanged since v2.10. Any case that informs a revision must be marked used and replaced before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout5.json",
+   "evals/print-v213-sample.test.ts",
+   "docs/local-reading-expansion/batch-0-v213-blind-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r10-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r2-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r3-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r4-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r5-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r6-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r7-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r8-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r9-key.json"
+  ],
+  "excludedTriples": 413,
+  "exclusionDigest": "817cb1ecb5724b5545e987cdff866d73ff04d32c15498871e7b70315ce1e0020",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "career|clarify|three-of-pentacles:r,page-of-pentacles,page-of-cups",
+    "career|clarify|three-of-pentacles:r,knight-of-swords,page-of-cups"
+   ],
+   [
+    "crossroads|decide|death,page-of-pentacles:r,queen-of-wands",
+    "crossroads|decide|death,four-of-swords:r,queen-of-wands"
+   ],
+   [
+    "career|companion|six-of-swords:r,knight-of-swords,two-of-pentacles",
+    "career|companion|six-of-swords:r,eight-of-wands,two-of-pentacles"
+   ],
+   [
+    "career|clarify|knight-of-swords:r,four-of-swords:r,death",
+    "career|clarify|knight-of-swords:r,three-of-pentacles,death"
+   ],
+   [
+    "self|clarify|knight-of-swords,the-hermit:r,queen-of-wands",
+    "self|clarify|knight-of-swords,three-of-pentacles:r,queen-of-wands"
+   ],
+   [
+    "self|decide|knight-of-swords,page-of-pentacles,page-of-cups",
+    "self|decide|knight-of-swords,death,page-of-cups"
+   ],
+   [
+    "self|decide|page-of-pentacles,death,knight-of-swords",
+    "self|decide|page-of-pentacles,death,four-of-swords:r"
+   ],
+   [
+    "career|decide|knight-of-swords,two-of-pentacles:r,queen-of-wands:r",
+    "career|decide|knight-of-swords,two-of-pentacles:r,three-of-pentacles"
+   ],
+   [
+    "career|companion|four-of-swords:r,the-hermit,eight-of-wands",
+    "career|companion|four-of-swords:r,the-hermit,knight-of-swords"
+   ],
+   [
+    "self|companion|death:r,the-tower,page-of-pentacles:r",
+    "self|companion|death:r,the-tower,knight-of-swords:r"
+   ],
+   [
+    "self|clarify|queen-of-wands,the-hermit,knight-of-swords",
+    "self|clarify|queen-of-wands,the-hermit,four-of-swords:r"
+   ],
+   [
+    "relationship|companion|queen-of-wands:r,the-hermit,page-of-pentacles:r",
+    "relationship|companion|queen-of-wands:r,the-hermit,two-of-pentacles:r"
+   ]
+  ],
+  "blind": [
+   "career|clarify|three-of-pentacles:r,page-of-pentacles,page-of-cups",
+   "relationship|clarify|death,eight-of-wands,the-tower:r",
+   "self|clarify|knight-of-swords,the-hermit:r,queen-of-wands",
+   "crossroads|clarify|the-hermit:r,knight-of-swords,page-of-cups",
+   "career|clarify|knight-of-swords:r,four-of-swords:r,death",
+   "self|clarify|queen-of-wands,the-hermit,knight-of-swords",
+   "career|decide|the-tower,two-of-pentacles,four-of-swords",
+   "relationship|decide|six-of-swords:r,eight-of-wands,page-of-pentacles:r",
+   "self|decide|knight-of-swords,page-of-pentacles,page-of-cups",
+   "crossroads|decide|death,page-of-pentacles:r,queen-of-wands",
+   "career|decide|knight-of-swords,two-of-pentacles:r,queen-of-wands:r",
+   "self|decide|page-of-pentacles,death,knight-of-swords",
+   "career|companion|six-of-swords:r,knight-of-swords,two-of-pentacles",
+   "relationship|companion|queen-of-wands:r,the-hermit,page-of-pentacles:r",
+   "self|companion|death:r,the-tower,page-of-pentacles:r",
+   "crossroads|companion|page-of-pentacles,knight-of-swords,queen-of-wands:r",
+   "career|companion|four-of-swords:r,the-hermit,eight-of-wands",
+   "self|companion|two-of-pentacles,six-of-swords,knight-of-swords"
+  ],
+  "inputsDigest": "0cdeb0a3040bcf4d3551592ad49e0f8606e26bb665d54c069f32ae751284cf89",
+  "status": "reviewed-used-for-revision",
+  "usedForRevision": true,
+  "candidateFreeze": {
+   "version": "local-v2.13-sample",
+   "frozenAt": "2026-10-27T12:21:32.531Z",
+   "inputsDigest": "0cdeb0a3040bcf4d3551592ad49e0f8606e26bb665d54c069f32ae751284cf89",
+   "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+   "contractHash": "fcf0733b2baf2caa8280c2484b5ef9df4ce35e2d3cca417f7c76d0a72e7df95c",
+   "engineHash": "132bcf6db912c51afa63e4d9c55d5805cb3ea4630085e5dd55c7c0b7b195e71e",
+   "outputDigest": "b7be9ac9db611ad18e537ccf8b3068bd82d9319001fad295f8b78eb88d89fc82"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout6.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v213-final-20261027",
+  "review": {
+   "file": "docs/local-reading-expansion/batch-0-v213-final-review.json",
+   "reviewer": "final-blind-sonnet（全新上下文，只读匿名材料）",
+   "result": "未过线：v2.13 连贯 14/18（门槛 16）、换末牌 4/6（门槛 5）；三牌 1.78、陪伴负担更轻、换阻碍位 6/6 通过",
+   "date": "2026-10-27"
+  }
+ },
+ "heldout7": [
+  "career|clarify|six-of-swords:r,page-of-pentacles:r,page-of-cups",
+  "relationship|clarify|page-of-pentacles:r,the-tower,three-of-pentacles:r",
+  "self|clarify|page-of-pentacles,three-of-pentacles,eight-of-wands",
+  "crossroads|clarify|knight-of-swords:r,queen-of-wands:r,page-of-cups",
+  "career|clarify|four-of-swords:r,page-of-pentacles:r,death",
+  "self|clarify|the-tower:r,the-hermit,death",
+  "career|decide|the-tower,two-of-pentacles:r,queen-of-wands:r",
+  "relationship|decide|six-of-swords,the-tower,eight-of-wands",
+  "self|decide|page-of-pentacles,the-tower:r,the-hermit",
+  "crossroads|decide|four-of-swords,three-of-pentacles:r,the-tower",
+  "career|decide|six-of-swords:r,knight-of-swords,eight-of-wands",
+  "self|decide|the-tower,six-of-swords:r,knight-of-swords:r",
+  "career|companion|six-of-swords:r,eight-of-wands,three-of-pentacles:r",
+  "relationship|companion|the-hermit:r,page-of-cups,page-of-pentacles",
+  "self|companion|three-of-pentacles:r,the-tower,four-of-swords",
+  "crossroads|companion|eight-of-wands,four-of-swords,two-of-pentacles",
+  "career|companion|knight-of-swords:r,the-hermit,two-of-pentacles",
+  "self|companion|knight-of-swords,eight-of-wands:r,page-of-pentacles:r"
+ ],
+ "heldout7Protocol": {
+  "fixedAt": "2026-10-27",
+  "seed": 2026102702,
+  "version": "local-v2.13-sample",
+  "commit": "11272aa",
+  "note": "Fixed after the v2.13 content was written (24 obstacle × 24 end-card sides) and before the final review. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Excludes every card-ID triple used in calibration, the ten v2.13 mini blind rounds, v2.12 frozen material and heldout1–5, plus heldout6 (used for the bridge revision), so no input here informed any v2.13 revision. Routing is unchanged since v2.10. Any case that informs a revision must be marked used and replaced before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout5.json",
+   "evals/print-v213-sample.test.ts",
+   "docs/local-reading-expansion/batch-0-v213-final-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout6.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r10-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r2-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r3-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r4-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r5-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r6-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r7-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r8-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r9-key.json"
+  ],
+  "excludedTriples": 443,
+  "exclusionDigest": "6182802bc496cbfc6377ace870dfaac0413a9de6b69eb1a2f86940e4be46b21b",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "self|clarify|page-of-pentacles,three-of-pentacles,eight-of-wands",
+    "self|clarify|page-of-pentacles,the-tower:r,eight-of-wands"
+   ],
+   [
+    "career|decide|the-tower,two-of-pentacles:r,queen-of-wands:r",
+    "career|decide|the-tower,the-hermit:r,queen-of-wands:r"
+   ],
+   [
+    "career|companion|six-of-swords:r,eight-of-wands,three-of-pentacles:r",
+    "career|companion|six-of-swords:r,knight-of-swords,three-of-pentacles:r"
+   ],
+   [
+    "relationship|decide|six-of-swords,the-tower,eight-of-wands",
+    "relationship|decide|six-of-swords,four-of-swords:r,eight-of-wands"
+   ],
+   [
+    "self|decide|page-of-pentacles,the-tower:r,the-hermit",
+    "self|decide|page-of-pentacles,four-of-swords:r,the-hermit"
+   ],
+   [
+    "crossroads|companion|eight-of-wands,four-of-swords,two-of-pentacles",
+    "crossroads|companion|eight-of-wands,page-of-pentacles:r,two-of-pentacles"
+   ],
+   [
+    "self|companion|three-of-pentacles:r,the-tower,four-of-swords",
+    "self|companion|three-of-pentacles:r,the-tower,six-of-swords:r"
+   ],
+   [
+    "self|clarify|the-tower:r,the-hermit,death",
+    "self|clarify|the-tower:r,the-hermit,page-of-pentacles:r"
+   ],
+   [
+    "relationship|companion|the-hermit:r,page-of-cups,page-of-pentacles",
+    "relationship|companion|the-hermit:r,page-of-cups,death"
+   ],
+   [
+    "relationship|clarify|page-of-pentacles:r,the-tower,three-of-pentacles:r",
+    "relationship|clarify|page-of-pentacles:r,the-tower,two-of-pentacles:r"
+   ],
+   [
+    "career|decide|six-of-swords:r,knight-of-swords,eight-of-wands",
+    "career|decide|six-of-swords:r,knight-of-swords,four-of-swords:r"
+   ],
+   [
+    "career|clarify|six-of-swords:r,page-of-pentacles:r,page-of-cups",
+    "career|clarify|six-of-swords:r,page-of-pentacles:r,the-hermit"
+   ]
+  ],
+  "blind": [
+   "career|clarify|six-of-swords:r,page-of-pentacles:r,page-of-cups",
+   "relationship|clarify|page-of-pentacles:r,the-tower,three-of-pentacles:r",
+   "self|clarify|page-of-pentacles,three-of-pentacles,eight-of-wands",
+   "crossroads|clarify|knight-of-swords:r,queen-of-wands:r,page-of-cups",
+   "career|clarify|four-of-swords:r,page-of-pentacles:r,death",
+   "self|clarify|the-tower:r,the-hermit,death",
+   "career|decide|the-tower,two-of-pentacles:r,queen-of-wands:r",
+   "relationship|decide|six-of-swords,the-tower,eight-of-wands",
+   "self|decide|page-of-pentacles,the-tower:r,the-hermit",
+   "crossroads|decide|four-of-swords,three-of-pentacles:r,the-tower",
+   "career|decide|six-of-swords:r,knight-of-swords,eight-of-wands",
+   "self|decide|the-tower,six-of-swords:r,knight-of-swords:r",
+   "career|companion|six-of-swords:r,eight-of-wands,three-of-pentacles:r",
+   "relationship|companion|the-hermit:r,page-of-cups,page-of-pentacles",
+   "self|companion|three-of-pentacles:r,the-tower,four-of-swords",
+   "crossroads|companion|eight-of-wands,four-of-swords,two-of-pentacles",
+   "career|companion|knight-of-swords:r,the-hermit,two-of-pentacles",
+   "self|companion|knight-of-swords,eight-of-wands:r,page-of-pentacles:r"
+  ],
+  "inputsDigest": "23bb52cfb02c5af52127bd8de08cd4b6855a3cdae4a9f8d2fecaec6f833d5848",
+  "status": "reviewed-used-for-revision",
+  "usedForRevision": true,
+  "candidateFreeze": {
+   "version": "local-v2.13-sample",
+   "frozenAt": "2026-10-27T12:33:38.693Z",
+   "inputsDigest": "23bb52cfb02c5af52127bd8de08cd4b6855a3cdae4a9f8d2fecaec6f833d5848",
+   "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+   "contractHash": "8804e4a7b553b9c24bb048091ad7d81adc81d69e80081c038c4ab42575e98696",
+   "engineHash": "12d5a5db4a28028f0282c0a05094dba52019ca642512d300d50120b8af4f5f58",
+   "outputDigest": "90f25e7dc7d72cc295ce8fce1fdc977199fd34712439c3ca76d1a6eb6f3cfa27"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout7.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v213-final2-20261027",
+  "review": {
+   "file": "docs/local-reading-expansion/batch-0-v213-final2-review.json",
+   "reviewer": "final2-blind-sonnet（全新上下文，只读匿名材料）",
+   "date": "2026-10-27",
+   "result": "v2.13 连贯 18/18、三牌 1.89、陪伴负担更轻（14 组 v2.10 更重，0 组 v2.13 更重）、偏好 17:1、换末牌 5/6；换阻碍位按评审字面口径 4/6（S02、S06 为陪伴，行动由末牌给出），按用户已确认的陪伴口径（比较读法一）为 6/6，待用户裁定"
+  },
+  "userRuling": "2026-10-27 用户裁定：S02、S06 按已确认的陪伴口径（比较读法一与阻碍说明）计，换阻碍位 6/6；自动门槛视为通过。"
+ },
+ "heldout8": [
+  "career|clarify|page-of-pentacles,page-of-cups,six-of-swords:r",
+  "relationship|clarify|the-tower,two-of-pentacles,the-hermit:r",
+  "self|clarify|knight-of-swords,queen-of-wands,eight-of-wands:r",
+  "crossroads|clarify|page-of-pentacles:r,four-of-swords,page-of-cups",
+  "career|clarify|queen-of-wands,three-of-pentacles,the-tower",
+  "self|clarify|four-of-swords,page-of-cups,the-hermit",
+  "career|decide|knight-of-swords,death,page-of-pentacles",
+  "relationship|decide|six-of-swords,four-of-swords:r,knight-of-swords",
+  "self|decide|page-of-pentacles,the-hermit,the-tower:r",
+  "crossroads|decide|two-of-pentacles,the-tower,knight-of-swords",
+  "career|decide|page-of-pentacles:r,six-of-swords,knight-of-swords",
+  "self|decide|eight-of-wands,page-of-pentacles:r,the-tower",
+  "career|companion|three-of-pentacles:r,knight-of-swords,two-of-pentacles",
+  "relationship|companion|three-of-pentacles:r,page-of-cups,the-hermit",
+  "self|companion|the-tower,death,page-of-pentacles",
+  "crossroads|companion|knight-of-swords:r,page-of-pentacles:r,eight-of-wands",
+  "career|companion|the-hermit,page-of-pentacles:r,two-of-pentacles:r",
+  "self|companion|eight-of-wands:r,the-tower,knight-of-swords"
+ ],
+ "heldout8Protocol": {
+  "fixedAt": "2026-10-27",
+  "seed": 2026102703,
+  "version": "local-v2.13-sample",
+  "commit": "11272aa",
+  "note": "Fixed after the v2.13 content was written (24 obstacle × 24 end-card sides) and before the final review. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Excludes every card-ID triple used in calibration, the ten v2.13 mini blind rounds, v2.12 frozen material and heldout1–5, plus heldout6 and heldout7 (used for the bridge and object-presupposition revisions), so no input here informed any v2.13 revision. Routing is unchanged since v2.10. Any case that informs a revision must be marked used and replaced before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout5.json",
+   "evals/print-v213-sample.test.ts",
+   "docs/local-reading-expansion/batch-0-v213-final-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout6.json",
+   "docs/local-reading-expansion/batch-0-v213-final2-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout7.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r10-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r2-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r3-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r4-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r5-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r6-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r7-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r8-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r9-key.json"
+  ],
+  "excludedTriples": 473,
+  "exclusionDigest": "bd8805aebd5b856d88cecff107a0d7a581473ac1526dc2c6b7161fc0e70e5cfd",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "crossroads|clarify|page-of-pentacles:r,four-of-swords,page-of-cups",
+    "crossroads|clarify|page-of-pentacles:r,three-of-pentacles:r,page-of-cups"
+   ],
+   [
+    "career|companion|three-of-pentacles:r,knight-of-swords,two-of-pentacles",
+    "career|companion|three-of-pentacles:r,eight-of-wands,two-of-pentacles"
+   ],
+   [
+    "career|decide|page-of-pentacles:r,six-of-swords,knight-of-swords",
+    "career|decide|page-of-pentacles:r,three-of-pentacles:r,knight-of-swords"
+   ],
+   [
+    "career|clarify|queen-of-wands,three-of-pentacles,the-tower",
+    "career|clarify|queen-of-wands,six-of-swords,the-tower"
+   ],
+   [
+    "relationship|clarify|the-tower,two-of-pentacles,the-hermit:r",
+    "relationship|clarify|the-tower,death,the-hermit:r"
+   ],
+   [
+    "relationship|decide|six-of-swords,four-of-swords:r,knight-of-swords",
+    "relationship|decide|six-of-swords,eight-of-wands,knight-of-swords"
+   ],
+   [
+    "self|decide|page-of-pentacles,the-hermit,the-tower:r",
+    "self|decide|page-of-pentacles,the-hermit,two-of-pentacles"
+   ],
+   [
+    "relationship|companion|three-of-pentacles:r,page-of-cups,the-hermit",
+    "relationship|companion|three-of-pentacles:r,page-of-cups,page-of-pentacles:r"
+   ],
+   [
+    "self|companion|the-tower,death,page-of-pentacles",
+    "self|companion|the-tower,death,knight-of-swords"
+   ],
+   [
+    "crossroads|decide|two-of-pentacles,the-tower,knight-of-swords",
+    "crossroads|decide|two-of-pentacles,the-tower,three-of-pentacles"
+   ],
+   [
+    "career|clarify|page-of-pentacles,page-of-cups,six-of-swords:r",
+    "career|clarify|page-of-pentacles,page-of-cups,three-of-pentacles:r"
+   ],
+   [
+    "self|clarify|four-of-swords,page-of-cups,the-hermit",
+    "self|clarify|four-of-swords,page-of-cups,three-of-pentacles"
+   ]
+  ],
+  "blind": [
+   "career|clarify|page-of-pentacles,page-of-cups,six-of-swords:r",
+   "relationship|clarify|the-tower,two-of-pentacles,the-hermit:r",
+   "self|clarify|knight-of-swords,queen-of-wands,eight-of-wands:r",
+   "crossroads|clarify|page-of-pentacles:r,four-of-swords,page-of-cups",
+   "career|clarify|queen-of-wands,three-of-pentacles,the-tower",
+   "self|clarify|four-of-swords,page-of-cups,the-hermit",
+   "career|decide|knight-of-swords,death,page-of-pentacles",
+   "relationship|decide|six-of-swords,four-of-swords:r,knight-of-swords",
+   "self|decide|page-of-pentacles,the-hermit,the-tower:r",
+   "crossroads|decide|two-of-pentacles,the-tower,knight-of-swords",
+   "career|decide|page-of-pentacles:r,six-of-swords,knight-of-swords",
+   "self|decide|eight-of-wands,page-of-pentacles:r,the-tower",
+   "career|companion|three-of-pentacles:r,knight-of-swords,two-of-pentacles",
+   "relationship|companion|three-of-pentacles:r,page-of-cups,the-hermit",
+   "self|companion|the-tower,death,page-of-pentacles",
+   "crossroads|companion|knight-of-swords:r,page-of-pentacles:r,eight-of-wands",
+   "career|companion|the-hermit,page-of-pentacles:r,two-of-pentacles:r",
+   "self|companion|eight-of-wands:r,the-tower,knight-of-swords"
+  ],
+  "inputsDigest": "72754d08b09d6701da6eaada91114badf74b9d205a5b8dc4beaf389451c7a7f0",
+  "status": "reviewed-used-for-revision",
+  "usedForRevision": true,
+  "candidateFreeze": {
+   "version": "local-v2.13-sample",
+   "frozenAt": "2026-10-27T12:40:49.673Z",
+   "inputsDigest": "72754d08b09d6701da6eaada91114badf74b9d205a5b8dc4beaf389451c7a7f0",
+   "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+   "contractHash": "39ea3187ac28ae02711de444a665db4a6197240ba4d826e3aa414f82ebd16e54",
+   "engineHash": "afde2abb745dc822f457f3428f40a0e171d5d14291ad98ff6e7fdd855455dc3e",
+   "outputDigest": "77b204f35f04c5d2eca1ede03c5db2743773cb4983d08828d86b6b2c825da3fb"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout8.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v213-final3-20261027",
+  "review": {
+   "file": "docs/local-reading-expansion/batch-0-v213-final3-review.json",
+   "reviewer": "final3-blind-sonnet（全新上下文，只读匿名材料）",
+   "date": "2026-10-27",
+   "result": "v2.13 连贯 18/18、三牌 1.72、陪伴负担更轻（6 组 v2.10 更重，0 组 v2.13 更重）、换阻碍位 6/6、偏好 15:2；换末牌 3/6 未过（S04、S10、S12）"
+  }
+ },
+ "heldout9": [
+  "career|clarify|knight-of-swords:r,six-of-swords,page-of-cups",
+  "relationship|clarify|two-of-pentacles,three-of-pentacles:r,the-tower",
+  "self|clarify|page-of-pentacles,six-of-swords,eight-of-wands",
+  "crossroads|clarify|the-hermit,six-of-swords:r,three-of-pentacles:r",
+  "career|clarify|page-of-cups:r,eight-of-wands,death",
+  "self|clarify|page-of-cups,page-of-pentacles:r,six-of-swords:r",
+  "career|decide|death:r,the-tower,two-of-pentacles",
+  "relationship|decide|three-of-pentacles:r,page-of-pentacles,knight-of-swords",
+  "self|decide|death,page-of-cups,eight-of-wands",
+  "crossroads|decide|four-of-swords:r,queen-of-wands,death",
+  "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+  "self|decide|three-of-pentacles,knight-of-swords:r,death",
+  "career|companion|knight-of-swords,two-of-pentacles:r,eight-of-wands",
+  "relationship|companion|knight-of-swords:r,the-hermit,page-of-cups",
+  "self|companion|queen-of-wands,four-of-swords,the-tower",
+  "crossroads|companion|eight-of-wands,the-hermit:r,knight-of-swords:r",
+  "career|companion|six-of-swords,three-of-pentacles,the-hermit",
+  "self|companion|three-of-pentacles,eight-of-wands,four-of-swords:r"
+ ],
+ "heldout9Protocol": {
+  "fixedAt": "2026-10-27",
+  "seed": 2026102704,
+  "version": "local-v2.13-sample",
+  "commit": "11272aa",
+  "note": "Fixed after the v2.13 content was written (24 obstacle × 24 end-card sides) and before the final review. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Excludes every card-ID triple used in calibration, the ten v2.13 mini blind rounds, v2.12 frozen material and heldout1–5, plus heldout6–8 (used for the bridge, object-presupposition and end-card-variation revisions), so no input here informed any v2.13 revision. Routing is unchanged since v2.10. Any case that informs a revision must be marked used and replaced before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout5.json",
+   "evals/print-v213-sample.test.ts",
+   "docs/local-reading-expansion/batch-0-v213-final-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout6.json",
+   "docs/local-reading-expansion/batch-0-v213-final2-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout7.json",
+   "docs/local-reading-expansion/batch-0-v213-final3-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout8.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r10-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r2-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r3-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r4-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r5-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r6-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r7-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r8-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r9-key.json"
+  ],
+  "excludedTriples": 503,
+  "exclusionDigest": "f45a4d4f7c674b50c8037ae01e492ad8f2ccf8e9f2da9139e6ef3249346d47ba",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "career|clarify|page-of-cups:r,eight-of-wands,death",
+    "career|clarify|page-of-cups:r,page-of-pentacles,death"
+   ],
+   [
+    "self|clarify|page-of-pentacles,six-of-swords,eight-of-wands",
+    "self|clarify|page-of-pentacles,four-of-swords,eight-of-wands"
+   ],
+   [
+    "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+    "career|decide|eight-of-wands,queen-of-wands,six-of-swords:r"
+   ],
+   [
+    "relationship|decide|three-of-pentacles:r,page-of-pentacles,knight-of-swords",
+    "relationship|decide|three-of-pentacles:r,the-hermit:r,knight-of-swords"
+   ],
+   [
+    "self|companion|three-of-pentacles,eight-of-wands,four-of-swords:r",
+    "self|companion|three-of-pentacles,knight-of-swords,four-of-swords:r"
+   ],
+   [
+    "crossroads|clarify|the-hermit,six-of-swords:r,three-of-pentacles:r",
+    "crossroads|clarify|the-hermit,four-of-swords,three-of-pentacles:r"
+   ],
+   [
+    "relationship|companion|knight-of-swords:r,the-hermit,page-of-cups",
+    "relationship|companion|knight-of-swords:r,the-hermit,three-of-pentacles"
+   ],
+   [
+    "relationship|clarify|two-of-pentacles,three-of-pentacles:r,the-tower",
+    "relationship|clarify|two-of-pentacles,three-of-pentacles:r,death"
+   ],
+   [
+    "self|decide|death,page-of-cups,eight-of-wands",
+    "self|decide|death,page-of-cups,page-of-pentacles:r"
+   ],
+   [
+    "career|decide|death:r,the-tower,two-of-pentacles",
+    "career|decide|death:r,the-tower,three-of-pentacles:r"
+   ],
+   [
+    "crossroads|companion|eight-of-wands,the-hermit:r,knight-of-swords:r",
+    "crossroads|companion|eight-of-wands,the-hermit:r,four-of-swords"
+   ],
+   [
+    "career|clarify|knight-of-swords:r,six-of-swords,page-of-cups",
+    "career|clarify|knight-of-swords:r,six-of-swords,the-hermit"
+   ]
+  ],
+  "blind": [
+   "career|clarify|knight-of-swords:r,six-of-swords,page-of-cups",
+   "relationship|clarify|two-of-pentacles,three-of-pentacles:r,the-tower",
+   "self|clarify|page-of-pentacles,six-of-swords,eight-of-wands",
+   "crossroads|clarify|the-hermit,six-of-swords:r,three-of-pentacles:r",
+   "career|clarify|page-of-cups:r,eight-of-wands,death",
+   "self|clarify|page-of-cups,page-of-pentacles:r,six-of-swords:r",
+   "career|decide|death:r,the-tower,two-of-pentacles",
+   "relationship|decide|three-of-pentacles:r,page-of-pentacles,knight-of-swords",
+   "self|decide|death,page-of-cups,eight-of-wands",
+   "crossroads|decide|four-of-swords:r,queen-of-wands,death",
+   "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+   "self|decide|three-of-pentacles,knight-of-swords:r,death",
+   "career|companion|knight-of-swords,two-of-pentacles:r,eight-of-wands",
+   "relationship|companion|knight-of-swords:r,the-hermit,page-of-cups",
+   "self|companion|queen-of-wands,four-of-swords,the-tower",
+   "crossroads|companion|eight-of-wands,the-hermit:r,knight-of-swords:r",
+   "career|companion|six-of-swords,three-of-pentacles,the-hermit",
+   "self|companion|three-of-pentacles,eight-of-wands,four-of-swords:r"
+  ],
+  "inputsDigest": "f5921d2368fa2ac417e7f9613c3187f9db272f5a19b98ddd25bc52df47051011",
+  "status": "reviewed-gates-passed",
+  "usedForRevision": false,
+  "candidateFreeze": {
+   "version": "local-v2.13-sample",
+   "frozenAt": "2026-10-27T12:55:09.903Z",
+   "inputsDigest": "f5921d2368fa2ac417e7f9613c3187f9db272f5a19b98ddd25bc52df47051011",
+   "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+   "contractHash": "cb3e709761b65936791eea0db934d12553f04651583dac034fdb0d027a659b4e",
+   "engineHash": "afde2abb745dc822f457f3428f40a0e171d5d14291ad98ff6e7fdd855455dc3e",
+   "outputDigest": "7359cd4c408c91b3f7e8123789bbdafa77e004f54bbef2aed4f3d1ff3ce9bfae"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout9.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v213-final4-20261027",
+  "review": {
+   "file": "docs/local-reading-expansion/batch-0-v213-final4-review.json",
+   "reviewer": "final4-blind-sonnet（全新上下文，只读匿名材料）",
+   "date": "2026-10-27",
+   "result": "v2.13 连贯 17/18、三牌 1.61、陪伴负担更轻（6 组 v2.10 更重，0 组 v2.13 更重）、换阻碍位 6/6、偏好 13:2；换末牌按评审字面口径 3/6（S05、S09 判为“可互换的小活动”，S10 行动逐字相同）；按校准口径（同一标准、不同观察方式算实质变化）为 5/6，待用户裁定"
+  },
+  "userRuling": "2026-10-27 用户裁定：换末牌按校准口径计——同一标准、不同观察方式算实质变化；S05、S09 计入，记 5/6，自动门槛视为通过。此后修了 2 句（P13、S02），未再盲评。"
+ },
+ "heldout10": [
+  "career|clarify|the-hermit,three-of-pentacles:r,two-of-pentacles:r",
+  "relationship|clarify|the-tower:r,death,two-of-pentacles",
+  "self|clarify|knight-of-swords,four-of-swords,queen-of-wands:r",
+  "crossroads|clarify|four-of-swords,the-hermit,page-of-cups",
+  "career|clarify|four-of-swords,the-tower,page-of-pentacles",
+  "self|clarify|the-hermit,queen-of-wands,three-of-pentacles:r",
+  "career|decide|the-tower,queen-of-wands,death:r",
+  "relationship|decide|eight-of-wands,page-of-pentacles,six-of-swords",
+  "self|decide|three-of-pentacles,death:r,page-of-cups",
+  "crossroads|decide|death,page-of-cups:r,three-of-pentacles",
+  "career|decide|eight-of-wands,three-of-pentacles,the-hermit:r",
+  "self|decide|knight-of-swords,queen-of-wands,death",
+  "career|companion|eight-of-wands,three-of-pentacles,queen-of-wands",
+  "relationship|companion|the-hermit,death:r,three-of-pentacles",
+  "self|companion|page-of-pentacles:r,the-tower,knight-of-swords",
+  "crossroads|companion|knight-of-swords,queen-of-wands,six-of-swords",
+  "career|companion|knight-of-swords:r,page-of-pentacles,the-hermit",
+  "self|companion|eight-of-wands,three-of-pentacles:r,knight-of-swords:r"
+ ],
+ "heldout10Protocol": {
+  "fixedAt": "2026-10-27",
+  "seed": 2026102705,
+  "version": "local-v2.13-sample",
+  "commit": "11272aa",
+  "note": "Fixed after the v2.13 content was written (24 obstacle × 24 end-card sides) and before the final review. Inputs selected from card IDs, orientations and routing only; no rendered text was read. Excludes every card-ID triple used in calibration, the ten v2.13 mini blind rounds, v2.12 frozen material and heldout1–5, plus heldout6–9 and every combination shown in the AI spot checks (used for the bridge, object-presupposition, end-card-variation and template-layer revisions), so no input here informed any v2.13 revision. Routing is unchanged since v2.10. Any case that informs a revision must be marked used and replaced before the next review.",
+  "selection": "Sort eligible inputs by SHA256(JSON.stringify([seed,spec])). Per intent, slot 0 for every topic and slot 1 for career and self (6 per intent, 18 total); fallback focus = FALLBACK_IDS[(topicIndex+intentIndex+slot)%3] under current routing; take first ordered draw whose card-ID triple is unused. Exclude any ordered card-ID triple found in the exclusion sources, whatever its orientation, topic or intent.",
+  "topics": [
+   "career",
+   "relationship",
+   "self",
+   "crossroads"
+  ],
+  "intents": [
+   "clarify",
+   "decide",
+   "companion"
+  ],
+  "focuses": [
+   "inner-first",
+   "rebuild",
+   "momentum-check"
+  ],
+  "exclusionSources": [
+   "docs/local-reading-expansion/batch-0-heldout.json",
+   "evals/local-quality/cases.json",
+   "evals/local-quality/reserved.json",
+   "evals/local-quality/baseline-v2.1.json",
+   "evals/local-quality/baseline-v2.10.json",
+   "evals/local-quality/baseline-v2.10-round2.json",
+   "docs/local-reading-expansion/batch-0-v211-frozen.json",
+   "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-frozen.json",
+   "docs/local-reading-expansion/batch-0-v212-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout5.json",
+   "evals/print-v213-sample.test.ts",
+   "docs/local-reading-expansion/batch-0-v213-final-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout6.json",
+   "docs/local-reading-expansion/batch-0-v213-final2-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout7.json",
+   "docs/local-reading-expansion/batch-0-v213-final3-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout8.json",
+   "docs/local-reading-expansion/batch-0-v213-final4-blind-key.json",
+   "evals/local-quality/baseline-v2.10-heldout9.json",
+   "docs/local-reading-expansion/v213-human-spotcheck.md",
+   "tmp/v213-ai-recheck.md",
+   "tmp/v213-ai-recheck-r3.md",
+   "docs/local-reading-expansion/batch-0-v213-blind-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r10-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r2-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r3-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r4-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r5-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r6-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r7-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r8-key.json",
+   "docs/local-reading-expansion/batch-0-v213-blind-r9-key.json"
+  ],
+  "excludedTriples": 533,
+  "exclusionDigest": "d578a23dbcfdfc0c456da38ff3c108025236671194251a8b4c48a0053f34e952",
+  "swapRule": "Order the 18 by SHA256([seed,'swap',spec]); walk that order, skipping bases with no valid swap and never reusing a base: first 6 pairs replace only the obstacle card, next 6 only the last card, with the first candidate (SHA256([seed,'swap-card',spec,token])) that keeps the same fallback focus and an unused, non-excluded card-ID triple. Each pair is [base, swapped].",
+  "swaps": [
+   [
+    "relationship|companion|the-hermit,death:r,three-of-pentacles",
+    "relationship|companion|the-hermit,page-of-pentacles:r,three-of-pentacles"
+   ],
+   [
+    "crossroads|companion|knight-of-swords,queen-of-wands,six-of-swords",
+    "crossroads|companion|knight-of-swords,eight-of-wands,six-of-swords"
+   ],
+   [
+    "career|decide|eight-of-wands,three-of-pentacles,the-hermit:r",
+    "career|decide|eight-of-wands,queen-of-wands:r,the-hermit:r"
+   ],
+   [
+    "career|decide|the-tower,queen-of-wands,death:r",
+    "career|decide|the-tower,three-of-pentacles:r,death:r"
+   ],
+   [
+    "crossroads|decide|death,page-of-cups:r,three-of-pentacles",
+    "crossroads|decide|death,eight-of-wands:r,three-of-pentacles"
+   ],
+   [
+    "career|companion|knight-of-swords:r,page-of-pentacles,the-hermit",
+    "career|companion|knight-of-swords:r,three-of-pentacles,the-hermit"
+   ],
+   [
+    "relationship|clarify|the-tower:r,death,two-of-pentacles",
+    "relationship|clarify|the-tower:r,death,queen-of-wands"
+   ],
+   [
+    "career|clarify|four-of-swords,the-tower,page-of-pentacles",
+    "career|clarify|four-of-swords,the-tower,knight-of-swords"
+   ],
+   [
+    "self|companion|page-of-pentacles:r,the-tower,knight-of-swords",
+    "self|companion|page-of-pentacles:r,the-tower,death:r"
+   ],
+   [
+    "self|clarify|knight-of-swords,four-of-swords,queen-of-wands:r",
+    "self|clarify|knight-of-swords,four-of-swords,eight-of-wands:r"
+   ],
+   [
+    "self|decide|three-of-pentacles,death:r,page-of-cups",
+    "self|decide|three-of-pentacles,death:r,the-hermit"
+   ],
+   [
+    "self|companion|eight-of-wands,three-of-pentacles:r,knight-of-swords:r",
+    "self|companion|eight-of-wands,three-of-pentacles:r,the-tower:r"
+   ]
+  ],
+  "blind": [
+   "career|clarify|the-hermit,three-of-pentacles:r,two-of-pentacles:r",
+   "relationship|clarify|the-tower:r,death,two-of-pentacles",
+   "self|clarify|knight-of-swords,four-of-swords,queen-of-wands:r",
+   "crossroads|clarify|four-of-swords,the-hermit,page-of-cups",
+   "career|clarify|four-of-swords,the-tower,page-of-pentacles",
+   "self|clarify|the-hermit,queen-of-wands,three-of-pentacles:r",
+   "career|decide|the-tower,queen-of-wands,death:r",
+   "relationship|decide|eight-of-wands,page-of-pentacles,six-of-swords",
+   "self|decide|three-of-pentacles,death:r,page-of-cups",
+   "crossroads|decide|death,page-of-cups:r,three-of-pentacles",
+   "career|decide|eight-of-wands,three-of-pentacles,the-hermit:r",
+   "self|decide|knight-of-swords,queen-of-wands,death",
+   "career|companion|eight-of-wands,three-of-pentacles,queen-of-wands",
+   "relationship|companion|the-hermit,death:r,three-of-pentacles",
+   "self|companion|page-of-pentacles:r,the-tower,knight-of-swords",
+   "crossroads|companion|knight-of-swords,queen-of-wands,six-of-swords",
+   "career|companion|knight-of-swords:r,page-of-pentacles,the-hermit",
+   "self|companion|eight-of-wands,three-of-pentacles:r,knight-of-swords:r"
+  ],
+  "inputsDigest": "7af1a9b0c20540ff8809de6fb42a683fc7b8b49e8b775d4051ab4a9350c04d73",
+  "status": "reviewed-gates-passed",
+  "usedForRevision": false,
+  "candidateFreeze": {
+   "version": "local-v2.13-sample",
+   "frozenAt": "2026-10-27T13:40:27.358Z",
+   "inputsDigest": "7af1a9b0c20540ff8809de6fb42a683fc7b8b49e8b775d4051ab4a9350c04d73",
+   "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+   "contractHash": "46e5f4f1b2977c96ba7fc208da269b7375ddc74362056e62e6793169d369f58a",
+   "engineHash": "4eef2189f49e5b4e06451360d5b1e8adf363c5f79427da7066439418c32d9cf6",
+   "outputDigest": "444bae3eba5a6a8849d0cd4997f1fa75001acbd2daab20092c5643034c4ddca1"
+  },
+  "baseline": {
+   "file": "evals/local-quality/baseline-v2.10-heldout10.json",
+   "commit": "9148317",
+   "note": "Rebuilt from the committed v2.10 engine; reproduces all 42 frozen round-2 outputs before generating."
+  },
+  "blindSeed": "v213-final5-20261027",
+  "review": {
+   "file": "docs/local-reading-expansion/batch-0-v213-final5-review.json",
+   "reviewer": "final5-blind-sonnet（全新上下文，只读匿名材料）",
+   "date": "2026-10-28",
+   "result": "全部门槛通过（字面口径）：连贯 16/18、三牌 1.61、陪伴负担更轻（6 组 v2.10 更重，0 组 v2.13 更重）、换阻碍位 6/6、换末牌 6/6、偏好 15:3。评后改 3 句（P05/S06 宝剑四正补、P09 星币侍从正比较回看、S05 死神逆比较回看），未再盲评。"
+  }
+ }
 }

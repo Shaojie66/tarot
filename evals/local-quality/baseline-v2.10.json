@@ -1,0 +1,3007 @@
+{
+  "commit": "9148317",
+  "version": "local-v2.10-sample",
+  "ids": [
+    "the-hermit",
+    "the-tower",
+    "death",
+    "queen-of-wands",
+    "eight-of-wands",
+    "page-of-cups",
+    "four-of-swords",
+    "six-of-swords",
+    "knight-of-swords",
+    "two-of-pentacles",
+    "three-of-pentacles",
+    "page-of-pentacles"
+  ],
+  "signature": "[interpretations, action, question]; compare within topic and intent",
+  "strata": [
+    {
+      "topic": "career",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "e27b494ce9f8f1ac729ac1f1794aaec35e424d3549a43bf9ee95dab50e75e83f",
+      "nonFallbackHash": "61124c7995e218c4a120f831af50f8eccdcc963300c5be15cafe36d6e52588e8",
+      "fullHash": "c3b3444d98748031750583279abfa78fc57183071978a82549a9cdbcdd189468",
+      "all": {
+        "n": 10560,
+        "unique": 294,
+        "redundant": 10266,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 3842645,
+        "possiblePairs": 55751520,
+        "collisionPct": 6.892448851618754,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 14,
+        "redundant": 3928,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1465867,
+        "possiblePairs": 7767711,
+        "collisionPct": 18.871286534733333,
+        "largestGroup": 1128
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "career|clarify|the-hermit,the-tower,death",
+            "career|clarify|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,death",
+            "career|clarify|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 6996,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 832,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "career|clarify|the-hermit,the-tower,four-of-swords",
+            "career|clarify|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "career|clarify|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "career|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+            "career|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "career",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "0e9bea70bf43d8fe34a05340e51c0c9f71ad5bbf5d01bcbe1d329874283395e3",
+      "nonFallbackHash": "64a19d05f4b202eb1d16fa57909c4cbd6915a438a09e6089c79d54ea6dcccb66",
+      "fullHash": "d420db6af86da6c39e36ea58e59318d3edb380ca6f01d63d4488dfdd6b25afe5",
+      "all": {
+        "n": 10560,
+        "unique": 288,
+        "redundant": 10272,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4367097,
+        "possiblePairs": 55751520,
+        "collisionPct": 7.8331442801918225,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 8,
+        "redundant": 3934,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1990319,
+        "possiblePairs": 7767711,
+        "collisionPct": 25.622979536700065,
+        "largestGroup": 1264
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "career|decide|the-hermit,the-tower,death",
+            "career|decide|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 10358,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "career|decide|the-hermit,the-tower,death",
+            "career|decide|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "career|decide|the-hermit,the-tower,death",
+            "career|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|decide|the-hermit,the-tower,four-of-swords",
+            "career|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|decide|the-hermit:r,the-tower,death",
+            "career|decide|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "career",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "42e71446ffca8e8b08199955ae1ab6d0571b17ff8f68d5151d594a29b57d5b58",
+      "nonFallbackHash": "1f5d5799760301c5033a07053b8b8e4755c92c35da5e762d0822c12e37934119",
+      "fullHash": "834e109054974d22aade7e89adc135a0b1633ce623adc3ae5aca0245dc0a74c5",
+      "all": {
+        "n": 10560,
+        "unique": 295,
+        "redundant": 10265,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4597625,
+        "possiblePairs": 55751520,
+        "collisionPct": 8.246636145525718,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 7,
+        "redundant": 4067,
+        "duplicatedMembers": 4074,
+        "collisionPairs": 2383721,
+        "possiblePairs": 8296701,
+        "collisionPct": 28.73094980764041,
+        "largestGroup": 1424
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 17146,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 1104,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "career|companion|the-hermit,the-tower,death",
+            "career|companion|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,death",
+            "career|companion|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 14524,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 942,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "career|companion|the-hermit,the-tower,four-of-swords",
+            "career|companion|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "career|companion|the-hermit:r,the-tower,queen-of-wands",
+            "career|companion|the-hermit:r,the-tower,three-of-pentacles"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "f25efc9831ecdaaf4c1ad2e947db199f425508cc03cacc576fdf8f3f352f6549",
+      "nonFallbackHash": "f5c35db01b5435db5b9c1c8a986af8b99dcdc64c153619cd164f52488d1d2734",
+      "fullHash": "375e62da6422bc8231095d4fda050956a52f5d9dc3aec143e531e9872b25f032",
+      "all": {
+        "n": 10560,
+        "unique": 233,
+        "redundant": 10327,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 5018458,
+        "possiblePairs": 55751520,
+        "collisionPct": 9.00147296432456,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 3,
+        "redundant": 3939,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 2637207,
+        "possiblePairs": 7767711,
+        "collisionPct": 33.950889779498745,
+        "largestGroup": 1512
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "relationship|clarify|the-hermit,the-tower,death",
+            "relationship|clarify|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "relationship|clarify|the-hermit,the-tower,death",
+            "relationship|clarify|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "relationship|clarify|the-hermit,the-tower,death",
+            "relationship|clarify|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|clarify|the-hermit,the-tower,four-of-swords",
+            "relationship|clarify|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|clarify|the-hermit:r,the-tower,death",
+            "relationship|clarify|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "e88968f8973ff688216dbada0200554719e1f91c61669a23c612992e3ec37575",
+      "nonFallbackHash": "b35d746ac8a784d0707306f7acb6c08140a994a71ee44dd03261cbe6ddff133d",
+      "fullHash": "a64362578dc1c80e86607d22038d1fe0932cc6554fd12a6e9dd8eb7d8b7ba6c8",
+      "all": {
+        "n": 10560,
+        "unique": 233,
+        "redundant": 10327,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 5018458,
+        "possiblePairs": 55751520,
+        "collisionPct": 9.00147296432456,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 3,
+        "redundant": 3939,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 2637207,
+        "possiblePairs": 7767711,
+        "collisionPct": 33.950889779498745,
+        "largestGroup": 1512
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "relationship|decide|the-hermit,the-tower,death",
+            "relationship|decide|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "relationship|decide|the-hermit,the-tower,death",
+            "relationship|decide|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "relationship|decide|the-hermit,the-tower,death",
+            "relationship|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|decide|the-hermit,the-tower,four-of-swords",
+            "relationship|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|decide|the-hermit:r,the-tower,death",
+            "relationship|decide|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "7980286d0671da32e8ec8ef8d775a60299a0cbb4ddf8dac01bb8b9fa35bccdd5",
+      "nonFallbackHash": "0cc7d7f5ac9a51b478eaa805ca0ddc730bd917d251614fd8d3137414acdd4e88",
+      "fullHash": "bfcb29aa64bd6da7707000973415d0341f9cf4a8baa75f06bfb138a8a403db7a",
+      "all": {
+        "n": 10560,
+        "unique": 242,
+        "redundant": 10318,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4760818,
+        "possiblePairs": 55751520,
+        "collisionPct": 8.53935103473412,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 6,
+        "redundant": 4068,
+        "duplicatedMembers": 4074,
+        "collisionPairs": 2540633,
+        "possiblePairs": 8296701,
+        "collisionPct": 30.62220754972368,
+        "largestGroup": 1424
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 17146,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 1104,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "relationship|companion|the-hermit,the-tower,death",
+            "relationship|companion|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 14880,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 962,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "relationship|companion|the-hermit,the-tower,death",
+            "relationship|companion|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "relationship|companion|the-hermit,the-tower,death",
+            "relationship|companion|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|companion|the-hermit,the-tower,four-of-swords",
+            "relationship|companion|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "relationship|companion|the-hermit:r,the-tower,death",
+            "relationship|companion|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "f67ad7e995897e4cdbc5d945be56603d56a3d61c38c2f2a45eb67883dc4a7920",
+      "nonFallbackHash": "0a6f46c49e7979e4bc247058665395897a32ceb7ead1b84cd956d88df244413b",
+      "fullHash": "35d219a38410c1a537fbb61329e8605dfff41abaca52012bca55445d5c88571f",
+      "all": {
+        "n": 10560,
+        "unique": 294,
+        "redundant": 10266,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 3842645,
+        "possiblePairs": 55751520,
+        "collisionPct": 6.892448851618754,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 14,
+        "redundant": 3928,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1465867,
+        "possiblePairs": 7767711,
+        "collisionPct": 18.871286534733333,
+        "largestGroup": 1128
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "self|clarify|the-hermit,the-tower,death",
+            "self|clarify|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,death",
+            "self|clarify|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 6996,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 832,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "self|clarify|the-hermit,the-tower,four-of-swords",
+            "self|clarify|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "self|clarify|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "self|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+            "self|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "269b3333aebe20945cde7a716706469c7106b7674148742d3b069793ee0966fe",
+      "nonFallbackHash": "cfa61c2037e2e3a15d92821ae87be928fbc8b51d0c7af9386e460a1b56855c3b",
+      "fullHash": "0a4e36b4c0ad978919f35c6af5f565d021969f818edb23370d9d83b996241cc2",
+      "all": {
+        "n": 10560,
+        "unique": 288,
+        "redundant": 10272,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4367097,
+        "possiblePairs": 55751520,
+        "collisionPct": 7.8331442801918225,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 8,
+        "redundant": 3934,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1990319,
+        "possiblePairs": 7767711,
+        "collisionPct": 25.622979536700065,
+        "largestGroup": 1264
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "self|decide|the-hermit,the-tower,death",
+            "self|decide|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 10358,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "self|decide|the-hermit,the-tower,death",
+            "self|decide|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "self|decide|the-hermit,the-tower,death",
+            "self|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|decide|the-hermit,the-tower,four-of-swords",
+            "self|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|decide|the-hermit:r,the-tower,death",
+            "self|decide|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "3e7a1b9428ff0e515b577d9722ef77640999ec1a2b7632ece69b7aa8690e9e22",
+      "nonFallbackHash": "d98be127b8b15cd6fc69869693d37255bceb5771f5298629a866da564e1feaf1",
+      "fullHash": "03e01ef8cc25334e2e0872bda03d00f3236930d77247e91acd0cd0e428bde4b9",
+      "all": {
+        "n": 10560,
+        "unique": 295,
+        "redundant": 10265,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4597625,
+        "possiblePairs": 55751520,
+        "collisionPct": 8.246636145525718,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 7,
+        "redundant": 4067,
+        "duplicatedMembers": 4074,
+        "collisionPairs": 2383721,
+        "possiblePairs": 8296701,
+        "collisionPct": 28.73094980764041,
+        "largestGroup": 1424
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 17146,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 1104,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "self|companion|the-hermit,the-tower,death",
+            "self|companion|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,death",
+            "self|companion|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 14524,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 942,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "self|companion|the-hermit,the-tower,four-of-swords",
+            "self|companion|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "self|companion|the-hermit:r,the-tower,queen-of-wands",
+            "self|companion|the-hermit:r,the-tower,three-of-pentacles"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "2ba37935280b7011130d2774df71aeac0835c32c67cbdee3b79144f1e32223ae",
+      "nonFallbackHash": "621e7b4924a34b3d649ecf15a67457f1c9fc2187453a42f6cbc449298e0fe051",
+      "fullHash": "b7b41f642e1304690d11b42559bc8f10139342413cd0edc9f9b14db503eae140",
+      "all": {
+        "n": 10560,
+        "unique": 279,
+        "redundant": 10281,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 3844019,
+        "possiblePairs": 55751520,
+        "collisionPct": 6.894913358416058,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 14,
+        "redundant": 3928,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1465867,
+        "possiblePairs": 7767711,
+        "collisionPct": 18.871286534733333,
+        "largestGroup": 1128
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "crossroads|clarify|the-hermit,the-tower,death",
+            "crossroads|clarify|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,death",
+            "crossroads|clarify|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 6996,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 832,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "crossroads|clarify|the-hermit,the-tower,four-of-swords",
+            "crossroads|clarify|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|clarify|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "crossroads|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+            "crossroads|clarify|the-hermit:r,the-tower,eight-of-wands"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "be5ef8544603aadc24f462978b509f735b205affe5a39c7b46196412b070f3a3",
+      "nonFallbackHash": "b64cc7c2e34fc84645e7791ad825b193f2fe87ef933a46970ba6744490ffa735",
+      "fullHash": "7944075d047a0a49b05e35bbe94d1903bf903a7db9a3760b680bd7178bfbdec9",
+      "all": {
+        "n": 10560,
+        "unique": 273,
+        "redundant": 10287,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4368471,
+        "possiblePairs": 55751520,
+        "collisionPct": 7.835608786989126,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 8,
+        "redundant": 3934,
+        "duplicatedMembers": 3942,
+        "collisionPairs": 1990319,
+        "possiblePairs": 7767711,
+        "collisionPct": 25.622979536700065,
+        "largestGroup": 1264
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 15962,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "crossroads|decide|the-hermit,the-tower,death",
+            "crossroads|decide|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 10358,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 1042,
+          "firstUnchanged": 1042
+        },
+        "failures": [
+          [
+            "crossroads|decide|the-hermit,the-tower,death",
+            "crossroads|decide|the-hermit,the-tower,four-of-swords"
+          ],
+          [
+            "crossroads|decide|the-hermit,the-tower,death",
+            "crossroads|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|decide|the-hermit,the-tower,four-of-swords",
+            "crossroads|decide|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,the-tower,queen-of-wands"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|decide|the-hermit:r,the-tower,death",
+            "crossroads|decide|the-hermit:r,the-tower,knight-of-swords"
+          ]
+        ]
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "c8c0757df1cb92672684106738ed3d791187b104127850ddcbfa17dc1a896034",
+      "nonFallbackHash": "a821f159fc8a7e67a9e602d5c9648c859312b82e0fa3d969b0d808a6be28169f",
+      "fullHash": "5f81c180b4d90873f23bc74daa035f96a075a2a76a7f1f3e32a3943f32a28f76",
+      "all": {
+        "n": 10560,
+        "unique": 280,
+        "redundant": 10280,
+        "duplicatedMembers": 10560,
+        "collisionPairs": 4599229,
+        "possiblePairs": 55751520,
+        "collisionPct": 8.249513197128975,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 7,
+        "redundant": 4067,
+        "duplicatedMembers": 4074,
+        "collisionPairs": 2383721,
+        "possiblePairs": 8296701,
+        "collisionPct": 28.73094980764041,
+        "largestGroup": 1424
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 17146,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 1104,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "crossroads|companion|the-hermit,the-tower,death",
+            "crossroads|companion|the-hermit,four-of-swords:r,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,queen-of-wands,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,eight-of-wands,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,knight-of-swords,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,two-of-pentacles,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,three-of-pentacles,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,three-of-pentacles:r,death"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,death",
+            "crossroads|companion|the-hermit:r,page-of-pentacles,death"
+          ]
+        ]
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 14524,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 942,
+          "firstUnchanged": 1104
+        },
+        "failures": [
+          [
+            "crossroads|companion|the-hermit,the-tower,four-of-swords",
+            "crossroads|companion|the-hermit,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands:r"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,eight-of-wands"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,six-of-swords:r"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,knight-of-swords"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,two-of-pentacles"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,two-of-pentacles:r"
+          ],
+          [
+            "crossroads|companion|the-hermit:r,the-tower,queen-of-wands",
+            "crossroads|companion|the-hermit:r,the-tower,three-of-pentacles"
+          ]
+        ]
+      }
+    }
+  ],
+  "heldout": [
+    {
+      "spec": "career|clarify|three-of-pentacles:r,knight-of-swords,the-hermit",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。星币三（逆位）可能在提示配合方式有缺口；宝剑骑士可能在给出往外推的劲头；隐士可能在提示先向内整理。这次只做一件事：把自己最在意的那几点理出来。",
+        "cards": [
+          {
+            "cardId": "three-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "配合不畅的提示：配合方式或认可方式可能有缺口。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "想直接动手的时候，先确认这一步是自己要的，再推。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "用 20 分钟独自写下工作里你最在意的三件事，按重要程度排序，圈出排在最前面的一条。",
+        "question": "如果先不管别人怎么说，你自己最在意的是什么？"
+      }
+    },
+    {
+      "spec": "career|clarify|two-of-pentacles,the-tower,the-hermit:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。星币二可能在提示手头同时顾着几件事；高塔可能在提示原来的安排被震动过；隐士（逆位）可能在提示独处是在整理还是在回避。理清的时候，一次只看一块就够。",
+        "cards": [
+          {
+            "cardId": "two-of-pentacles",
+            "position": 0,
+            "reversed": false,
+            "text": "同时顾着几件事的时候，要动的那一块得小到挤得进去。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的做法还有一部分管用，先把管用的留下，只重做不行的那一块。",
+          "如果原来的做法已经整体不合适，先给它一个小的收尾，再从最小的一块开始。"
+        ],
+        "action": "用 15 分钟列两栏：工作里现在仍然能用的几件事、已经可以告一段落的几件事（没有就空着）；如果有一块想重新开始的地方，把它圈出来。",
+        "question": "如果要从一小块重新开始，你会先选哪一块？"
+      }
+    },
+    {
+      "spec": "career|decide|the-tower,knight-of-swords,page-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；宝剑骑士可能在给出重新出发的劲头；星币侍从可能在提示重新开始可以先小小地试一次。比较选项时，先看每个选项要放下什么、保留什么。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "劲头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "重新开始不用一步到位：先做一份小功课，换一点实际的了解。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的做法还有一部分管用，先把管用的留下，只重做不行的那一块。",
+          "如果原来的做法已经整体不合适，先给它一个小的收尾，再从最小的一块开始。"
+        ],
+        "action": "为每个选项各做一次 30 分钟的小调研，记下它要你放下什么、保留什么，各一条。",
+        "question": "哪个选项，查清之后最可能改变你愿意放下的东西？"
+      }
+    },
+    {
+      "spec": "career|decide|page-of-pentacles,queen-of-wands,knight-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。星币侍从可能在提示推进可以先小小地试一次；权杖王后可能在带来向外的热度；宝剑骑士可能在给出果断的力量。比较选项时，先看每个选项最关键的那一处能不能先确认。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": false,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "热度加上势头，适合收拢到一件具体的事上。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "思路清楚时适合直接动手；动手前先确认一个最关键的前提。"
+          }
+        ],
+        "interpretations": [
+          "如果条件基本具备，定一个这周内要到的结果，直接推到那里。",
+          "如果还有一处没把握，先花二十分钟确认它，再推。"
+        ],
+        "action": "给每个选项写一个“这周内能拿到的结果”和一处“还没确认的前提”，看哪个选项的前提最容易先确认。",
+        "question": "哪个选项的前提，是你今天就能确认的？"
+      }
+    },
+    {
+      "spec": "career|companion|eight-of-wands,page-of-pentacles,the-hermit:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。权杖八可能在给出推进的势头；星币侍从可能在提示推进可以先小小地试一次；隐士（逆位）可能在提示独处是在整理还是在回避，推进前值得分清。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "如果手边有一件很小的事，今天把它往前推一格——放进日程也算——推完就停；没有就不用找。",
+        "question": "有没有一件小事，推一格就能让你松一口气？"
+      }
+    },
+    {
+      "spec": "career|companion|the-hermit,knight-of-swords,four-of-swords",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；宝剑骑士可能在给出往外推的劲头；宝剑四可能在提示理清之前可以先歇一歇。这次只需要一段不被打扰的时间，不用回应任何人。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "想直接动手的时候，先确认这一步是自己要的，再推。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "把一段完整的休息排进日程，给下一次行动留出力气。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|the-tower,two-of-pentacles,page-of-pentacles:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。高塔可能在提示原来的相处方式被震动过；星币二可能在提示手头同时顾着几件事；星币侍从（逆位）可能在提示重新开始可以先小小地试一次。先列出还在的，再挑一件只靠自己就能做的小事。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的相处方式被震动过，先分清哪些部分还在、哪些已经变了。"
+          },
+          {
+            "cardId": "two-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "同时顾着几件事的时候，要动的那一块得小到挤得进去。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "重新开始不用一步到位：先做一份小功课，换一点实际的了解。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的相处方式还有一部分合适，先把合适的留下，只调整不合适的那一块。",
+          "如果原来的相处方式已经整体不合适，先从自己这边停掉其中一小部分。"
+        ],
+        "action": "用 15 分钟列两栏：这段关系里现在仍然在的几件事、已经变了的几件事（没有就空着），只写你自己看到的部分。",
+        "question": "这段关系里，如果要从一件小事做起，你会先选哪一件？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|four-of-swords:r,knight-of-swords,queen-of-wands",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。宝剑四（逆位）可能带来静不下来的劲头，适合用在一件小事上；宝剑骑士可能在给出果断的力量；权杖王后可能在带来向外的热度。这次先把那一点想清楚，对方那一边先不用管。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": true,
+            "text": "焦躁与重启的提示：可能还停不下来，也可能已经休息够了。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "想直接做点什么的时候，先想清楚自己最在意的是哪一点。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "热度加上势头，适合收拢到一件具体的事上。"
+          }
+        ],
+        "interpretations": [
+          "如果自己这边的想法已经清楚，先把只靠自己就能做的一步做完。",
+          "如果还有一点没弄清，先花二十分钟想清楚它，再走这一步。"
+        ],
+        "action": "如果这段关系里有一件事悬着，写下其中只靠你自己就能推进的一步，以及走这一步之前你最想弄清的一点。",
+        "question": "如果要走自己这边的一步，你会先走哪一步？"
+      }
+    },
+    {
+      "spec": "relationship|decide|the-hermit:r,knight-of-swords,six-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。隐士（逆位）可能在提示独处是在整理还是在回避，推进前值得分清；宝剑骑士可能在给出果断的力量；宝剑六可能在指向一段还在路上的变化。比较方向时，先看哪个方向里有你自己今天就能弄清的事。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": true,
+            "text": "独处的提示有两面：一面是整理，一面是躲开；如果最近常一个人想事情，值得分清更像哪一种。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "想直接做点什么的时候，先想清楚自己最在意的是哪一点。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "如果正处在一段变化里，推进只定到下一站，不用一次到终点。"
+          }
+        ],
+        "interpretations": [
+          "如果自己这边的想法已经清楚，先把只靠自己就能做的一步做完。",
+          "如果还有一点没弄清，先花二十分钟想清楚它，再走这一步。"
+        ],
+        "action": "给你在考虑的每个方向各写一个“只靠我自己今天就能弄清的事”，看哪个最容易先弄清。",
+        "question": "哪个方向里，有你今天就能自己弄清的事？"
+      }
+    },
+    {
+      "spec": "relationship|decide|eight-of-wands,the-hermit:r,page-of-cups",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先弄清自己在这段关系里想要什么，再看下一步怎么走。权杖八可能在给出推进的势头；隐士（逆位）可能在提示独处是在整理，还是在回避；圣杯侍从可能在提示有一个细小的感受值得先听一听。先定下自己的标准，再拿它去看这段关系里的选择。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "事情推得快的时候，自己的判断容易跟不上；先停一下，看这是不是自己要的方向。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 1,
+            "reversed": true,
+            "text": "如果最近常一个人想事情，值得分清是在整理，还是在躲开外面的事。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 2,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "先写下你在这段关系里最在意的两三条，再看每个方向各满足哪几条，只写你自己的部分。",
+        "question": "如果你最在意的那几条里有一条不能让步，是哪一条？"
+      }
+    },
+    {
+      "spec": "relationship|companion|two-of-pentacles:r,three-of-pentacles:r,the-hermit",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先弄清自己在这段关系里想要什么，再看下一步怎么走。星币二（逆位）可能在提示承诺是否偏多；星币三（逆位）可能在提示彼此的期待没有对上；隐士可能在提示先向内整理。这次只需要一段不被打扰的时间，不用想下一步。",
+        "cards": [
+          {
+            "cardId": "two-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "如果承诺偏多，先分清哪些是自己想要的，哪些只是答应了。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "关系里的期待没有说清时，容易靠猜；先说清一件具体的期待，通常比继续揣测更有用。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|companion|the-tower,the-hermit:r,two-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。高塔可能在提示原来的相处方式被震动过；隐士（逆位）可能在提示独处是在整理还是在回避；星币二可能在提示手头同时顾着几件事。这次只收拾一个小角落，不用想清楚这段关系。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的相处方式被震动过，先分清哪些部分还在、哪些已经变了。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 1,
+            "reversed": true,
+            "text": "想法只在心里打转、没有拿到外面反馈时，容易越想越闭合。"
+          },
+          {
+            "cardId": "two-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "同时顾着几件事的时候，要动的那一块得小到挤得进去。"
+          }
+        ],
+        "interpretations": [
+          "如果有什么刚刚结束或变了，今天先为它做一个小小的了结，比如收好一样东西。",
+          "如果已经想重新动起来，挑一件十分钟的小事，做完就停。"
+        ],
+        "action": "今天只收拾一个小角落——一个抽屉、一个文件夹——做完就够了，不用想这段关系。",
+        "question": "今天，有没有一件小事是你愿意让它告一段落的？"
+      }
+    },
+    {
+      "spec": "self|clarify|eight-of-wands,three-of-pentacles,page-of-pentacles:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。权杖八可能在给出推进的势头；星币三可能在提示完成标准要先定清楚；星币侍从（逆位）可能在提示推进可以先小小地试一次。这次先找出那一处，并在今天把它确认掉。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "一件事迟迟收不了尾时，常常是“做到什么程度算完成”没有定。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          }
+        ],
+        "interpretations": [
+          "如果条件基本具备，定一个这周内要到的结果，直接推到那里。",
+          "如果还有一处没把握，先花二十分钟确认它，再推。"
+        ],
+        "action": "如果这件事里有一件事想推进，写下这周内要到的结果，再写出推进前最需要确认的一处，今天先确认它。",
+        "question": "如果要推进一件事，最容易出错的是哪一处？"
+      }
+    },
+    {
+      "spec": "self|clarify|page-of-cups,eight-of-wands:r,queen-of-wands:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。圣杯侍从可能在提示有一个细小的感受值得先听一听；权杖八（逆位）可能在提示节奏被打乱时，更要听清自己；权杖王后（逆位）可能在提醒补给是否跟得上投入。这次只做一件事：把自己最在意的那几点理出来。",
+        "cards": [
+          {
+            "cardId": "page-of-cups",
+            "position": 0,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "进展慢的事，通常先要分清它在等别人、等条件，还是在等自己。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": true,
+            "text": "如果投入多、回应少，先听听自己还想不想这样给下去。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "用 20 分钟独自写下这件事里你最在意的三件事，按重要程度排序，圈出排在最前面的一条。",
+        "question": "如果先不管别人怎么说，你自己最在意的是什么？"
+      }
+    },
+    {
+      "spec": "self|decide|the-hermit,three-of-pentacles,knight-of-swords",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；星币三可能在提示完成标准要先定清楚；宝剑骑士可能在给出往外推的劲头。先定下自己的标准，再拿它去比较选项。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "一件事迟迟收不了尾时，常常是“做到什么程度算完成”没有定。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "想直接动手的时候，先确认这一步是自己要的，再推。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "先写下你最在意的两三条，再看每个选项各满足哪几条，逐条打 √ 或 ×，看差距落在哪一条。",
+        "question": "如果你最在意的那几条里有一条不能让步，是哪一条？"
+      }
+    },
+    {
+      "spec": "self|decide|three-of-pentacles:r,the-tower,queen-of-wands",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。星币三（逆位）可能在提示完成标准还没定下来；高塔可能在提示原来的安排被震动过；权杖王后可能在带来重新开始的热度。比较选项时，先看每个选项要放下什么、保留什么。",
+        "cards": [
+          {
+            "cardId": "three-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "标准模糊的提示：对“做完”的标准可能还没定下来。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "热度可以先落在一件小而具体的事上，让重新开始有个看得见的起点。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的做法还有一部分管用，先把管用的留下，只重做不行的那一块。",
+          "如果原来的做法已经整体不合适，先给它一个小的收尾，再从最小的一块开始。"
+        ],
+        "action": "为你正在比较的每个选项各写一条“选它意味着放下什么、保留什么”，标出你更能接受的那一条，作为比较时的一条参考。",
+        "question": "每个选项要你放下的东西里，哪一样最让你犹豫？"
+      }
+    },
+    {
+      "spec": "self|companion|the-tower,queen-of-wands,four-of-swords",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；权杖王后可能在带来重新开始的热度；宝剑四可能在提示重新开始之前先歇一歇。这次只收拾一个小角落，别的不动。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "热度可以先落在一件小而具体的事上，让重新开始有个看得见的起点。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "如果已经累了很久，不紧急的事可以排在恢复之后，再谈重新开始。"
+          }
+        ],
+        "interpretations": [
+          "如果有什么刚刚结束或变了，今天先为它做一个小小的了结，比如收好一样东西。",
+          "如果已经想重新动起来，挑一件十分钟的小事，做完就停。"
+        ],
+        "action": "今天只收拾一个小角落——一个抽屉、一个文件夹——把用不上的清掉，做完就够了。",
+        "question": "今天，有没有一件小事是你愿意让它告一段落的？"
+      }
+    },
+    {
+      "spec": "self|companion|eight-of-wands,queen-of-wands,four-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。权杖八可能在给出推进的势头；权杖王后可能在带来向外的热度；宝剑四可能在提示推进之前先看力气够不够。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "热度加上势头，适合收拢到一件具体的事上。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "如果已经累了很久，不紧急的推进可以排在恢复之后。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "今晚留出 30 分钟，只做一件让你放松的事，推进的事不带进来。",
+        "question": "今晚，哪一件小事能让你放松下来？"
+      }
+    },
+    {
+      "spec": "crossroads|clarify|the-tower:r,the-hermit,three-of-pentacles",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。高塔（逆位）可能在提示有个信号一直没被正面看过；隐士可能在提示先向内整理；星币三可能在提示选项各自依赖的条件。这次只做一件事：把自己最在意的那几点理出来。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": true,
+            "text": "如果有什么让人隐隐不安，先自己把它看一眼，再去听别人怎么说。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 1,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "把每个选项成立所依赖的条件写清，让比较变得可检验。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "先写下这个选择里你自己最想要的一件事，再写它做到什么程度算数；如果要靠别人，写一句最想先说清的一点，留给自己看。",
+        "question": "如果要请别人配合，你最想先说清的是哪一点？"
+      }
+    },
+    {
+      "spec": "crossroads|clarify|eight-of-wands:r,the-tower,death",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。权杖八（逆位）可能在提醒重新开始不用急；高塔可能在提示原来的安排被震动过；死神可能在指向一个做法已经完成了它的作用。理清的时候，一次只看一块就够。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": true,
+            "text": "节奏被打乱的提示：事情可能卡在等待上，也可能是推得太急。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "death",
+            "position": 2,
+            "reversed": false,
+            "text": "如果有个做法越做越费力，对照一下它当初的目的，看是不是可以告一段落。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的做法还有一部分管用，先把管用的留下，只重做不行的那一块。",
+          "如果原来的做法已经整体不合适，先给它一个小的收尾，再从最小的一块开始。"
+        ],
+        "action": "如果这个选择里有一个做法越做越费力，写下它当初要解决什么、现在还解决吗，各一句。",
+        "question": "有没有哪一部分，当初要解决的事已经完成了？"
+      }
+    },
+    {
+      "spec": "crossroads|decide|page-of-pentacles:r,death,three-of-pentacles:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。星币侍从（逆位）可能在提示重新开始可以先小小地试一次；死神可能在指向一个做法已经完成了它的作用；星币三（逆位）可能在提示有个条件还没落实。比较选项时，先看每个选项要放下什么、保留什么。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "重新开始不用一步到位：先做一份小功课，换一点实际的了解。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有个做法越做越费力，对照一下它当初的目的，看是不是可以告一段落。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "挑一个还没落实的条件，把它变成可以核实的问题。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的做法还有一部分管用，先把管用的留下，只重做不行的那一块。",
+          "如果原来的做法已经整体不合适，先给它一个小的收尾，再从最小的一块开始。"
+        ],
+        "action": "为每个选项各写一条“选它意味着放下什么、保留什么”，再写清它做到什么程度算完成。",
+        "question": "哪个选项的完成标准，你现在最说得清？"
+      }
+    },
+    {
+      "spec": "crossroads|decide|page-of-pentacles,eight-of-wands,four-of-swords:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。星币侍从可能在提示推进可以先小小地试一次；权杖八可能在给出推进的势头；宝剑四（逆位）可能带来静不下来的劲头，适合用在一件小事上。比较选项时，先看每个选项最关键的那一处能不能先确认。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": false,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": true,
+            "text": "用一个小步骤重新启动。"
+          }
+        ],
+        "interpretations": [
+          "如果条件基本具备，定一个这周内要到的结果，直接推到那里。",
+          "如果还有一处没把握，先花二十分钟确认它，再推。"
+        ],
+        "action": "给每个选项写一个“这周内能拿到的结果”和一处“还没确认的前提”，看哪个选项的前提最容易先确认。",
+        "question": "哪个选项的前提，是你今天就能确认的？"
+      }
+    },
+    {
+      "spec": "crossroads|companion|knight-of-swords,eight-of-wands:r,queen-of-wands:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。宝剑骑士可能在给出果断的力量；权杖八（逆位）可能在提示节奏被打乱过；权杖王后（逆位）可能在提醒补给是否跟得上投入。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "思路清楚时适合直接动手；动手前先确认一个最关键的前提。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "如果事情卡过，先分清它在等别人、等条件，还是在等你，再决定推哪一处。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": true,
+            "text": "如果补给不够，推进的范围先缩小一点。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "如果手边有一件很小的事，今天把它往前推一格——放进日程也算——推完就停；没有就不用找。",
+        "question": "有没有一件小事，推一格就能让你松一口气？"
+      }
+    },
+    {
+      "spec": "crossroads|companion|the-hermit:r,eight-of-wands,page-of-cups",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士（逆位）可能在提示独处是在整理，还是在回避；权杖八可能在给出推进的势头；圣杯侍从可能在提示有一个细小的感受值得先听一听。这次只需要一段不被打扰的时间，不用回应任何人。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": true,
+            "text": "如果最近常一个人想事情，值得分清是在整理，还是在躲开外面的事。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "事情推得快的时候，自己的判断容易跟不上；先停一下，看这是不是自己要的方向。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 2,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|the-hermit,the-tower,page-of-pentacles:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先弄清自己在这段关系里想要什么，再看下一步怎么走。隐士可能在提示先向内整理；高塔可能在提示外面的安排被震动过；星币侍从（逆位）可能在提示从小处做起。这次只做一件事：把自己在这段关系里最在意的理出来。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "如果外面的安排变了，先稳住自己怎么看，再决定跟着改什么。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "理清之后不用一步到位：先为最在意的那件事做一份小功课。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "用 20 分钟独自写下你在这段关系里最在意的三件事，按重要程度排序，只写你自己的部分。",
+        "question": "如果先不管对方怎么想，你自己在这段关系里最在意的是什么？"
+      }
+    },
+    {
+      "spec": "self|companion|the-hermit,the-tower:r,six-of-swords",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；高塔（逆位）可能在提示有个信号一直没被正面看过；宝剑六可能在指向一段还在路上的变化。这次只需要一段不被打扰的时间，不用回应任何人。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": true,
+            "text": "如果有什么让人隐隐不安，先自己把它看一眼，再去听别人怎么说。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "变化还在路上的时候，先弄清自己想往哪里去，再看怎么走。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|queen-of-wands,eight-of-wands,the-tower",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。权杖王后可能在带来重新开始的热度；权杖八可能在给出重新出发的势头；高塔可能在提示原来的相处方式被震动过。先列出还在的，再挑一件只靠自己就能做的小事。",
+        "cards": [
+          {
+            "cardId": "queen-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "热度可以先落在一件小而具体的事上，让重新开始有个看得见的起点。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "势头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 2,
+            "reversed": false,
+            "text": "如果原来的相处方式被震动过，先分清哪些部分还在、哪些已经变了。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的相处方式还有一部分合适，先把合适的留下，只调整不合适的那一块。",
+          "如果原来的相处方式已经整体不合适，先从自己这边停掉其中一小部分。"
+        ],
+        "action": "用 15 分钟列两栏：这段关系里现在仍然在的几件事、已经变了的几件事（没有就空着），只写你自己看到的部分。",
+        "question": "这段关系里，如果要从一件小事做起，你会先选哪一件？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,queen-of-wands:r,the-tower",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。星币侍从（逆位）可能在提示重新开始可以先小小地试一次；权杖王后（逆位）可能在提醒补给是否跟得上投入；高塔可能在提示原来的安排被震动过。这次只收拾一个小角落，别的不动。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "重新开始不用一步到位：先做一份小功课，换一点实际的了解。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "如果补给不够，先从最省力的一块开始。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 2,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          }
+        ],
+        "interpretations": [
+          "如果有什么刚刚结束或变了，今天先为它做一个小小的了结，比如收好一样东西。",
+          "如果已经想重新动起来，挑一件十分钟的小事，做完就停。"
+        ],
+        "action": "今天只收拾一个小角落——一个抽屉、一个文件夹——把用不上的清掉，做完就够了。",
+        "question": "今天，有没有一件小事是你愿意让它告一段落的？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|eight-of-wands,six-of-swords:r,page-of-pentacles",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。权杖八可能在给出往前走的劲头；宝剑六（逆位）可能在提示有什么拖着脚步；星币侍从可能在提示这一步可以先小小地试一次。这次先把那一点想清楚，对方那一边先不用管。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果这段关系里有一件事悬着，劲头可以先用在只靠自己就能走的一步上。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 1,
+            "reversed": true,
+            "text": "如果有件事一直推不动，先分清拖住它的是资源、顾虑，还是没处理完的事。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "这一步可以先小小地试一次，再看要不要继续。"
+          }
+        ],
+        "interpretations": [
+          "如果自己这边的想法已经清楚，先把只靠自己就能做的一步做完。",
+          "如果还有一点没弄清，先花二十分钟想清楚它，再走这一步。"
+        ],
+        "action": "如果这段关系里有一件事悬着，写下其中只靠你自己就能推进的一步，以及走这一步之前你最想弄清的一点。",
+        "question": "如果要走自己这边的一步，你会先走哪一步？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,eight-of-wands:r,knight-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。星币侍从（逆位）可能在提示推进可以先小小地试一次；权杖八（逆位）可能在提示节奏被打乱过；宝剑骑士可能在给出果断的力量。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "如果事情卡过，先分清它在等别人、等条件，还是在等你，再决定推哪一处。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "思路清楚时适合直接动手；动手前先确认一个最关键的前提。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "如果手边有一件很小的事，今天把它往前推一格——放进日程也算——推完就停；没有就不用找。",
+        "question": "有没有一件小事，推一格就能让你松一口气？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|four-of-swords,page-of-cups,knight-of-swords",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先弄清自己在这段关系里想要什么，再看下一步怎么走。宝剑四可能在提示理清之前可以先歇一歇；圣杯侍从可能在提示有一个细小的感受值得先听一听；宝剑骑士可能在给出往外推的劲头。这次只做一件事：把自己在这段关系里最在意的理出来。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "停顿的提示：先让脑子和身体缓一缓，可能比继续硬撑更有用。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 1,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "想直接动手的时候，先确认这一步是自己要的，再推。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "用 20 分钟独自写下你在这段关系里最在意的三件事，按重要程度排序，只写你自己的部分。",
+        "question": "如果先不管对方怎么想，你自己在这段关系里最在意的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|four-of-swords,page-of-cups,queen-of-wands:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先弄清自己在这段关系里想要什么，再看下一步怎么走。宝剑四可能在提示理清之前可以先歇一歇；圣杯侍从可能在提示有一个细小的感受值得先听一听；权杖王后（逆位）可能在提醒补给是否跟得上投入。这次只做一件事：把自己在这段关系里最在意的理出来。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "停顿的提示：先让脑子和身体缓一缓，可能比继续硬撑更有用。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 1,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": true,
+            "text": "如果投入多、回应少，先听听自己还想不想这样给下去。"
+          }
+        ],
+        "interpretations": [
+          "如果已经听了很多意见却越听越乱，先停一轮，回到自己最在意的那几点上。",
+          "如果自己的想法已经清楚、只是还没说出口，先想好最想让人知道的一句。"
+        ],
+        "action": "用 20 分钟独自写下你在这段关系里最在意的三件事，按重要程度排序，只写你自己的部分。",
+        "question": "如果先不管对方怎么想，你自己在这段关系里最在意的是什么？"
+      }
+    },
+    {
+      "spec": "self|companion|the-hermit,page-of-cups,three-of-pentacles:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；圣杯侍从可能在提示有一个细小的感受值得先听一听；星币三（逆位）可能在提示完成标准还没定下来。这次只需要一段不被打扰的时间，不用回应任何人。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 1,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "先定下一版“做到这样就算完成”，让自己有个可以对照的标准。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "self|companion|the-hermit,page-of-cups,the-tower",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；圣杯侍从可能在提示有一个细小的感受值得先听一听；高塔可能在提示外面的安排被震动过。这次只需要一段不被打扰的时间，不用回应任何人。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 1,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 2,
+            "reversed": false,
+            "text": "如果外面的安排变了，先稳住自己怎么看，再决定跟着改什么。"
+          }
+        ],
+        "interpretations": [
+          "如果外面的声音有点多，先把手机放远一点，安静待一会儿。",
+          "如果心里有个细小的感受，让它待着就好，不用给它下结论。"
+        ],
+        "action": "找一个不被打扰的 15 分钟，安静待着就好；心里冒出哪句话，听一听，不用回答它。",
+        "question": "此刻安静下来，心里最先冒出来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|knight-of-swords,death,three-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。宝剑骑士可能在给出重新出发的劲头；死神可能在指向一种相处方式在收尾；星币三可能在提示期待有没有说清。先列出还在的，再挑一件只靠自己就能做的小事。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "劲头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有一种相处方式越来越费力，对照一下它当初是为了什么。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "把自己的一个期待想到能说清的程度，再决定要不要说。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的相处方式还有一部分合适，先把合适的留下，只调整不合适的那一块。",
+          "如果原来的相处方式已经整体不合适，先从自己这边停掉其中一小部分。"
+        ],
+        "action": "用 15 分钟列两栏：这段关系里现在仍然在的几件事、已经变了的几件事（没有就空着），只写你自己看到的部分。",
+        "question": "这段关系里，如果要从一件小事做起，你会先选哪一件？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|knight-of-swords,death,the-hermit:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。宝剑骑士可能在给出重新出发的劲头；死神可能在指向一种相处方式在收尾；隐士（逆位）可能在提示独处是在整理还是在回避。先列出还在的，再挑一件只靠自己就能做的小事。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "劲头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有一种相处方式越来越费力，对照一下它当初是为了什么。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "如果原来的相处方式还有一部分合适，先把合适的留下，只调整不合适的那一块。",
+          "如果原来的相处方式已经整体不合适，先从自己这边停掉其中一小部分。"
+        ],
+        "action": "用 15 分钟列两栏：这段关系里现在仍然在的几件事、已经变了的几件事（没有就空着），只写你自己看到的部分。",
+        "question": "这段关系里，如果要从一件小事做起，你会先选哪一件？"
+      }
+    },
+    {
+      "spec": "self|companion|the-tower,eight-of-wands,queen-of-wands",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；权杖八可能在给出重新出发的势头；权杖王后可能在带来重新开始的热度。这次只收拾一个小角落，别的不动。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "势头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "热度可以先落在一件小而具体的事上，让重新开始有个看得见的起点。"
+          }
+        ],
+        "interpretations": [
+          "如果有什么刚刚结束或变了，今天先为它做一个小小的了结，比如收好一样东西。",
+          "如果已经想重新动起来，挑一件十分钟的小事，做完就停。"
+        ],
+        "action": "今天只收拾一个小角落——一个抽屉、一个文件夹——把用不上的清掉，做完就够了。",
+        "question": "今天，有没有一件小事是你愿意让它告一段落的？"
+      }
+    },
+    {
+      "spec": "self|companion|the-tower,eight-of-wands,the-hermit:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；权杖八可能在给出重新出发的势头；隐士（逆位）可能在提示独处是在整理还是在回避。这次只收拾一个小角落，别的不动。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "势头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "如果有什么刚刚结束或变了，今天先为它做一个小小的了结，比如收好一样东西。",
+          "如果已经想重新动起来，挑一件十分钟的小事，做完就停。"
+        ],
+        "action": "今天只收拾一个小角落——一个抽屉、一个文件夹——把用不上的清掉，做完就够了。",
+        "question": "今天，有没有一件小事是你愿意让它告一段落的？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|queen-of-wands:r,eight-of-wands,four-of-swords:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。权杖王后（逆位）可能在提醒自己的力气是否跟得上；权杖八可能在给出往前走的劲头；宝剑四（逆位）可能带来静不下来的劲头，适合用在一件小事上。这次先把那一点想清楚，对方那一边先不用管。",
+        "cards": [
+          {
+            "cardId": "queen-of-wands",
+            "position": 0,
+            "reversed": true,
+            "text": "如果自己的力气已经不多，这一步先走小一点。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "如果这段关系里有一件事悬着，劲头可以先用在只靠自己就能走的一步上。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": true,
+            "text": "用一个小步骤重新启动。"
+          }
+        ],
+        "interpretations": [
+          "如果自己这边的想法已经清楚，先把只靠自己就能做的一步做完。",
+          "如果还有一点没弄清，先花二十分钟想清楚它，再走这一步。"
+        ],
+        "action": "如果这段关系里有一件事悬着，写下其中只靠你自己就能推进的一步，以及走这一步之前你最想弄清的一点。",
+        "question": "如果要走自己这边的一步，你会先走哪一步？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|queen-of-wands:r,eight-of-wands,knight-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。权杖王后（逆位）可能在提醒自己的力气是否跟得上；权杖八可能在给出往前走的劲头；宝剑骑士可能在给出果断的力量。这次先把那一点想清楚，对方那一边先不用管。",
+        "cards": [
+          {
+            "cardId": "queen-of-wands",
+            "position": 0,
+            "reversed": true,
+            "text": "如果自己的力气已经不多，这一步先走小一点。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "如果这段关系里有一件事悬着，劲头可以先用在只靠自己就能走的一步上。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "想直接做点什么的时候，先想清楚自己最在意的是哪一点。"
+          }
+        ],
+        "interpretations": [
+          "如果自己这边的想法已经清楚，先把只靠自己就能做的一步做完。",
+          "如果还有一点没弄清，先花二十分钟想清楚它，再走这一步。"
+        ],
+        "action": "如果这段关系里有一件事悬着，写下其中只靠你自己就能推进的一步，以及走这一步之前你最想弄清的一点。",
+        "question": "如果要走自己这边的一步，你会先走哪一步？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,eight-of-wands,four-of-swords:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。星币侍从（逆位）可能在提示推进可以先小小地试一次；权杖八可能在给出推进的势头；宝剑四（逆位）可能带来静不下来的劲头，适合用在一件小事上。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 2,
+            "reversed": true,
+            "text": "用一个小步骤重新启动。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "如果手边有一件很小的事，今天把它往前推一格——放进日程也算——推完就停；没有就不用找。",
+        "question": "有没有一件小事，推一格就能让你松一口气？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,eight-of-wands,queen-of-wands",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。星币侍从（逆位）可能在提示推进可以先小小地试一次；权杖八可能在给出推进的势头；权杖王后可能在带来向外的热度。这次只推一件很小的事，推一格就停。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "推进可以先从一小步开始：试一次，再看要不要继续。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "热度加上势头，适合收拢到一件具体的事上。"
+          }
+        ],
+        "interpretations": [
+          "如果手边有一件很小的事，今天把它往前推一格，推完就停。",
+          "如果没有想推的事，就什么都不用推，劲头留着。"
+        ],
+        "action": "如果手边有一件很小的事，今天把它往前推一格——放进日程也算——推完就停；没有就不用找。",
+        "question": "有没有一件小事，推一格就能让你松一口气？"
+      }
+    }
+  ]
+}

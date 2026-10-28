@@ -1,0 +1,1031 @@
+{
+  "version": "local-v2.13-sample",
+  "frozenAt": "2026-10-27T13:40:27.358Z",
+  "inputsDigest": "7af1a9b0c20540ff8809de6fb42a683fc7b8b49e8b775d4051ab4a9350c04d73",
+  "contentHash": "864d7982359df81a7e4988d4376bec93b768bb1dafd90a82558eb025b69c1277",
+  "contractHash": "46e5f4f1b2977c96ba7fc208da269b7375ddc74362056e62e6793169d369f58a",
+  "engineHash": "4eef2189f49e5b4e06451360d5b1e8adf363c5f79427da7066439418c32d9cf6",
+  "outputDigest": "444bae3eba5a6a8849d0cd4997f1fa75001acbd2daab20092c5643034c4ddca1",
+  "outputs": [
+    {
+      "spec": "career|clarify|the-hermit,three-of-pentacles:r,two-of-pentacles:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；星币三（逆位）可能在提示配合方式有缺口；星币二（逆位）可能在提示承诺是否偏多。要先听清自己，就从这里听起：如果工作里有个约定落空过，先看这个约定。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是一个说得太模糊的约定：没法检验，也就容易落空。"
+          },
+          {
+            "cardId": "two-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "如果承诺偏多，先分清哪些是自己想要的，哪些只是答应了。"
+          }
+        ],
+        "interpretations": [
+          "先核对：这个约定是否已经具体到可以检验。",
+          "末牌在提示，承诺偏多的时候先停下来，看看哪里最耗劲。"
+        ],
+        "action": "先停下来，想想这个约定里哪一部分最耗你的劲，再看那一部分有没有说到可以检验。想到就停。",
+        "question": "这个约定是否已经具体到可以检验？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|the-tower:r,death,two-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。高塔（逆位）可能在指向变动留下的余波；死神可能在指向一种相处方式在收尾；星币二可能在提示手头同时顾着几件事。要看清什么还在、什么变了，就从这里看：如果这段关系里有个做法越做越费力，先看这个做法。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": true,
+            "text": "如果一次变动的余波还在，先看清它留下了什么，再谈重新开始。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是一个越做越费力的做法：它当初要解决的事，也许已经变了。"
+          },
+          {
+            "cardId": "two-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "同时顾着几件事的时候，要动的那一块得小到挤得进去。"
+          }
+        ],
+        "interpretations": [
+          "先核对：它当初要解决的事现在是否还成立。",
+          "末牌在提示，顾不过来的时候，先减掉一项。"
+        ],
+        "action": "先停掉这个做法里最费力的一小部分，过两天看看，它当初要解决的事有没有因此冒出来。只停一处。",
+        "question": "它当初要解决的事现在是否还成立？"
+      }
+    },
+    {
+      "spec": "self|clarify|knight-of-swords,four-of-swords,queen-of-wands:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。宝剑骑士可能在给出果断的力量；宝剑四可能在提示推进之前先看力气够不够；权杖王后（逆位）可能在提醒补给是否跟得上投入。往前走之前，最关键的一处在这里：如果这件事里最近很少真正歇下来，先看你留给自己的恢复时间。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "思路清楚时适合直接动手；动手前先确认一个最关键的前提。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是休息：很久没有真正停下来，力气没地方补。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": true,
+            "text": "如果补给不够，推进的范围先缩小一点。"
+          }
+        ],
+        "interpretations": [
+          "先核对：最近是否有过一段真正不夹带任务的休息。",
+          "末牌在提示，状态偏低的时候先停下来，看看哪里最耗劲。"
+        ],
+        "action": "先停下来，想想最近休息的时候，哪一样事情还在耗你的劲。想到就停。",
+        "question": "最近是否有过一段真正不夹带任务的休息？"
+      }
+    },
+    {
+      "spec": "crossroads|clarify|four-of-swords,the-hermit,page-of-cups",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。宝剑四可能在提示理清之前可以先歇一歇；隐士可能在提示先向内整理；圣杯侍从可能在提示有一个细小的感受值得先听一听。要先听清自己，就从这里听起：如果这个选择里听来的建议很多，先看你自己真正在意的是哪几点。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "停顿的提示：先让脑子和身体缓一缓，可能比继续硬撑更有用。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是你自己的声音：建议听多了，自己在意的那几点容易被盖住。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 2,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          }
+        ],
+        "interpretations": [
+          "先核对：你自己真正在意的点是否已经被听来的建议盖住。",
+          "末牌在提示，带着好奇，先写下来。"
+        ],
+        "action": "写下一句：抛开别人说的，你自己最在意的是哪一点。不想写，在心里说给自己也可以。写完就停。",
+        "question": "你自己真正在意的点是否已经被听来的建议盖住？"
+      }
+    },
+    {
+      "spec": "career|clarify|four-of-swords,the-tower,page-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。宝剑四可能在提示重新开始之前先歇一歇；高塔可能在提示原来的安排被震动过；星币侍从可能在提示重新开始可以先小小地试一次。要看清什么还在、什么变了，就从这里看：如果工作里原来的安排被打乱过，先看这套安排还剩什么。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "如果已经累了很久，不紧急的事可以排在恢复之后，再谈重新开始。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是原来那套安排：被打乱之后，还能用的和已经不行的混在一起。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "重新开始不用一步到位：先做一份小功课，换一点实际的了解。"
+          }
+        ],
+        "interpretations": [
+          "先核对：这套安排里还能用的部分，是否多于已经不行的部分。",
+          "末牌在提示，了解还不够的时候，先查清一处。"
+        ],
+        "action": "查一处：这套安排里你最依赖的那一块，现在还在正常运转吗。查完就停。",
+        "question": "这套安排里还能用的部分，是否多于已经不行的部分？"
+      }
+    },
+    {
+      "spec": "self|clarify|the-hermit,queen-of-wands,three-of-pentacles:r",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。隐士可能在提示先向内整理；权杖王后可能在带来向外的热度；星币三（逆位）可能在提示完成标准还没定下来。要先听清自己，就从这里听起：如果这件事里有几件想推进的事，先看你最想推进的那一件。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是热度太分散：想推进的事太多，力气落不到一件上。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": true,
+            "text": "先定下一版“做到这样就算完成”，让自己有个可以对照的标准。"
+          }
+        ],
+        "interpretations": [
+          "先核对：想推进的是否已经收窄到一件，而不是好几件。",
+          "末牌在提示，不必急着追加投入，先停一拍。"
+        ],
+        "action": "先停一拍：花两分钟写下想推进的几件事，写完再看哪一件让你最有热度。",
+        "question": "想推进的是否已经收窄到一件，而不是好几件？"
+      }
+    },
+    {
+      "spec": "career|decide|the-tower,queen-of-wands,death:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；权杖王后可能在带来重新开始的热度；死神（逆位）可能在提示有一件该收尾的事还拖着。要看清什么还在、什么变了，就从这里看：如果工作里有几件想推进的事，先看你最想推进的那一件。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是热度太分散：想推进的事太多，力气落不到一件上。"
+          },
+          {
+            "cardId": "death",
+            "position": 2,
+            "reversed": true,
+            "text": "如果有件事一直拖着没收尾，重新开始之前，先给它一个小的了结。"
+          }
+        ],
+        "interpretations": [
+          "比较时，热度集中在一件上的选项，更容易推得动。",
+          "末牌在提示，先试一次撤得回来的改变。"
+        ],
+        "action": "在每个选项里挑出最有热度的那一个，只为它做十分钟，看热度还在不在。做一次就停，不用当场决定。",
+        "question": "哪个选项是你最想推进、也只需要推进这一件的？"
+      }
+    },
+    {
+      "spec": "relationship|decide|eight-of-wands,page-of-pentacles,six-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把劲头用在自己这一边的一步上，迈出去之前先弄清最关键的一点。权杖八可能在给出往前走的劲头；星币侍从可能在提示这一步可以先小小地试一次；宝剑六可能在指向一段还在路上的变化。往前走之前，最关键的一处在这里：如果这段关系里有一步想开始，先看这第一步。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果这段关系里有一件事悬着，劲头可以先用在只靠自己就能走的一步上。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是第一步太大：大到迟迟迈不出去。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "如果正处在一段变化里，推进只定到下一站，不用一次到终点。"
+          }
+        ],
+        "interpretations": [
+          "比较时，第一步越小的选项，越容易真的开始。",
+          "末牌在提示，一站一站来，先回到上一段路的具体情形里看。"
+        ],
+        "action": "回想以前类似的开始，每个选项里哪一种第一步最容易迈出去。想到就停，今天不用决定。",
+        "question": "哪个选项的第一步，已经小到三十分钟内能做完？"
+      }
+    },
+    {
+      "spec": "self|decide|three-of-pentacles,death:r,page-of-cups",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。星币三可能在提示完成标准要先定清楚；死神（逆位）可能在指向一段还在路上的变化；圣杯侍从可能在提示有一个细小的感受值得先听一听。要先听清自己，就从这里听起：如果这件事里有个调整迟迟没动，先看这个调整。",
+        "cards": [
+          {
+            "cardId": "three-of-pentacles",
+            "position": 0,
+            "reversed": false,
+            "text": "把事做成的提示：一件事的完成标准清楚了，力气才用得到点上。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是一个迟迟没动的调整：维持和改变的代价都还没算清。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 2,
+            "reversed": false,
+            "text": "如果心里有个细小的感受，它可能比外面的声音更早知道你在意什么。"
+          }
+        ],
+        "interpretations": [
+          "比较时，调整一小步和继续维持，代价都要算进去。",
+          "末牌在提示，带着好奇，先写下来。"
+        ],
+        "action": "给每个选项各写一句：选了它，要付出什么代价。不想写，在心里说给自己也可以。写完就停，今天不用决定。",
+        "question": "哪个选项调整一小步的代价，比继续维持更小？"
+      }
+    },
+    {
+      "spec": "crossroads|decide|death,page-of-cups:r,three-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。死神可能在指向一个做法已经完成了它的作用；圣杯侍从（逆位）可能在提示情绪正响时，重新开始可以小一点；星币三可能在提示选项各自依赖的条件。要看清什么还在、什么变了，就从这里看：如果这个选择里此刻有股比较响的情绪，先看这股情绪。",
+        "cards": [
+          {
+            "cardId": "death",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有个做法越做越费力，对照一下它当初的目的，看是不是可以告一段落。"
+          },
+          {
+            "cardId": "page-of-cups",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是情绪的音量：情绪响的时候，看法容易被放大。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "把每个选项成立所依赖的条件写清，让比较变得可检验。"
+          }
+        ],
+        "interpretations": [
+          "比较时，情绪正响时的看法，会让每个选项显得更好或更糟。",
+          "末牌在提示，先查清一处，让事情可以检验。"
+        ],
+        "action": "每个选项各查一处：支持它的理由里，哪些是实际发生的事。查完就停，不用当场决定。",
+        "question": "哪个选项在情绪平静下来之后，仍然站得住？"
+      }
+    },
+    {
+      "spec": "career|decide|eight-of-wands,three-of-pentacles,the-hermit:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。权杖八可能在给出推进的势头；星币三可能在提示分工和标准；隐士（逆位）可能在提示独处是在整理还是在回避，推进前值得分清。往前走之前，最关键的一处在这里：如果工作里有什么要和别人配合完成，先看分工和完成标准。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是分工和完成标准没说清：各做各的，结果对不上。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "比较时，分工和完成标准说得清的选项，更不容易反复返工。",
+          "末牌在提示，想了很久的，可以写下来，放到心外看。"
+        ],
+        "action": "给每个选项各写一句：选了它，谁负责什么、做到什么算完成。不想写，在心里说给自己也可以。写完就停，今天不用决定。",
+        "question": "哪个选项的分工和完成标准，现在说得最清楚？"
+      }
+    },
+    {
+      "spec": "self|decide|knight-of-swords,queen-of-wands,death",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。宝剑骑士可能在给出重新出发的劲头；权杖王后可能在带来重新开始的热度；死神可能在指向一个做法已经完成了它的作用。要看清什么还在、什么变了，就从这里看：如果这件事里有几件想推进的事，先看你最想推进的那一件。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "劲头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是热度太分散：想推进的事太多，力气落不到一件上。"
+          },
+          {
+            "cardId": "death",
+            "position": 2,
+            "reversed": false,
+            "text": "如果有个做法越做越费力，对照一下它当初的目的，看是不是可以告一段落。"
+          }
+        ],
+        "interpretations": [
+          "比较时，热度集中在一件上的选项，更容易推得动。",
+          "末牌在提示，收尾可以从减掉一小处开始。"
+        ],
+        "action": "把每个选项里想推进的事各写下来，有两件以上的就划掉一件，看剩下的哪一个你还最想推。划完就停，今天不用决定。",
+        "question": "哪个选项是你最想推进、也只需要推进这一件的？"
+      }
+    },
+    {
+      "spec": "career|companion|eight-of-wands,three-of-pentacles,queen-of-wands",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是事情在往前走，你可以慢一点跟上。合起来，牌面的语气是：热度可以先留在心里。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "八根权杖一起飞过天空，事情走得很快。跟不上一点，也很正常。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "三个人在拱门下一起看着图纸。有人在身边，事情会轻一些。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "权杖王后坐得很稳，脚边的黑猫安静地守着。这份热度可以先留给自己。"
+          }
+        ],
+        "interpretations": [
+          "如果工作里有什么要和别人一起完成，有点费心也很正常。",
+          "末牌在提示，心里有热度，这本身就很好。"
+        ],
+        "action": "如果愿意，想一想最近哪件小事让你有一点热乎劲，不用去做。不这样也可以。",
+        "question": "最近哪件小事让你心里有一点热乎？"
+      }
+    },
+    {
+      "spec": "relationship|companion|the-hermit,death:r,three-of-pentacles",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先安静地陪自己待一会儿。合起来，牌面的语气是：一块一块来就好。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "隐士提着灯，只照亮脚下一小段路。这次看清眼前就够了。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": true,
+            "text": "死神的脚步停住了，旗子还在。有些收尾慢一点来，也没关系。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "三个人在拱门下一起看着图纸。有人在身边，事情会轻一些。"
+          }
+        ],
+        "interpretations": [
+          "如果这段关系里有个调整一直没动，慢一点动也可以。",
+          "末牌在提示，事情可以分开来做，不用一口气全做完。"
+        ],
+        "action": "如果愿意，对自己说一句：这件事可以一块一块来。不这样也可以。",
+        "question": "如果事情可以一块一块来，你现在是什么感觉？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,the-tower,knight-of-swords",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是有些东西在收尾，有些还在，不用急着理清。合起来，牌面的语气是：劲头在，也可以先歇一口气。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "星币侍从捧着星币看了很久。还没动起来的心思，也可以先只是看着。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "闪电落在塔顶，原来的东西被震松了。乱的时候，先站稳就好。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "宝剑骑士迎着风往前冲。劲头在，也可以先让它待一会儿。"
+          }
+        ],
+        "interpretations": [
+          "如果这件事里原来的安排被打乱了，先站稳就好。",
+          "末牌在提示，劲头在的时候，也可以先不用。"
+        ],
+        "action": "如果愿意，今天把想冲的劲先留一点给明天。不这样也可以。",
+        "question": "如果把劲头留一点给明天，今晚你想做什么？"
+      }
+    },
+    {
+      "spec": "crossroads|companion|knight-of-swords,queen-of-wands,six-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是事情在往前走，你可以慢一点跟上。合起来，牌面的语气是：一站一站来就好。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "宝剑骑士迎着风往前冲。劲头在，也可以先让它待一会儿。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "权杖王后坐得很稳，脚边的黑猫安静地守着。这份热度可以先留给自己。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "小船慢慢划向对岸，水面平了一些。还在路上，也没关系。"
+          }
+        ],
+        "interpretations": [
+          "如果这个选择里有好几件想做的事，热度多一点也没关系。",
+          "末牌在提示，变动可以一站一站来，不必一次想到终点。"
+        ],
+        "action": "如果愿意，今晚只想到明天就好，更远的先不用想。不这样也可以。",
+        "question": "明天你想怎么过？"
+      }
+    },
+    {
+      "spec": "career|companion|knight-of-swords:r,page-of-pentacles,the-hermit",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先安静地陪自己待一会儿。合起来，牌面的语气是：这一步可以一个人慢慢来。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": true,
+            "text": "马冲得太快时，骑士反而握不稳剑。慢一点没关系。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "星币侍从捧着一枚星币细细地看。好奇可以慢慢来。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": false,
+            "text": "隐士提着灯，只照亮脚下一小段路。这次看清眼前就够了。"
+          }
+        ],
+        "interpretations": [
+          "如果工作里有件想开始的事，还没开始也没关系。",
+          "末牌在提示，这一步适合独自完成，先不急着听更多意见。"
+        ],
+        "action": "如果愿意，今晚给自己留一小段不被打扰的时间，什么都不用想清楚。不这样也可以。",
+        "question": "一个人安静下来的时候，最先想到的是什么？"
+      }
+    },
+    {
+      "spec": "self|companion|eight-of-wands,three-of-pentacles:r,knight-of-swords:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是事情在往前走，你可以慢一点跟上。合起来，牌面的语气是：这阵子不必赶。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "八根权杖一起飞过天空，事情走得很快。跟不上一点，也很正常。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "拱门下的三个人一时没对上话。没对上，也不全是谁的问题。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": true,
+            "text": "马冲得太快时，骑士反而握不稳剑。慢一点没关系。"
+          }
+        ],
+        "interpretations": [
+          "如果有个打算总是落空，可以先不责怪自己。",
+          "末牌在提示，越急越要先停一拍。"
+        ],
+        "action": "如果愿意，今晚留一小段不处理任何事的时间，什么都不用想清楚。不想也完全可以。",
+        "question": "安静下来之后，最先浮上来的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|companion|the-hermit,page-of-pentacles:r,three-of-pentacles",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先安静地陪自己待一会儿。合起来，牌面的语气是：一块一块来就好。",
+        "cards": [
+          {
+            "cardId": "the-hermit",
+            "position": 0,
+            "reversed": false,
+            "text": "隐士提着灯，只照亮脚下一小段路。这次看清眼前就够了。"
+          },
+          {
+            "cardId": "page-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "星币侍从捧着星币看了很久。还没动起来的心思，也可以先只是看着。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "三个人在拱门下一起看着图纸。有人在身边，事情会轻一些。"
+          }
+        ],
+        "interpretations": [
+          "如果这段关系里有个打算一直停在心里，停着也没关系，可以先让它在那儿。",
+          "末牌在提示，事情可以分开来做，不用一口气全做完。"
+        ],
+        "action": "如果愿意，对自己说一句：这件事可以一块一块来。不这样也可以。",
+        "question": "如果事情可以一块一块来，你现在是什么感觉？"
+      }
+    },
+    {
+      "spec": "crossroads|companion|knight-of-swords,eight-of-wands,six-of-swords",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是事情在往前走，你可以慢一点跟上。合起来，牌面的语气是：一站一站来就好。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "宝剑骑士迎着风往前冲。劲头在，也可以先让它待一会儿。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": false,
+            "text": "八根权杖一起飞过天空，事情走得很快。跟不上一点，也很正常。"
+          },
+          {
+            "cardId": "six-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "小船慢慢划向对岸，水面平了一些。还在路上，也没关系。"
+          }
+        ],
+        "interpretations": [
+          "如果这个选择里有什么推得很快，心里有点跟不上，也很正常。",
+          "末牌在提示，变动可以一站一站来，不必一次想到终点。"
+        ],
+        "action": "如果愿意，今晚只想到明天就好，更远的先不用想。不这样也可以。",
+        "question": "明天你想怎么过？"
+      }
+    },
+    {
+      "spec": "career|decide|eight-of-wands,queen-of-wands:r,the-hermit:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。权杖八可能在给出推进的势头；权杖王后（逆位）可能在提醒补给是否跟得上投入；隐士（逆位）可能在提示独处是在整理还是在回避，推进前值得分清。往前走之前，最关键的一处在这里：如果工作里最近投入得多，先看投入和补给。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是补给：投入一直在出，回来的跟不上。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": true,
+            "text": "如果想法一直只在心里转，换成把它拿出来看一眼。"
+          }
+        ],
+        "interpretations": [
+          "比较时，补给跟不跟得上，比哪个选项看起来更好更要紧。",
+          "末牌在提示，想了很久的，可以写下来，放到心外看。"
+        ],
+        "action": "给每个选项各写一句：选了它，你从哪里补劲。不想写，在心里说给自己也可以。写完就停，今天不用决定。",
+        "question": "哪个选项选了之后，你的补给还跟得上？"
+      }
+    },
+    {
+      "spec": "career|decide|the-tower,three-of-pentacles:r,death:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。高塔可能在提示原来的安排被震动过；星币三（逆位）可能在提示配合方式有缺口；死神（逆位）可能在提示有一件该收尾的事还拖着。要看清什么还在、什么变了，就从这里看：如果工作里有个约定落空过，先看这个约定。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": false,
+            "text": "如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是一个说得太模糊的约定：没法检验，也就容易落空。"
+          },
+          {
+            "cardId": "death",
+            "position": 2,
+            "reversed": true,
+            "text": "如果有件事一直拖着没收尾，重新开始之前，先给它一个小的了结。"
+          }
+        ],
+        "interpretations": [
+          "比较时，谁做什么、做到哪、什么时候看，说得清的选项更容易落地。",
+          "末牌在提示，先试一次撤得回来的改变。"
+        ],
+        "action": "在每个选项里挑一个，先按它的分工做一小段，看哪里会落空。试一次就停，不用当场决定。",
+        "question": "哪个选项的分工和标准，已经能用一句话说清？"
+      }
+    },
+    {
+      "spec": "crossroads|decide|death,eight-of-wands:r,three-of-pentacles",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。死神可能在指向一个做法已经完成了它的作用；权杖八（逆位）可能在提醒重新开始不用急；星币三可能在提示选项各自依赖的条件。要看清什么还在、什么变了，就从这里看：如果这个选择里有什么迟迟没有进展，先看它卡在哪里。",
+        "cards": [
+          {
+            "cardId": "death",
+            "position": 0,
+            "reversed": false,
+            "text": "如果有个做法越做越费力，对照一下它当初的目的，看是不是可以告一段落。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是等待：事情停着，却说不清是在等谁。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 2,
+            "reversed": false,
+            "text": "把每个选项成立所依赖的条件写清，让比较变得可检验。"
+          }
+        ],
+        "interpretations": [
+          "比较时，下一步在自己手上的选项，等待更少。",
+          "末牌在提示，先查清一处，让事情可以检验。"
+        ],
+        "action": "每个选项各查一处：它要等的条件，现在实际到了没有。查完就停，不用当场决定。",
+        "question": "哪个选项的下一步，是在你自己手上的？"
+      }
+    },
+    {
+      "spec": "career|companion|knight-of-swords:r,three-of-pentacles,the-hermit",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先安静地陪自己待一会儿。合起来，牌面的语气是：这一步可以一个人慢慢来。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": true,
+            "text": "马冲得太快时，骑士反而握不稳剑。慢一点没关系。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": false,
+            "text": "三个人在拱门下一起看着图纸。有人在身边，事情会轻一些。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": false,
+            "text": "隐士提着灯，只照亮脚下一小段路。这次看清眼前就够了。"
+          }
+        ],
+        "interpretations": [
+          "如果工作里有什么要和别人一起完成，有点费心也很正常。",
+          "末牌在提示，这一步适合独自完成，先不急着听更多意见。"
+        ],
+        "action": "如果愿意，今晚给自己留一小段不被打扰的时间，什么都不用想清楚。不这样也可以。",
+        "question": "一个人安静下来的时候，最先想到的是什么？"
+      }
+    },
+    {
+      "spec": "relationship|clarify|the-tower:r,death,queen-of-wands",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清这段关系里什么还在、什么已经变了，再决定从哪一件小事做起。高塔（逆位）可能在指向变动留下的余波；死神可能在指向一种相处方式在收尾；权杖王后可能在带来重新开始的热度。要看清什么还在、什么变了，就从这里看：如果这段关系里有个做法越做越费力，先看这个做法。",
+        "cards": [
+          {
+            "cardId": "the-tower",
+            "position": 0,
+            "reversed": true,
+            "text": "如果一次变动的余波还在，先看清它留下了什么，再谈重新开始。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是一个越做越费力的做法：它当初要解决的事，也许已经变了。"
+          },
+          {
+            "cardId": "queen-of-wands",
+            "position": 2,
+            "reversed": false,
+            "text": "热度可以先落在一件小而具体的事上，让重新开始有个看得见的起点。"
+          }
+        ],
+        "interpretations": [
+          "先核对：它当初要解决的事现在是否还成立。",
+          "末牌在提示，热度在的时候，先写成一句话。"
+        ],
+        "action": "写下一句：如果明天停掉这个做法，最先会发现少了什么。不想写，在心里说给自己也可以。写完就停。",
+        "question": "它当初要解决的事现在是否还成立？"
+      }
+    },
+    {
+      "spec": "career|clarify|four-of-swords,the-tower,knight-of-swords",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。宝剑四可能在提示重新开始之前先歇一歇；高塔可能在提示原来的安排被震动过；宝剑骑士可能在给出重新出发的劲头。要看清什么还在、什么变了，就从这里看：如果工作里原来的安排被打乱过，先看这套安排还剩什么。",
+        "cards": [
+          {
+            "cardId": "four-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "如果已经累了很久，不紧急的事可以排在恢复之后，再谈重新开始。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是原来那套安排：被打乱之后，还能用的和已经不行的混在一起。"
+          },
+          {
+            "cardId": "knight-of-swords",
+            "position": 2,
+            "reversed": false,
+            "text": "劲头在的时候，先把它用在最小的一块上，而不是一口气全部重来。"
+          }
+        ],
+        "interpretations": [
+          "先核对：这套安排里还能用的部分，是否多于已经不行的部分。",
+          "末牌在提示，直接试一次，比反复盘算有用。"
+        ],
+        "action": "今天只按这套安排里还稳的那一块过一天，看够不够用。试一次就停。",
+        "question": "这套安排里还能用的部分，是否多于已经不行的部分？"
+      }
+    },
+    {
+      "spec": "self|companion|page-of-pentacles:r,the-tower,death:r",
+      "focus": "rebuild",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是有些东西在收尾，有些还在，不用急着理清。合起来，牌面的语气是：调整可以慢一点。",
+        "cards": [
+          {
+            "cardId": "page-of-pentacles",
+            "position": 0,
+            "reversed": true,
+            "text": "星币侍从捧着星币看了很久。还没动起来的心思，也可以先只是看着。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 1,
+            "reversed": false,
+            "text": "闪电落在塔顶，原来的东西被震松了。乱的时候，先站稳就好。"
+          },
+          {
+            "cardId": "death",
+            "position": 2,
+            "reversed": true,
+            "text": "死神的脚步停住了，旗子还在。有些收尾慢一点来，也没关系。"
+          }
+        ],
+        "interpretations": [
+          "如果这件事里原来的安排被打乱了，先站稳就好。",
+          "末牌在提示，变化可以很小，也可以先不变。"
+        ],
+        "action": "如果愿意，今晚只对自己说一句：慢慢来也可以。不这样也可以。",
+        "question": "如果慢一点也可以，你最想先松开哪一点？"
+      }
+    },
+    {
+      "spec": "self|clarify|knight-of-swords,four-of-swords,eight-of-wands:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。宝剑骑士可能在给出果断的力量；宝剑四可能在提示推进之前先看力气够不够；权杖八（逆位）可能在提示节奏被打乱过。往前走之前，最关键的一处在这里：如果这件事里最近很少真正歇下来，先看你留给自己的恢复时间。",
+        "cards": [
+          {
+            "cardId": "knight-of-swords",
+            "position": 0,
+            "reversed": false,
+            "text": "思路清楚时适合直接动手；动手前先确认一个最关键的前提。"
+          },
+          {
+            "cardId": "four-of-swords",
+            "position": 1,
+            "reversed": false,
+            "text": "挡住的可能是休息：很久没有真正停下来，力气没地方补。"
+          },
+          {
+            "cardId": "eight-of-wands",
+            "position": 2,
+            "reversed": true,
+            "text": "如果事情卡过，先分清它在等别人、等条件，还是在等你，再决定推哪一处。"
+          }
+        ],
+        "interpretations": [
+          "先核对：最近是否有过一段真正不夹带任务的休息。",
+          "末牌在提示，先慢一拍，别在仓促里补救。"
+        ],
+        "action": "先停一拍：花两分钟写下最近一次真正的休息是哪一天，写完再看。",
+        "question": "最近是否有过一段真正不夹带任务的休息？"
+      }
+    },
+    {
+      "spec": "self|decide|three-of-pentacles,death:r,the-hermit",
+      "focus": "inner-first",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是先听清自己心里的声音，再回应外面的事。星币三可能在提示完成标准要先定清楚；死神（逆位）可能在指向一段还在路上的变化；隐士可能在提示先向内整理。要先听清自己，就从这里听起：如果这件事里有个调整迟迟没动，先看这个调整。",
+        "cards": [
+          {
+            "cardId": "three-of-pentacles",
+            "position": 0,
+            "reversed": false,
+            "text": "把事做成的提示：一件事的完成标准清楚了，力气才用得到点上。"
+          },
+          {
+            "cardId": "death",
+            "position": 1,
+            "reversed": true,
+            "text": "挡住的可能是一个迟迟没动的调整：维持和改变的代价都还没算清。"
+          },
+          {
+            "cardId": "the-hermit",
+            "position": 2,
+            "reversed": false,
+            "text": "外面的声音和事情多的时候，先留一段安静，把自己的判断理出来。"
+          }
+        ],
+        "interpretations": [
+          "比较时，调整一小步和继续维持，代价都要算进去。",
+          "末牌在提示，这一步适合独自完成，先自己回到一次具体的情形里看。"
+        ],
+        "action": "回想以前推迟过的调整，每个选项里哪一种后来证明值得早点动。想到就停，今天不用决定。",
+        "question": "哪个选项调整一小步的代价，比继续维持更小？"
+      }
+    },
+    {
+      "spec": "self|companion|eight-of-wands,three-of-pentacles:r,the-tower:r",
+      "focus": "momentum-check",
+      "output": {
+        "source": "local",
+        "overall": "这组牌的重点是事情在往前走，你可以慢一点跟上。合起来，牌面的语气是：隐约的不安，可以先放在一边。",
+        "cards": [
+          {
+            "cardId": "eight-of-wands",
+            "position": 0,
+            "reversed": false,
+            "text": "八根权杖一起飞过天空，事情走得很快。跟不上一点，也很正常。"
+          },
+          {
+            "cardId": "three-of-pentacles",
+            "position": 1,
+            "reversed": true,
+            "text": "拱门下的三个人一时没对上话。没对上，也不全是谁的问题。"
+          },
+          {
+            "cardId": "the-tower",
+            "position": 2,
+            "reversed": true,
+            "text": "塔还立着，只是晃过一下。心里留着一点不安，也很正常。"
+          }
+        ],
+        "interpretations": [
+          "如果有个打算总是落空，可以先不责怪自己。",
+          "末牌在提示，隐约的不安不用今晚就弄清。"
+        ],
+        "action": "如果愿意，今晚先不去查那些让你不安的事，放到明天也来得及。不这样也可以。",
+        "question": "此刻心里最想先放下的是什么？"
+      }
+    }
+  ]
+}

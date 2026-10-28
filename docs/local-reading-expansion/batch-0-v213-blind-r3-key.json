@@ -1,0 +1,145 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "self|clarify|the-hermit:r,eight-of-wands,knight-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "pause"
+   },
+   "b": {
+    "spec": "self|clarify|the-hermit:r,eight-of-wands,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "crossroads|decide|the-hermit:r,eight-of-wands,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "crossroads|decide|the-hermit:r,eight-of-wands,knight-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "career|clarify|eight-of-wands,knight-of-swords:r,the-tower",
+    "focus": "momentum-check",
+    "mode": "pause"
+   },
+   "b": {
+    "spec": "career|clarify|eight-of-wands,knight-of-swords:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "歇 vs 停一拍",
+   "a": {
+    "spec": "relationship|decide|eight-of-wands,knight-of-swords:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "relationship|decide|eight-of-wands,knight-of-swords:r,the-tower",
+    "focus": "momentum-check",
+    "mode": "pause"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "歇 vs 补",
+   "a": {
+    "spec": "self|clarify|eight-of-wands,knight-of-swords:r,queen-of-wands:r",
+    "focus": "momentum-check",
+    "mode": "refuel"
+   },
+   "b": {
+    "spec": "self|clarify|eight-of-wands,knight-of-swords:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "补 vs 缓",
+   "a": {
+    "spec": "crossroads|clarify|eight-of-wands,knight-of-swords:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   },
+   "b": {
+    "spec": "crossroads|clarify|eight-of-wands,knight-of-swords:r,queen-of-wands:r",
+    "focus": "momentum-check",
+    "mode": "refuel"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "歇 vs 缓",
+   "a": {
+    "spec": "career|decide|eight-of-wands,knight-of-swords:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "career|decide|eight-of-wands,knight-of-swords:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "歇 vs 缓",
+   "a": {
+    "spec": "career|clarify|knight-of-swords,three-of-pentacles:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   },
+   "b": {
+    "spec": "career|clarify|knight-of-swords,three-of-pentacles:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "歇 vs 缓",
+   "a": {
+    "spec": "self|decide|the-hermit,three-of-pentacles:r,four-of-swords",
+    "focus": "inner-first",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "self|decide|the-hermit,three-of-pentacles:r,page-of-cups:r",
+    "focus": "inner-first",
+    "mode": "settle"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "歇 vs 缓",
+   "a": {
+    "spec": "relationship|clarify|eight-of-wands,three-of-pentacles:r,four-of-swords",
+    "focus": "momentum-check",
+    "mode": "rest"
+   },
+   "b": {
+    "spec": "relationship|clarify|eight-of-wands,three-of-pentacles:r,page-of-cups:r",
+    "focus": "momentum-check",
+    "mode": "settle"
+   }
+  }
+ ]
+}

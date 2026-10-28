@@ -1,0 +1,2635 @@
+{
+ "note": "v2.13 人工审读表：一组 = 阻碍位的一句行动 × 用到它的末牌。reviewed 只能由用户填写（如 \"ok\" 或修改意见），AI 不得代填；指纹变化时由生成器清空，需重新审。逐组内容见 docs/local-reading-expansion/v213-review-groups.md。",
+ "groups": {
+  "clarify|the-hermit/upright|drop": {
+   "fingerprint": "3582d685d3c6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|check": {
+   "fingerprint": "41ee5bc15e7a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|trial": {
+   "fingerprint": "2354b19ca50e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|say": {
+   "fingerprint": "25ca9b27001c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|refuel": {
+   "fingerprint": "e9a08d677ec4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|pause": {
+   "fingerprint": "8a034bffa7ef",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|settle": {
+   "fingerprint": "7c3ff60e1321",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|rest": {
+   "fingerprint": "c2fff54c3b1f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/upright|recall": {
+   "fingerprint": "879a50868cf0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|pause": {
+   "fingerprint": "3285a38b09dd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|check": {
+   "fingerprint": "d3d9364681e6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|recall": {
+   "fingerprint": "f9c3c82de278",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|trial": {
+   "fingerprint": "1156e76ca798",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|say": {
+   "fingerprint": "d082eeea631d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|refuel": {
+   "fingerprint": "311efc3adfd1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|settle": {
+   "fingerprint": "355c402b6133",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/upright|rest": {
+   "fingerprint": "ccbd5957ee99",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|drop": {
+   "fingerprint": "c9bdae5aff37",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|check": {
+   "fingerprint": "ba17daaa0139",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|trial": {
+   "fingerprint": "466671b037ab",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|say": {
+   "fingerprint": "6bd70b4487cc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|refuel": {
+   "fingerprint": "7a05b08d1d70",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|pause": {
+   "fingerprint": "df968ef3a658",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|the-hermit/reversed|settle": {
+   "fingerprint": "5dc822f76b96",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|rest": {
+   "fingerprint": "691159898a2a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-hermit/reversed|recall": {
+   "fingerprint": "6cb5cf4ce267",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|drop": {
+   "fingerprint": "bbd325fed127",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|check": {
+   "fingerprint": "a68efb3cf644",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|trial": {
+   "fingerprint": "0c5a73d91c5c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|say": {
+   "fingerprint": "5b00ece4e512",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|refuel": {
+   "fingerprint": "b98d8afe158c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|pause": {
+   "fingerprint": "1e8ceb2deec0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|settle": {
+   "fingerprint": "c2be75b3ecee",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|rest": {
+   "fingerprint": "3cfcfefab585",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-hermit/reversed|recall": {
+   "fingerprint": "41f5f9506e77",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|recall": {
+   "fingerprint": "fbcca39c3d5d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|say": {
+   "fingerprint": "fb1b85b137fc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|drop": {
+   "fingerprint": "6bf1c387fa32",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|trial": {
+   "fingerprint": "91a53c463daf",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|refuel": {
+   "fingerprint": "f9c7c7ac37ee",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|check": {
+   "fingerprint": "319aa71ceb46",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|pause": {
+   "fingerprint": "cbc24cbb5b3a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|settle": {
+   "fingerprint": "7606a59e7c3a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/upright|rest": {
+   "fingerprint": "be00f349b518",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|recall": {
+   "fingerprint": "f334be77f8f6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|say": {
+   "fingerprint": "ebdcec6d4156",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|drop": {
+   "fingerprint": "1c7b112f555a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|trial": {
+   "fingerprint": "be982d3b555c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|refuel": {
+   "fingerprint": "012f828c9b25",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|check": {
+   "fingerprint": "8e98d77b053b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|pause": {
+   "fingerprint": "5ce0baf8af2c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|settle": {
+   "fingerprint": "ba43bf924cce",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/upright|rest": {
+   "fingerprint": "b087b733228d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|recall": {
+   "fingerprint": "4cf23f52bf03",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|say": {
+   "fingerprint": "a6bbc0ed2919",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|trial": {
+   "fingerprint": "9b331d57cf2d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|the-tower/reversed|refuel": {
+   "fingerprint": "6d431d88e5b3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|check": {
+   "fingerprint": "a02990d43a51",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|pause": {
+   "fingerprint": "36987f6d4c9a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|settle": {
+   "fingerprint": "6b5de56dff32",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|the-tower/reversed|rest": {
+   "fingerprint": "ba63613bec45",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|recall": {
+   "fingerprint": "40f4393941dd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|say": {
+   "fingerprint": "a250d42ae44c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|trial": {
+   "fingerprint": "4494f7d77684",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|refuel": {
+   "fingerprint": "c3206bb55e40",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|check": {
+   "fingerprint": "0ca0d83391be",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|pause": {
+   "fingerprint": "7103e4881891",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|settle": {
+   "fingerprint": "651401a3ff57",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|the-tower/reversed|rest": {
+   "fingerprint": "7dcc2135d333",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|recall": {
+   "fingerprint": "e1543547a025",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|say": {
+   "fingerprint": "37e3cfd55910",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|drop": {
+   "fingerprint": "a1596577b6ea",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|check": {
+   "fingerprint": "f1b265f87f56",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第三轮"
+  },
+  "clarify|death/upright|refuel": {
+   "fingerprint": "84305adf60bd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|pause": {
+   "fingerprint": "47a5652e7588",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|settle": {
+   "fingerprint": "9c7a91c8460f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|rest": {
+   "fingerprint": "f195825a8d30",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/upright|trial": {
+   "fingerprint": "3c8baea39939",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|recall": {
+   "fingerprint": "c9e9f1c5d385",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|say": {
+   "fingerprint": "8688e191dd6f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|drop": {
+   "fingerprint": "0e112485583c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|death/upright|check": {
+   "fingerprint": "60ed33bf2e9c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|refuel": {
+   "fingerprint": "2276b75649ab",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|pause": {
+   "fingerprint": "7074a6be1092",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|settle": {
+   "fingerprint": "ef5585ba908b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|rest": {
+   "fingerprint": "b0ac407e3714",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/upright|trial": {
+   "fingerprint": "b93afa59031c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|recall": {
+   "fingerprint": "f7ffef634c9b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|say": {
+   "fingerprint": "498e0a2ef91e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|drop": {
+   "fingerprint": "bff8c59e0b21",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|check": {
+   "fingerprint": "1f48ef3d1a47",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|death/reversed|refuel": {
+   "fingerprint": "c80ea3604fd5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|pause": {
+   "fingerprint": "c5c3b699896b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|settle": {
+   "fingerprint": "29d688d9d23c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|rest": {
+   "fingerprint": "e879822a8cd6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|death/reversed|trial": {
+   "fingerprint": "e5b7ed8706cd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|recall": {
+   "fingerprint": "8a4a970f0a48",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-28｜第五轮"
+  },
+  "decide|death/reversed|say": {
+   "fingerprint": "e8127d0d5398",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|drop": {
+   "fingerprint": "89a090ee7960",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|check": {
+   "fingerprint": "671dbdfc4362",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|refuel": {
+   "fingerprint": "e607e536d793",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|pause": {
+   "fingerprint": "8da2de8144cb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|settle": {
+   "fingerprint": "6b4468999611",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|rest": {
+   "fingerprint": "531a589a55b8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|death/reversed|trial": {
+   "fingerprint": "f3bc77b74458",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|recall": {
+   "fingerprint": "f767544feee5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|say": {
+   "fingerprint": "cacf80c64dd8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|drop": {
+   "fingerprint": "73a2b2fa5953",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|check": {
+   "fingerprint": "192161530eba",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|trial": {
+   "fingerprint": "e8734674db0e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|pause": {
+   "fingerprint": "b992e75325d9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|settle": {
+   "fingerprint": "cfd673ff93d8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|rest": {
+   "fingerprint": "d5d7caf14da7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/upright|refuel": {
+   "fingerprint": "c7e64c699341",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|recall": {
+   "fingerprint": "042bde6c1501",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|say": {
+   "fingerprint": "f35e5ba869ab",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|drop": {
+   "fingerprint": "b594e62cae81",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第四轮"
+  },
+  "decide|queen-of-wands/upright|check": {
+   "fingerprint": "a39558f00d2a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|trial": {
+   "fingerprint": "7d60871f6cdf",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|pause": {
+   "fingerprint": "fd5c8de57454",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|settle": {
+   "fingerprint": "690eec0af966",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|rest": {
+   "fingerprint": "cdc3931f0191",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/upright|refuel": {
+   "fingerprint": "4b43878f4ab3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|recall": {
+   "fingerprint": "e1ec8d4a320a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|say": {
+   "fingerprint": "25842eba8c87",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|drop": {
+   "fingerprint": "3c2dcb94e043",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|check": {
+   "fingerprint": "a3c160cd0c5f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|trial": {
+   "fingerprint": "fbcd9b93e910",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|pause": {
+   "fingerprint": "671d9e3294da",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|settle": {
+   "fingerprint": "19bec65a4d8c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|rest": {
+   "fingerprint": "bd3245fdf03b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|queen-of-wands/reversed|refuel": {
+   "fingerprint": "939b883f909f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|recall": {
+   "fingerprint": "e8d75a6cbc29",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|say": {
+   "fingerprint": "5650ee09bfd6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|drop": {
+   "fingerprint": "c89eca862d71",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|check": {
+   "fingerprint": "0474dbe9d35d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|trial": {
+   "fingerprint": "85ab06104ea4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|pause": {
+   "fingerprint": "70ff18dd07a0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|settle": {
+   "fingerprint": "2799d2fba365",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|rest": {
+   "fingerprint": "1bb982fbda4e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|queen-of-wands/reversed|refuel": {
+   "fingerprint": "4fbd3308320a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|recall": {
+   "fingerprint": "d31f9d3476c4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|say": {
+   "fingerprint": "280d793a78ae",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|drop": {
+   "fingerprint": "0cdb506ec763",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|check": {
+   "fingerprint": "55f8ab455f4b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|trial": {
+   "fingerprint": "a6fa20ab3373",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|refuel": {
+   "fingerprint": "f1d37623fc5d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|settle": {
+   "fingerprint": "46c2a99979f9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|rest": {
+   "fingerprint": "ae8e10b85d62",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/upright|pause": {
+   "fingerprint": "696814ffb0d2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|recall": {
+   "fingerprint": "3b85f7a8be16",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|say": {
+   "fingerprint": "37c9dfbdbfdd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|drop": {
+   "fingerprint": "20e50c3f7f88",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|check": {
+   "fingerprint": "08bf6763b8e5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|trial": {
+   "fingerprint": "c701107ad906",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|refuel": {
+   "fingerprint": "7548cbe54049",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|settle": {
+   "fingerprint": "94f6c035e838",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|rest": {
+   "fingerprint": "e73460b736d0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/upright|pause": {
+   "fingerprint": "790c11fde1d6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|recall": {
+   "fingerprint": "cd33635f995a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|say": {
+   "fingerprint": "6515d11fc68c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|drop": {
+   "fingerprint": "22ee4e3e524c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|check": {
+   "fingerprint": "414c78537b99",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|eight-of-wands/reversed|trial": {
+   "fingerprint": "e2979a02d310",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|refuel": {
+   "fingerprint": "1ec7d43434be",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|settle": {
+   "fingerprint": "713c2276a2a1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|rest": {
+   "fingerprint": "d121a0516932",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|eight-of-wands/reversed|pause": {
+   "fingerprint": "2676cc4120d7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|eight-of-wands/reversed|recall": {
+   "fingerprint": "ef1619dc9f33",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|say": {
+   "fingerprint": "b3cc7e7ad457",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|drop": {
+   "fingerprint": "f65976b23f6e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|check": {
+   "fingerprint": "afc420c61f8a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|trial": {
+   "fingerprint": "160fb266399e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|refuel": {
+   "fingerprint": "525e1faddff1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|settle": {
+   "fingerprint": "b5f5db5e8cef",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|eight-of-wands/reversed|rest": {
+   "fingerprint": "60bd738874b1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|recall": {
+   "fingerprint": "3ebf6e441092",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|say": {
+   "fingerprint": "68bdfdb60e0c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|page-of-cups/upright|drop": {
+   "fingerprint": "1613ccee6fcd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|check": {
+   "fingerprint": "10a6bb1238e6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|trial": {
+   "fingerprint": "2941e76000af",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|refuel": {
+   "fingerprint": "402952385de9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|pause": {
+   "fingerprint": "6c6ff80043b0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/upright|rest": {
+   "fingerprint": "18785e88d946",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|recall": {
+   "fingerprint": "fc41f9064de7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|say": {
+   "fingerprint": "7d18a28f3cdd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|drop": {
+   "fingerprint": "a69b4cb62b4b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|page-of-cups/upright|check": {
+   "fingerprint": "f3e53abb3b43",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|trial": {
+   "fingerprint": "fb72b7637f09",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|refuel": {
+   "fingerprint": "62fe6fea189f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|pause": {
+   "fingerprint": "5ce6e5394724",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/upright|rest": {
+   "fingerprint": "978a12e5b80f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|recall": {
+   "fingerprint": "04afd51e2154",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|say": {
+   "fingerprint": "47a4bc53e2e9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|drop": {
+   "fingerprint": "6b19869ce4c5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|check": {
+   "fingerprint": "80ee79efa053",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|trial": {
+   "fingerprint": "ce16e6c03473",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|refuel": {
+   "fingerprint": "b39727688036",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|pause": {
+   "fingerprint": "9f95b4636364",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-cups/reversed|rest": {
+   "fingerprint": "c33837c31850",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|recall": {
+   "fingerprint": "854d7e2a105b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|say": {
+   "fingerprint": "173faede1c38",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|drop": {
+   "fingerprint": "25fd91a58325",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|check": {
+   "fingerprint": "c58989cd9764",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|trial": {
+   "fingerprint": "945ed95274a0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|refuel": {
+   "fingerprint": "2d68da2c48a2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|pause": {
+   "fingerprint": "fbf322e0611b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-cups/reversed|rest": {
+   "fingerprint": "060880a31669",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|recall": {
+   "fingerprint": "b8b40c7b20a0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|say": {
+   "fingerprint": "adf8fa4483f5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|drop": {
+   "fingerprint": "1d2cae35d873",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|check": {
+   "fingerprint": "2e1687e4f6e5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|trial": {
+   "fingerprint": "f833dd35cce7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|refuel": {
+   "fingerprint": "a81d23baca90",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-28｜第五轮"
+  },
+  "clarify|four-of-swords/upright|pause": {
+   "fingerprint": "923b489e22f8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/upright|settle": {
+   "fingerprint": "90a7996f1c4f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|recall": {
+   "fingerprint": "16e39a9fb2b0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|say": {
+   "fingerprint": "ce557cd5267b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|drop": {
+   "fingerprint": "1a416c254728",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|check": {
+   "fingerprint": "96ea9ffbaf37",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|trial": {
+   "fingerprint": "ec98b8ae725c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|refuel": {
+   "fingerprint": "2fd49bdb129f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|pause": {
+   "fingerprint": "2bb6ebbedebe",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/upright|settle": {
+   "fingerprint": "993b75910251",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|recall": {
+   "fingerprint": "c2dbee1e6fb6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|say": {
+   "fingerprint": "efba42929a88",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|drop": {
+   "fingerprint": "aabffb061181",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|check": {
+   "fingerprint": "c5a08953035e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|trial": {
+   "fingerprint": "7410c1fb69c5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|refuel": {
+   "fingerprint": "3d0e2d7465f6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|pause": {
+   "fingerprint": "7cf575bb091e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|four-of-swords/reversed|settle": {
+   "fingerprint": "659afaf187b3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|recall": {
+   "fingerprint": "c5fbf9f5b9f0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|say": {
+   "fingerprint": "06aa05fb5767",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|drop": {
+   "fingerprint": "df12e968a6a5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|check": {
+   "fingerprint": "2d58c47a48c7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|trial": {
+   "fingerprint": "ba2f074934e1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|refuel": {
+   "fingerprint": "ae99f40ba208",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|pause": {
+   "fingerprint": "43c398c4a969",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|four-of-swords/reversed|rest": {
+   "fingerprint": "d68367dade1c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|recall": {
+   "fingerprint": "084682c9880b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|say": {
+   "fingerprint": "a828ecfd390b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|drop": {
+   "fingerprint": "9e6aff0d98aa",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|check": {
+   "fingerprint": "f5155ac10653",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|trial": {
+   "fingerprint": "db74a918228e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|refuel": {
+   "fingerprint": "a6583ef2c89d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|pause": {
+   "fingerprint": "e7cfe4041627",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|settle": {
+   "fingerprint": "c9a53b596188",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/upright|rest": {
+   "fingerprint": "e986fc6f7ce2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|recall": {
+   "fingerprint": "53fe6937ce77",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|say": {
+   "fingerprint": "5b467ba611c6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|drop": {
+   "fingerprint": "c21593b3f408",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|check": {
+   "fingerprint": "9c07c3e56ed6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|trial": {
+   "fingerprint": "e8cf425df376",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|refuel": {
+   "fingerprint": "f084677a7fb2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|pause": {
+   "fingerprint": "c3ca38bd4f78",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|settle": {
+   "fingerprint": "52b29f5debc0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/upright|rest": {
+   "fingerprint": "e8c24993bf7d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|recall": {
+   "fingerprint": "94ea97b9fe3b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|say": {
+   "fingerprint": "8f17dd6a9c00",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|drop": {
+   "fingerprint": "3c069c73d4c2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|six-of-swords/reversed|check": {
+   "fingerprint": "6052112a6a1a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第三轮"
+  },
+  "clarify|six-of-swords/reversed|trial": {
+   "fingerprint": "07c6130235c8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|refuel": {
+   "fingerprint": "1066400e53b1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|pause": {
+   "fingerprint": "5a977717bc28",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|settle": {
+   "fingerprint": "05747a138c7a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|six-of-swords/reversed|rest": {
+   "fingerprint": "dbed10877b10",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|recall": {
+   "fingerprint": "7cf97c88acbf",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|say": {
+   "fingerprint": "f48467ce2fd9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|drop": {
+   "fingerprint": "79802af916ae",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|check": {
+   "fingerprint": "e08d9e90ff92",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|trial": {
+   "fingerprint": "3630088e6502",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|refuel": {
+   "fingerprint": "a0a57e8928b8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|pause": {
+   "fingerprint": "7f2987f5e794",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|settle": {
+   "fingerprint": "a1f7ffcaf210",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|six-of-swords/reversed|rest": {
+   "fingerprint": "3304f87e9ab7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|recall": {
+   "fingerprint": "314a6bbb049c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|say": {
+   "fingerprint": "cea516f778b8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|drop": {
+   "fingerprint": "35e3be50194c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|check": {
+   "fingerprint": "f95aa1155e9c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|trial": {
+   "fingerprint": "2af95398be74",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|refuel": {
+   "fingerprint": "74e2b6d36253",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|pause": {
+   "fingerprint": "c99db17623d4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|settle": {
+   "fingerprint": "3251f2c08793",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/upright|rest": {
+   "fingerprint": "e59715e2ff29",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|recall": {
+   "fingerprint": "b0c293e53b57",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|say": {
+   "fingerprint": "8c12cca89734",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|drop": {
+   "fingerprint": "4348c4d0fea9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|check": {
+   "fingerprint": "a9329095a4ee",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|trial": {
+   "fingerprint": "b78c26de89d1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|refuel": {
+   "fingerprint": "c0e5dfb87667",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|pause": {
+   "fingerprint": "3a96bb844314",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|settle": {
+   "fingerprint": "3a497ac682c8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/upright|rest": {
+   "fingerprint": "513efcc61941",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|recall": {
+   "fingerprint": "8ceb6206e442",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|say": {
+   "fingerprint": "723dd6171dda",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|drop": {
+   "fingerprint": "d1b5607c32ac",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|check": {
+   "fingerprint": "d847d6afc66b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|trial": {
+   "fingerprint": "2b3e84e25dff",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|refuel": {
+   "fingerprint": "f22ebf01011f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|pause": {
+   "fingerprint": "cd43ebf08a4f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|settle": {
+   "fingerprint": "397264caa62a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|knight-of-swords/reversed|rest": {
+   "fingerprint": "88f280e362a7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|recall": {
+   "fingerprint": "c96b9c774c81",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|say": {
+   "fingerprint": "2d72948e5f31",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|drop": {
+   "fingerprint": "94f97abbf888",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|check": {
+   "fingerprint": "ccf2666f2562",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|trial": {
+   "fingerprint": "102937c1e188",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|refuel": {
+   "fingerprint": "ac2f0e25929c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|pause": {
+   "fingerprint": "8f2b63461af8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|settle": {
+   "fingerprint": "7c356b7f8ab2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|knight-of-swords/reversed|rest": {
+   "fingerprint": "2c2896f55041",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|recall": {
+   "fingerprint": "d9741c8e9a00",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|say": {
+   "fingerprint": "f9cb996b8a66",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|drop": {
+   "fingerprint": "901c595fa6e1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|check": {
+   "fingerprint": "49517d3c23c8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|trial": {
+   "fingerprint": "7ed79ea32ba0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|refuel": {
+   "fingerprint": "1e17c12ad2a5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|settle": {
+   "fingerprint": "576973a3ea4f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/upright|rest": {
+   "fingerprint": "d9a7baedde71",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|recall": {
+   "fingerprint": "35a16e90b4e4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|two-of-pentacles/upright|say": {
+   "fingerprint": "61536717e963",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|drop": {
+   "fingerprint": "2826707f0355",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|check": {
+   "fingerprint": "18e52f699879",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|trial": {
+   "fingerprint": "4598d0960a40",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|refuel": {
+   "fingerprint": "4b612c7dd2be",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|settle": {
+   "fingerprint": "4883e3f31500",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/upright|rest": {
+   "fingerprint": "9634d995a59c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|recall": {
+   "fingerprint": "edb9f5200b55",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|say": {
+   "fingerprint": "903b9a41d341",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|drop": {
+   "fingerprint": "df3c1e769c0c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|check": {
+   "fingerprint": "aa243226e811",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|trial": {
+   "fingerprint": "36f50a41158f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|refuel": {
+   "fingerprint": "a9ee03f0aed1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|pause": {
+   "fingerprint": "e68156eb99c9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|settle": {
+   "fingerprint": "5a3485454fd5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|two-of-pentacles/reversed|rest": {
+   "fingerprint": "62ffdf14e259",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|recall": {
+   "fingerprint": "e73239892111",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|say": {
+   "fingerprint": "03a37ca8c08d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|drop": {
+   "fingerprint": "5fa802832e91",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|two-of-pentacles/reversed|check": {
+   "fingerprint": "bc05acc37d58",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|trial": {
+   "fingerprint": "5b49cf55cd64",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|refuel": {
+   "fingerprint": "bfe1116f2c47",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|pause": {
+   "fingerprint": "777263720456",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|settle": {
+   "fingerprint": "63c544440509",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|two-of-pentacles/reversed|rest": {
+   "fingerprint": "88aff051a292",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|recall": {
+   "fingerprint": "c3414030d31f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|say": {
+   "fingerprint": "bda23d0f6ff6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|drop": {
+   "fingerprint": "25ef22618837",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|check": {
+   "fingerprint": "d951981a0b5a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|trial": {
+   "fingerprint": "1282561d9ba5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|refuel": {
+   "fingerprint": "9f6c466affe2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|pause": {
+   "fingerprint": "f800254f28c3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|three-of-pentacles/upright|settle": {
+   "fingerprint": "a8841b4911e3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright|rest": {
+   "fingerprint": "9be66a6b4f47",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|recall": {
+   "fingerprint": "5d6f8967bd5b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|say": {
+   "fingerprint": "9013822f244b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|drop": {
+   "fingerprint": "d9b3d27e25f0",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|three-of-pentacles/upright|check": {
+   "fingerprint": "f13d32126cfe",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|trial": {
+   "fingerprint": "9d3d6bd8902d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|refuel": {
+   "fingerprint": "f86b8c017d7e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|pause": {
+   "fingerprint": "c12e9c39b3c4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "decide|three-of-pentacles/upright|settle": {
+   "fingerprint": "09d8ca3497ee",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright|rest": {
+   "fingerprint": "9fc69bce40b5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|recall": {
+   "fingerprint": "0c1a59921d3f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|say": {
+   "fingerprint": "7ce3d7670586",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|drop": {
+   "fingerprint": "a949658c3e1b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|check": {
+   "fingerprint": "6943aed0e5ba",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|trial": {
+   "fingerprint": "fdda4295a7d1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|refuel": {
+   "fingerprint": "2e619304f7cb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|pause": {
+   "fingerprint": "6fe06d441ebb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|settle": {
+   "fingerprint": "240120055263",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@relationship|rest": {
+   "fingerprint": "3f3dffc70d48",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|recall": {
+   "fingerprint": "162b99083dad",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|say": {
+   "fingerprint": "26e4a6da3717",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|drop": {
+   "fingerprint": "79a59b993151",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|check": {
+   "fingerprint": "67e6824929c1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|trial": {
+   "fingerprint": "ee15b4a3913d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|refuel": {
+   "fingerprint": "838c00baf780",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|pause": {
+   "fingerprint": "bda0a1701b11",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|settle": {
+   "fingerprint": "2e42e39a613b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@relationship|rest": {
+   "fingerprint": "37f04edc57d3",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|recall": {
+   "fingerprint": "677f4513dc8a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|say": {
+   "fingerprint": "e722108c6630",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|drop": {
+   "fingerprint": "0f784d50b982",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|check": {
+   "fingerprint": "0582e51daadc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|trial": {
+   "fingerprint": "532c98252ead",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|refuel": {
+   "fingerprint": "0761579f63b7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|pause": {
+   "fingerprint": "f699e01deef6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|settle": {
+   "fingerprint": "fea8e824dd5a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@self|rest": {
+   "fingerprint": "a25cf4730143",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|recall": {
+   "fingerprint": "b9d9253c5d0f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|say": {
+   "fingerprint": "71a9d6fda736",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|drop": {
+   "fingerprint": "6feda2bd3431",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|check": {
+   "fingerprint": "b725676932dd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|trial": {
+   "fingerprint": "557758f15846",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|refuel": {
+   "fingerprint": "4f827885f736",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|pause": {
+   "fingerprint": "309e0fcff62d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|settle": {
+   "fingerprint": "d805c1341f65",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@self|rest": {
+   "fingerprint": "2eee5351bd9b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|recall": {
+   "fingerprint": "677f4513dc8a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|say": {
+   "fingerprint": "e722108c6630",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|drop": {
+   "fingerprint": "0f784d50b982",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|check": {
+   "fingerprint": "0582e51daadc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|trial": {
+   "fingerprint": "532c98252ead",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|refuel": {
+   "fingerprint": "0761579f63b7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|pause": {
+   "fingerprint": "f699e01deef6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|settle": {
+   "fingerprint": "fea8e824dd5a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/upright@crossroads|rest": {
+   "fingerprint": "a25cf4730143",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|recall": {
+   "fingerprint": "b9d9253c5d0f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|say": {
+   "fingerprint": "71a9d6fda736",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|drop": {
+   "fingerprint": "6feda2bd3431",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|check": {
+   "fingerprint": "b725676932dd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|trial": {
+   "fingerprint": "557758f15846",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|refuel": {
+   "fingerprint": "4f827885f736",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|pause": {
+   "fingerprint": "309e0fcff62d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|settle": {
+   "fingerprint": "d805c1341f65",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/upright@crossroads|rest": {
+   "fingerprint": "2eee5351bd9b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|recall": {
+   "fingerprint": "a5a7d4b17807",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|say": {
+   "fingerprint": "58c5df3c6672",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|drop": {
+   "fingerprint": "77b5d5b2ed68",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|check": {
+   "fingerprint": "70a3ec953740",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|trial": {
+   "fingerprint": "60fdd9e33de5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|refuel": {
+   "fingerprint": "0e6db233e9a2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|pause": {
+   "fingerprint": "de037a4d8258",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|settle": {
+   "fingerprint": "4813b611fe43",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed|rest": {
+   "fingerprint": "825ad3dad56a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|recall": {
+   "fingerprint": "ca355e979643",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|say": {
+   "fingerprint": "74cc2b7065c7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|drop": {
+   "fingerprint": "7cdfef86c62a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|check": {
+   "fingerprint": "e0e929759a48",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|trial": {
+   "fingerprint": "01da944aca4a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|refuel": {
+   "fingerprint": "13007546efcf",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|pause": {
+   "fingerprint": "3e0f0b6ac4d5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|settle": {
+   "fingerprint": "82a64f8a246b",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed|rest": {
+   "fingerprint": "24c7173dc648",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|recall": {
+   "fingerprint": "209768e8e933",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|say": {
+   "fingerprint": "0967ef784d93",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|drop": {
+   "fingerprint": "fe9a8bb4b897",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|check": {
+   "fingerprint": "8720654b50e4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|trial": {
+   "fingerprint": "38f53f24f6a1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|refuel": {
+   "fingerprint": "61160eb69647",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|pause": {
+   "fingerprint": "ee7ccc8e54ae",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|settle": {
+   "fingerprint": "5e87c32d9e12",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@relationship|rest": {
+   "fingerprint": "e63bae128397",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|recall": {
+   "fingerprint": "f65a93400fce",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|say": {
+   "fingerprint": "566f3637d9dc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|drop": {
+   "fingerprint": "8e554f6b6024",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|check": {
+   "fingerprint": "3089f2980a6f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|trial": {
+   "fingerprint": "bf03e404ea88",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|refuel": {
+   "fingerprint": "4555de07dbef",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|pause": {
+   "fingerprint": "1fa6a4f2021a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|settle": {
+   "fingerprint": "ed0746e521d5",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@relationship|rest": {
+   "fingerprint": "f556056fbf88",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|recall": {
+   "fingerprint": "eb0750b14524",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|say": {
+   "fingerprint": "77ff335a6fa2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|drop": {
+   "fingerprint": "76256a36071d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|check": {
+   "fingerprint": "ecec7f0cacd8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|trial": {
+   "fingerprint": "2d1edaa584f1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|refuel": {
+   "fingerprint": "0399aacb858a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|pause": {
+   "fingerprint": "b6198b329a40",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|settle": {
+   "fingerprint": "016a172daaf1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@self|rest": {
+   "fingerprint": "9a7ae1161231",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|recall": {
+   "fingerprint": "3a23a97e7699",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|say": {
+   "fingerprint": "6cfb96803511",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|drop": {
+   "fingerprint": "15b1403c3e74",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|check": {
+   "fingerprint": "6d4deba29de9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|trial": {
+   "fingerprint": "c9fa320ac9eb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|refuel": {
+   "fingerprint": "58d1ee5b7e4a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|pause": {
+   "fingerprint": "22294ef03ca4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|settle": {
+   "fingerprint": "29f7ba9c53f7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@self|rest": {
+   "fingerprint": "f01cd94ce691",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|recall": {
+   "fingerprint": "eb0750b14524",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|say": {
+   "fingerprint": "77ff335a6fa2",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|drop": {
+   "fingerprint": "76256a36071d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|check": {
+   "fingerprint": "ecec7f0cacd8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|trial": {
+   "fingerprint": "2d1edaa584f1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|refuel": {
+   "fingerprint": "0399aacb858a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|pause": {
+   "fingerprint": "b6198b329a40",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|settle": {
+   "fingerprint": "016a172daaf1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|three-of-pentacles/reversed@crossroads|rest": {
+   "fingerprint": "9a7ae1161231",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|recall": {
+   "fingerprint": "3a23a97e7699",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|say": {
+   "fingerprint": "6cfb96803511",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|drop": {
+   "fingerprint": "15b1403c3e74",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|check": {
+   "fingerprint": "6d4deba29de9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|trial": {
+   "fingerprint": "c9fa320ac9eb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|refuel": {
+   "fingerprint": "58d1ee5b7e4a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|pause": {
+   "fingerprint": "22294ef03ca4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|settle": {
+   "fingerprint": "29f7ba9c53f7",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|three-of-pentacles/reversed@crossroads|rest": {
+   "fingerprint": "f01cd94ce691",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|recall": {
+   "fingerprint": "d80bcff19d2e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|say": {
+   "fingerprint": "7c4ac2d0239d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|drop": {
+   "fingerprint": "65e8928bcb63",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|check": {
+   "fingerprint": "d8af4a6843b8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|trial": {
+   "fingerprint": "a44fc9f9c777",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|refuel": {
+   "fingerprint": "e130929de141",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|pause": {
+   "fingerprint": "f24a5fa79a00",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|settle": {
+   "fingerprint": "f76775a0f6c8",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/upright|rest": {
+   "fingerprint": "37d8ca8ff20f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|recall": {
+   "fingerprint": "429e57c8cb0a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-28｜第五轮"
+  },
+  "decide|page-of-pentacles/upright|say": {
+   "fingerprint": "48f31f723a96",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|drop": {
+   "fingerprint": "e604a0009ba6",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|check": {
+   "fingerprint": "69a1e794d9dd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|trial": {
+   "fingerprint": "8619b61bc186",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|refuel": {
+   "fingerprint": "84aed11b005c",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|pause": {
+   "fingerprint": "9f2ad1497750",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|settle": {
+   "fingerprint": "61e15986aeaa",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/upright|rest": {
+   "fingerprint": "6c1fee6d0e95",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|recall": {
+   "fingerprint": "0775b652cd2e",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|say": {
+   "fingerprint": "b48eb281308a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|drop": {
+   "fingerprint": "25ee60e95fe9",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|check": {
+   "fingerprint": "7a40c9d3e523",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27｜第二轮"
+  },
+  "clarify|page-of-pentacles/reversed|trial": {
+   "fingerprint": "806a4f63dcd1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|refuel": {
+   "fingerprint": "3016c6d57efc",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|pause": {
+   "fingerprint": "be1b3041e79d",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|settle": {
+   "fingerprint": "88c4e4c8a043",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "clarify|page-of-pentacles/reversed|rest": {
+   "fingerprint": "6c423077a7b1",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|recall": {
+   "fingerprint": "023607345d38",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|say": {
+   "fingerprint": "57bf1e3086bb",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|drop": {
+   "fingerprint": "48ff620d0b1a",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|check": {
+   "fingerprint": "d0033f5005cd",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|trial": {
+   "fingerprint": "3b86a7c047c4",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|refuel": {
+   "fingerprint": "af16a8bfc538",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|pause": {
+   "fingerprint": "fe14d74e339f",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|settle": {
+   "fingerprint": "81f859199586",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  },
+  "decide|page-of-pentacles/reversed|rest": {
+   "fingerprint": "f3d3581f1919",
+   "reviewed": null,
+   "aiReviewed": "ok｜deepseek-flash（用户自有 API）｜2026-10-27"
+  }
+ }
+}

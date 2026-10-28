@@ -1,1436 +1,2537 @@
 {
-  "note": "每批的评审记录。aiPrescreen：是否做过 AI 盲评预审（子智能体 / 其他模型）；humanReview：人工评分是否完成（评审人、人数、日期、结果）。AI 预审不能填进 humanReview。 aiEditorialReview：知情 AI 编辑审读的逐例分数、问题与修复方向，仍不计入 humanReview。",
-  "reviews": {
-    "0": {
-      "aiPrescreen": "docs/review-local-reading-ai-prescreen-2026-10-10.md（Claude 子智能体 10 轮；DeepSeek 1 轮）；docs/review-local-v2-7-blind-agents-2026-10-11.md（Codex 3 个独立子智能体模拟盲评，45/1/2）",
-      "humanReview": null,
-      "aiEditorialReview": {
-        "type": "ai-editorial-review",
-        "reviewer": "Codex 主审，3 个子智能体分段初审后统一校准",
-        "date": "2026-10-11",
-        "humanReviewerCount": 0,
-        "aiAgentCount": 4,
-        "methodology": "知情审读当前版本；3 个子智能体各初审 8 例，主审按同一口径校准；不是每例四位独立评审，不做旧版盲比较，不能替代人工验收。评审期间可见版本与历史评审背景。",
-        "sampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.7-sample.md",
-        "contentVersion": "local-v2.7-sample",
-        "sourceSamplesSha256": "6c4538e7c1893f58eeb31c1e1fbab01995bc7bc0badb05c3d476557e91d2ec57",
-        "sourceSamplesHashScope": "本轮追加评语前的评分表原文；移除带标记的本轮摘要与逐例评语可还原。",
-        "rubric": {
-          "order": [
-            "clearClaim",
-            "threeCardConnection",
-            "topicFit",
-            "concreteAction",
-            "directLanguage"
-          ],
-          "labels": [
-            "观点明确",
-            "三牌关联",
-            "主题匹配",
-            "行动具体",
-            "语言直接"
-          ],
-          "scale": {
-            "0": "缺失或明显问题",
-            "1": "部分达到",
-            "2": "清楚有用"
-          },
-          "minimumTotal": 8,
-          "noZeroItem": true,
-          "blockingIssuesMustBeResolved": true
-        },
-        "verdict": "needs-revision",
-        "summary": {
-          "sampleCount": 24,
-          "totalScore": 166,
-          "averageTotal": 6.92,
-          "averageByDimension": {
-            "clearClaim": 1.79,
-            "threeCardConnection": 1.08,
-            "topicFit": 1.38,
-            "concreteAction": 1.38,
-            "directLanguage": 1.29
-          },
-          "scorePassedCount": 8,
-          "scorePassedSamples": [
-            2,
-            5,
-            6,
-            7,
-            8,
-            14,
-            18,
-            19
-          ],
-          "editorialPassedCount": 1,
-          "editorialPassedSamples": [
-            8
-          ],
-          "blockingIssueSamples": [
-            1,
-            2,
-            5,
-            6,
-            7,
-            9,
-            10,
-            12,
-            14,
-            15,
-            16,
-            18,
-            19,
-            21
-          ],
-          "samplesWithZeroItem": [
-            10,
-            13,
-            21,
-            22
-          ],
-          "positionalPathSampleCount": 14,
-          "sharedFocusSampleCount": 10,
-          "scope": "仅描述这 24 个 v2.7 固定样本；不推断全部组合命中率、用户效果或其他版本质量。"
-        },
-        "priorities": [
-          "先修样本 21 的离开预设与三次事实冒认，以及 10、13、22 的主题错配。",
-          "修 1、9、12、16 的现实前提及 2、5、6、7、14、18、19 的延期口径；15 的整体也要保留决定的期限边界。",
-          "统一三牌解释、读法、行动与追问，补第三张牌的实际贡献，消除 companion 的强制记录。",
-          "新增共同解释按 STYLE §7 先保留组合及期望命中，再补标记与角色、分支、行动、追问和主题变体。",
-          "修订后复评不通过例和同牌其他组合，再交真人评审；本轮不变更批次放行状态。"
-        ],
-        "samples": [
-          {
-            "id": 1,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "先核对一项做法是否仍有作用，再安排变化。",
-            "rationale": "三牌分别讲整理、收尾、震动，缺少共同推理；行动转去列稳固与松动事项，问句又转去揭露旧问题，没有接住“原目的是否仍成立”。",
-            "problemSentences": [
-              {
-                "quote": "这次变动里，哪一点让你最先看清了原来被盖住的东西？",
-                "reason": "预设变动已发生且已经看清某事。",
-                "source": "PRD LQ07；STYLE §1–2",
-                "blocking": true
-              },
-              {
-                "quote": "变动刚发生、信息还不全时，先稳住吃饭、睡觉和必须履行的事，其余先放进待查清单。",
-                "reason": "实际暂放其余事项，同句未限定不紧急或有期限的事。",
-                "source": "STYLE §3",
-                "blocking": true
-              }
-            ],
-            "revision": "把三牌连成“整理依据—核对旧做法—保护基本安排”；行动只核对一项做法的原目的与现在作用，问句改成条件口径。"
-          },
-          {
-            "id": 2,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "安顿情绪后，用同一标准重新比较关系中的选择。",
-            "rationale": "高塔与圣杯侍从逆位支持安顿；隐士只有背景标签，没有说明如何形成自己的比较标准。行动具体，但整体无条件要求今天不决定，语言只能部分达标。",
-            "problemSentences": [
-              {
-                "quote": "今天先不拍板：等情绪平稳后，用同样的标准再看一次这段关系里的选择。",
-                "reason": "延后决定未在同句保留期限例外；行动末尾的例外不能补全整体句。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              }
-            ],
-            "revision": "限定情绪影响判断且事情不紧急时再延后；让隐士承担筛掉外部声音、留下自己比较标准的作用。"
-          },
-          {
-            "id": 3,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "考虑关系调整时，先看收尾与现有负担，再缩小下一步。",
-            "rationale": "权杖八的推进势头没有参与减负的理由；关系被写成过渡、下一站，转译不足。陪伴行动仍要求处理一项安排，并固定假定能腾出半小时。",
-            "problemSentences": [
-              {
-                "quote": "如果想走却没走，原因常在资源、顾虑和没处理完的事里，先分清是哪一类。",
-                "reason": "条件句没有确认必须离开，但关系语境仍偏去留。",
-                "source": "STYLE §6 牌族检查",
-                "blocking": false
-              },
-              {
-                "quote": "今天先减一件小事：把一项不紧急的安排挪到明天，用省下的半小时做点让自己放松的事；有期限的事以期限为准。",
-                "reason": "有延期例外；问题在于陪伴仍默认有事项要处理，省下的时间也未必是半小时。",
-                "source": "STYLE §4；PRD §8",
-                "blocking": false
-              }
-            ],
-            "revision": "将关系变体写成相处方式或自身期待的调整；解释推进与收尾的张力，陪伴提供无需处理事项的轻量选择。"
-          },
-          {
-            "id": 4,
-            "scores": {
-              "clearClaim": 1,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 2,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "先弄清自己要什么，再看哪些约定或做法可以收尾。",
-            "rationale": "首段问约定，行动问旧目的是否完成，缺少连接；权杖王后的表达需要没有参与推理。自我主题仍借协作分工和退场语境。行动有明确产物，保留具体性得分。",
-            "problemSentences": [
-              {
-                "quote": "这组牌值得先核对的是：约定有没有说清楚。",
-                "reason": "与后面的收尾行动不是同一个观察重点。",
-                "source": "PRD §4、LQ01–03",
-                "blocking": false
-              },
-              {
-                "quote": "约定还不清楚时，先整理一件需要配合的事，写清各自要做什么。",
-                "reason": "自我主题需要落到自己的需要和承担部分，不能默认多人分工。",
-                "source": "STYLE §6 牌族检查",
-                "blocking": false
-              }
-            ],
-            "revision": "统一为“说清自己现在要什么，再核对承诺是否仍服务于它”；分支分别处理期待未清与目的已完成。"
-          },
-          {
-            "id": 5,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 2,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 9,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "找到能安顿自己的小落点，再分清事实与猜测进行比较。",
-            "rationale": "圣杯侍从的轻落点、隐士逆位的待整理部分、高塔的震动能共同支持先稳后比较；行动和问句也接住标准。语言扣分仅因整体无条件宣布延后。",
-            "problemSentences": [
-              {
-                "quote": "今天先不拍板：等情绪平稳后，用同样的标准再比较一次。",
-                "reason": "同句没有不紧急或期限例外。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              }
-            ],
-            "revision": "给真正延后的整体句补适用条件与期限例外，保留已有解释链和比较行动。"
-          },
-          {
-            "id": 6,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "面对可能的变动余波，先用一个小动作让自己稳一些。",
-            "rationale": "高塔逆位和宝剑四支持恢复，权杖王后却转向让别人看见成果。整体说不用想清楚，读法二又要求写两栏；陪伴任务口径不一致。呼吸或喝水的行动本身具体且无需追加期限补丁。",
-            "problemSentences": [
-              {
-                "quote": "如果有一次变动留下了余波，先让自己稳一稳，再去处理变动本身。",
-                "reason": "确实将处理变动延后，同句无期限例外。",
-                "source": "STYLE §3",
-                "blocking": true
-              },
-              {
-                "quote": "如果情绪已经缓下来、只剩一个说不清的不安，把它拆成“看到的事实”和“自己的解读”两栏。",
-                "reason": "陪伴读法仍要求书写核对，与整体的低负担承诺不一致。",
-                "source": "STYLE §4；PRD §8",
-                "blocking": false
-              }
-            ],
-            "revision": "让权杖王后的热度用于照顾自己的小动作；陪伴读法二改成可停留的观察，只对真正延后的句子补边界。"
-          },
-          {
-            "id": 7,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "比较去留时，先看每个选项的消耗和现有承受余量。",
-            "rationale": "过渡成本与恢复需求相连，但权杖八逆位只作节奏背景；“延期或缩小”又接“处理掉”，不清楚今天要完成事项还是完成调整安排。",
-            "problemSentences": [
-              {
-                "quote": "如果已经累了很久，判断质量容易下降，恢复期要先于决定。",
-                "reason": "恢复被无条件排在决定前，同句无期限例外。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              },
-              {
-                "quote": "在这个选择里写下你现在同时承担的几件事，选一件不紧急、可以延期或缩小的，今天就处理掉；有期限的事以期限为准。",
-                "reason": "行动有产物及边界，但“处理掉”与延期或缩小的目标含混。",
-                "source": "STYLE §4",
-                "blocking": false
-              }
-            ],
-            "revision": "让节奏牌帮助区分等信息与推得过急；明确今天完成的是延期或缩小的安排，并为恢复后再决定保留期限边界。"
-          },
-          {
-            "id": 8,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 2
-            },
-            "total": 9,
-            "scorePassed": true,
-            "hasBlockingIssue": false,
-            "editorialPassed": true,
-            "keyPoint": "有推进势头时，先确认关键细节和承诺容量是否撑得住。",
-            "rationale": "快速推进与容量约束可以共同成立，事业比较行动具体且没有事实冒认；三牌关联扣一分，因为追问改成承诺动机，全文的重点只部分一致。",
-            "problemSentences": [
-              {
-                "quote": "如果有一项承诺当初是出于“应该”才答应的，是哪一项？",
-                "reason": "条件句合规，但从细节与容量转到承诺动机，连接不足。",
-                "source": "PRD LQ02–03",
-                "blocking": false
-              }
-            ],
-            "revision": "追问改为哪条未确认的细节会改变投入估计，或哪项新增投入最可能超出余量。"
-          },
-          {
-            "id": 9,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "把分散的热情收拢到一件喜欢的小事，停留五分钟即可。",
-            "rationale": "星币二与权杖王后的收拢关系成立；星币侍从逆位只作背景，实际运用的逐牌建议与不需要成果的陪伴口径未连接。事业适配偏弱，学过的经历预设影响语言分。",
-            "problemSentences": [
-              {
-                "quote": "把学过的东西用出来一次。",
-                "reason": "未提供学过某项东西的经历，句子却把它当作已有前提。",
-                "source": "PRD LQ07；STYLE §2",
-                "blocking": true
-              }
-            ],
-            "revision": "用条件口径；让末牌承担把计划缩成无需成果的小接触，而不是将陪伴变成学习作业。"
-          },
-          {
-            "id": 10,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 0,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 5,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "先把反复出现的不对劲分成事实与猜测。",
-            "rationale": "关系主题套用制作成果、展示最小版本；整体核对不安，行动却做粗糙版本，问句再转向愿意动手的事项。主题明显错配，具体时长不能补救重点脱节。",
-            "problemSentences": [
-              {
-                "quote": "被放到一边的不安，要等把事实和猜测分开之后才好判断。",
-                "reason": "无条件确认不安已经被放到一边。",
-                "source": "PRD LQ07；STYLE §1–2",
-                "blocking": true
-              },
-              {
-                "quote": "用 20 分钟把你最想推进的一件事做成一个最粗糙的版本，写清下一次想拿给谁看。",
-                "reason": "关系语境变成制作与展示成果，未接住事实核对。",
-                "source": "PRD LQ02–03；STYLE §6",
-                "blocking": false
-              }
-            ],
-            "revision": "补关系变体，把事实、自己的期待和投入的一步相连；行动仅整理自己的观察与待核实点。"
-          },
-          {
-            "id": 11,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "比较关系中的选择时，先看投入与补给是否相称。",
-            "rationale": "观察重点明确，但学习、好奇没有形成比较投入与补给的共同依据；行动改用想象中的轻松感，问句又问心动时刻，全文逐步偏离重点。",
-            "problemSentences": [
-              {
-                "quote": "为每个选项想象做完后的第一个早晨，记下哪个让你心里更轻，并写一句原因。",
-                "reason": "能完成，但没有核对整体强调的投入与补给。",
-                "source": "PRD §4、LQ02–04",
-                "blocking": false
-              },
-              {
-                "quote": "如果最近有哪一刻让你心里动了一下，是什么时候？",
-                "reason": "条件口径合规，但追问没有继续确认比较条件。",
-                "source": "PRD LQ03",
-                "blocking": false
-              }
-            ],
-            "revision": "将轻量探索用于获得投入或补给的信息；行动与追问继续比较同一项现实条件。"
-          },
-          {
-            "id": 12,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "外部意见很多时，先整理自己的判断，再缩小动作。",
-            "rationale": "自我语境可成立，但情绪、外部意见与果断行动没有形成解释链；陪伴行动直接要求处理事项，问句也继续催推进，没有覆盖只想陪伴的情况。",
-            "problemSentences": [
-              {
-                "quote": "把今天最想快点解决的事缩小成一个 10 分钟的动作，做完就停。",
-                "reason": "预设今天存在一件想快点解决的事，并把陪伴变成推进任务。",
-                "source": "STYLE §2、§4；PRD LQ07",
-                "blocking": true
-              }
-            ],
-            "revision": "分清有明确目标与只需要安静两种情况；陪伴提供短暂的注意方向，不强制处理事项。"
-          },
-          {
-            "id": 13,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 0,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 5,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "先看旧做法是否已完成作用，再确定适合自己的完成标准。",
-            "rationale": "自我主题被多人分工、共同任务接管；行动与问句没有承接宝剑四逆位的重启或死神的旧做法收尾，还默认存在共同事项和参与者。",
-            "problemSentences": [
-              {
-                "quote": "写一页分工：这件事里要完成的一件事、各自负责的部分、完成标准和确认日期。",
-                "reason": "具体产物属于多人协作，既未回答旧做法是否仍有用，也未适配自我主题。",
-                "source": "PRD LQ02–03；STYLE §6",
-                "blocking": false
-              }
-            ],
-            "revision": "补星币三的自我变体，用自己的完成标准承接旧做法收尾；涉及共同事项时再使用分工内容。"
-          },
-          {
-            "id": 14,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "把各选项的过渡消耗与现有余量放在一起比较。",
-            "rationale": "消耗、余量与具体估算连贯；高塔仍只作背景，没有解释旧安排改变为何需要重估余量。恢复必须先于决定的句子缺边界；直接选更可承担的一项也过度缩窄比较标准。",
-            "problemSentences": [
-              {
-                "quote": "如果已经累了很久，判断质量容易下降，恢复期要先于决定。",
-                "reason": "延期决定没有同句期限例外。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              },
-              {
-                "quote": "把两个选项的消耗和现有负担放在一起比较，选更可承担的那一个。",
-                "reason": "把消耗标准直接推成选择结果，未留下其他重要条件。",
-                "source": "STYLE §4 decide",
-                "blocking": false
-              }
-            ],
-            "revision": "让高塔承担重新估算余量的理由；保留具体估算，改成标明可承担程度，再与其他条件比较，并补期限例外。"
-          },
-          {
-            "id": 15,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "过渡中的负担偏重时，先减少一项非紧急安排。",
-            "rationale": "去留与减负匹配，但权杖八的推进窗口和延后安排之间的张力未解释。陪伴行动仍要求处理事项，固定半小时及后续追问也未必成立。",
-            "problemSentences": [
-              {
-                "quote": "这次先减一点负担，不用做任何决定。",
-                "reason": "无条件宣布可以不决定，行动里的期限句不能补全整体。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              },
-              {
-                "quote": "今天省下的半小时，你想怎么用？",
-                "reason": "假定行动必定腾出半小时，追问依赖未核实的时间。",
-                "source": "STYLE §1–2、§4",
-                "blocking": false
-              }
-            ],
-            "revision": "把推进窗口与资源不足解释成缩小范围的推进；不固定腾出的时间，陪伴保留无需处理事项的选择。"
-          },
-          {
-            "id": 16,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "先分清仍需恢复还是可以出发，再考虑一个中间站。",
-            "rationale": "事业语境自然，但行动直接安排过渡，跳过恢复与出发的区别；首牌热度未参与判断，问句还默认已处在过渡期。",
-            "problemSentences": [
-              {
-                "quote": "写下工作里你想从哪里到哪里，再写出一个一个月内能到的“中间站”，以及到达的标志。",
-                "reason": "未限定正在考虑方向调整，就要求规划过渡。",
-                "source": "STYLE §2、§6；PRD LQ02–03",
-                "blocking": false
-              },
-              {
-                "quote": "过渡期里，你最需要先备好的一样东西是什么？",
-                "reason": "直接预设用户正处于过渡期。",
-                "source": "PRD LQ07；STYLE §1–2",
-                "blocking": true
-              }
-            ],
-            "revision": "两条读法分别承接仍需恢复与已经能推进；只有考虑方向调整时，才安排中间站并追问准备条件。"
-          },
-          {
-            "id": 17,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "将精力集中到一个有兴趣、可停止的小尝试，再考虑加速。",
-            "rationale": "圣杯侍从与星币二支持聚焦，但宝剑骑士的推进被改成慢慢来，转折理由不足；事业决定退化成兴趣排序，小试探缺对象、范围和完成标准。",
-            "problemSentences": [
-              {
-                "quote": "末牌的节奏偏急，所以先把热度放在一件能慢慢来的小事上，不急着出成果。",
-                "reason": "没有解释果断推进为何在这里变成放慢。",
-                "source": "PRD LQ02",
-                "blocking": false
-              },
-              {
-                "quote": "把最让你有精神的选项排第一，但先做一次可以随时停的小试探，再决定要不要加速。",
-                "reason": "试探的对象、边界与产物不明确，比较只剩精神感受。",
-                "source": "STYLE §4；PRD LQ04",
-                "blocking": false
-              }
-            ],
-            "revision": "写成果断推进一个小试验、避免扩大承诺；明确与事业有关的对象、时长及停止点。"
-          },
-          {
-            "id": 18,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 2,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "关系判断若受过快节奏与疲劳干扰，先留出安静恢复空间。",
-            "rationale": "过快、暂停、向内整理能共同支撑重点，关系中也可成立；行动有时间和产物，但陪伴被强制变成写作。恢复后再决定没有同句边界，语言扣分。",
-            "problemSentences": [
-              {
-                "quote": "已经累了很久、判断开始变差时，先给自己一个明确的休息窗口，再做决定。",
-                "reason": "确实延后决定，同句没有不紧急或期限例外。",
-                "source": "STYLE §3；PRD LQ07",
-                "blocking": true
-              },
-              {
-                "quote": "找一个不被打扰的 15 分钟，什么都不用决定，只写下此刻心里最响的一句话。",
-                "reason": "companion 强制写字，降低负担只做到一部分。",
-                "source": "STYLE §4；PRD §8",
-                "blocking": false
-              }
-            ],
-            "revision": "补延期决定的期限边界；允许安静待一会儿，写字作为可选。"
-          },
-          {
-            "id": 19,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 2,
-              "directLanguage": 1
-            },
-            "total": 8,
-            "scorePassed": true,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "先确认现有关系负担，减轻一项，再评估调整能承受多大变化。",
-            "rationale": "负担与过渡连贯，关系调整本身不等于离开；高塔只作背景，没有解释震动怎样改变减负顺序。处理变化被排到稳住之后，缺同句例外。",
-            "problemSentences": [
-              {
-                "quote": "先稳住最基本的几件事，再处理其他的变化。",
-                "reason": "这句实际延后其他变化，却没有同句限定不紧急或保留期限。",
-                "source": "STYLE §3",
-                "blocking": true
-              }
-            ],
-            "revision": "让高塔明确承担保护基本生活和已有责任的作用；把其他变化是否延期写成有边界的条件。"
-          },
-          {
-            "id": 20,
-            "scores": {
-              "clearClaim": 1,
-              "threeCardConnection": 1,
-              "topicFit": 2,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "决定前检查承载余量，并区分事实与当下情绪。",
-            "rationale": "整体主张余量，读法二、行动和问句却转向情绪；没有解释速度、兼顾与情绪如何共同影响比较。行动有日期和期限例外，但没有检查余量。",
-            "problemSentences": [
-              {
-                "quote": "今天先不拍板：把需要决定的事写下，标上“情绪平稳后再看”，约好明天同一时间再读一遍；有期限的事以期限为准。",
-                "reason": "延期边界已经提供；问题在于把情绪分支变成默认行动，未回应余量主张。",
-                "source": "PRD LQ02–04；STYLE §4",
-                "blocking": false
-              }
-            ],
-            "revision": "统一为区分有余量推进与被情绪催促；行动比较各选项的时间、精力占用，只在对应条件下使用情绪暂停。"
-          },
-          {
-            "id": 21,
-            "scores": {
-              "clearClaim": 1,
-              "threeCardConnection": 1,
-              "topicFit": 0,
-              "concreteAction": 1,
-              "directLanguage": 0
-            },
-            "total": 3,
-            "scorePassed": false,
-            "hasBlockingIssue": true,
-            "editorialPassed": false,
-            "keyPoint": "检查个人负担和重复模式，而不是默认通过离开来解决。",
-            "rationale": "分工、重复问题与离开没有共同解释；自我与陪伴被写成合作和去留任务。要求推进离开并确认最近三次重复，是明显现实前提和语言问题。",
-            "problemSentences": [
-              {
-                "quote": "今天只做一件让“离开”更近一点的小事（查一个信息、整理一份材料），做完就好。",
-                "reason": "自我主题未提供离开意愿，行动却直接推进离开。",
-                "source": "STYLE §2、§4、§6",
-                "blocking": true
-              },
-              {
-                "quote": "同样的问题，最近三次是在什么情境下出现的？",
-                "reason": "冒认同样问题已在最近发生过三次。",
-                "source": "PRD LQ07；STYLE §1–2",
-                "blocking": true
-              }
-            ],
-            "revision": "优先补自我主题变体；重复模式用条件句，陪伴不要求推进离开或整理材料。"
-          },
-          {
-            "id": 22,
-            "scores": {
-              "clearClaim": 1,
-              "threeCardConnection": 1,
-              "topicFit": 0,
-              "concreteAction": 1,
-              "directLanguage": 1
-            },
-            "total": 4,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "分清独处是否在有效整理，还是缺少能改变去留判断的信息。",
-            "rationale": "学习起步与多人分工没有接进去留判断；行动虽然有产物和日期，却没有回答独处是否有效，还默认选项涉及共同事项。",
-            "problemSentences": [
-              {
-                "quote": "写一页分工：这个选择里要完成的一件事、各自负责的部分、完成标准和确认日期。",
-                "reason": "去留被套成多人分工，未限定选择确实涉及协作。",
-                "source": "PRD LQ02–03；STYLE §6",
-                "blocking": false
-              }
-            ],
-            "revision": "用星币三的可检验性整理一条待核实的去留条件及验证渠道；涉及协作时才启用分工变体。"
-          },
-          {
-            "id": 23,
-            "scores": {
-              "clearClaim": 2,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 7,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "比较维持与调整的成本，再用小调查补齐信息。",
-            "rationale": "成本重点明确，但三牌仍主要并列；读法二和问句变成学习练习，去留适配不足。调查行动具体，却未指定记录何种成本，主张与产物仅部分关联。",
-            "problemSentences": [
-              {
-                "quote": "如果有想学的东西，先安排一个固定的学习或练习时段。",
-                "reason": "去留主题被学习牌带成学习任务。",
-                "source": "STYLE §6 牌族检查",
-                "blocking": false
-              },
-              {
-                "quote": "如果要开始一件事，最小的一次练习是什么？",
-                "reason": "追问没有继续确认维持与调整的成本。",
-                "source": "PRD LQ03",
-                "blocking": false
-              }
-            ],
-            "revision": "保留短调查，明确每个选项的时间、精力或机会成本及待核实项；第二读法与追问改成验证去留条件。"
-          },
-          {
-            "id": 24,
-            "scores": {
-              "clearClaim": 1,
-              "threeCardConnection": 1,
-              "topicFit": 1,
-              "concreteAction": 1,
-              "directLanguage": 2
-            },
-            "total": 6,
-            "scorePassed": false,
-            "hasBlockingIssue": false,
-            "editorialPassed": false,
-            "keyPoint": "检查旧做法是否仍有作用，再为一个小起点留空间。",
-            "rationale": "计划未启动、阶段收尾与向外热度没有形成解释；事业读法指向目的复核或最小版本，行动却变成家务和音乐，还强制记录感受。",
-            "problemSentences": [
-              {
-                "quote": "今天做一件让你有精神的小事，比如放一首喜欢的歌做 10 分钟家务，做完记一句感受。",
-                "reason": "与旧做法是否仍有作用脱节，companion 仍追加记录任务。",
-                "source": "STYLE §4；PRD §4、§8",
-                "blocking": false
-              }
-            ],
-            "revision": "先解释旧做法收尾与新起点的关系；陪伴动作围绕这个重点，取消必须记录感受。"
-          }
-        ],
-        "sampleFileNote": "2026-10-11 修订为 v2.9 时，带评语的 v2.7 评分表另存到此路径（内容未改）；batch-0-samples.md 现在是 v2.9 的表。"
+ "note": "每批的评审记录。aiPrescreen：是否做过 AI 盲评预审（子智能体 / 其他模型）；humanReview：人工评分是否完成（评审人、人数、日期、结果）。AI 预审不能填进 humanReview。 aiEditorialReview：知情 AI 编辑审读的逐例分数、问题与修复方向，仍不计入 humanReview。 aiReview：用户决定由 AI 代替人工完成的审核（2026-10-27 起，见 PROCESS.md 文末例外），注明模型与来源，仍不计入 humanReview。",
+ "reviews": {
+  "0": {
+   "aiPrescreen": "docs/review-local-reading-ai-prescreen-2026-10-10.md（Claude 子智能体 10 轮；DeepSeek 1 轮）；docs/review-local-v2-7-blind-agents-2026-10-11.md（Codex 3 个独立子智能体模拟盲评，45/1/2）",
+   "humanReview": null,
+   "aiEditorialReview": {
+    "type": "ai-editorial-review",
+    "reviewer": "Codex 主审，3 个子智能体分段初审后统一校准",
+    "date": "2026-10-11",
+    "humanReviewerCount": 0,
+    "aiAgentCount": 4,
+    "methodology": "知情审读当前版本；3 个子智能体各初审 8 例，主审按同一口径校准；不是每例四位独立评审，不做旧版盲比较，不能替代人工验收。评审期间可见版本与历史评审背景。",
+    "sampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.7-sample.md",
+    "contentVersion": "local-v2.7-sample",
+    "sourceSamplesSha256": "6c4538e7c1893f58eeb31c1e1fbab01995bc7bc0badb05c3d476557e91d2ec57",
+    "sourceSamplesHashScope": "本轮追加评语前的评分表原文；移除带标记的本轮摘要与逐例评语可还原。",
+    "rubric": {
+     "order": [
+      "clearClaim",
+      "threeCardConnection",
+      "topicFit",
+      "concreteAction",
+      "directLanguage"
+     ],
+     "labels": [
+      "观点明确",
+      "三牌关联",
+      "主题匹配",
+      "行动具体",
+      "语言直接"
+     ],
+     "scale": {
+      "0": "缺失或明显问题",
+      "1": "部分达到",
+      "2": "清楚有用"
+     },
+     "minimumTotal": 8,
+     "noZeroItem": true,
+     "blockingIssuesMustBeResolved": true
+    },
+    "verdict": "needs-revision",
+    "summary": {
+     "sampleCount": 24,
+     "totalScore": 166,
+     "averageTotal": 6.92,
+     "averageByDimension": {
+      "clearClaim": 1.79,
+      "threeCardConnection": 1.08,
+      "topicFit": 1.38,
+      "concreteAction": 1.38,
+      "directLanguage": 1.29
+     },
+     "scorePassedCount": 8,
+     "scorePassedSamples": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      14,
+      18,
+      19
+     ],
+     "editorialPassedCount": 1,
+     "editorialPassedSamples": [
+      8
+     ],
+     "blockingIssueSamples": [
+      1,
+      2,
+      5,
+      6,
+      7,
+      9,
+      10,
+      12,
+      14,
+      15,
+      16,
+      18,
+      19,
+      21
+     ],
+     "samplesWithZeroItem": [
+      10,
+      13,
+      21,
+      22
+     ],
+     "positionalPathSampleCount": 14,
+     "sharedFocusSampleCount": 10,
+     "scope": "仅描述这 24 个 v2.7 固定样本；不推断全部组合命中率、用户效果或其他版本质量。"
+    },
+    "priorities": [
+     "先修样本 21 的离开预设与三次事实冒认，以及 10、13、22 的主题错配。",
+     "修 1、9、12、16 的现实前提及 2、5、6、7、14、18、19 的延期口径；15 的整体也要保留决定的期限边界。",
+     "统一三牌解释、读法、行动与追问，补第三张牌的实际贡献，消除 companion 的强制记录。",
+     "新增共同解释按 STYLE §7 先保留组合及期望命中，再补标记与角色、分支、行动、追问和主题变体。",
+     "修订后复评不通过例和同牌其他组合，再交真人评审；本轮不变更批次放行状态。"
+    ],
+    "samples": [
+     {
+      "id": 1,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 1
       },
-      "heldout": "docs/local-reading-expansion/batch-0-heldout.json（heldout：v2.9 前固定，已用于改稿，现只作回归；heldout2：v2.10 前固定；family：牌族主题矩阵）",
-      "revisions": [
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "先核对一项做法是否仍有作用，再安排变化。",
+      "rationale": "三牌分别讲整理、收尾、震动，缺少共同推理；行动转去列稳固与松动事项，问句又转去揭露旧问题，没有接住“原目的是否仍成立”。",
+      "problemSentences": [
+       {
+        "quote": "这次变动里，哪一点让你最先看清了原来被盖住的东西？",
+        "reason": "预设变动已发生且已经看清某事。",
+        "source": "PRD LQ07；STYLE §1–2",
+        "blocking": true
+       },
+       {
+        "quote": "变动刚发生、信息还不全时，先稳住吃饭、睡觉和必须履行的事，其余先放进待查清单。",
+        "reason": "实际暂放其余事项，同句未限定不紧急或有期限的事。",
+        "source": "STYLE §3",
+        "blocking": true
+       }
+      ],
+      "revision": "把三牌连成“整理依据—核对旧做法—保护基本安排”；行动只核对一项做法的原目的与现在作用，问句改成条件口径。"
+     },
+     {
+      "id": 2,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "安顿情绪后，用同一标准重新比较关系中的选择。",
+      "rationale": "高塔与圣杯侍从逆位支持安顿；隐士只有背景标签，没有说明如何形成自己的比较标准。行动具体，但整体无条件要求今天不决定，语言只能部分达标。",
+      "problemSentences": [
+       {
+        "quote": "今天先不拍板：等情绪平稳后，用同样的标准再看一次这段关系里的选择。",
+        "reason": "延后决定未在同句保留期限例外；行动末尾的例外不能补全整体句。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       }
+      ],
+      "revision": "限定情绪影响判断且事情不紧急时再延后；让隐士承担筛掉外部声音、留下自己比较标准的作用。"
+     },
+     {
+      "id": 3,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "考虑关系调整时，先看收尾与现有负担，再缩小下一步。",
+      "rationale": "权杖八的推进势头没有参与减负的理由；关系被写成过渡、下一站，转译不足。陪伴行动仍要求处理一项安排，并固定假定能腾出半小时。",
+      "problemSentences": [
+       {
+        "quote": "如果想走却没走，原因常在资源、顾虑和没处理完的事里，先分清是哪一类。",
+        "reason": "条件句没有确认必须离开，但关系语境仍偏去留。",
+        "source": "STYLE §6 牌族检查",
+        "blocking": false
+       },
+       {
+        "quote": "今天先减一件小事：把一项不紧急的安排挪到明天，用省下的半小时做点让自己放松的事；有期限的事以期限为准。",
+        "reason": "有延期例外；问题在于陪伴仍默认有事项要处理，省下的时间也未必是半小时。",
+        "source": "STYLE §4；PRD §8",
+        "blocking": false
+       }
+      ],
+      "revision": "将关系变体写成相处方式或自身期待的调整；解释推进与收尾的张力，陪伴提供无需处理事项的轻量选择。"
+     },
+     {
+      "id": 4,
+      "scores": {
+       "clearClaim": 1,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 2,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "先弄清自己要什么，再看哪些约定或做法可以收尾。",
+      "rationale": "首段问约定，行动问旧目的是否完成，缺少连接；权杖王后的表达需要没有参与推理。自我主题仍借协作分工和退场语境。行动有明确产物，保留具体性得分。",
+      "problemSentences": [
+       {
+        "quote": "这组牌值得先核对的是：约定有没有说清楚。",
+        "reason": "与后面的收尾行动不是同一个观察重点。",
+        "source": "PRD §4、LQ01–03",
+        "blocking": false
+       },
+       {
+        "quote": "约定还不清楚时，先整理一件需要配合的事，写清各自要做什么。",
+        "reason": "自我主题需要落到自己的需要和承担部分，不能默认多人分工。",
+        "source": "STYLE §6 牌族检查",
+        "blocking": false
+       }
+      ],
+      "revision": "统一为“说清自己现在要什么，再核对承诺是否仍服务于它”；分支分别处理期待未清与目的已完成。"
+     },
+     {
+      "id": 5,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 2,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 9,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "找到能安顿自己的小落点，再分清事实与猜测进行比较。",
+      "rationale": "圣杯侍从的轻落点、隐士逆位的待整理部分、高塔的震动能共同支持先稳后比较；行动和问句也接住标准。语言扣分仅因整体无条件宣布延后。",
+      "problemSentences": [
+       {
+        "quote": "今天先不拍板：等情绪平稳后，用同样的标准再比较一次。",
+        "reason": "同句没有不紧急或期限例外。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       }
+      ],
+      "revision": "给真正延后的整体句补适用条件与期限例外，保留已有解释链和比较行动。"
+     },
+     {
+      "id": 6,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "面对可能的变动余波，先用一个小动作让自己稳一些。",
+      "rationale": "高塔逆位和宝剑四支持恢复，权杖王后却转向让别人看见成果。整体说不用想清楚，读法二又要求写两栏；陪伴任务口径不一致。呼吸或喝水的行动本身具体且无需追加期限补丁。",
+      "problemSentences": [
+       {
+        "quote": "如果有一次变动留下了余波，先让自己稳一稳，再去处理变动本身。",
+        "reason": "确实将处理变动延后，同句无期限例外。",
+        "source": "STYLE §3",
+        "blocking": true
+       },
+       {
+        "quote": "如果情绪已经缓下来、只剩一个说不清的不安，把它拆成“看到的事实”和“自己的解读”两栏。",
+        "reason": "陪伴读法仍要求书写核对，与整体的低负担承诺不一致。",
+        "source": "STYLE §4；PRD §8",
+        "blocking": false
+       }
+      ],
+      "revision": "让权杖王后的热度用于照顾自己的小动作；陪伴读法二改成可停留的观察，只对真正延后的句子补边界。"
+     },
+     {
+      "id": 7,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "比较去留时，先看每个选项的消耗和现有承受余量。",
+      "rationale": "过渡成本与恢复需求相连，但权杖八逆位只作节奏背景；“延期或缩小”又接“处理掉”，不清楚今天要完成事项还是完成调整安排。",
+      "problemSentences": [
+       {
+        "quote": "如果已经累了很久，判断质量容易下降，恢复期要先于决定。",
+        "reason": "恢复被无条件排在决定前，同句无期限例外。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       },
+       {
+        "quote": "在这个选择里写下你现在同时承担的几件事，选一件不紧急、可以延期或缩小的，今天就处理掉；有期限的事以期限为准。",
+        "reason": "行动有产物及边界，但“处理掉”与延期或缩小的目标含混。",
+        "source": "STYLE §4",
+        "blocking": false
+       }
+      ],
+      "revision": "让节奏牌帮助区分等信息与推得过急；明确今天完成的是延期或缩小的安排，并为恢复后再决定保留期限边界。"
+     },
+     {
+      "id": 8,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 2
+      },
+      "total": 9,
+      "scorePassed": true,
+      "hasBlockingIssue": false,
+      "editorialPassed": true,
+      "keyPoint": "有推进势头时，先确认关键细节和承诺容量是否撑得住。",
+      "rationale": "快速推进与容量约束可以共同成立，事业比较行动具体且没有事实冒认；三牌关联扣一分，因为追问改成承诺动机，全文的重点只部分一致。",
+      "problemSentences": [
+       {
+        "quote": "如果有一项承诺当初是出于“应该”才答应的，是哪一项？",
+        "reason": "条件句合规，但从细节与容量转到承诺动机，连接不足。",
+        "source": "PRD LQ02–03",
+        "blocking": false
+       }
+      ],
+      "revision": "追问改为哪条未确认的细节会改变投入估计，或哪项新增投入最可能超出余量。"
+     },
+     {
+      "id": 9,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "把分散的热情收拢到一件喜欢的小事，停留五分钟即可。",
+      "rationale": "星币二与权杖王后的收拢关系成立；星币侍从逆位只作背景，实际运用的逐牌建议与不需要成果的陪伴口径未连接。事业适配偏弱，学过的经历预设影响语言分。",
+      "problemSentences": [
+       {
+        "quote": "把学过的东西用出来一次。",
+        "reason": "未提供学过某项东西的经历，句子却把它当作已有前提。",
+        "source": "PRD LQ07；STYLE §2",
+        "blocking": true
+       }
+      ],
+      "revision": "用条件口径；让末牌承担把计划缩成无需成果的小接触，而不是将陪伴变成学习作业。"
+     },
+     {
+      "id": 10,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 0,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 5,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "先把反复出现的不对劲分成事实与猜测。",
+      "rationale": "关系主题套用制作成果、展示最小版本；整体核对不安，行动却做粗糙版本，问句再转向愿意动手的事项。主题明显错配，具体时长不能补救重点脱节。",
+      "problemSentences": [
+       {
+        "quote": "被放到一边的不安，要等把事实和猜测分开之后才好判断。",
+        "reason": "无条件确认不安已经被放到一边。",
+        "source": "PRD LQ07；STYLE §1–2",
+        "blocking": true
+       },
+       {
+        "quote": "用 20 分钟把你最想推进的一件事做成一个最粗糙的版本，写清下一次想拿给谁看。",
+        "reason": "关系语境变成制作与展示成果，未接住事实核对。",
+        "source": "PRD LQ02–03；STYLE §6",
+        "blocking": false
+       }
+      ],
+      "revision": "补关系变体，把事实、自己的期待和投入的一步相连；行动仅整理自己的观察与待核实点。"
+     },
+     {
+      "id": 11,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "比较关系中的选择时，先看投入与补给是否相称。",
+      "rationale": "观察重点明确，但学习、好奇没有形成比较投入与补给的共同依据；行动改用想象中的轻松感，问句又问心动时刻，全文逐步偏离重点。",
+      "problemSentences": [
+       {
+        "quote": "为每个选项想象做完后的第一个早晨，记下哪个让你心里更轻，并写一句原因。",
+        "reason": "能完成，但没有核对整体强调的投入与补给。",
+        "source": "PRD §4、LQ02–04",
+        "blocking": false
+       },
+       {
+        "quote": "如果最近有哪一刻让你心里动了一下，是什么时候？",
+        "reason": "条件口径合规，但追问没有继续确认比较条件。",
+        "source": "PRD LQ03",
+        "blocking": false
+       }
+      ],
+      "revision": "将轻量探索用于获得投入或补给的信息；行动与追问继续比较同一项现实条件。"
+     },
+     {
+      "id": 12,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "外部意见很多时，先整理自己的判断，再缩小动作。",
+      "rationale": "自我语境可成立，但情绪、外部意见与果断行动没有形成解释链；陪伴行动直接要求处理事项，问句也继续催推进，没有覆盖只想陪伴的情况。",
+      "problemSentences": [
+       {
+        "quote": "把今天最想快点解决的事缩小成一个 10 分钟的动作，做完就停。",
+        "reason": "预设今天存在一件想快点解决的事，并把陪伴变成推进任务。",
+        "source": "STYLE §2、§4；PRD LQ07",
+        "blocking": true
+       }
+      ],
+      "revision": "分清有明确目标与只需要安静两种情况；陪伴提供短暂的注意方向，不强制处理事项。"
+     },
+     {
+      "id": 13,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 0,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 5,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "先看旧做法是否已完成作用，再确定适合自己的完成标准。",
+      "rationale": "自我主题被多人分工、共同任务接管；行动与问句没有承接宝剑四逆位的重启或死神的旧做法收尾，还默认存在共同事项和参与者。",
+      "problemSentences": [
+       {
+        "quote": "写一页分工：这件事里要完成的一件事、各自负责的部分、完成标准和确认日期。",
+        "reason": "具体产物属于多人协作，既未回答旧做法是否仍有用，也未适配自我主题。",
+        "source": "PRD LQ02–03；STYLE §6",
+        "blocking": false
+       }
+      ],
+      "revision": "补星币三的自我变体，用自己的完成标准承接旧做法收尾；涉及共同事项时再使用分工内容。"
+     },
+     {
+      "id": 14,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "把各选项的过渡消耗与现有余量放在一起比较。",
+      "rationale": "消耗、余量与具体估算连贯；高塔仍只作背景，没有解释旧安排改变为何需要重估余量。恢复必须先于决定的句子缺边界；直接选更可承担的一项也过度缩窄比较标准。",
+      "problemSentences": [
+       {
+        "quote": "如果已经累了很久，判断质量容易下降，恢复期要先于决定。",
+        "reason": "延期决定没有同句期限例外。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       },
+       {
+        "quote": "把两个选项的消耗和现有负担放在一起比较，选更可承担的那一个。",
+        "reason": "把消耗标准直接推成选择结果，未留下其他重要条件。",
+        "source": "STYLE §4 decide",
+        "blocking": false
+       }
+      ],
+      "revision": "让高塔承担重新估算余量的理由；保留具体估算，改成标明可承担程度，再与其他条件比较，并补期限例外。"
+     },
+     {
+      "id": 15,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "过渡中的负担偏重时，先减少一项非紧急安排。",
+      "rationale": "去留与减负匹配，但权杖八的推进窗口和延后安排之间的张力未解释。陪伴行动仍要求处理事项，固定半小时及后续追问也未必成立。",
+      "problemSentences": [
+       {
+        "quote": "这次先减一点负担，不用做任何决定。",
+        "reason": "无条件宣布可以不决定，行动里的期限句不能补全整体。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       },
+       {
+        "quote": "今天省下的半小时，你想怎么用？",
+        "reason": "假定行动必定腾出半小时，追问依赖未核实的时间。",
+        "source": "STYLE §1–2、§4",
+        "blocking": false
+       }
+      ],
+      "revision": "把推进窗口与资源不足解释成缩小范围的推进；不固定腾出的时间，陪伴保留无需处理事项的选择。"
+     },
+     {
+      "id": 16,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "先分清仍需恢复还是可以出发，再考虑一个中间站。",
+      "rationale": "事业语境自然，但行动直接安排过渡，跳过恢复与出发的区别；首牌热度未参与判断，问句还默认已处在过渡期。",
+      "problemSentences": [
+       {
+        "quote": "写下工作里你想从哪里到哪里，再写出一个一个月内能到的“中间站”，以及到达的标志。",
+        "reason": "未限定正在考虑方向调整，就要求规划过渡。",
+        "source": "STYLE §2、§6；PRD LQ02–03",
+        "blocking": false
+       },
+       {
+        "quote": "过渡期里，你最需要先备好的一样东西是什么？",
+        "reason": "直接预设用户正处于过渡期。",
+        "source": "PRD LQ07；STYLE §1–2",
+        "blocking": true
+       }
+      ],
+      "revision": "两条读法分别承接仍需恢复与已经能推进；只有考虑方向调整时，才安排中间站并追问准备条件。"
+     },
+     {
+      "id": 17,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "将精力集中到一个有兴趣、可停止的小尝试，再考虑加速。",
+      "rationale": "圣杯侍从与星币二支持聚焦，但宝剑骑士的推进被改成慢慢来，转折理由不足；事业决定退化成兴趣排序，小试探缺对象、范围和完成标准。",
+      "problemSentences": [
+       {
+        "quote": "末牌的节奏偏急，所以先把热度放在一件能慢慢来的小事上，不急着出成果。",
+        "reason": "没有解释果断推进为何在这里变成放慢。",
+        "source": "PRD LQ02",
+        "blocking": false
+       },
+       {
+        "quote": "把最让你有精神的选项排第一，但先做一次可以随时停的小试探，再决定要不要加速。",
+        "reason": "试探的对象、边界与产物不明确，比较只剩精神感受。",
+        "source": "STYLE §4；PRD LQ04",
+        "blocking": false
+       }
+      ],
+      "revision": "写成果断推进一个小试验、避免扩大承诺；明确与事业有关的对象、时长及停止点。"
+     },
+     {
+      "id": 18,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 2,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "关系判断若受过快节奏与疲劳干扰，先留出安静恢复空间。",
+      "rationale": "过快、暂停、向内整理能共同支撑重点，关系中也可成立；行动有时间和产物，但陪伴被强制变成写作。恢复后再决定没有同句边界，语言扣分。",
+      "problemSentences": [
+       {
+        "quote": "已经累了很久、判断开始变差时，先给自己一个明确的休息窗口，再做决定。",
+        "reason": "确实延后决定，同句没有不紧急或期限例外。",
+        "source": "STYLE §3；PRD LQ07",
+        "blocking": true
+       },
+       {
+        "quote": "找一个不被打扰的 15 分钟，什么都不用决定，只写下此刻心里最响的一句话。",
+        "reason": "companion 强制写字，降低负担只做到一部分。",
+        "source": "STYLE §4；PRD §8",
+        "blocking": false
+       }
+      ],
+      "revision": "补延期决定的期限边界；允许安静待一会儿，写字作为可选。"
+     },
+     {
+      "id": 19,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 2,
+       "directLanguage": 1
+      },
+      "total": 8,
+      "scorePassed": true,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "先确认现有关系负担，减轻一项，再评估调整能承受多大变化。",
+      "rationale": "负担与过渡连贯，关系调整本身不等于离开；高塔只作背景，没有解释震动怎样改变减负顺序。处理变化被排到稳住之后，缺同句例外。",
+      "problemSentences": [
+       {
+        "quote": "先稳住最基本的几件事，再处理其他的变化。",
+        "reason": "这句实际延后其他变化，却没有同句限定不紧急或保留期限。",
+        "source": "STYLE §3",
+        "blocking": true
+       }
+      ],
+      "revision": "让高塔明确承担保护基本生活和已有责任的作用；把其他变化是否延期写成有边界的条件。"
+     },
+     {
+      "id": 20,
+      "scores": {
+       "clearClaim": 1,
+       "threeCardConnection": 1,
+       "topicFit": 2,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "决定前检查承载余量，并区分事实与当下情绪。",
+      "rationale": "整体主张余量，读法二、行动和问句却转向情绪；没有解释速度、兼顾与情绪如何共同影响比较。行动有日期和期限例外，但没有检查余量。",
+      "problemSentences": [
+       {
+        "quote": "今天先不拍板：把需要决定的事写下，标上“情绪平稳后再看”，约好明天同一时间再读一遍；有期限的事以期限为准。",
+        "reason": "延期边界已经提供；问题在于把情绪分支变成默认行动，未回应余量主张。",
+        "source": "PRD LQ02–04；STYLE §4",
+        "blocking": false
+       }
+      ],
+      "revision": "统一为区分有余量推进与被情绪催促；行动比较各选项的时间、精力占用，只在对应条件下使用情绪暂停。"
+     },
+     {
+      "id": 21,
+      "scores": {
+       "clearClaim": 1,
+       "threeCardConnection": 1,
+       "topicFit": 0,
+       "concreteAction": 1,
+       "directLanguage": 0
+      },
+      "total": 3,
+      "scorePassed": false,
+      "hasBlockingIssue": true,
+      "editorialPassed": false,
+      "keyPoint": "检查个人负担和重复模式，而不是默认通过离开来解决。",
+      "rationale": "分工、重复问题与离开没有共同解释；自我与陪伴被写成合作和去留任务。要求推进离开并确认最近三次重复，是明显现实前提和语言问题。",
+      "problemSentences": [
+       {
+        "quote": "今天只做一件让“离开”更近一点的小事（查一个信息、整理一份材料），做完就好。",
+        "reason": "自我主题未提供离开意愿，行动却直接推进离开。",
+        "source": "STYLE §2、§4、§6",
+        "blocking": true
+       },
+       {
+        "quote": "同样的问题，最近三次是在什么情境下出现的？",
+        "reason": "冒认同样问题已在最近发生过三次。",
+        "source": "PRD LQ07；STYLE §1–2",
+        "blocking": true
+       }
+      ],
+      "revision": "优先补自我主题变体；重复模式用条件句，陪伴不要求推进离开或整理材料。"
+     },
+     {
+      "id": 22,
+      "scores": {
+       "clearClaim": 1,
+       "threeCardConnection": 1,
+       "topicFit": 0,
+       "concreteAction": 1,
+       "directLanguage": 1
+      },
+      "total": 4,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "分清独处是否在有效整理，还是缺少能改变去留判断的信息。",
+      "rationale": "学习起步与多人分工没有接进去留判断；行动虽然有产物和日期，却没有回答独处是否有效，还默认选项涉及共同事项。",
+      "problemSentences": [
+       {
+        "quote": "写一页分工：这个选择里要完成的一件事、各自负责的部分、完成标准和确认日期。",
+        "reason": "去留被套成多人分工，未限定选择确实涉及协作。",
+        "source": "PRD LQ02–03；STYLE §6",
+        "blocking": false
+       }
+      ],
+      "revision": "用星币三的可检验性整理一条待核实的去留条件及验证渠道；涉及协作时才启用分工变体。"
+     },
+     {
+      "id": 23,
+      "scores": {
+       "clearClaim": 2,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 7,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "比较维持与调整的成本，再用小调查补齐信息。",
+      "rationale": "成本重点明确，但三牌仍主要并列；读法二和问句变成学习练习，去留适配不足。调查行动具体，却未指定记录何种成本，主张与产物仅部分关联。",
+      "problemSentences": [
+       {
+        "quote": "如果有想学的东西，先安排一个固定的学习或练习时段。",
+        "reason": "去留主题被学习牌带成学习任务。",
+        "source": "STYLE §6 牌族检查",
+        "blocking": false
+       },
+       {
+        "quote": "如果要开始一件事，最小的一次练习是什么？",
+        "reason": "追问没有继续确认维持与调整的成本。",
+        "source": "PRD LQ03",
+        "blocking": false
+       }
+      ],
+      "revision": "保留短调查，明确每个选项的时间、精力或机会成本及待核实项；第二读法与追问改成验证去留条件。"
+     },
+     {
+      "id": 24,
+      "scores": {
+       "clearClaim": 1,
+       "threeCardConnection": 1,
+       "topicFit": 1,
+       "concreteAction": 1,
+       "directLanguage": 2
+      },
+      "total": 6,
+      "scorePassed": false,
+      "hasBlockingIssue": false,
+      "editorialPassed": false,
+      "keyPoint": "检查旧做法是否仍有作用，再为一个小起点留空间。",
+      "rationale": "计划未启动、阶段收尾与向外热度没有形成解释；事业读法指向目的复核或最小版本，行动却变成家务和音乐，还强制记录感受。",
+      "problemSentences": [
+       {
+        "quote": "今天做一件让你有精神的小事，比如放一首喜欢的歌做 10 分钟家务，做完记一句感受。",
+        "reason": "与旧做法是否仍有作用脱节，companion 仍追加记录任务。",
+        "source": "STYLE §4；PRD §4、§8",
+        "blocking": false
+       }
+      ],
+      "revision": "先解释旧做法收尾与新起点的关系；陪伴动作围绕这个重点，取消必须记录感受。"
+     }
+    ],
+    "sampleFileNote": "2026-10-11 修订为 v2.9 时，带评语的 v2.7 评分表另存到此路径（内容未改）；batch-0-samples.md 现在是 v2.9 的表。"
+   },
+   "heldout": "docs/local-reading-expansion/batch-0-heldout.json（heldout：v2.9 前固定，已用于改稿，现只作回归；heldout2：v2.10 前固定；family：牌族主题矩阵）",
+   "revisions": [
+    {
+     "version": "local-v2.9-sample",
+     "date": "2026-10-11",
+     "author": "Claude（Opus 5.5）",
+     "basedOn": "aiEditorialReview 2026-10-11（Codex，v2.7 文本，24 例平均 6.92/10，建议打回）",
+     "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
+     "changes": [
+      "引擎：每个朝向新增 next.aim，按位置路径的整体改为两拍（阻碍牌的核对点 + 末牌的方向）；命中主张时没有贡献的牌改用衔接句（focus.support）或一句话要点，不再写“带来「……」这一层背景”；主题变体可覆盖 situation / next.aim，两条路径统一取值；三张牌的要点之间改用分号。",
+      "内容：24 个朝向与 5 个主张全量修订——现实预设改条件口径、延后句嵌入“不紧急”、陪伴行动与读法不要求写 / 列、decide 不替用户选；补星币三（关系 / 自我 / 去留）、星币侍从（去留）、死神（关系）、权杖王后 / 权杖八 / 宝剑骑士 / 星币二 / 宝剑四（关系）的主题变体；“负担与过渡”补关系变体、“投入与配合”补自我变体。",
+      "测试：新增 v2.9 全文扫描（延后边界覆盖全部字符串、陪伴不强制书写、问句不预设、aim 规则、读法不要求书写、support 规则）与 9 条定向用例；6 类违规做过变异检查，均能拦住。",
+      "本轮没有新增共同解释（另起一轮，按 STYLE §7 先写保留组合）。"
+     ],
+     "aiRecheck": {
+      "type": "ai-blind-recheck",
+      "note": "AI 复评，不是人工验收，不改变批次放行状态；humanReview 仍为空。评审为 Claude 子智能体，只读打乱后的材料，不知道哪个版本是新的。",
+      "blindPairs": {
+       "scoredAt": "第三遍修订之后的文本（之后又按评审意见改了第四至七遍，那几遍只过了自动扫描、作者通读和下面的规则审读，没有重新打分）",
+       "rubric": "同 PRD：五项各 0–2，门槛每例 ≥8 且无单项 0；阻断项单列",
+       "sheet24": {
+        "n": 24,
+        "beforeAvg": "6.21",
+        "afterAvg": "8.79",
+        "beforePass": 5,
+        "afterPass": 23,
+        "beforeBlockingSamples": 17,
+        "afterBlockingSamples": 1,
+        "prefer": {
+         "after": 24,
+         "before": 0,
+         "tie": 0
+        },
+        "beforeDims": {
+         "claim": "1.96",
+         "three": "1.04",
+         "topic": "1.29",
+         "action": "1.08",
+         "language": "0.83"
+        },
+        "afterDims": {
+         "claim": "2.00",
+         "three": "1.42",
+         "topic": "2.00",
+         "action": "1.83",
+         "language": "1.54"
+        },
+        "samples": [
+         {
+          "id": "S1",
+          "before": "2/1/2/1/0",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S2",
+          "before": "2/1/2/1/1",
+          "after": "2/2/2/1/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S3",
+          "before": "2/1/0/2/1",
+          "after": "2/2/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S4",
+          "before": "2/1/0/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S5",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/1/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S6",
+          "before": "2/1/1/2/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S7",
+          "before": "2/1/2/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S8",
+          "before": "2/1/2/1/2",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S9",
+          "before": "2/1/2/2/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S10",
+          "before": "2/1/0/0/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S11",
+          "before": "2/1/1/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S12",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/1/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S13",
+          "before": "2/1/0/0/0",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S14",
+          "before": "2/1/2/2/0",
+          "after": "2/2/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S15",
+          "before": "2/1/2/2/1",
+          "after": "2/2/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S16",
+          "before": "2/1/2/1/0",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S17",
+          "before": "1/1/2/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S18",
+          "before": "2/2/2/1/1",
+          "after": "2/2/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S19",
+          "before": "2/1/0/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S20",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/1/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S21",
+          "before": "2/1/0/0/0",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S22",
+          "before": "2/1/0/0/0",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "S23",
+          "before": "2/1/1/2/2",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "S24",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         }
+        ]
+       },
+       "heldout24": {
+        "n": 24,
+        "beforeAvg": "6.83",
+        "afterAvg": "8.63",
+        "beforePass": 4,
+        "afterPass": 23,
+        "beforeBlockingSamples": 21,
+        "afterBlockingSamples": 1,
+        "prefer": {
+         "after": 24,
+         "before": 0,
+         "tie": 0
+        },
+        "beforeDims": {
+         "claim": "2.00",
+         "three": "1.04",
+         "topic": "1.58",
+         "action": "1.25",
+         "language": "0.96"
+        },
+        "afterDims": {
+         "claim": "2.00",
+         "three": "1.29",
+         "topic": "1.96",
+         "action": "1.96",
+         "language": "1.42"
+        },
+        "samples": [
+         {
+          "id": "H1",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H2",
+          "before": "2/1/2/2/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H3",
+          "before": "2/1/1/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H4",
+          "before": "2/1/2/2/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H5",
+          "before": "2/1/1/1/0",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H6",
+          "before": "2/1/1/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H7",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H8",
+          "before": "2/1/1/1/2",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H9",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H10",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H11",
+          "before": "2/1/1/2/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H12",
+          "before": "2/1/2/2/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H13",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H14",
+          "before": "2/1/1/1/1",
+          "after": "2/1/1/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H15",
+          "before": "2/2/1/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H16",
+          "before": "2/1/0/1/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H17",
+          "before": "2/1/2/2/1",
+          "after": "2/2/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H18",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H19",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H20",
+          "before": "2/1/2/1/1",
+          "after": "2/2/2/1/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H21",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H22",
+          "before": "2/1/1/2/0",
+          "after": "2/1/2/2/2",
+          "prefer": "after"
+         },
+         {
+          "id": "H23",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         },
+         {
+          "id": "H24",
+          "before": "2/1/2/1/1",
+          "after": "2/1/2/2/1",
+          "prefer": "after"
+         }
+        ]
+       },
+       "scoreOrder": "观点/三牌/主题/行动/语言"
+      },
+      "finalRulesAudit": {
+       "scoredAt": "第六遍修订之后的 48 例（评分表 24 + 留出 24）；第七遍修掉了其中 3 例“明确”和一批“轻”，没有再审",
+       "clearBlockingSamples": [
+        "H3",
+        "H15",
+        "H21"
+       ],
+       "lightBlockingSampleCount": 27,
+       "noBlockingSampleCount": 20,
+       "incoherentSamples": [
+        "S10",
+        "S11",
+        "S12",
+        "S20",
+        "S21",
+        "S24",
+        "H1",
+        "H5",
+        "H6",
+        "H8",
+        "H14",
+        "H19",
+        "H21",
+        "H23",
+        "H24"
+       ],
+       "incoherentNote": "不连贯的 15 例全部来自按位置路径；命中共同解释的 20 例全部连贯。"
+      },
+      "knownLimits": [
+       "按位置路径的结构上限：核对点来自阻碍牌、下一步来自末牌，两者之间没有因果；“两拍”让行动有了来处，但严格读者仍判为两件事（15 / 48 例）。首牌多数仍只是并列。要提高“三牌关联”，需要新增共同解释，而不是继续改句子。",
+       "整体里固定的三连“可能在提示……”被两位评审认为仍是防御腔的直接来源（v2.7 的设计，测试要求 oneLine 以“可能”开头）。",
+       "陪伴意图在按位置路径下仍以“值得先核对的是”开头，读法仍带核对口吻（已不要求书写）。",
+       "不同牌组命中同一主张时，读法 / 行动 / 追问逐字相同；死神（逆位）与宝剑六共用“过渡”角色句。",
+       "关系主题一律写“这段关系”，默认有一段具体的关系；事业、去留主题在部分结果里看不出来。"
+      ]
+     }
+    },
+    {
+     "version": "local-v2.10-sample",
+     "date": "2026-10-11",
+     "author": "Claude（Opus 5.5）",
+     "basedOn": "v2.9 的规则审读：48 例里 15 例连不成一条线，全部来自按位置路径",
+     "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
+     "previousSampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.9-sample.md",
+     "changes": [
+      "新增 3 个后备共同解释：inner-first（先听自己；锚牌标记 reflect / sensitivity）、rebuild（收尾与重建；upheaval / ending）、momentum-check（势头与确认；momentum / decisive）。依据是全量枚举（10560 个组合），不是评分表的 24 例。",
+      "引擎：focus.fallback——后备主张只接原有 5 个主张都不命中的组合；原来命中的组合一例不变（测试里全量枚举对账）。",
+      "写内容之前先在 reserved.json 追加 r9–r20、在 batch-0-heldout.json 追加 heldout2。通读输出后把 rebuild 的锚牌从（高塔 / 死神 / 宝剑四逆位）收窄为（高塔 / 死神），r14 的期望随之更新。"
+     ],
+     "routing": {
+      "note": "12 张牌全部有序三牌组合（含正逆位）的路径分布，百分比",
+      "beforeMissClarify": 56.9,
+      "beforeMissCompanion": 62.5,
+      "after": {
+       "clarify": {
+        "rebuild": 10.2,
+        "inner-first": 14.3,
+        "settle-feelings": 13.8,
+        "load-transition": 15.9,
+        "warm-juggle": 5.5,
+        "invest-cooperate": 2.4,
+        "miss": 19.6,
+        "small-trial": 5.6,
+        "momentum-check": 12.8
+       },
+       "companion": {
+        "rebuild": 10.6,
+        "inner-first": 14.8,
+        "settle-feelings": 13.8,
+        "load-transition": 15.9,
+        "warm-juggle": 5.5,
+        "invest-cooperate": 2.4,
+        "miss": 23.9,
+        "momentum-check": 13.2
+       }
+      }
+     },
+     "aiRecheck": {
+      "type": "ai-blind-recheck",
+      "note": "AI 复评，不是人工验收，不改变批次放行状态；humanReview 仍为空。评审为 Claude 子智能体，只读打乱后的材料。",
+      "scoredAt": "盲评与规则审读看的是最后一轮文字修正之前的文本；之后按评审意见改了约 25 处措辞（主张用词、无牌支撑的“旧的安排 / 重建”、一例明确预设、关系主题口径等），那一轮只过了自动扫描和作者通读。",
+      "blindPairs": {
+       "scope": "只比较前后文字有变化的样本：评分表 9 对 + heldout2 12 对",
+       "n": 21,
+       "beforeAvg": 7.48,
+       "afterAvg": 9.05,
+       "beforePass": 12,
+       "afterPass": 20,
+       "beforeCoherent": 7,
+       "afterCoherent": 21,
+       "threeCardBefore": 1,
+       "threeCardAfter": 1.57,
+       "prefer": {
+        "after": 12,
+        "before": 2,
+        "tie": 7
+       },
+       "preferredOld": [
+        "S4",
+        "S23"
+       ],
+       "samples": [
         {
-          "version": "local-v2.9-sample",
-          "date": "2026-10-11",
-          "author": "Claude（Opus 5.5）",
-          "basedOn": "aiEditorialReview 2026-10-11（Codex，v2.7 文本，24 例平均 6.92/10，建议打回）",
-          "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
-          "changes": [
-            "引擎：每个朝向新增 next.aim，按位置路径的整体改为两拍（阻碍牌的核对点 + 末牌的方向）；命中主张时没有贡献的牌改用衔接句（focus.support）或一句话要点，不再写“带来「……」这一层背景”；主题变体可覆盖 situation / next.aim，两条路径统一取值；三张牌的要点之间改用分号。",
-            "内容：24 个朝向与 5 个主张全量修订——现实预设改条件口径、延后句嵌入“不紧急”、陪伴行动与读法不要求写 / 列、decide 不替用户选；补星币三（关系 / 自我 / 去留）、星币侍从（去留）、死神（关系）、权杖王后 / 权杖八 / 宝剑骑士 / 星币二 / 宝剑四（关系）的主题变体；“负担与过渡”补关系变体、“投入与配合”补自我变体。",
-            "测试：新增 v2.9 全文扫描（延后边界覆盖全部字符串、陪伴不强制书写、问句不预设、aim 规则、读法不要求书写、support 规则）与 9 条定向用例；6 类违规做过变异检查，均能拦住。",
-            "本轮没有新增共同解释（另起一轮，按 STYLE §7 先写保留组合）。"
-          ],
-          "aiRecheck": {
-            "type": "ai-blind-recheck",
-            "note": "AI 复评，不是人工验收，不改变批次放行状态；humanReview 仍为空。评审为 Claude 子智能体，只读打乱后的材料，不知道哪个版本是新的。",
-            "blindPairs": {
-              "scoredAt": "第三遍修订之后的文本（之后又按评审意见改了第四至七遍，那几遍只过了自动扫描、作者通读和下面的规则审读，没有重新打分）",
-              "rubric": "同 PRD：五项各 0–2，门槛每例 ≥8 且无单项 0；阻断项单列",
-              "sheet24": {
-                "n": 24,
-                "beforeAvg": "6.21",
-                "afterAvg": "8.79",
-                "beforePass": 5,
-                "afterPass": 23,
-                "beforeBlockingSamples": 17,
-                "afterBlockingSamples": 1,
-                "prefer": {
-                  "after": 24,
-                  "before": 0,
-                  "tie": 0
-                },
-                "beforeDims": {
-                  "claim": "1.96",
-                  "three": "1.04",
-                  "topic": "1.29",
-                  "action": "1.08",
-                  "language": "0.83"
-                },
-                "afterDims": {
-                  "claim": "2.00",
-                  "three": "1.42",
-                  "topic": "2.00",
-                  "action": "1.83",
-                  "language": "1.54"
-                },
-                "samples": [
-                  {
-                    "id": "S1",
-                    "before": "2/1/2/1/0",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S2",
-                    "before": "2/1/2/1/1",
-                    "after": "2/2/2/1/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S3",
-                    "before": "2/1/0/2/1",
-                    "after": "2/2/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S4",
-                    "before": "2/1/0/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S5",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/1/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S6",
-                    "before": "2/1/1/2/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S7",
-                    "before": "2/1/2/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S8",
-                    "before": "2/1/2/1/2",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S9",
-                    "before": "2/1/2/2/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S10",
-                    "before": "2/1/0/0/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S11",
-                    "before": "2/1/1/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S12",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/1/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S13",
-                    "before": "2/1/0/0/0",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S14",
-                    "before": "2/1/2/2/0",
-                    "after": "2/2/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S15",
-                    "before": "2/1/2/2/1",
-                    "after": "2/2/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S16",
-                    "before": "2/1/2/1/0",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S17",
-                    "before": "1/1/2/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S18",
-                    "before": "2/2/2/1/1",
-                    "after": "2/2/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S19",
-                    "before": "2/1/0/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S20",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/1/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S21",
-                    "before": "2/1/0/0/0",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S22",
-                    "before": "2/1/0/0/0",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S23",
-                    "before": "2/1/1/2/2",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "S24",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  }
-                ]
-              },
-              "heldout24": {
-                "n": 24,
-                "beforeAvg": "6.83",
-                "afterAvg": "8.63",
-                "beforePass": 4,
-                "afterPass": 23,
-                "beforeBlockingSamples": 21,
-                "afterBlockingSamples": 1,
-                "prefer": {
-                  "after": 24,
-                  "before": 0,
-                  "tie": 0
-                },
-                "beforeDims": {
-                  "claim": "2.00",
-                  "three": "1.04",
-                  "topic": "1.58",
-                  "action": "1.25",
-                  "language": "0.96"
-                },
-                "afterDims": {
-                  "claim": "2.00",
-                  "three": "1.29",
-                  "topic": "1.96",
-                  "action": "1.96",
-                  "language": "1.42"
-                },
-                "samples": [
-                  {
-                    "id": "H1",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H2",
-                    "before": "2/1/2/2/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H3",
-                    "before": "2/1/1/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H4",
-                    "before": "2/1/2/2/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H5",
-                    "before": "2/1/1/1/0",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H6",
-                    "before": "2/1/1/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H7",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H8",
-                    "before": "2/1/1/1/2",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H9",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H10",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H11",
-                    "before": "2/1/1/2/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H12",
-                    "before": "2/1/2/2/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H13",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H14",
-                    "before": "2/1/1/1/1",
-                    "after": "2/1/1/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H15",
-                    "before": "2/2/1/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H16",
-                    "before": "2/1/0/1/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H17",
-                    "before": "2/1/2/2/1",
-                    "after": "2/2/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H18",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H19",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H20",
-                    "before": "2/1/2/1/1",
-                    "after": "2/2/2/1/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H21",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H22",
-                    "before": "2/1/1/2/0",
-                    "after": "2/1/2/2/2",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H23",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  },
-                  {
-                    "id": "H24",
-                    "before": "2/1/2/1/1",
-                    "after": "2/1/2/2/1",
-                    "prefer": "after"
-                  }
-                ]
-              },
-              "scoreOrder": "观点/三牌/主题/行动/语言"
-            },
-            "finalRulesAudit": {
-              "scoredAt": "第六遍修订之后的 48 例（评分表 24 + 留出 24）；第七遍修掉了其中 3 例“明确”和一批“轻”，没有再审",
-              "clearBlockingSamples": [
-                "H3",
-                "H15",
-                "H21"
-              ],
-              "lightBlockingSampleCount": 27,
-              "noBlockingSampleCount": 20,
-              "incoherentSamples": [
-                "S10",
-                "S11",
-                "S12",
-                "S20",
-                "S21",
-                "S24",
-                "H1",
-                "H5",
-                "H6",
-                "H8",
-                "H14",
-                "H19",
-                "H21",
-                "H23",
-                "H24"
-              ],
-              "incoherentNote": "不连贯的 15 例全部来自按位置路径；命中共同解释的 20 例全部连贯。"
-            },
-            "knownLimits": [
-              "按位置路径的结构上限：核对点来自阻碍牌、下一步来自末牌，两者之间没有因果；“两拍”让行动有了来处，但严格读者仍判为两件事（15 / 48 例）。首牌多数仍只是并列。要提高“三牌关联”，需要新增共同解释，而不是继续改句子。",
-              "整体里固定的三连“可能在提示……”被两位评审认为仍是防御腔的直接来源（v2.7 的设计，测试要求 oneLine 以“可能”开头）。",
-              "陪伴意图在按位置路径下仍以“值得先核对的是”开头，读法仍带核对口吻（已不要求书写）。",
-              "不同牌组命中同一主张时，读法 / 行动 / 追问逐字相同；死神（逆位）与宝剑六共用“过渡”角色句。",
-              "关系主题一律写“这段关系”，默认有一段具体的关系；事业、去留主题在部分结果里看不出来。"
-            ]
-          }
+         "id": "S1",
+         "focus": "rebuild",
+         "before": "1/1/2/2/2",
+         "after": "2/1/2/2/2",
+         "prefer": "after"
         },
         {
-          "version": "local-v2.10-sample",
-          "date": "2026-10-11",
-          "author": "Claude（Opus 5.5）",
-          "basedOn": "v2.9 的规则审读：48 例里 15 例连不成一条线，全部来自按位置路径",
-          "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
-          "previousSampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.9-sample.md",
-          "changes": [
-            "新增 3 个后备共同解释：inner-first（先听自己；锚牌标记 reflect / sensitivity）、rebuild（收尾与重建；upheaval / ending）、momentum-check（势头与确认；momentum / decisive）。依据是全量枚举（10560 个组合），不是评分表的 24 例。",
-            "引擎：focus.fallback——后备主张只接原有 5 个主张都不命中的组合；原来命中的组合一例不变（测试里全量枚举对账）。",
-            "写内容之前先在 reserved.json 追加 r9–r20、在 batch-0-heldout.json 追加 heldout2。通读输出后把 rebuild 的锚牌从（高塔 / 死神 / 宝剑四逆位）收窄为（高塔 / 死神），r14 的期望随之更新。"
-          ],
-          "routing": {
-            "note": "12 张牌全部有序三牌组合（含正逆位）的路径分布，百分比",
-            "beforeMissClarify": 56.9,
-            "beforeMissCompanion": 62.5,
-            "after": {
-              "clarify": {
-                "rebuild": 10.2,
-                "inner-first": 14.3,
-                "settle-feelings": 13.8,
-                "load-transition": 15.9,
-                "warm-juggle": 5.5,
-                "invest-cooperate": 2.4,
-                "miss": 19.6,
-                "small-trial": 5.6,
-                "momentum-check": 12.8
-              },
-              "companion": {
-                "rebuild": 10.6,
-                "inner-first": 14.8,
-                "settle-feelings": 13.8,
-                "load-transition": 15.9,
-                "warm-juggle": 5.5,
-                "invest-cooperate": 2.4,
-                "miss": 23.9,
-                "momentum-check": 13.2
-              }
-            }
-          },
-          "aiRecheck": {
-            "type": "ai-blind-recheck",
-            "note": "AI 复评，不是人工验收，不改变批次放行状态；humanReview 仍为空。评审为 Claude 子智能体，只读打乱后的材料。",
-            "scoredAt": "盲评与规则审读看的是最后一轮文字修正之前的文本；之后按评审意见改了约 25 处措辞（主张用词、无牌支撑的“旧的安排 / 重建”、一例明确预设、关系主题口径等），那一轮只过了自动扫描和作者通读。",
-            "blindPairs": {
-              "scope": "只比较前后文字有变化的样本：评分表 9 对 + heldout2 12 对",
-              "n": 21,
-              "beforeAvg": 7.48,
-              "afterAvg": 9.05,
-              "beforePass": 12,
-              "afterPass": 20,
-              "beforeCoherent": 7,
-              "afterCoherent": 21,
-              "threeCardBefore": 1,
-              "threeCardAfter": 1.57,
-              "prefer": {
-                "after": 12,
-                "before": 2,
-                "tie": 7
-              },
-              "preferredOld": [
-                "S4",
-                "S23"
-              ],
-              "samples": [
-                {
-                  "id": "S1",
-                  "focus": "rebuild",
-                  "before": "1/1/2/2/2",
-                  "after": "2/1/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "S4",
-                  "focus": "rebuild",
-                  "before": "2/1/2/2/2",
-                  "after": "2/1/2/1/1",
-                  "prefer": "before"
-                },
-                {
-                  "id": "S8",
-                  "focus": "momentum-check",
-                  "before": "1/1/2/2/2",
-                  "after": "2/2/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "S11",
-                  "focus": "inner-first",
-                  "before": "1/1/1/2/1",
-                  "after": "2/1/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "S12",
-                  "focus": "inner-first",
-                  "before": "1/1/2/1/1",
-                  "after": "2/2/2/2/1",
-                  "prefer": "after"
-                },
-                {
-                  "id": "S13",
-                  "focus": "rebuild",
-                  "before": "2/1/2/2/2",
-                  "after": "2/2/2/2/2",
-                  "prefer": "平"
-                },
-                {
-                  "id": "S20",
-                  "focus": "momentum-check",
-                  "before": "1/1/2/2/1",
-                  "after": "2/2/1/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "S23",
-                  "focus": "inner-first",
-                  "before": "2/1/2/2/2",
-                  "after": "2/1/1/2/2",
-                  "prefer": "before"
-                },
-                {
-                  "id": "S24",
-                  "focus": "rebuild",
-                  "before": "1/1/2/1/1",
-                  "after": "2/2/2/2/1",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N1",
-                  "focus": "momentum-check",
-                  "before": "2/1/1/2/1",
-                  "after": "2/2/2/2/1",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N2",
-                  "focus": "rebuild",
-                  "before": "1/1/2/2/2",
-                  "after": "2/1/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N4",
-                  "focus": "inner-first",
-                  "before": "1/1/2/2/2",
-                  "after": "2/1/2/2/2",
-                  "prefer": "平"
-                },
-                {
-                  "id": "N7",
-                  "focus": "rebuild",
-                  "before": "1/1/1/1/2",
-                  "after": "2/2/2/2/1",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N9",
-                  "focus": "momentum-check",
-                  "before": "2/1/2/2/2",
-                  "after": "2/2/2/2/1",
-                  "prefer": "平"
-                },
-                {
-                  "id": "N11",
-                  "focus": "inner-first",
-                  "before": "1/1/1/1/1",
-                  "after": "2/2/2/2/1",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N16",
-                  "focus": "rebuild",
-                  "before": "1/1/2/2/2",
-                  "after": "2/1/2/2/2",
-                  "prefer": "平"
-                },
-                {
-                  "id": "N17",
-                  "focus": "rebuild",
-                  "before": "1/1/1/2/1",
-                  "after": "2/2/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N21",
-                  "focus": "rebuild",
-                  "before": "2/1/2/2/1",
-                  "after": "2/1/2/2/2",
-                  "prefer": "平"
-                },
-                {
-                  "id": "N22",
-                  "focus": "rebuild",
-                  "before": "1/1/2/2/1",
-                  "after": "2/2/2/2/2",
-                  "prefer": "after"
-                },
-                {
-                  "id": "N23",
-                  "focus": "rebuild",
-                  "before": "2/1/2/2/2",
-                  "after": "2/2/2/2/1",
-                  "prefer": "平"
-                },
-                {
-                  "id": "N24",
-                  "focus": "inner-first",
-                  "before": "1/1/2/2/2",
-                  "after": "2/1/2/2/2",
-                  "prefer": "平"
-                }
-              ],
-              "scoreOrder": "观点/三牌/主题/行动/语言"
-            },
-            "rulesAudit": {
-              "scope": "修订后的 31 例（评分表 9 + heldout2 12 + heldout 10）",
-              "coherent": 29,
-              "anchored": 29,
-              "clearBlockingSamples": [
-                "H22"
-              ],
-              "lightBlockingItemCount": 16,
-              "samenessGroups": 16,
-              "harmfulSamenessGroups": 15
-            },
-            "knownLimits": [
-              "换牌不换话（本轮最主要的未解决问题）：31 例只有 3 个重点句；读法、行动、追问按“主张 × 意图”固定，9 组例子除逐牌说明外逐字相同，其中一组两副牌没有一张相同。规则审读的结论是“主要问题是换牌不换话，不是冒认”。靠“按末牌换行动”的变体只缓解了一小部分。",
-              "只靠一张锚牌立论时，换掉另外两张牌结论不变；被晾着的常常是最贴主题的那张（阻碍位的牌）。盲评里偏好旧版的两例（S4、S23）都是这种情况。",
-              "位置语义弱：同一张牌在此刻 / 阻碍 / 下一步三个位置用同一句角色句。",
-              "整体里“可能在提示……”三连仍在（31 例约 93 次），被评为防御性句式的直接来源。",
-              "后备层与同分按顺序是 12 张牌阶段的简化；约一成组合有两个新主张都能接。"
-            ],
-            "recommendation": "下一步不是继续加主张或改句子，而是让后备主张只给“重点 + 每张牌与重点的关系”，读法、行动、追问改由牌自己给（读法一取锚牌的条件，读法二、行动、追问取末牌按主题取值的内容），这样换牌就会换话。属于渲染结构改动，需先出方案。"
-          }
+         "id": "S4",
+         "focus": "rebuild",
+         "before": "2/1/2/2/2",
+         "after": "2/1/2/1/1",
+         "prefer": "before"
+        },
+        {
+         "id": "S8",
+         "focus": "momentum-check",
+         "before": "1/1/2/2/2",
+         "after": "2/2/2/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "S11",
+         "focus": "inner-first",
+         "before": "1/1/1/2/1",
+         "after": "2/1/2/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "S12",
+         "focus": "inner-first",
+         "before": "1/1/2/1/1",
+         "after": "2/2/2/2/1",
+         "prefer": "after"
+        },
+        {
+         "id": "S13",
+         "focus": "rebuild",
+         "before": "2/1/2/2/2",
+         "after": "2/2/2/2/2",
+         "prefer": "平"
+        },
+        {
+         "id": "S20",
+         "focus": "momentum-check",
+         "before": "1/1/2/2/1",
+         "after": "2/2/1/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "S23",
+         "focus": "inner-first",
+         "before": "2/1/2/2/2",
+         "after": "2/1/1/2/2",
+         "prefer": "before"
+        },
+        {
+         "id": "S24",
+         "focus": "rebuild",
+         "before": "1/1/2/1/1",
+         "after": "2/2/2/2/1",
+         "prefer": "after"
+        },
+        {
+         "id": "N1",
+         "focus": "momentum-check",
+         "before": "2/1/1/2/1",
+         "after": "2/2/2/2/1",
+         "prefer": "after"
+        },
+        {
+         "id": "N2",
+         "focus": "rebuild",
+         "before": "1/1/2/2/2",
+         "after": "2/1/2/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "N4",
+         "focus": "inner-first",
+         "before": "1/1/2/2/2",
+         "after": "2/1/2/2/2",
+         "prefer": "平"
+        },
+        {
+         "id": "N7",
+         "focus": "rebuild",
+         "before": "1/1/1/1/2",
+         "after": "2/2/2/2/1",
+         "prefer": "after"
+        },
+        {
+         "id": "N9",
+         "focus": "momentum-check",
+         "before": "2/1/2/2/2",
+         "after": "2/2/2/2/1",
+         "prefer": "平"
+        },
+        {
+         "id": "N11",
+         "focus": "inner-first",
+         "before": "1/1/1/1/1",
+         "after": "2/2/2/2/1",
+         "prefer": "after"
+        },
+        {
+         "id": "N16",
+         "focus": "rebuild",
+         "before": "1/1/2/2/2",
+         "after": "2/1/2/2/2",
+         "prefer": "平"
+        },
+        {
+         "id": "N17",
+         "focus": "rebuild",
+         "before": "1/1/1/2/1",
+         "after": "2/2/2/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "N21",
+         "focus": "rebuild",
+         "before": "2/1/2/2/1",
+         "after": "2/1/2/2/2",
+         "prefer": "平"
+        },
+        {
+         "id": "N22",
+         "focus": "rebuild",
+         "before": "1/1/2/2/1",
+         "after": "2/2/2/2/2",
+         "prefer": "after"
+        },
+        {
+         "id": "N23",
+         "focus": "rebuild",
+         "before": "2/1/2/2/2",
+         "after": "2/2/2/2/1",
+         "prefer": "平"
+        },
+        {
+         "id": "N24",
+         "focus": "inner-first",
+         "before": "1/1/2/2/2",
+         "after": "2/1/2/2/2",
+         "prefer": "平"
         }
-      ]
+       ],
+       "scoreOrder": "观点/三牌/主题/行动/语言"
+      },
+      "rulesAudit": {
+       "scope": "修订后的 31 例（评分表 9 + heldout2 12 + heldout 10）",
+       "coherent": 29,
+       "anchored": 29,
+       "clearBlockingSamples": [
+        "H22"
+       ],
+       "lightBlockingItemCount": 16,
+       "samenessGroups": 16,
+       "harmfulSamenessGroups": 15
+      },
+      "knownLimits": [
+       "换牌不换话（本轮最主要的未解决问题）：31 例只有 3 个重点句；读法、行动、追问按“主张 × 意图”固定，9 组例子除逐牌说明外逐字相同，其中一组两副牌没有一张相同。规则审读的结论是“主要问题是换牌不换话，不是冒认”。靠“按末牌换行动”的变体只缓解了一小部分。",
+       "只靠一张锚牌立论时，换掉另外两张牌结论不变；被晾着的常常是最贴主题的那张（阻碍位的牌）。盲评里偏好旧版的两例（S4、S23）都是这种情况。",
+       "位置语义弱：同一张牌在此刻 / 阻碍 / 下一步三个位置用同一句角色句。",
+       "整体里“可能在提示……”三连仍在（31 例约 93 次），被评为防御性句式的直接来源。",
+       "后备层与同分按顺序是 12 张牌阶段的简化；约一成组合有两个新主张都能接。"
+      ],
+      "recommendation": "下一步不是继续加主张或改句子，而是让后备主张只给“重点 + 每张牌与重点的关系”，读法、行动、追问改由牌自己给（读法一取锚牌的条件，读法二、行动、追问取末牌按主题取值的内容），这样换牌就会换话。属于渲染结构改动，需先出方案。"
+     }
+    },
+    {
+     "version": "local-v2.11-sample",
+     "date": "2026-10-12",
+     "author": "Codex",
+     "implementationStatus": "implemented-quality-guardrail-failed",
+     "basedOn": "用户批准的阻碍位/末牌渲染方案；v2.10 换牌不换话；首轮独立盲评发现条件与行动判准脱节、陪伴负担回退后，在新留出上再修订。",
+     "sampleFile": "docs/local-reading-expansion/batch-0-samples.md",
+     "previousSampleFile": "docs/local-reading-expansion/batch-0-samples.local-v2.10-sample.md",
+     "changes": [
+      "仅后备分支改为阻碍位给读法一、末牌给读法二/方向/行动/追问；主张保留重点与关系，requireAny 仅选路由。",
+      "后备与普通主张分别严格校验，移除后备失效的通用 stance/branches/intentBranches/actions/questions/topicActions/turns。",
+      "有牌面主题条目时只应用变体中明确填写的主题字段；补充部分覆盖、陪伴方向和全量实际输出检查。",
+      "在后备条件里区分原有正逆位同文；关系主题星币侍从逆位的方向、读法、行动和追問分别补写。",
+      "首轮未过语义护栏后先固定 heldout4；修正末牌变体的判准一致性及陪伴的方向/问句/任务量，新增受同样主题保护的 companionAim。",
+      "为隐士逆位增加不参与路由权重的 closed-reflection 标签，避免与高塔逆位的 avoid 共用后备变体。原有牌义文本不改。"
+     ],
+     "routing": {
+      "universe": 12,
+      "combinationsPerTopicIntent": 10560,
+      "topicIntentStrata": 12,
+      "renders": 126720,
+      "allRoutingHashesMatch": true,
+      "nonFallbackOutputs": 78888,
+      "nonFallbackHashesMatch": true,
+      "note": "五主张、未命中路径及其完整输出和路由分布全量对账一致；历史快照逻辑未改。",
+      "metricsFile": "docs/local-reading-expansion/batch-0-v211-metrics.json"
+     },
+     "sameness": {
+      "signature": "[interpretations, action, question]",
+      "aggregation": "Within each topic/intent; sum collision-pair numerators and all-pair denominators across 12 strata. Redundancy=(N-U)/N.",
+      "statistics": {
+       "fallback": {
+        "before": {
+         "n": 47832,
+         "uniqueMin": 3,
+         "uniqueMax": 14,
+         "collisionPct": 26.576281097575738,
+         "redundancyPct": 99.79302558956347,
+         "duplicatedMembersPct": 100.0
+        },
+        "after": {
+         "n": 47832,
+         "uniqueMin": 450,
+         "uniqueMax": 810,
+         "collisionPct": 0.26903813814656796,
+         "redundancyPct": 84.56263589228968,
+         "duplicatedMembersPct": 97.60829570162234
+        }
+       },
+       "all": {
+        "before": {
+         "n": 126720,
+         "uniqueMin": 233,
+         "uniqueMax": 295,
+         "collisionPct": 7.955565905049165,
+         "redundancyPct": 97.40056818181819,
+         "duplicatedMembersPct": 100.0
+        },
+        "after": {
+         "n": 126720,
+         "uniqueMin": 629,
+         "uniqueMax": 878,
+         "collisionPct": 4.214642040252894,
+         "redundancyPct": 93.0981691919192,
+         "duplicatedMembersPct": 99.2550505050505
+        }
+       }
+      },
+      "positionSensitivity": {
+       "obstacle": {
+        "replace": {
+         "pairs": 196280,
+         "unchanged": 0
+        },
+        "flip": {
+         "pairs": 12752,
+         "unchanged": 0
+        }
+       },
+       "next": {
+        "replace": {
+         "pairs": 196280,
+         "unchanged": 0
+        },
+        "flip": {
+         "pairs": 12752,
+         "unchanged": 0
+        }
+       }
+      },
+      "obstacleFirstReadingChangedPct": 100,
+      "thresholdsRelaxed": false
+     },
+     "aiRecheck": {
+      "type": "ai-blind-recheck",
+      "note": "AI 复评不是人工验收。首轮只读一个匿名文件的独立子智能体；第二轮复用同一个评审、向同一个输入文件追加新的匿名材料。不是两位独立评审；先前材料可能影响后续判断。",
+      "reviewerCount": 1,
+      "rounds": [
+       {
+        "round": 1,
+        "heldout": "heldout3",
+        "status": "failed-used-for-revision",
+        "rawFile": "docs/local-reading-expansion/batch-0-v211-review.json",
+        "summaryFile": "docs/local-reading-expansion/batch-0-v211-review-summary.json",
+        "before": {
+         "avg": 8.555555555555555,
+         "pass": 15,
+         "coherent": 16,
+         "threeCardAvg": 1.0
+        },
+        "after": {
+         "avg": 7.944444444444445,
+         "pass": 11,
+         "coherent": 7,
+         "threeCardAvg": 1.1111111111111112
+        },
+        "guardrails": {
+         "coherence": false,
+         "threeCard": true,
+         "companion": false
+        },
+        "companion": {
+         "n": 6,
+         "regressionIds": [
+          "P07",
+          "P10",
+          "P14",
+          "P17"
+         ]
+        },
+        "prefer": {
+         "before": 13,
+         "after": 5,
+         "tie": 0
+        }
+       },
+       {
+        "round": 2,
+        "heldout": "heldout4",
+        "status": "reviewed-coherence-guardrail-failed",
+        "frozenFile": "docs/local-reading-expansion/batch-0-v211-round2-frozen.json",
+        "inputDigest": "6f7a1b3240fdf3debfcdaed05f080d678e0e4d55415dd67e64185e15c1ffba19",
+        "contentHash": "9777f07404e97cc11f546bf42f8186e14226fc9710b55962c76874e159ace379",
+        "engineHash": "187489167e50f0129c89f710194b32a4b931bc30b0b2ee0629f50e3f0d433489",
+        "rawFile": "docs/local-reading-expansion/batch-0-v211-round2-review.json",
+        "summaryFile": "docs/local-reading-expansion/batch-0-v211-round2-review-summary.json",
+        "before": {
+         "avg": 8.444444444444445,
+         "pass": 15,
+         "coherent": 16,
+         "threeCardAvg": 1.0
+        },
+        "after": {
+         "avg": 8.88888888888889,
+         "pass": 15,
+         "coherent": 12,
+         "threeCardAvg": 1.4444444444444444
+        },
+        "guardrails": {
+         "coherence": false,
+         "threeCard": true,
+         "companion": true
+        },
+        "companion": {
+         "n": 6,
+         "regressionIds": [],
+         "burdenAverages": {
+          "before": {
+           "analysis": 1.1666666666666667,
+           "tasks": 1.5,
+           "pressure": 1.1666666666666667,
+           "optOut": 1.1666666666666667
+          },
+          "after": {
+           "analysis": 1.1666666666666667,
+           "tasks": 0.8333333333333334,
+           "pressure": 0.3333333333333333,
+           "optOut": 2
+          }
+         }
+        },
+        "prefer": {
+         "before": 6,
+         "after": 12,
+         "tie": 0
+        },
+        "incoherentCandidateIds": [
+         "R2-P04",
+         "R2-P05",
+         "R2-P06",
+         "R2-P11",
+         "R2-P14",
+         "R2-P15"
+        ],
+        "candidateChangedAfterReview": false
+       }
+      ],
+      "knownLimits": [
+       "第二轮连贯 16/18 → 12/18，未达不回退护栏；六例候选不连贯：R2-P04, R2-P05, R2-P06, R2-P11, R2-P14, R2-P15。均分和偏好票数不能抵消该失败。",
+       "核对对象或判断标准仍会改变：如收尾转为可撤回试验、关系修补转为投入回报、关键前提转为反馈速度。阻碍位改变文字不等于核对结果实际约束行动。",
+       "陪伴六对无明确增负，但逐牌说明的分析要求保留，分析负担均分仍为1.17/2；轻动作有时替代了主张中的核对任务。",
+       "第二轮换末牌实质差异5/6，R2-S6未过；机制对照锚牌与阻碍位各1/6连贯，不能把阻碍取法本身当作因果衔接保证。",
+       "仍只有三个后备重点；完整的位置角色与防御性措辞未重写。",
+       "首牌在主张不变时不保证改变后续内容。",
+       "原有五主张与未命中路径的重复/连贯问题保留。",
+       "12/78 张牌有 v2 内容，普通均匀三牌理论覆盖 0.289%；全牌扩写未完成。",
+       "一位 AI、每轮18对版本样本，只是护栏，不能代表人工验收。"
+      ],
+      "recommendation": "保留未提交候选和两轮证据；工程及位置敏感性目标通过，保住连贯性的质量目标未完成，不放行批次。下一轮先设计核对结果如何约束末牌动作的条件、对象和完成标准，并统一陪伴的整体/逐牌要求；任何后续改稿前固定新留出，涉及新的渲染结构先出方案。不要继续靠同义改写、补活动例子或放宽门槛。",
+      "scoredAt": "第二轮评分对应 2026-10-12T15:08:09.714Z 冻结的最终候选；复评之后没有修改运行时代码或内容。两轮使用不同新留出，不能直接把两轮分数差当成改进幅度。",
+      "blindPairs": {
+       "scope": "heldout4 中预先指定的三后备主张 × 三意图各两例，共18对；另有6对机制对照及6组换末牌对照。",
+       "n": 18,
+       "beforeAvg": 8.444444444444445,
+       "afterAvg": 8.88888888888889,
+       "beforePass": 15,
+       "afterPass": 15,
+       "beforeCoherent": 16,
+       "afterCoherent": 12,
+       "threeCardBefore": 1.0,
+       "threeCardAfter": 1.4444444444444444,
+       "prefer": {
+        "before": 6,
+        "after": 12,
+        "tie": 0
+       },
+       "scoreOrder": "观点/三牌/主题/行动/语言",
+       "samples": [
+        {
+         "id": "R2-P01",
+         "spec": "career|decide|three-of-pentacles,the-tower,queen-of-wands",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "先判断哪些仍合用，再把愿意投入的小动作接到保留部分，行动同时比较保留理由和实际力气，联系比单纯列取舍更具体。"
+        },
+        {
+         "id": "R2-P02",
+         "spec": "relationship|companion|death,four-of-swords:r,the-hermit",
+         "before": [
+          1,
+          1,
+          1,
+          1,
+          2
+         ],
+         "after": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": false,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": {
+          "analysis": 1,
+          "tasks": 2,
+          "pressure": 2,
+          "optOut": 1
+         },
+         "companionBurdenAfter": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 1,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "“重新开始之前，先留一段安静”接到想安静时坐一会儿、听见念头而不用回答，形成先停留再处理变化的陪伴路径；逐牌说明仍带有分析和完成要求。"
+        },
+        {
+         "id": "R2-P03",
+         "spec": "career|clarify|the-hermit,page-of-cups:r,queen-of-wands",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          1,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "before",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "先向内整理，情绪起伏且不紧急时延后判断，已经知道目标时才做小版本，三牌都参与了先判断再行动的顺序；最终制作任务对理清处境的帮助仍较间接。"
+        },
+        {
+         "id": "R2-P04",
+         "spec": "self|companion|death,eight-of-wands:r,page-of-pentacles",
+         "before": [
+          2,
+          1,
+          1,
+          1,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "after",
+         "companionBurdenBefore": {
+          "analysis": 2,
+          "tasks": 2,
+          "pressure": 2,
+          "optOut": 1
+         },
+         "companionBurdenAfter": {
+          "analysis": 2,
+          "tasks": 1,
+          "pressure": 1,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "节奏乱时允许慢下来，有兴趣才接触五分钟，任务和退出边界清楚；但已完成作用的旧做法与新兴趣之间没有连接，未落实先辨认什么该结束的重点。"
+        },
+        {
+         "id": "R2-P05",
+         "spec": "self|decide|the-tower,knight-of-swords:r,death:r",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          1,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "before",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "等一晚核对后果能回应急躁，但下一步从给未完事项收尾变成可撤回试验，缺少说明试验如何解决原有拖延或判断哪些值得保留。"
+        },
+        {
+         "id": "R2-P06",
+         "spec": "career|companion|knight-of-swords:r,page-of-cups,death",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          1,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "before",
+         "companionBurdenBefore": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 0,
+          "optOut": 1
+         },
+         "companionBurdenAfter": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 0,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "感受可以不命名，物品也只有已经不用且愿意时才收好，完成压力很低；但收好物品没有接到工作阶段中自己还想带走什么的判断。"
+        },
+        {
+         "id": "R2-P07",
+         "spec": "self|clarify|knight-of-swords,three-of-pentacles:r,the-tower:r",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          1
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "觉得不够时定义完成边界，担忧尚无事实时检查具体信息，再区分已确认和未确认；推进、完成标准和隐约风险均有具体作用。"
+        },
+        {
+         "id": "R2-P08",
+         "spec": "self|companion|eight-of-wands,three-of-pentacles,four-of-swords",
+         "before": [
+          1,
+          1,
+          1,
+          1,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": false,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": {
+          "analysis": 1,
+          "tasks": 2,
+          "pressure": 2,
+          "optOut": 1
+         },
+         "companionBurdenAfter": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 0,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "以力气和期限作为恢复条件，再用自己认可的够了限制完成标准，最后允许无时长、无结论的休息，三牌对推进压力都有具体约束。"
+        },
+        {
+         "id": "R2-P09",
+         "spec": "relationship|decide|knight-of-swords,six-of-swords:r,the-tower:r",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "先区分迟迟未开始的缺口，再把担忧变成可检验问题，为选项安排小检查，核对条件与决定依据有直接联系。"
+        },
+        {
+         "id": "R2-P10",
+         "spec": "relationship|decide|four-of-swords:r,the-hermit,page-of-pentacles",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "外部意见混乱时先回到个人关注点，想了解的事明确后再做仅涉及自己的小调查；调查用于澄清选择，能接住末牌。"
+        },
+        {
+         "id": "R2-P11",
+         "spec": "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "before",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "前面要求核对关系变化、决定修补或重建，后面却盘点投入回报和降低投入；没有说明变化情况如何决定该减少哪一部分。"
+        },
+        {
+         "id": "R2-P12",
+         "spec": "relationship|clarify|two-of-pentacles,four-of-swords:r,knight-of-swords",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "多事时收拢到一步，焦躁时先分辨具体担忧，目标明确后把关键前提变成证据核对，再决定推进范围；三牌形成可辨认的约束。"
+        },
+        {
+         "id": "R2-P13",
+         "spec": "self|clarify|page-of-cups,knight-of-swords:r,the-hermit",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "细小感受提示个人关注点，急于回应时先延后并考虑后果，信息足够后安静整理优先事项，三牌分别约束内容、速度和整理方式。"
+        },
+        {
+         "id": "R2-P14",
+         "spec": "career|companion|page-of-pentacles,the-hermit:r,knight-of-swords",
+         "before": [
+          2,
+          1,
+          1,
+          2,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "after",
+         "companionBurdenBefore": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 1,
+          "optOut": 2
+         },
+         "companionBurdenAfter": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 0,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "让已有念头停留而不用推进，实际行动适合陪伴且不要求成果；但整体仍承诺推进前核对，阻碍又警告想法闭合，文本未说明为什么此时应继续让想法留在心里。"
+        },
+        {
+         "id": "R2-P15",
+         "spec": "career|decide|three-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          1,
+          1,
+          2,
+          1,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": false,
+         "prefer": "before",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "核心要求先确认关键处，行动却改按最快得到反馈来选试验；没有说明反馈速度如何对应关键前提或协作缺口。"
+        },
+        {
+         "id": "R2-P16",
+         "spec": "relationship|companion|knight-of-swords:r,page-of-cups,the-hermit:r",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": {
+          "analysis": 1,
+          "tasks": 1,
+          "pressure": 0,
+          "optOut": 1
+         },
+         "companionBurdenAfter": {
+          "analysis": 1,
+          "tasks": 0,
+          "pressure": 0,
+          "optOut": 2
+         },
+         "burdenRegression": false,
+         "candidateEvidence": "不急于判断、不强迫命名感受，想法转累时暂换注视对象；速度、感受和独处反复思考分别影响这段暂缓判断的陪伴方式，动作与条件一致。"
+        },
+        {
+         "id": "R2-P17",
+         "spec": "career|clarify|three-of-pentacles,six-of-swords:r,the-tower",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "before",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "安排变化时核对工作里哪些仍稳固、哪些松动，并要求具体表现，能落实看清变化的核心；分类拖延原因及稳定基本生活两条支线没有充分接回清单。"
+        },
+        {
+         "id": "R2-P18",
+         "spec": "self|decide|knight-of-swords,eight-of-wands,page-of-cups",
+         "before": [
+          2,
+          1,
+          2,
+          2,
+          2
+         ],
+         "after": [
+          2,
+          2,
+          2,
+          2,
+          2
+         ],
+         "beforeCoherent": true,
+         "afterCoherent": true,
+         "prefer": "after",
+         "companionBurdenBefore": null,
+         "companionBurdenAfter": null,
+         "burdenRegression": false,
+         "candidateEvidence": "推进快却没把握时先核对，感到好奇时把感受转成具体期待，再以已知事实检验期待；行动没有直接把感受当作选项事实。"
+        }
+       ],
+       "rawFile": "docs/local-reading-expansion/batch-0-v211-round2-review.json",
+       "summaryFile": "docs/local-reading-expansion/batch-0-v211-round2-review-summary.json"
+      },
+      "mechanism": {
+       "n": 6,
+       "anchorCoherent": 1,
+       "obstacleCoherent": 1,
+       "prefer": {
+        "anchor": 1,
+        "obstacle": 3,
+        "tie": 2
+       },
+       "note": "两种取法只有读法一不同；两方都只有1/6连贯，改回锚牌没有本组改善证据。保留阻碍位实现，不在运行时混用。逐例原句见解盲汇总。"
+      },
+      "swaps": {
+       "n": 6,
+       "meaningful": 5,
+       "insufficientIds": [
+        "R2-S6"
+       ],
+       "note": "签名全部变化不等于建议均有实质差异；R2-S6 仍主要是可互换的小活动。"
+      }
+     },
+     "validation": {
+      "pnpmCheck": {
+       "passed": true,
+       "tests": 644,
+       "skippedGenerators": 4
+      },
+      "pnpmBuild": {
+       "passed": true
+      },
+      "pnpmE2e": {
+       "passed": true,
+       "tests": 80
+      },
+      "batch0Samples": {
+       "generated": true,
+       "previousArchived": true,
+       "round1CandidateArchived": true
+      },
+      "historicalV21SamplesGenerated": true,
+      "coverageUpdated": true,
+      "gitDiffCheck": true,
+      "contentHash": "9777f07404e97cc11f546bf42f8186e14226fc9710b55962c76874e159ace379",
+      "engineHash": "187489167e50f0129c89f710194b32a4b931bc30b0b2ee0629f50e3f0d433489",
+      "committed": false,
+      "pushed": false,
+      "frozenCandidateUnchangedAfterReview": true
+     }
     }
+   ],
+   "aiReview": {
+    "type": "ai-review-in-place-of-human",
+    "decidedBy": "用户，2026-10-27（见 PROCESS.md 文末例外）",
+    "reviewer": "deepseek-flash（用户自有 DeepSeek API），Orca Worker deepseek-review，全新上下文，只读审读材料",
+    "scope": "v2.13 批次 0：方式审读表 526 组 + 6 例抽检（含按规则对未过线例的复评）",
+    "reviewTable": {
+     "rounds": 5,
+     "result": "526/526 组 aiReviewed=ok；第一轮 17 组 issue 经核实全部改写；之后每次改句的组都重审通过（共 5 轮）",
+     "file": "evals/local-quality/v213-mode-table.json"
+    },
+    "spotCheck": {
+     "rule": "五项各 0–2，每例 ≥8/10 且无单项 0",
+     "round1": [
+      {
+       "case": 1,
+       "spec": "self|companion|three-of-pentacles,eight-of-wands,four-of-swords:r",
+       "scores": [
+        2,
+        2,
+        2,
+        2,
+        2
+       ],
+       "total": 10,
+       "pass": true,
+       "verdict": "可用",
+       "issues": [
+        "此刻：三个人在拱门下一起看着图纸。有人在身边，事情会轻一些。——「有人在身边」在「自我｜只是陪我说说话」这一组里是句没头没尾的话：自我牌阵里并没有出现别人，读者会不知道「有人」指谁，不如把「有人在身边」改成牌面本身的意思（一起做一件小事会更轻）。"
+       ]
+      },
+      {
+       "case": 2,
+       "spec": "self|companion|queen-of-wands,four-of-swords,the-tower",
+       "scores": [
+        1,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：这组牌的重点是有些东西在收尾，有些还在，不用急着理清。——高塔不是「收尾」，收尾是死神的位置；同一段下面又写「闪电落在塔顶，原来的东西被震松了」，一个说在收尾、一个说刚被震松，前后对不上。建议改成「有些东西正在被震松」。",
+        "阻碍：骑士安静地躺着，三把剑挂在墙上。这次先歇一会儿。——阻碍位把宝剑四读成了建议（「先歇一会儿」），没有说清它阻碍了什么；和行动「今晚只做一件小事」也在做同一件事，阻碍位等于空转。"
+       ]
+      },
+      {
+       "case": 3,
+       "spec": "relationship|decide|three-of-pentacles:r,page-of-pentacles,knight-of-swords",
+       "scores": [
+        2,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "阻碍：这一步可以先小小地试一次，再看要不要继续。——星币侍从在阻碍位却被读成建议，读法二和行动又都是「试一次」，同一件事在阻碍、读法二、行动里说了三遍；阻碍位没有说出「它挡住了什么」。",
+        "整体：如果这段关系里有一步想开始，先看这第一步。如果手上已经有几个选项，这次只用同一把尺子去比。——一句话里塞了两套标准（第一步够不够小 / 同一把尺子比较），读者不知道该用哪一个；「往前走之前」后面接第二句也让句子拖着走。"
+       ]
+      },
+      {
+       "case": 4,
+       "spec": "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+       "scores": [
+        1,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 7,
+       "pass": false,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：如果工作里同时顾着几样，先看其中最重要的那一样。如果手上已经有几个选项，这次只用同一把尺子去比。——两套标准并列（最重要的一件 / 同一把尺子），而本组比较标准只有后者；读者会在两句话之间来回，最后也不清楚该拿哪把尺子量。",
+        "阻碍：同时顾几件事的时候，势头要收拢到一件上，而不是平均分。——这是建议不是阻碍；星币二在阻碍位被读成「该怎么做」，和行动里的「保住最重要那件」是同一条建议，阻碍位没有提供任何新信息。",
+        "读法二：末牌在提示，同一个问题反复出现时，先回到最近一次的具体情形里看。——「同一个问题反复出现时」是条件句，本组并没有说问题反复出现；这半句像是模板带进来的，和「怎么排先后」的比较标准接不上。",
+        "下一步：如果有件事一直推不动，先分清拖住它的是资源、顾虑，还是没处理完的事。——三分法在这里没有后续动作接住（行动讲的是「保住最重要那件」），读者拿到一个分类框架却不知道下一步做什么。"
+       ]
+      },
+      {
+       "case": 5,
+       "spec": "crossroads|clarify|the-hermit,six-of-swords:r,three-of-pentacles:r",
+       "scores": [
+        2,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "阻碍：一次变动迟迟没开始时，原因通常可以分成资源、顾虑和没处理完的事三类。——这句在讲一类现象的通用分类，没有落到这张牌、这次变动上；「通常」也让语气变成讲课，读者读不到自己的处境。",
+        "整体：宝剑六（逆位）可能在提示有什么拖着脚步，值得先问问自己；星币三（逆位）可能在提示有个条件还没落实。——两个「可能在提示」连着排比，句式是模板，信息量低于后面的「此刻/阻碍/下一步」。"
+       ]
+      },
+      {
+       "case": 6,
+       "spec": "self|clarify|page-of-pentacles,six-of-swords,eight-of-wands",
+       "scores": [
+        2,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "阻碍：如果正处在一段变化里，推进只定到下一站，不用一次到终点。——这是建议不是阻碍，而且和「此刻」（先一小步）、「下一步」（先查清一处）说的是同一件事；宝剑六在阻碍位没有说出它挡住了什么。",
+        "整体：这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。——这句是从权杖八来的，但本组的判断标准是「过渡期需要的资源够不够」，「确认最关键的一处」与资源核对不是一件事，读起来像上一组的句子没换。"
+       ]
+      }
+     ],
+     "round2": [
+      {
+       "case": 4,
+       "spec": "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+       "scores": [
+        2,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 9,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：往前走之前，最关键的一处在这里：如果工作里同时顾着几样，先看其中最重要的那一样。如果手上已经有几个选项，这次只用同一把尺子去比。——前半句已经把「最关键的一处」点明成「最重要的那一样」，紧接着又补一条通用的「同一把尺子」，第二个标准在读法、行动、追问里一次都没用到；读者会以为要同时满足两件事。",
+        "此刻：如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。——「最容易出错的一处」既不在比较标准里，也不在任何后续句子里，是一句悬空的话。",
+        "阻碍：同时顾几件事的时候，势头要收拢到一件上，而不是平均分。——星币二在阻碍位写的仍是建议（该怎么做），没有说它挡住了什么；和行动（拿掉一件、看最重要那件排前面）也不是同一件事。"
+       ]
+      },
+      {
+       "case": "A",
+       "spec": "self|decide|three-of-pentacles:r,two-of-pentacles,the-tower",
+       "scores": [
+        1,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 7,
+       "pass": false,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：这组牌的重点是先看清什么还在、什么已经告一段落，再从一小块重新开始。……要看清什么还在、什么变了：如果这件事里同时顾着几样，先看其中最重要的那一样。——冒号前立的是「什么还在、什么变了」（高塔），冒号后给的标准却是「最重要的一件」（星币二），两套框架没有合并，后面又叠一句通用的「同一把尺子」，一段里有三个说法。",
+        "此刻：标准模糊的提示：对“做完”的标准可能还没定下来。——星币三（逆位）的「完成标准」在阻碍、读法一、读法二、行动里一次都没有再出现，此刻位开场就断线，三张牌读不出一条线。",
+        "阻碍：同时顾着几件事的时候，要动的那一块得小到挤得进去。——星币二在阻碍位仍是建议，而且和行动说的「拿掉一件、看最重要那件排前面」不是同一件事，阻碍位和行动各说各的。"
+       ]
+      },
+      {
+       "case": "B",
+       "spec": "self|decide|the-tower,two-of-pentacles,eight-of-wands",
+       "scores": [
+        1,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 7,
+       "pass": false,
+       "verdict": "部分可用",
+       "issues": [
+        "阻碍：同时顾着几件事的时候，要动的那一块得小到挤得进去。——本组是在查「最重要的那件排不排得进这周」，阻碍句讲的却是「把要动的那块做小」，一句建议、一句查证，接不上工作；末牌权杖八正的读法二「先查清一处再往前」也和这句对不齐。",
+        "整体：……要看清什么还在、什么变了：如果这件事里同时顾着几样，先看其中最重要的那一样。如果手上已经有几个选项，这次只用同一把尺子去比。——冒号前立「还在／变了」，冒号后换成「最重要的一件」，再叠一句通用的「同一把尺子」，三个框架并列，最后不知道以哪个为准。",
+        "此刻：如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。／下一步：势头在的时候，先把它用在最小的一块上，而不是一口气全部重来。——这两句自己构成一条线（什么还能用→用在最小的一块），而读法一和行动走的是「最重要的一件」，两条线在牌阵里没有交汇。"
+       ]
+      }
+     ],
+     "round3": [
+      {
+       "case": 4,
+       "spec": "career|decide|eight-of-wands,two-of-pentacles,six-of-swords:r",
+       "scores": [
+        2,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 9,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "此刻：如果有一件事悬着，势头可以用来把它推到有结果；推之前先确认最容易出错的一处。——本组出现了三个「一处」：整体标题句的「最关键的一处」、桥接句指认的「最重要的那一样」、此刻的「最容易出错的一处」，三个不是同一件事，整体那句「最关键的一处在这里」被此刻悄悄换成了另一件事。",
+        "整体：这组牌的重点是把势头用在一件事上，推进前先确认最关键的一处。——主张句要「确认一处前提」，桥接句却把它指认为「最重要的那一样」，指认前后不是同一个东西（虽然比上一版少了「同一把尺子」，这一处仍没对齐）。"
+       ]
+      },
+      {
+       "case": "A",
+       "spec": "self|decide|three-of-pentacles:r,two-of-pentacles,the-tower",
+       "scores": [
+        2,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：要看清什么还在、什么变了，就从这里看：如果这件事里同时顾着几样，先看其中最重要的那一样。——桥接句换成了「就从这里看」，但前件（什么还在、什么变了）和后件（最重要的一件）不是同一件事，「先看最重要的一样」看不出「什么还在、什么变了」，是把两个框架用连接词粘在一起。",
+        "此刻：标准模糊的提示：对“做完”的标准可能还没定下来。——星币三（逆位）的「完成标准」在阻碍、读法一、读法二、行动里一次都没再出现，此刻位仍然开场就断线（本轮不修，照常扣分）。",
+        "阻碍：挡住的可能是同时顾着几样：最重要的那一样容易被挤到后面。——这句本身已符合「说挡在哪里」，但它讲的是星币二；此刻的星币三（逆位）没有对应的阻碍说法，三张牌只连成两张。"
+       ]
+      },
+      {
+       "case": "B",
+       "spec": "self|decide|the-tower,two-of-pentacles,eight-of-wands",
+       "scores": [
+        2,
+        1,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "下一步：势头在的时候，先把它用在最小的一块上，而不是一口气全部重来。——一个要「最小的一块」，读法一和行动要「最重要的一件」，最小和最重要在这组里没有合并，读者不知道该先动哪一块。",
+        "整体：要看清什么还在、什么变了，就从这里看：如果这件事里同时顾着几样，先看其中最重要的那一样。——和 A 同一问题：主张（还在／变了，来自高塔）与标准（最重要的一件，来自星币二）不同，靠「就从这里看」硬接。",
+        "此刻：如果原来的安排被震动过，先分清哪些部分还能用、哪些已经不行。——与下一步「势头在的时候，先把它用在最小的一块上」讲的是同一条线，两段各说一半，此刻位自己的内容（高塔被震动）没有独立的观察。"
+       ]
+      },
+      {
+       "case": "N1",
+       "spec": "crossroads|decide|four-of-swords:r,queen-of-wands,death",
+       "scores": [
+        2,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 9,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "行动：把每个选项里想推进的事各写下来，每个划掉一件，看剩下的哪一个你还最想推。——「每个划掉一件」预设每个选项里至少有两件想推进的事；只有一个选项里只有一件时，划掉就空了，后面「剩下的哪一个」无从看。",
+        "整体：要看清什么还在、什么变了，就从这里看：如果这个选择里有几件想推进的事，先看你最想推进的那一件。——主张来自死神（什么告一段落），标准来自权杖王后（最想推进的那一件），两者不是一件事，靠桥接句硬接。",
+        "此刻：如果已经歇够了却还静不下来，挑一件二十分钟能做完的小事，重新动起来。——此刻位写成做法，且「已经歇够了」替读者预设了状态（本轮不修，照常扣分）。"
+       ]
+      },
+      {
+       "case": "N2",
+       "spec": "relationship|clarify|two-of-pentacles,three-of-pentacles:r,the-tower",
+       "scores": [
+        1,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 8,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：要看清什么还在、什么变了，就从这里看：如果这段关系里有件你希望改变的小事，先看这件小事。——桥接后面那句是空转的：只说「先看这件小事」，得不到「能不能用一句具体的话说出来」；标准在这里被说没了，读者拿到的是一个同义反复。",
+        "此刻：同时顾着几件事的时候，要动的那一块得小到挤得进去。——星币二在「此刻」被写成了减项的做法（该怎么做），既不是对牌面的观察，也没有在这组的阻碍/读法/行动里被回收。",
+        "下一步：如果原来的相处方式被震动过，先分清哪些部分还在、哪些已经变了。——与整体开头的「先看清这段关系里什么还在、什么已经变了」重复一次，两句话在说同一件事。"
+       ]
+      },
+      {
+       "case": "N3",
+       "spec": "career|clarify|page-of-cups:r,eight-of-wands,death",
+       "scores": [
+        2,
+        2,
+        2,
+        2,
+        1
+       ],
+       "total": 9,
+       "pass": true,
+       "verdict": "部分可用",
+       "issues": [
+        "整体：要看清什么还在、什么变了，就从这里看：如果工作里有什么推得很快，先看其中最容易出错的那个环节。——主张（什么还在、什么告一段落，来自死神）与标准（最容易出错的环节，来自权杖八）不是同一件事，仍是桥接句硬接；这次桥接的落点至少可执行，所以只影响主张的成立度。",
+        "此刻：情绪起伏的提示：情绪较响的时候，判断容易被它带着走。——圣杯侍从（逆位）在这组的阻碍、读法、行动里都没有回收，此刻位等于一个孤岛（本轮不修，照常扣分）。"
+       ]
+      }
+     ],
+     "result": "第三轮（模板层修改后）6 例全部过线（8–9 分）；第一轮例 4 为 7 分，第二轮同牌组合 A、B 为 7 分，均已据此修改"
+    },
+    "notHumanReview": "不计入 humanReview；真人是否觉得有用仍是未验证项",
+    "files": [
+     "docs/local-reading-expansion/v213-ai-review/"
+    ]
+   },
+   "v213Release": {
+    "date": "2026-10-28",
+    "decidedBy": "用户",
+    "status": "已放行",
+    "note": "未经人工审核，由 DeepSeek 代审（aiReview）；humanReview 仍为空",
+    "report": "docs/local-reading-expansion/v213-release-report.md",
+    "finalBlind": "batch-0-v213-final5-review.json（heldout10，全部门槛通过）"
+   }
   }
+ }
 }

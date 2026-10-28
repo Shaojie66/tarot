@@ -1,0 +1,173 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "career|clarify|two-of-pentacles,knight-of-swords,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "career|clarify|two-of-pentacles,knight-of-swords,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "relationship|decide|the-hermit:r,knight-of-swords,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "relationship|decide|the-hermit:r,knight-of-swords,three-of-pentacles",
+    "focus": "momentum-check",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "self|clarify|two-of-pentacles,the-tower:r,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "self|clarify|two-of-pentacles,the-tower:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "crossroads|decide|eight-of-wands,the-tower:r,two-of-pentacles",
+    "focus": "momentum-check",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|decide|eight-of-wands,the-tower:r,six-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "recall"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "career|clarify|queen-of-wands:r,eight-of-wands:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "career|clarify|queen-of-wands:r,eight-of-wands:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "relationship|decide|queen-of-wands,eight-of-wands:r,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "relationship|decide|queen-of-wands,eight-of-wands:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "self|clarify|page-of-pentacles:r,six-of-swords:r,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "self|clarify|page-of-pentacles:r,six-of-swords:r,page-of-cups",
+    "focus": "inner-first",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "crossroads|decide|four-of-swords:r,six-of-swords:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "crossroads|decide|four-of-swords:r,six-of-swords:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "career|clarify|death,four-of-swords:r,page-of-pentacles:r",
+    "focus": "rebuild",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "career|clarify|death,four-of-swords:r,three-of-pentacles:r",
+    "focus": "rebuild",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "relationship|decide|eight-of-wands:r,four-of-swords:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "relationship|decide|eight-of-wands:r,four-of-swords:r,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 11,
+   "probe": "B 批：clarify",
+   "a": {
+    "spec": "self|clarify|six-of-swords:r,the-hermit:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "self|clarify|six-of-swords:r,the-hermit:r,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 12,
+   "probe": "B 批：decide",
+   "a": {
+    "spec": "crossroads|decide|queen-of-wands,the-hermit:r,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|decide|queen-of-wands,the-hermit:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "gather"
+   }
+  }
+ ]
+}

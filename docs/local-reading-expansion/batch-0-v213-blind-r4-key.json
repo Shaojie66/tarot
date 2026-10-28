@@ -1,0 +1,187 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "A 批：clarify",
+   "a": {
+    "spec": "career|clarify|two-of-pentacles,eight-of-wands,three-of-pentacles:r",
+    "focus": "momentum-check",
+    "mode": "pause"
+   },
+   "b": {
+    "spec": "career|clarify|two-of-pentacles,eight-of-wands,six-of-swords",
+    "focus": "momentum-check",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "A 批：decide",
+   "a": {
+    "spec": "relationship|decide|the-hermit:r,eight-of-wands,death:r",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "relationship|decide|the-hermit:r,eight-of-wands,three-of-pentacles",
+    "focus": "momentum-check",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "A 批：clarify",
+   "a": {
+    "spec": "self|clarify|two-of-pentacles,death,eight-of-wands:r",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "self|clarify|two-of-pentacles,death,three-of-pentacles:r",
+    "focus": "rebuild",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "A 批：decide",
+   "a": {
+    "spec": "crossroads|decide|the-tower:r,death,eight-of-wands:r",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|decide|the-tower:r,death,three-of-pentacles",
+    "focus": "rebuild",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "A 批：clarify",
+   "a": {
+    "spec": "career|clarify|queen-of-wands:r,knight-of-swords:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "career|clarify|queen-of-wands:r,knight-of-swords:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "A 批：decide",
+   "a": {
+    "spec": "relationship|decide|death:r,knight-of-swords:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "relationship|decide|death:r,knight-of-swords:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "A 批：clarify",
+   "a": {
+    "spec": "self|clarify|page-of-cups,three-of-pentacles:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "self|clarify|page-of-cups,three-of-pentacles:r,eight-of-wands",
+    "focus": "inner-first",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "A 批：decide",
+   "a": {
+    "spec": "crossroads|decide|four-of-swords:r,three-of-pentacles:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "crossroads|decide|four-of-swords:r,three-of-pentacles:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "A 批：clarify",
+   "a": {
+    "spec": "career|clarify|two-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "career|clarify|two-of-pentacles:r,page-of-pentacles:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "A 批：decide",
+   "a": {
+    "spec": "relationship|decide|death,page-of-pentacles:r,page-of-cups",
+    "focus": "inner-first",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "relationship|decide|death,page-of-pentacles:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 11,
+   "probe": "A 批：companion",
+   "a": {
+    "spec": "self|companion|six-of-swords:r,eight-of-wands,four-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "self|companion|six-of-swords:r,eight-of-wands,page-of-cups",
+    "focus": "inner-first",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 12,
+   "probe": "A 批：companion",
+   "a": {
+    "spec": "crossroads|companion|the-hermit:r,page-of-pentacles:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "crossroads|companion|the-hermit:r,page-of-pentacles:r,page-of-cups",
+    "focus": "inner-first",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 13,
+   "probe": "A 批：companion",
+   "a": {
+    "spec": "career|companion|page-of-cups,death,eight-of-wands:r",
+    "focus": "inner-first",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "career|companion|page-of-cups,death,three-of-pentacles",
+    "focus": "inner-first",
+    "mode": "check"
+   }
+  }
+ ]
+}

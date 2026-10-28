@@ -2,7 +2,7 @@
 
 > 由 `node scripts/local-coverage.mjs` 生成，不要手改。流程见 [PROCESS.md](PROCESS.md)，写作规范见 [STYLE.md](STYLE.md)。
 
-- 内容版本：`local-v2.10-sample`
+- 内容版本：`local-v2.13`（契约 `local-v2.13-contract`；2026-10-28，后备路径按 v2.13 契约构造，见 `v213-release-report.md`）
 - 已写完的牌：**12 / 78**（24 / 156 个朝向）
 - 共同解释（focus）：8 个：small-trial、warm-juggle、load-transition、settle-feelings、invest-cooperate、inner-first、rebuild、momentum-check
 - **普通随机三牌走新结构的概率** = C(12,3) / C(78,3) = **0.289%**（假设抽牌均匀；不是用户流量实测）

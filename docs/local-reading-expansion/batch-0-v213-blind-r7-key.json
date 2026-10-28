@@ -1,0 +1,173 @@
+{
+ "note": "答案键：评审完成前不要给评审者看。",
+ "pairs": [
+  {
+   "pair": 1,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "career|clarify|four-of-swords,queen-of-wands:r,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "career|clarify|four-of-swords,queen-of-wands:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 2,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "relationship|decide|the-hermit,queen-of-wands:r,eight-of-wands",
+    "focus": "inner-first",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "relationship|decide|the-hermit,queen-of-wands:r,knight-of-swords",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 3,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "self|clarify|two-of-pentacles,six-of-swords,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "self|clarify|two-of-pentacles,six-of-swords,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 4,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "crossroads|decide|page-of-cups,six-of-swords,three-of-pentacles:r",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "crossroads|decide|page-of-cups,six-of-swords,eight-of-wands",
+    "focus": "inner-first",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 5,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "career|clarify|knight-of-swords,two-of-pentacles:r,four-of-swords:r",
+    "focus": "momentum-check",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "career|clarify|knight-of-swords,two-of-pentacles:r,the-tower:r",
+    "focus": "momentum-check",
+    "mode": "check"
+   }
+  },
+  {
+   "pair": 6,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "relationship|decide|page-of-pentacles,two-of-pentacles:r,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "relationship|decide|page-of-pentacles,two-of-pentacles:r,knight-of-swords",
+    "focus": "momentum-check",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 7,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "self|clarify|page-of-cups,four-of-swords,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "self|clarify|page-of-cups,four-of-swords,queen-of-wands:r",
+    "focus": "inner-first",
+    "mode": "refuel"
+   }
+  },
+  {
+   "pair": 8,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "crossroads|decide|three-of-pentacles:r,four-of-swords,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "crossroads|decide|three-of-pentacles:r,four-of-swords,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 9,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "career|clarify|page-of-pentacles:r,queen-of-wands,death",
+    "focus": "rebuild",
+    "mode": "drop"
+   },
+   "b": {
+    "spec": "career|clarify|page-of-pentacles:r,queen-of-wands,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "trial"
+   }
+  },
+  {
+   "pair": 10,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "relationship|decide|death,queen-of-wands,eight-of-wands",
+    "focus": "rebuild",
+    "mode": "trial"
+   },
+   "b": {
+    "spec": "relationship|decide|death,queen-of-wands,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   }
+  },
+  {
+   "pair": 11,
+   "probe": "C 批：clarify",
+   "a": {
+    "spec": "self|clarify|six-of-swords:r,two-of-pentacles,the-hermit",
+    "focus": "inner-first",
+    "mode": "say"
+   },
+   "b": {
+    "spec": "self|clarify|six-of-swords:r,two-of-pentacles,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   }
+  },
+  {
+   "pair": 12,
+   "probe": "C 批：decide",
+   "a": {
+    "spec": "crossroads|decide|the-hermit:r,two-of-pentacles,eight-of-wands",
+    "focus": "momentum-check",
+    "mode": "check"
+   },
+   "b": {
+    "spec": "crossroads|decide|the-hermit:r,two-of-pentacles,the-tower",
+    "focus": "rebuild",
+    "mode": "drop"
+   }
+  }
+ ]
+}

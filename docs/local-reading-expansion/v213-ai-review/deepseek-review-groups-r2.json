@@ -1,0 +1,20 @@
+{
+  "clarify|death/reversed|check": {"verdict": "ok"},
+  "clarify|death/upright|check": {"verdict": "issue", "note": "行动「查一处：翻一翻当初开始这个做法时的记录或消息，看它要解决的那件事现在还在不在」预设当初留下了记录或消息；习惯类、口头定下的做法常常没有可翻的东西，也缺一句「找不到就凭记忆答」的退路，卡住时这一步落不下去（四张末牌读法二都只说「先查清一处」，救不了这个前提）。"},
+  "clarify|eight-of-wands/reversed|check": {"verdict": "ok"},
+  "clarify|eight-of-wands/reversed|pause": {"verdict": "ok"},
+  "clarify|page-of-cups/upright|say": {"verdict": "ok"},
+  "clarify|page-of-pentacles/reversed|check": {"verdict": "ok"},
+  "clarify|six-of-swords/reversed|check": {"verdict": "issue", "note": "行动把三类换成「东西／一个决定／一件没了结的事」，与判断标准的三类（资源／顾虑／没了结的事）对不上：答到「缺的是一个决定」时，既不是资源也不是顾虑，读者拿不到标准要的那个结论；末牌星币三正「先查清一处，让事情可以检验」也接不住这个错位。"},
+  "clarify|six-of-swords/reversed|drop": {"verdict": "ok"},
+  "clarify|the-hermit/reversed|pause": {"verdict": "ok"},
+  "clarify|the-tower/reversed|trial": {"verdict": "ok"},
+  "clarify|three-of-pentacles/upright|pause": {"verdict": "ok"},
+  "decide|death/upright|drop": {"verdict": "ok"},
+  "decide|page-of-cups/upright|drop": {"verdict": "ok"},
+  "decide|queen-of-wands/upright|drop": {"verdict": "ok"},
+  "decide|three-of-pentacles/upright|drop": {"verdict": "ok"},
+  "decide|three-of-pentacles/upright|pause": {"verdict": "ok"},
+  "decide|two-of-pentacles/reversed|drop": {"verdict": "ok"},
+  "decide|two-of-pentacles/upright|recall": {"verdict": "ok"}
+}

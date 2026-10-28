@@ -1,0 +1,306 @@
+{
+  "seed": "v211-final-blind-20261012-round2",
+  "outputDigest": "291e86af39f4992d9f5d767dbda9559cc76074c42247c83ab0b5a77f39e89206",
+  "cases": [
+    {
+      "id": "R2-P01",
+      "kind": "version",
+      "specs": [
+        "career|decide|three-of-pentacles,the-tower,queen-of-wands",
+        "career|decide|three-of-pentacles,the-tower,queen-of-wands"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P02",
+      "kind": "version",
+      "specs": [
+        "relationship|companion|death,four-of-swords:r,the-hermit",
+        "relationship|companion|death,four-of-swords:r,the-hermit"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P03",
+      "kind": "version",
+      "specs": [
+        "career|clarify|the-hermit,page-of-cups:r,queen-of-wands",
+        "career|clarify|the-hermit,page-of-cups:r,queen-of-wands"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P04",
+      "kind": "version",
+      "specs": [
+        "self|companion|death,eight-of-wands:r,page-of-pentacles",
+        "self|companion|death,eight-of-wands:r,page-of-pentacles"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P05",
+      "kind": "version",
+      "specs": [
+        "self|decide|the-tower,knight-of-swords:r,death:r",
+        "self|decide|the-tower,knight-of-swords:r,death:r"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P06",
+      "kind": "version",
+      "specs": [
+        "career|companion|knight-of-swords:r,page-of-cups,death",
+        "career|companion|knight-of-swords:r,page-of-cups,death"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P07",
+      "kind": "version",
+      "specs": [
+        "self|clarify|knight-of-swords,three-of-pentacles:r,the-tower:r",
+        "self|clarify|knight-of-swords,three-of-pentacles:r,the-tower:r"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P08",
+      "kind": "version",
+      "specs": [
+        "self|companion|eight-of-wands,three-of-pentacles,four-of-swords",
+        "self|companion|eight-of-wands,three-of-pentacles,four-of-swords"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P09",
+      "kind": "version",
+      "specs": [
+        "relationship|decide|knight-of-swords,six-of-swords:r,the-tower:r",
+        "relationship|decide|knight-of-swords,six-of-swords:r,the-tower:r"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P10",
+      "kind": "version",
+      "specs": [
+        "relationship|decide|four-of-swords:r,the-hermit,page-of-pentacles",
+        "relationship|decide|four-of-swords:r,the-hermit,page-of-pentacles"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P11",
+      "kind": "version",
+      "specs": [
+        "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r",
+        "relationship|clarify|the-hermit:r,the-tower,queen-of-wands:r"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-P12",
+      "kind": "version",
+      "specs": [
+        "relationship|clarify|two-of-pentacles,four-of-swords:r,knight-of-swords",
+        "relationship|clarify|two-of-pentacles,four-of-swords:r,knight-of-swords"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P13",
+      "kind": "version",
+      "specs": [
+        "self|clarify|page-of-cups,knight-of-swords:r,the-hermit",
+        "self|clarify|page-of-cups,knight-of-swords:r,the-hermit"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P14",
+      "kind": "version",
+      "specs": [
+        "career|companion|page-of-pentacles,the-hermit:r,knight-of-swords",
+        "career|companion|page-of-pentacles,the-hermit:r,knight-of-swords"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P15",
+      "kind": "version",
+      "specs": [
+        "career|decide|three-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+        "career|decide|three-of-pentacles:r,page-of-pentacles:r,eight-of-wands"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P16",
+      "kind": "version",
+      "specs": [
+        "relationship|companion|knight-of-swords:r,page-of-cups,the-hermit:r",
+        "relationship|companion|knight-of-swords:r,page-of-cups,the-hermit:r"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P17",
+      "kind": "version",
+      "specs": [
+        "career|clarify|three-of-pentacles,six-of-swords:r,the-tower",
+        "career|clarify|three-of-pentacles,six-of-swords:r,the-tower"
+      ],
+      "a": "after",
+      "b": "before"
+    },
+    {
+      "id": "R2-P18",
+      "kind": "version",
+      "specs": [
+        "self|decide|knight-of-swords,eight-of-wands,page-of-cups",
+        "self|decide|knight-of-swords,eight-of-wands,page-of-cups"
+      ],
+      "a": "before",
+      "b": "after"
+    },
+    {
+      "id": "R2-M1",
+      "kind": "mechanism",
+      "specs": [
+        "self|companion|the-tower,knight-of-swords,the-hermit:r",
+        "self|companion|the-tower,knight-of-swords,the-hermit:r"
+      ],
+      "a": "anchor",
+      "b": "obstacle"
+    },
+    {
+      "id": "R2-M2",
+      "kind": "mechanism",
+      "specs": [
+        "relationship|clarify|the-tower:r,six-of-swords:r,eight-of-wands",
+        "relationship|clarify|the-tower:r,six-of-swords:r,eight-of-wands"
+      ],
+      "a": "anchor",
+      "b": "obstacle"
+    },
+    {
+      "id": "R2-M3",
+      "kind": "mechanism",
+      "specs": [
+        "self|companion|the-hermit,three-of-pentacles,the-tower:r",
+        "self|companion|the-hermit,three-of-pentacles,the-tower:r"
+      ],
+      "a": "obstacle",
+      "b": "anchor"
+    },
+    {
+      "id": "R2-M4",
+      "kind": "mechanism",
+      "specs": [
+        "self|companion|two-of-pentacles:r,page-of-pentacles:r,eight-of-wands",
+        "self|companion|two-of-pentacles:r,page-of-pentacles:r,eight-of-wands"
+      ],
+      "a": "anchor",
+      "b": "obstacle"
+    },
+    {
+      "id": "R2-M5",
+      "kind": "mechanism",
+      "specs": [
+        "relationship|clarify|page-of-cups,queen-of-wands:r,the-tower",
+        "relationship|clarify|page-of-cups,queen-of-wands:r,the-tower"
+      ],
+      "a": "obstacle",
+      "b": "anchor"
+    },
+    {
+      "id": "R2-M6",
+      "kind": "mechanism",
+      "specs": [
+        "relationship|clarify|the-tower,queen-of-wands,the-hermit:r",
+        "relationship|clarify|the-tower,queen-of-wands,the-hermit:r"
+      ],
+      "a": "obstacle",
+      "b": "anchor"
+    },
+    {
+      "id": "R2-S1",
+      "kind": "swap",
+      "specs": [
+        "self|companion|two-of-pentacles:r,eight-of-wands,three-of-pentacles",
+        "self|companion|two-of-pentacles:r,eight-of-wands,the-hermit:r"
+      ],
+      "a": "first-draw",
+      "b": "second-draw"
+    },
+    {
+      "id": "R2-S2",
+      "kind": "swap",
+      "specs": [
+        "relationship|clarify|the-hermit,two-of-pentacles:r,the-tower",
+        "relationship|clarify|the-hermit,two-of-pentacles:r,eight-of-wands:r"
+      ],
+      "a": "second-draw",
+      "b": "first-draw"
+    },
+    {
+      "id": "R2-S3",
+      "kind": "swap",
+      "specs": [
+        "relationship|clarify|eight-of-wands,two-of-pentacles,three-of-pentacles",
+        "relationship|clarify|eight-of-wands,two-of-pentacles,the-hermit:r"
+      ],
+      "a": "first-draw",
+      "b": "second-draw"
+    },
+    {
+      "id": "R2-S4",
+      "kind": "swap",
+      "specs": [
+        "relationship|clarify|the-tower,eight-of-wands,death",
+        "relationship|clarify|the-tower,eight-of-wands,three-of-pentacles:r"
+      ],
+      "a": "second-draw",
+      "b": "first-draw"
+    },
+    {
+      "id": "R2-S5",
+      "kind": "swap",
+      "specs": [
+        "self|companion|page-of-cups,the-hermit,eight-of-wands",
+        "self|companion|page-of-cups,the-hermit,death:r"
+      ],
+      "a": "first-draw",
+      "b": "second-draw"
+    },
+    {
+      "id": "R2-S6",
+      "kind": "swap",
+      "specs": [
+        "self|companion|death,the-tower:r,eight-of-wands:r",
+        "self|companion|death,the-tower:r,queen-of-wands"
+      ],
+      "a": "second-draw",
+      "b": "first-draw"
+    }
+  ]
+}

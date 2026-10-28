@@ -1,0 +1,784 @@
+{
+  "version": "local-v2.11-sample",
+  "ids": [
+    "the-hermit",
+    "the-tower",
+    "death",
+    "queen-of-wands",
+    "eight-of-wands",
+    "page-of-cups",
+    "four-of-swords",
+    "six-of-swords",
+    "knight-of-swords",
+    "two-of-pentacles",
+    "three-of-pentacles",
+    "page-of-pentacles"
+  ],
+  "signature": "[interpretations, action, question]; compare within topic and intent",
+  "strata": [
+    {
+      "topic": "career",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "e27b494ce9f8f1ac729ac1f1794aaec35e424d3549a43bf9ee95dab50e75e83f",
+      "nonFallbackHash": "61124c7995e218c4a120f831af50f8eccdcc963300c5be15cafe36d6e52588e8",
+      "fullHash": "665883408810327f68cb6fb34ea16abda19609bb55c489f9e8afad65274d41c1",
+      "all": {
+        "n": 10560,
+        "unique": 878,
+        "redundant": 9682,
+        "duplicatedMembers": 10381,
+        "collisionPairs": 2400443,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.305609963638659,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 810,
+        "redundant": 3132,
+        "duplicatedMembers": 3731,
+        "collisionPairs": 19025,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.24492414818213498,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "career",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "0e9bea70bf43d8fe34a05340e51c0c9f71ad5bbf5d01bcbe1d329874283395e3",
+      "nonFallbackHash": "64a19d05f4b202eb1d16fa57909c4cbd6915a438a09e6089c79d54ea6dcccb66",
+      "fullHash": "bbaf25ef9adf086472b382b14a57700279a9fdc2ae63e70d937b333dc80e4a66",
+      "all": {
+        "n": 10560,
+        "unique": 791,
+        "redundant": 9769,
+        "duplicatedMembers": 10430,
+        "collisionPairs": 2401797,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.308038596974575,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 754,
+        "redundant": 3188,
+        "duplicatedMembers": 3784,
+        "collisionPairs": 19502,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.2510649533691457,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "career",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "42e71446ffca8e8b08199955ae1ab6d0571b17ff8f68d5151d594a29b57d5b58",
+      "nonFallbackHash": "1f5d5799760301c5033a07053b8b8e4755c92c35da5e762d0822c12e37934119",
+      "fullHash": "42989e9ef0a1d96d47d148bab262190ed8f10f18bf1400d089f403edb30d8a9e",
+      "all": {
+        "n": 10560,
+        "unique": 738,
+        "redundant": 9822,
+        "duplicatedMembers": 10556,
+        "collisionPairs": 2238028,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.014290552078221,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 450,
+        "redundant": 3624,
+        "duplicatedMembers": 4070,
+        "collisionPairs": 24124,
+        "possiblePairs": 8296701,
+        "collisionPct": 0.2907661732054705,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 1104
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "f25efc9831ecdaaf4c1ad2e947db199f425508cc03cacc576fdf8f3f352f6549",
+      "nonFallbackHash": "f5c35db01b5435db5b9c1c8a986af8b99dcdc64c153619cd164f52488d1d2734",
+      "fullHash": "68205b32fe4185b59eed39af9f4279020fe98fb7ca28414b4a5661cf39b061c0",
+      "all": {
+        "n": 10560,
+        "unique": 667,
+        "redundant": 9893,
+        "duplicatedMembers": 10450,
+        "collisionPairs": 2409373,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.3216274641480625,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 641,
+        "redundant": 3301,
+        "duplicatedMembers": 3814,
+        "collisionPairs": 20676,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.2661788009363376,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "e88968f8973ff688216dbada0200554719e1f91c61669a23c612992e3ec37575",
+      "nonFallbackHash": "b35d746ac8a784d0707306f7acb6c08140a994a71ee44dd03261cbe6ddff133d",
+      "fullHash": "85becf07139e531c4c300e81a097846b5522a3b598081145e3fbb2e54f2c76c3",
+      "all": {
+        "n": 10560,
+        "unique": 629,
+        "redundant": 9931,
+        "duplicatedMembers": 10489,
+        "collisionPairs": 2409851,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.322484839875218,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 599,
+        "redundant": 3343,
+        "duplicatedMembers": 3864,
+        "collisionPairs": 20896,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.26901103812950816,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "relationship",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "7980286d0671da32e8ec8ef8d775a60299a0cbb4ddf8dac01bb8b9fa35bccdd5",
+      "nonFallbackHash": "0cc7d7f5ac9a51b478eaa805ca0ddc730bd917d251614fd8d3137414acdd4e88",
+      "fullHash": "3199f4b9be51153072ea80a6e3acfebd3c3cefbe5f078007d9a725b5c92ac89b",
+      "all": {
+        "n": 10560,
+        "unique": 686,
+        "redundant": 9874,
+        "duplicatedMembers": 10556,
+        "collisionPairs": 2244309,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.025556612626884,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 450,
+        "redundant": 3624,
+        "duplicatedMembers": 4070,
+        "collisionPairs": 24124,
+        "possiblePairs": 8296701,
+        "collisionPct": 0.2907661732054705,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 1104
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "f67ad7e995897e4cdbc5d945be56603d56a3d61c38c2f2a45eb67883dc4a7920",
+      "nonFallbackHash": "0a6f46c49e7979e4bc247058665395897a32ceb7ead1b84cd956d88df244413b",
+      "fullHash": "5e155e619a6a860f58272a5dc8008b35ab71da6da9ef1489a18ed0e28c884012",
+      "all": {
+        "n": 10560,
+        "unique": 793,
+        "redundant": 9767,
+        "duplicatedMembers": 10409,
+        "collisionPairs": 2402077,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.308540825433997,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 755,
+        "redundant": 3187,
+        "duplicatedMembers": 3757,
+        "collisionPairs": 19510,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.2511679438125337,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "269b3333aebe20945cde7a716706469c7106b7674148742d3b069793ee0966fe",
+      "nonFallbackHash": "cfa61c2037e2e3a15d92821ae87be928fbc8b51d0c7af9386e460a1b56855c3b",
+      "fullHash": "3f9ae8aa706cbad6b4f8e9b103fb58fb6a04bcbb259d061e54e1fba40ed0b545",
+      "all": {
+        "n": 10560,
+        "unique": 734,
+        "redundant": 9826,
+        "duplicatedMembers": 10454,
+        "collisionPairs": 2402930,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.310070828562163,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 699,
+        "redundant": 3243,
+        "duplicatedMembers": 3811,
+        "collisionPairs": 19970,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.25708989430734486,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "self",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "3e7a1b9428ff0e515b577d9722ef77640999ec1a2b7632ece69b7aa8690e9e22",
+      "nonFallbackHash": "d98be127b8b15cd6fc69869693d37255bceb5771f5298629a866da564e1feaf1",
+      "fullHash": "53400c934ab629b80c7ed9118f5f651cb89d1fc1755bbb9f5b6aebab1d9b9340",
+      "all": {
+        "n": 10560,
+        "unique": 738,
+        "redundant": 9822,
+        "duplicatedMembers": 10556,
+        "collisionPairs": 2238028,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.014290552078221,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 450,
+        "redundant": 3624,
+        "duplicatedMembers": 4070,
+        "collisionPairs": 24124,
+        "possiblePairs": 8296701,
+        "collisionPct": 0.2907661732054705,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 1104
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "clarify",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "2ba37935280b7011130d2774df71aeac0835c32c67cbdee3b79144f1e32223ae",
+      "nonFallbackHash": "621e7b4924a34b3d649ecf15a67457f1c9fc2187453a42f6cbc449298e0fe051",
+      "fullHash": "6aa63517444e11de1652b31b1600383b97fc9e98e8ad30527568cdf6943b9aff",
+      "all": {
+        "n": 10560,
+        "unique": 714,
+        "redundant": 9846,
+        "duplicatedMembers": 10447,
+        "collisionPairs": 2404693,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.313233074183448,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 691,
+        "redundant": 3251,
+        "duplicatedMembers": 3797,
+        "collisionPairs": 19959,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.2569482824476863,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "decide",
+      "routes": {
+        "rebuild": 1074,
+        "inner-first": 1512,
+        "settle-feelings": 1452,
+        "miss": 2070,
+        "load-transition": 1680,
+        "momentum-check": 1356,
+        "warm-juggle": 576,
+        "invest-cooperate": 252,
+        "small-trial": 588
+      },
+      "routingHash": "be5ef8544603aadc24f462978b509f735b205affe5a39c7b46196412b070f3a3",
+      "nonFallbackHash": "b64cc7c2e34fc84645e7791ad825b193f2fe87ef933a46970ba6744490ffa735",
+      "fullHash": "51d80f0a489113836926a42ae646ca2303c1dc8cb3ee020e62ea1dbf901baa45",
+      "all": {
+        "n": 10560,
+        "unique": 655,
+        "redundant": 9905,
+        "duplicatedMembers": 10492,
+        "collisionPairs": 2405563,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.314793569753793,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 3942,
+        "unique": 635,
+        "redundant": 3307,
+        "duplicatedMembers": 3850,
+        "collisionPairs": 20436,
+        "possiblePairs": 7767711,
+        "collisionPct": 0.263089087634697,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 15962,
+          "unchanged": 0,
+          "firstUnchanged": 15962
+        },
+        "flip": {
+          "pairs": 1042,
+          "unchanged": 0,
+          "firstUnchanged": 1042
+        },
+        "failures": []
+      }
+    },
+    {
+      "topic": "crossroads",
+      "intent": "companion",
+      "routes": {
+        "rebuild": 1122,
+        "inner-first": 1560,
+        "settle-feelings": 1452,
+        "miss": 2526,
+        "load-transition": 1680,
+        "momentum-check": 1392,
+        "warm-juggle": 576,
+        "invest-cooperate": 252
+      },
+      "routingHash": "c8c0757df1cb92672684106738ed3d791187b104127850ddcbfa17dc1a896034",
+      "nonFallbackHash": "a821f159fc8a7e67a9e602d5c9648c859312b82e0fa3d969b0d808a6be28169f",
+      "fullHash": "36392eb6bbf0264376ba3a6380521d5b944e10057ec6edbadef8203dfb5a9359",
+      "all": {
+        "n": 10560,
+        "unique": 723,
+        "redundant": 9837,
+        "duplicatedMembers": 10556,
+        "collisionPairs": 2239632,
+        "possiblePairs": 55751520,
+        "collisionPct": 4.017167603681478,
+        "largestGroup": 1680
+      },
+      "fallback": {
+        "n": 4074,
+        "unique": 450,
+        "redundant": 3624,
+        "duplicatedMembers": 4070,
+        "collisionPairs": 24124,
+        "possiblePairs": 8296701,
+        "collisionPct": 0.2907661732054705,
+        "largestGroup": 20
+      },
+      "obstacle": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 0
+        },
+        "failures": []
+      },
+      "next": {
+        "replace": {
+          "pairs": 17146,
+          "unchanged": 0,
+          "firstUnchanged": 17146
+        },
+        "flip": {
+          "pairs": 1104,
+          "unchanged": 0,
+          "firstUnchanged": 1104
+        },
+        "failures": []
+      }
+    }
+  ]
+}

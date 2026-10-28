@@ -53,3 +53,6 @@ next-env.d.ts
 
 # 本地密钥文件，永远不提交
 /deepseek/
+
+# Cindy 协作时建在仓库内的临时 worktree，不提交
+/.cindy-worktrees/
